@@ -42,7 +42,7 @@ export const SEOContent = () => {
         <div className="container mx-auto px-4 max-w-4xl">
           <article className="prose prose-invert max-w-none">
             <h1 className="text-5xl font-bold mb-10 text-white bg-gradient-to-r from-neon to-white bg-clip-text text-transparent">
-              Premium IPTV Subscription Service - Best USA Provider 2024
+              IPTV Subscription Service - Best USA Provider
             </h1>
             
             <section>
