@@ -18,5 +18,15 @@ export const seoKeywords = [
   'VOD service',
   'sports channels',
   'movie streaming',
-  'TV shows streaming'
+  'TV shows streaming',
+  'IPTV reseller',
+  'IPTV trial',
+  'IPTV box',
+  'IPTV app',
+  'IPTV player',
+  'IPTV setup',
+  'IPTV support',
+  'IPTV packages',
+  'IPTV pricing',
+  'IPTV quality'
 ];

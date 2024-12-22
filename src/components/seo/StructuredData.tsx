@@ -9,7 +9,12 @@ export const getStructuredData = () => ({
       "logo": {
         "@type": "ImageObject",
         "url": "https://iptvsubscription.news/og-image.png"
-      }
+      },
+      "sameAs": [
+        "https://twitter.com/iptvsubscription",
+        "https://facebook.com/iptvsubscription",
+        "https://instagram.com/iptvsubscription"
+      ]
     },
     {
       "@type": "WebSite",
@@ -18,6 +23,11 @@ export const getStructuredData = () => ({
       "name": "Best IPTV Service Provider",
       "publisher": {
         "@id": "https://iptvsubscription.news/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://iptvsubscription.news/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
       }
     },
     {
@@ -34,7 +44,9 @@ export const getStructuredData = () => ({
       "primaryImageOfPage": {
         "@type": "ImageObject",
         "url": "https://iptvsubscription.news/og-image.png"
-      }
+      },
+      "datePublished": "2024-03-19",
+      "dateModified": "2024-03-19"
     },
     {
       "@type": "Service",
@@ -55,7 +67,10 @@ export const getStructuredData = () => ({
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Premium IPTV Package"
+              "name": "Premium IPTV Package",
+              "description": "Access to 40,000+ live channels and 54,000+ VOD content",
+              "price": "14.99",
+              "priceCurrency": "USD"
             }
           }
         ]
@@ -91,7 +106,8 @@ export const getStructuredData = () => ({
         ],
         "opens": "00:00",
         "closes": "23:59"
-      }
+      },
+      "priceRange": "$$"
     }
   ]
 });
