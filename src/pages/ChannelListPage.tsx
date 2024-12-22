@@ -20,14 +20,48 @@ const ChannelListPage = () => {
       </nav>
 
       {/* Hero Section */}
-      <div className="container mx-auto px-4 py-12 text-center">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6">
-          Explore Our <span className="text-neon">Channel List</span>
-        </h1>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-12">
-          Browse through our extensive collection of channels from around the world.
-          Enjoy premium content across various categories and languages.
-        </p>
+      <div className="container mx-auto px-4 py-20">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+          <div className="lg:w-1/2 space-y-8">
+            <h1 className="text-4xl md:text-6xl font-bold text-white">
+              Access <span className="text-neon">7000+ Live Channels</span> Worldwide
+            </h1>
+            <p className="text-gray-400 text-lg">
+              Discover our extensive collection of premium channels from around the globe. 
+              Enjoy live sports, movies, news, and entertainment in HD quality. Browse through 
+              our channel list and find your favorite content.
+            </p>
+            <Button className="bg-neon text-dark hover:bg-neon/90 text-lg px-8 py-6">
+              Start Free Trial
+            </Button>
+          </div>
+          <div className="lg:w-1/2">
+            <div className="relative">
+              <div className="absolute -inset-1 bg-neon/30 rounded-lg blur"></div>
+              <div className="relative bg-dark-gray rounded-lg p-6">
+                <div className="text-2xl font-bold mb-4 text-neon">Channel Statistics</div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 rounded-lg bg-dark-gray/50">
+                    <div className="text-3xl font-bold text-white">7000+</div>
+                    <div className="text-gray-400">Live Channels</div>
+                  </div>
+                  <div className="p-4 rounded-lg bg-dark-gray/50">
+                    <div className="text-3xl font-bold text-white">1500+</div>
+                    <div className="text-gray-400">Sport Channels</div>
+                  </div>
+                  <div className="p-4 rounded-lg bg-dark-gray/50">
+                    <div className="text-3xl font-bold text-white">500+</div>
+                    <div className="text-gray-400">News Channels</div>
+                  </div>
+                  <div className="p-4 rounded-lg bg-dark-gray/50">
+                    <div className="text-3xl font-bold text-white">2000+</div>
+                    <div className="text-gray-400">Movie Channels</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Channel List Component */}
