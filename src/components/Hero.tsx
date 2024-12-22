@@ -57,9 +57,9 @@ export const Hero = () => {
             <div className="relative">
               <div className="absolute -inset-1 bg-neon/20 rounded-lg blur"></div>
               <BlurImage
-                src="/lovable-uploads/eb41a9e5-0a89-4fbb-9995-ac1735cd4aaf.png"
+                src="/lovable-uploads/62b3cd9e-1589-432c-b117-d855ac8f0b81.png"
                 alt="IPTV Service Preview"
-                className="relative rounded-lg shadow-2xl w-full h-auto"
+                className="relative rounded-lg shadow-2xl w-full h-auto object-cover"
                 hash="LRG8}V?bxuWB~qofM{WB%MWBRjay"
               />
             </div>
