@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Monitor, Laptop, Smartphone, Apple, Monitor2 } from "lucide-react";
+import { Monitor, Laptop, Smartphone, Apple, MonitorPlay } from "lucide-react";
 
 export const Hero = () => {
   return (
@@ -53,7 +53,7 @@ export const Hero = () => {
                 <span>iOS</span>
               </div>
               <div className="flex flex-col items-center text-gray-400 text-sm">
-                <Monitor2 className="w-8 h-8 mb-2" />
+                <MonitorPlay className="w-8 h-8 mb-2" />
                 <span>Windows</span>
               </div>
             </div>
