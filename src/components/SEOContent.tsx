@@ -1,35 +1,37 @@
 import { Helmet } from "react-helmet";
 
 export const SEOContent = () => {
-  // Schema.org structured data for IPTV service
+  // Enhanced Schema.org structured data for IPTV service
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Service",
+    "@type": "Product",
     "name": "Premium IPTV Subscription Service",
     "description": "High-quality IPTV service offering 40,000+ channels and 54,000+ VOD content in 4K & HD quality",
-    "provider": {
-      "@type": "Organization",
+    "brand": {
+      "@type": "Brand",
       "name": "Premium IPTV Service"
     },
     "offers": {
-      "@type": "Offer",
-      "availability": "https://schema.org/InStock",
-      "price": "Starting from $9.99",
-      "priceCurrency": "USD"
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "lowPrice": "14.99",
+      "highPrice": "59.99",
+      "offerCount": "4",
+      "availability": "https://schema.org/InStock"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "1250"
     }
   };
 
   return (
     <>
       <Helmet>
-        <title>Buy IPTV Subscription | Top USA IPTV Service 2025 - 4K & HD</title>
-        <meta name="description" content="Premium IPTV subscription service offering 40,000+ channels and 54,000+ VOD content in 4K & HD quality. Best IPTV provider in USA for 2025." />
+        <title>Premium IPTV Subscription | Best USA IPTV Service 2024 - 4K & HD</title>
+        <meta name="description" content="Get premium IPTV subscription with 40,000+ channels and VOD content in 4K & HD quality. Best IPTV provider in USA with 24/7 support." />
         <meta name="keywords" content="IPTV subscription, buy IPTV, best IPTV service, 4K IPTV, HD channels, USA IPTV, streaming service" />
-        <meta property="og:title" content="Premium IPTV Subscription Service - 40,000+ Channels in 4K & HD" />
-        <meta property="og:description" content="Get access to 40,000+ channels and 54,000+ VOD content with our premium IPTV subscription. Best streaming quality, reliable service." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={window.location.href} />
-        <meta name="twitter:card" content="summary_large_image" />
         <link rel="canonical" href={window.location.href} />
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
@@ -40,7 +42,7 @@ export const SEOContent = () => {
         <div className="container mx-auto px-4 max-w-4xl">
           <article className="prose prose-invert max-w-none">
             <h1 className="text-5xl font-bold mb-10 text-white bg-gradient-to-r from-neon to-white bg-clip-text text-transparent">
-              Buy IPTV Subscription | Top USA IPTV Service 2025 - 4K & HD
+              Premium IPTV Subscription Service - Best USA Provider 2024
             </h1>
             
             <section>
