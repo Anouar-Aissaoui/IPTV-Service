@@ -7,6 +7,11 @@ import {
 
 const faqs = [
   {
+    question: "What makes your IPTV service stand out?",
+    answer:
+      "Our service stands out with its extensive channel lineup, premium HD/4K quality, reliable streaming infrastructure, and dedicated 24/7 customer support. We offer competitive pricing and flexible subscription plans to meet your entertainment needs.",
+  },
+  {
     question: "What devices can I use with your IPTV service?",
     answer:
       "Our IPTV service is compatible with a wide range of devices including Smart TVs (Samsung, LG, Android TV), smartphones (iOS/Android), tablets, computers, and streaming devices like Amazon Fire Stick, Apple TV, and Android TV boxes.",
@@ -30,6 +35,11 @@ const faqs = [
     question: "What's the streaming quality like?",
     answer:
       "We offer HD and 4K quality streams depending on the channel and your internet connection. Most channels are available in full HD (1080p), with select content available in 4K UHD quality.",
+  },
+  {
+    question: "Do you offer technical support?",
+    answer:
+      "Yes, we provide 24/7 technical support through various channels including live chat, email, and phone. Our expert team is always ready to help you with setup, troubleshooting, or any other questions you may have.",
   },
   {
     question: "Do I need a VPN with your service?",
