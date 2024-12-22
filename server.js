@@ -25,9 +25,11 @@ async function createServer() {
     app.use(sirv('dist/client', { gzip: true }));
   }
 
-  app.use('*', async (req, res) => {
+  // Handle all routes
+  app.use('*', async (req, res, next) => {
+    const url = req.originalUrl;
+
     try {
-      const url = req.originalUrl;
       let template = fs.readFileSync(
         isProduction ? resolve('dist/client/index.html') : resolve('index.html'),
         'utf-8'
@@ -49,9 +51,14 @@ async function createServer() {
       if (!isProduction) {
         vite.ssrFixStacktrace(e);
       }
-      console.error(e.stack);
-      res.status(500).end(e.stack);
+      next(e);
     }
+  });
+
+  // Error handler
+  app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
   });
 
   const port = process.env.PORT || 8080;
