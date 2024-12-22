@@ -1,32 +1,47 @@
 import { BlurImage } from "./ui/blur-image";
+import { Suspense, lazy } from "react";
 
+// Moved movies data outside component to prevent re-creation on each render
 const movies = [
   {
     title: "Madame Web",
     image: "https://image.tmdb.org/t/p/w342/sjMN7DRi4sGiledsmllEw5HJjPy.jpg",
     hash: "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
+    width: 342,
+    height: 513,
   },
   {
     title: "Dune: Part Two",
     image: "https://image.tmdb.org/t/p/w342/cdqLnri3NEGcmfnqwk2TSIYtddg.jpg",
     hash: "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
+    width: 342,
+    height: 513,
   },
   {
     title: "Argylle",
     image: "https://image.tmdb.org/t/p/w342/aosm8NMQ3UyoBVpSxyimorCQykC.jpg",
     hash: "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
+    width: 342,
+    height: 513,
   },
   {
     title: "Migration",
     image: "https://image.tmdb.org/t/p/w342/4YZpsylmjHbqeWzjKpUEF8gcLNW.jpg",
     hash: "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
+    width: 342,
+    height: 513,
   },
   {
     title: "Anyone But You",
     image: "https://image.tmdb.org/t/p/w342/lurEK87kukWNaHd0zYnsi3yzJrs.jpg",
     hash: "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
+    width: 342,
+    height: 513,
   },
 ];
+
+// Lazy load MovieCard component
+const MovieCard = lazy(() => import("./MovieCard"));
 
 export const Content = () => {
   return (
@@ -37,20 +52,14 @@ export const Content = () => {
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {movies.map((movie) => (
-            <div
+            <Suspense
               key={movie.title}
-              className="relative group overflow-hidden rounded-lg aspect-[2/3] border border-neon/20 hover:border-neon/40 transition-colors duration-300"
+              fallback={
+                <div className="aspect-[2/3] bg-gray-800 animate-pulse rounded-lg"></div>
+              }
             >
-              <BlurImage
-                src={movie.image}
-                alt={movie.title}
-                hash={movie.hash}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <h3 className="text-white font-bold">{movie.title}</h3>
-              </div>
-            </div>
+              <MovieCard movie={movie} />
+            </Suspense>
           ))}
         </div>
       </div>
