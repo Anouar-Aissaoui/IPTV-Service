@@ -88,8 +88,9 @@ export const BrandCarousel = () => {
   }, [api, autoplay]);
 
   return (
-    <div className="bg-dark-gray py-12">
-      <div className="container mx-auto px-4">
+    <div className="bg-gradient-radial from-dark-gray via-dark to-dark py-12 relative">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(158,255,0,0.03)_0%,transparent_70%)]"></div>
+      <div className="container mx-auto px-4 relative z-10">
         <Carousel
           opts={{
             align: "start",
