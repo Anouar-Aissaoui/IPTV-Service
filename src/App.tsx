@@ -10,6 +10,7 @@ import Pricing from "./pages/Pricing";
 import Channels from "./pages/Channels";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/channels" element={<Channels />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Toaster />
         <Sonner />
