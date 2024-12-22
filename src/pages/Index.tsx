@@ -4,6 +4,7 @@ import { Content } from "@/components/Content";
 import { FAQ } from "@/components/FAQ";
 import { Contact } from "@/components/Contact";
 import { BrandCarousel } from "@/components/BrandCarousel";
+import { SEOContent } from "@/components/SEOContent";
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
       <Content />
       <FAQ />
       <Contact />
+      <SEOContent />
     </div>
   );
 };
