@@ -36,6 +36,14 @@ export const Hero = () => {
               Experience breathtaking 4K visuals on any device, at any place, at any time. 
               Discover an expansive library with over <span className="text-neon font-semibold">40,000 channels</span> and more than <span className="text-neon font-semibold">54,000 VOD</span> options.
             </p>
+            {/* Devices Image */}
+            <div className="w-full max-w-[366px]">
+              <img 
+                src="https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/devices-4.webp"
+                alt="Supported Devices"
+                className="w-full h-auto"
+              />
+            </div>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button 
                 className="bg-neon text-dark hover:bg-neon/90 text-lg px-6 py-5 font-bold"
