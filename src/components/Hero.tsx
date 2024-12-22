@@ -11,14 +11,6 @@ export const Hero = () => {
     window.open('https://wa.me/your_number_here', '_blank');
   };
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
-    }
-  };
-
   return (
     <div className="relative bg-dark">
       {/* Navigation Bar */}
@@ -36,11 +28,11 @@ export const Hero = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6 text-white">
-            <button onClick={() => scrollToSection('home')} className="hover:text-neon transition-colors duration-300 hover:scale-105">Home</button>
-            <button onClick={() => scrollToSection('pricing')} className="hover:text-neon transition-colors duration-300 hover:scale-105">Pricing</button>
-            <button onClick={() => scrollToSection('channels')} className="hover:text-neon transition-colors duration-300 hover:scale-105">Channel List</button>
-            <button onClick={() => scrollToSection('faq')} className="hover:text-neon transition-colors duration-300 hover:scale-105">FAQ</button>
-            <button onClick={() => scrollToSection('contact')} className="hover:text-neon transition-colors duration-300 hover:scale-105">Contact Us</button>
+            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Home</a>
+            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Pricing</a>
+            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Channel List</a>
+            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">FAQ</a>
+            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Contact Us</a>
           </div>
           
           <Button className="hidden md:flex bg-[#F97316] text-white hover:bg-[#F97316]/90 shadow-lg shadow-[#F97316]/30 font-bold transform hover:scale-105 transition-all duration-300">
@@ -51,11 +43,11 @@ export const Hero = () => {
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 bg-dark-gray rounded-lg p-4 space-y-4">
-            <button onClick={() => scrollToSection('home')} className="block w-full text-left text-white hover:text-neon transition-colors duration-300">Home</button>
-            <button onClick={() => scrollToSection('pricing')} className="block w-full text-left text-white hover:text-neon transition-colors duration-300">Pricing</button>
-            <button onClick={() => scrollToSection('channels')} className="block w-full text-left text-white hover:text-neon transition-colors duration-300">Channel List</button>
-            <button onClick={() => scrollToSection('faq')} className="block w-full text-left text-white hover:text-neon transition-colors duration-300">FAQ</button>
-            <button onClick={() => scrollToSection('contact')} className="block w-full text-left text-white hover:text-neon transition-colors duration-300">Contact Us</button>
+            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Home</a>
+            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Pricing</a>
+            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Channel List</a>
+            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">FAQ</a>
+            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Contact Us</a>
             <Button className="w-full bg-[#F97316] text-white hover:bg-[#F97316]/90 shadow-lg shadow-[#F97316]/30 font-bold">
               Free Trial
             </Button>
