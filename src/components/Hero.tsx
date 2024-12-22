@@ -12,14 +12,12 @@ export const Hero = () => {
 
   return (
     <div className="relative bg-gradient-to-b from-dark to-dark-gray min-h-screen">
-      {/* Navigation Bar */}
       <nav className="container mx-auto px-4 py-6 border-b border-gray-800/30">
         <div className="flex items-center justify-between">
           <div className="text-2xl font-bold text-white tracking-tight hover:text-primary transition-colors duration-300">
             IPTV Subscription
           </div>
           
-          {/* Mobile Menu Button */}
           <button 
             className="md:hidden text-white hover:text-primary transition-colors duration-300"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -27,7 +25,6 @@ export const Hero = () => {
             <Menu className="h-6 w-6" />
           </button>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8 text-gray-300">
             <a href="#" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Home</a>
             <a href="#" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Pricing</a>
@@ -41,7 +38,6 @@ export const Hero = () => {
           </Button>
         </div>
 
-        {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 bg-dark-gray/80 backdrop-blur-lg rounded-xl p-4 space-y-4 border border-gray-800/30">
             <a href="#" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Home</a>
@@ -56,7 +52,6 @@ export const Hero = () => {
         )}
       </nav>
 
-      {/* Hero Content */}
       <div className="container mx-auto px-4 py-12 md:py-20">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="lg:w-1/2 space-y-8">
@@ -71,13 +66,15 @@ export const Hero = () => {
               Discover an expansive library with over <span className="text-primary font-semibold">40,000 channels</span> and more than <span className="text-primary font-semibold">54,000 VOD</span> options.
             </p>
             
-            {/* Devices Image */}
             <div className="relative w-full max-w-[280px] mx-auto lg:mx-0 animate-float">
               <div className="absolute -inset-1 bg-primary/20 rounded-lg blur-xl"></div>
               <img 
                 src="https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/devices-4.webp"
                 alt="Supported Devices"
                 className="relative w-full h-auto hover:scale-105 transition-transform duration-300"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
               />
             </div>
 
@@ -105,14 +102,13 @@ export const Hero = () => {
               <BlurImage
                 src="/lovable-uploads/62b3cd9e-1589-432c-b117-d855ac8f0b81.png"
                 alt="IPTV Service Preview"
-                className="relative rounded-2xl shadow-2xl w-full h-auto object-cover border border-gray-800/30"
+                className="hero-image relative rounded-2xl shadow-2xl w-full h-auto object-cover border border-gray-800/30"
                 hash="LRG8}V?bxuWB~qofM{WB%MWBRjay"
               />
             </div>
           </div>
         </div>
 
-        {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
           {[
             { value: "+7K", label: "Happy Customers" },
@@ -128,7 +124,6 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* Background Effect */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.15)_0%,transparent_70%)]"></div>
       </div>
