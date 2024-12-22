@@ -8,6 +8,7 @@ import { PerformanceMonitor } from "./components/PerformanceMonitor";
 import Index from "./pages/Index";
 import Pricing from "./pages/Pricing";
 import FAQ from "./pages/FAQ";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/" element={<Index />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
         <Toaster />
         <Sonner />

@@ -29,7 +29,7 @@ export const Navigation = () => {
           <Link to="/pricing" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Pricing</Link>
           <a href="#" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Channel List</a>
           <Link to="/faq" className="hover:text-primary transition-colors duration-300 text-sm font-medium">FAQ</Link>
-          <a href="#" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Contact Us</a>
+          <Link to="/contact" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Contact</Link>
         </div>
         
         <Button className="hidden md:flex bg-primary/90 text-white hover:bg-primary shadow-lg shadow-primary/20 font-medium px-6 transform hover:scale-105 transition-all duration-300">
@@ -43,7 +43,7 @@ export const Navigation = () => {
           <Link to="/pricing" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Pricing</Link>
           <a href="#" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Channel List</a>
           <Link to="/faq" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">FAQ</Link>
-          <a href="#" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Contact Us</a>
+          <Link to="/contact" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Contact</Link>
           <Button className="w-full bg-primary/90 text-white hover:bg-primary shadow-lg shadow-primary/20 font-medium">
             Free Trial
           </Button>
