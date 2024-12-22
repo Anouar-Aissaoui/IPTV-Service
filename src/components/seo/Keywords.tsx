@@ -8,5 +8,15 @@ export const seoKeywords = [
   'streaming TV channels',
   'live TV streaming',
   '4K IPTV service',
-  'affordable IPTV subscription'
+  'affordable IPTV subscription',
+  'USA IPTV service',
+  'UK IPTV service',
+  'worldwide IPTV',
+  'IPTV provider',
+  'streaming service',
+  'live TV channels',
+  'VOD service',
+  'sports channels',
+  'movie streaming',
+  'TV shows streaming'
 ];
