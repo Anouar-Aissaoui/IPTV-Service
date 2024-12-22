@@ -9,8 +9,8 @@ export const SEOContent = () => {
     <>
       <Helmet>
         <html lang="en" />
-        <title>Premium IPTV Subscription | Best USA IPTV Service 2024 - 4K & HD</title>
-        <meta name="description" content="Get premium IPTV subscription with 40,000+ channels and VOD content in 4K & HD quality. Best IPTV provider in USA with 24/7 support." />
+        <title>Premium IPTV Service - Best USA Provider 2024</title>
+        <meta name="description" content="Experience premium IPTV with 40,000+ channels and VOD content in 4K & HD quality. Get reliable streaming, 24/7 support, and affordable plans. Try our premium IPTV service today!" />
         <meta name="keywords" content={seoKeywords.join(', ')} />
         <link rel="canonical" href="https://iptvsubscription.news" />
         <script type="application/ld+json">
@@ -26,7 +26,7 @@ export const SEOContent = () => {
                 className="text-5xl font-bold mb-10 text-white bg-gradient-to-r from-neon to-white bg-clip-text text-transparent"
                 itemProp="headline"
               >
-                Best IPTV Subscription Service
+                Premium IPTV Subscription Service - Your Ultimate Entertainment Solution
               </h1>
               
               <meta itemProp="datePublished" content="2024-03-19" />
