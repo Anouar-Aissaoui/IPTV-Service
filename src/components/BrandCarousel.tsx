@@ -8,8 +8,9 @@ import {
 import { useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { BlurImage } from "./ui/blur-image";
+import { uploadImage } from "@/utils/supabaseStorage";
 
-const brands = [
+const initialBrands = [
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item05-150x46-1-2.webp",
     alt: "brand_item05"
@@ -78,6 +79,7 @@ const brands = [
 
 export const BrandCarousel = () => {
   const [api, setApi] = useState<any>(null);
+  const [brands, setBrands] = useState(initialBrands);
   const autoplay = Autoplay({ delay: 2500, stopOnInteraction: true });
 
   useEffect(() => {
@@ -87,6 +89,24 @@ export const BrandCarousel = () => {
       autoplay.reset();
     });
   }, [api, autoplay]);
+
+  useEffect(() => {
+    const uploadBrandImages = async () => {
+      const updatedBrands = await Promise.all(
+        brands.map(async (brand) => {
+          const fileName = brand.src.split('/').pop() || 'brand.webp';
+          const supabaseUrl = await uploadImage(brand.src, fileName);
+          return {
+            ...brand,
+            src: supabaseUrl,
+          };
+        })
+      );
+      setBrands(updatedBrands);
+    };
+
+    uploadBrandImages();
+  }, []);
 
   return (
     <div className="bg-black py-6 md:py-8 relative">
