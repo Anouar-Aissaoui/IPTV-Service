@@ -59,12 +59,13 @@ export const Hero = () => {
       <div className="container mx-auto px-4 py-8 md:py-12">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="lg:w-1/2 space-y-6">
-            <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white leading-tight animate-fade-in">
+            <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white leading-tight animate-fade-in">
               Best IPTV Service at an{" "}
               <span className="text-[#F97316] bg-gradient-to-r from-[#F97316] to-neon bg-clip-text text-transparent">
                 Affordable Price
               </span>
-            </h1>
+            </h2>
+            
             <p className="text-base md:text-lg lg:text-xl leading-relaxed text-gray-300">
               Experience breathtaking 4K visuals on any device, at any place, at any time. 
               Discover an expansive library with over <span className="text-[#F97316] font-semibold">40,000 channels</span> and more than <span className="text-[#F97316] font-semibold">54,000 VOD</span> options.
