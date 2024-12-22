@@ -37,7 +37,8 @@ export const Hero = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6 text-white">
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Home</a>
+            <a href="/" className="hover:text-neon transition-colors duration-300 hover:scale-105">Home</a>
+            <a href="/blog" className="hover:text-neon transition-colors duration-300 hover:scale-105">Blog</a>
             <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Pricing</a>
             <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Channel List</a>
             <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">FAQ</a>
@@ -52,7 +53,8 @@ export const Hero = () => {
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 bg-dark-gray rounded-lg p-4 space-y-4">
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Home</a>
+            <a href="/" className="block text-white hover:text-neon transition-colors duration-300">Home</a>
+            <a href="/blog" className="block text-white hover:text-neon transition-colors duration-300">Blog</a>
             <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Pricing</a>
             <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Channel List</a>
             <a href="#" className="block text-white hover:text-neon transition-colors duration-300">FAQ</a>
