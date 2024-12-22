@@ -16,7 +16,16 @@ export const Hero = () => {
       {/* Navigation Bar */}
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <div className="text-xl font-bold text-white">IPTV Subscription</div>
+          <div className="text-xl font-bold text-white">
+            <a 
+              href="https://iptvsubscription.news/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-[#F97316] transition-colors"
+            >
+              IPTV Subscription
+            </a>
+          </div>
           
           {/* Mobile Menu Button */}
           <button 
