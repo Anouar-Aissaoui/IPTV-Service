@@ -1,14 +1,8 @@
 export const Stats = () => {
   return (
     <>
-      <div className="space-y-2">
-        <div className="text-4xl font-bold text-neon">+7K</div>
-        <div className="text-gray-400">Live Channels</div>
-      </div>
-      <div className="space-y-2">
-        <div className="text-4xl font-bold text-neon">+40K</div>
-        <div className="text-gray-400">Movies</div>
-      </div>
+      <div className="text-4xl font-bold text-neon">+40K</div>
+      <div className="text-gray-400">Movies</div>
       <div className="space-y-2">
         <div className="text-4xl font-bold text-neon">+1,500</div>
         <div className="text-gray-400">TV Shows</div>
