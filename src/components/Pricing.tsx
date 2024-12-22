@@ -1,5 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
+import { Helmet } from "react-helmet";
+
+const keywords = [
+  'buy IPTV',
+  'IPTV service',
+  'best IPTV service',
+  'IPTV subscription',
+  'premium IPTV',
+  'HD IPTV service',
+  'streaming TV channels',
+  'live TV streaming',
+  '4K IPTV service',
+  'affordable IPTV subscription'
+];
 
 const plans = [
   {
@@ -57,52 +71,75 @@ const plans = [
 
 export const Pricing = () => {
   return (
-    <div className="bg-dark py-20">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          Choose Your <span className="text-neon">IPTV Plan</span>
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`relative rounded-xl p-6 ${
-                plan.popular
-                  ? "bg-dark border-2 border-neon"
-                  : "bg-dark border border-neon/20"
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-neon text-dark px-4 py-1 rounded-full text-sm font-bold">
-                  Most Popular
-                </div>
-              )}
-              <div className="text-xl font-bold mb-4 text-white">{plan.name}</div>
-              <div className="text-4xl font-bold mb-6 text-white">
-                ${plan.price}
-                <span className="text-sm text-gray-400">/month</span>
-              </div>
-              <ul className="space-y-4 mb-8">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-2">
-                    <Check className="w-5 h-5 text-neon" />
-                    <span className="text-gray-300">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <Button
-                className={`w-full ${
+    <>
+      <Helmet>
+        <title>Premium IPTV Subscription Plans & Pricing - Best IPTV Service 2024</title>
+        <meta name="description" content="Choose from our flexible IPTV subscription plans starting at $14.99. Get access to 7000+ live channels, 40000+ VOD content in HD & 4K quality." />
+        <meta name="keywords" content={keywords.join(', ')} />
+        <link rel="canonical" href="https://iptvsubscription.news/pricing" />
+      </Helmet>
+
+      <div className="bg-dark py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
+            Choose Your <span className="text-neon">IPTV Plan</span>
+          </h2>
+          
+          <p className="text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+            Get the best <a href="https://www.iptvservice.site/" className="text-neon hover:underline" rel="dofollow">IPTV subscription</a> plans 
+            with premium features, HD quality, and extensive content library. Our plans are designed to provide the ultimate streaming experience.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {plans.map((plan) => (
+              <div
+                key={plan.name}
+                className={`relative rounded-xl p-6 ${
                   plan.popular
-                    ? "bg-neon text-dark hover:bg-neon/90"
-                    : "bg-dark border border-neon/40 text-neon hover:border-neon"
+                    ? "bg-dark border-2 border-neon"
+                    : "bg-dark border border-neon/20"
                 }`}
               >
-                Get Started
-              </Button>
-            </div>
-          ))}
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-neon text-dark px-4 py-1 rounded-full text-sm font-bold">
+                    Most Popular
+                  </div>
+                )}
+                <div className="text-xl font-bold mb-4 text-white">{plan.name}</div>
+                <div className="text-4xl font-bold mb-6 text-white">
+                  ${plan.price}
+                  <span className="text-sm text-gray-400">/month</span>
+                </div>
+                <ul className="space-y-4 mb-8">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-center gap-2">
+                      <Check className="w-5 h-5 text-neon" />
+                      <span className="text-gray-300">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  className={`w-full ${
+                    plan.popular
+                      ? "bg-neon text-dark hover:bg-neon/90"
+                      : "bg-dark border border-neon/40 text-neon hover:border-neon"
+                  }`}
+                >
+                  Get Started
+                </Button>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <h3 className="text-2xl font-bold mb-4 text-white">Why Choose Our IPTV Service?</h3>
+            <p className="text-gray-300 max-w-3xl mx-auto">
+              Experience the best streaming quality with our premium <a href="https://www.iptvservice.site/" className="text-neon hover:underline" rel="dofollow">IPTV subscription</a> service. 
+              We offer extensive channel selection, reliable streams, and dedicated customer support to ensure the best viewing experience.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
