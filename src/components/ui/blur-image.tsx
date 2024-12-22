@@ -6,9 +6,24 @@ interface BlurImageProps {
   alt: string;
   hash?: string;
   className?: string;
+  width?: number;
+  height?: number;
+  loading?: "lazy" | "eager";
+  decoding?: "async" | "sync" | "auto";
+  fetchPriority?: "high" | "low" | "auto";
 }
 
-export const BlurImage = ({ src, alt, hash = "L6PZfSi_.AyE_3t7t7R**0o#DgR4", className = "" }: BlurImageProps) => {
+export const BlurImage = ({ 
+  src, 
+  alt, 
+  hash = "L6PZfSi_.AyE_3t7t7R**0o#DgR4", 
+  className = "",
+  width,
+  height,
+  loading = "lazy",
+  decoding = "async",
+  fetchPriority = "low"
+}: BlurImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
@@ -28,9 +43,13 @@ export const BlurImage = ({ src, alt, hash = "L6PZfSi_.AyE_3t7t7R**0o#DgR4", cla
       <img
         src={src}
         alt={alt}
+        width={width}
+        height={height}
+        loading={loading}
+        decoding={decoding}
+        fetchPriority={fetchPriority}
         className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
         onLoad={() => setIsLoaded(true)}
-        loading="lazy"
       />
     </div>
   );
