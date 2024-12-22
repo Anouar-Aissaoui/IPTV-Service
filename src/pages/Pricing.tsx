@@ -1,10 +1,12 @@
 import { SEOContent } from "@/components/SEOContent";
 import { Pricing as PricingSection } from "@/components/Pricing";
+import { Navigation } from "@/components/Navigation";
 
 const Pricing = () => {
   return (
-    <div className="min-h-screen bg-dark text-white">
+    <div className="min-h-screen bg-gradient-to-b from-dark to-dark-gray text-white">
       <SEOContent />
+      <Navigation />
       <div className="container mx-auto px-4 py-12 md:py-20">
         <article className="prose prose-invert max-w-none mb-12" itemScope itemType="https://schema.org/Product">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-8 animate-fade-in text-center">
@@ -29,6 +31,10 @@ const Pricing = () => {
         </article>
       </div>
       <PricingSection />
+      
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.15)_0%,transparent_70%)]"></div>
+      </div>
     </div>
   );
 };
