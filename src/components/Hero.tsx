@@ -27,9 +27,9 @@ export const Hero = () => {
           </div>
           <div className="lg:w-1/2">
             <img
-              src="/lovable-uploads/68c06c7a-d842-491a-a970-14726b960bc0.png"
-              alt="TV Interface"
-              className="rounded-lg shadow-2xl animate-float"
+              src="/lovable-uploads/74cadd1d-7f11-4677-9cfc-3342545d312f.png"
+              alt="IPTV Service Preview"
+              className="rounded-lg shadow-2xl animate-float w-full h-auto object-cover"
             />
           </div>
         </div>
