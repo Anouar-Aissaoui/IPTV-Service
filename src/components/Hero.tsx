@@ -46,9 +46,10 @@ export const Hero = () => {
           </div>
           <div className="lg:w-1/2">
             <BlurImage
-              src="/lovable-uploads/00c90df3-a23d-47e3-b967-8806209cd5b1.png"
+              src="/lovable-uploads/eb41a9e5-0a89-4fbb-9995-ac1735cd4aaf.png"
               alt="IPTV Service Preview"
               className="rounded-lg shadow-2xl w-full h-auto"
+              hash="LRG8}V?bxuWB~qofM{WB%MWBRjay"
             />
           </div>
         </div>
