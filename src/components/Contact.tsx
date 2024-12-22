@@ -3,7 +3,7 @@ import { MessageCircle } from "lucide-react";
 
 export const Contact = () => {
   return (
-    <div className="bg-dark-gray py-20">
+    <div className="bg-dark py-20">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-8">
           Have Questions? <span className="text-neon">Contact us</span>

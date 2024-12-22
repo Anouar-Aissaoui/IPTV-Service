@@ -68,8 +68,8 @@ export const Pricing = () => {
               key={plan.name}
               className={`relative rounded-xl p-6 ${
                 plan.popular
-                  ? "bg-gradient-to-br from-neon/20 to-dark-gray border-2 border-neon"
-                  : "bg-dark-gray"
+                  ? "bg-dark border-2 border-neon"
+                  : "bg-dark border border-neon/20"
               }`}
             >
               {plan.popular && (
@@ -77,8 +77,8 @@ export const Pricing = () => {
                   Most Popular
                 </div>
               )}
-              <div className="text-xl font-bold mb-4">{plan.name}</div>
-              <div className="text-4xl font-bold mb-6">
+              <div className="text-xl font-bold mb-4 text-white">{plan.name}</div>
+              <div className="text-4xl font-bold mb-6 text-white">
                 ${plan.price}
                 <span className="text-sm text-gray-400">/month</span>
               </div>
@@ -94,7 +94,7 @@ export const Pricing = () => {
                 className={`w-full ${
                   plan.popular
                     ? "bg-neon text-dark hover:bg-neon/90"
-                    : "bg-dark-gray border border-gray-700 hover:border-neon"
+                    : "bg-dark border border-neon/40 text-neon hover:border-neon"
                 }`}
               >
                 Get Started
