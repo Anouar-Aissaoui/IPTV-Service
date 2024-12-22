@@ -14,23 +14,44 @@ export const optimizeAndUploadImage = async (imageUrl: string, fileName: string)
       return publicUrl;
     }
 
-    // Fetch with appropriate headers and credentials
-    const response = await fetch(imageUrl, {
-      headers: {
-        'Accept': 'image/webp,image/jpeg,image/png,*/*',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    // Try different approaches to fetch the image
+    const fetchOptions = [
+      // Try with no-cors first
+      { mode: 'no-cors' as RequestMode },
+      // Then with cors and full headers
+      {
+        mode: 'cors' as RequestMode,
+        headers: {
+          'Accept': 'image/webp,image/jpeg,image/png,*/*',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        },
+        referrerPolicy: 'no-referrer'
       },
-      mode: 'cors',
-      referrerPolicy: 'no-referrer'
-    });
-    
-    if (!response.ok) {
-      console.error('Failed to fetch image:', imageUrl);
-      return imageUrl; // Fallback to original URL
-    }
-    
-    const blob = await response.blob();
+      // Finally try with minimal headers
+      { headers: { 'Accept': '*/*' } }
+    ];
 
+    let response;
+    let error;
+
+    // Try each fetch option until one works
+    for (const options of fetchOptions) {
+      try {
+        response = await fetch(imageUrl, options);
+        if (response.ok) break;
+      } catch (e) {
+        error = e;
+        continue;
+      }
+    }
+
+    if (!response?.ok) {
+      console.error('Failed to fetch image after all attempts:', error);
+      return imageUrl; // Return original URL as fallback
+    }
+
+    const blob = await response.blob();
+    
     // Upload to Supabase with retry logic
     const maxRetries = 3;
     let attempt = 0;

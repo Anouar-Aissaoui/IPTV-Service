@@ -22,6 +22,7 @@ export const BlurImage = ({
   const [imageSrc, setImageSrc] = useState(src);
   const { toast } = useToast();
   const [hasError, setHasError] = useState(false);
+  const [toastShown, setToastShown] = useState(false);
 
   useEffect(() => {
     const optimizeImage = async () => {
@@ -33,11 +34,14 @@ export const BlurImage = ({
         } catch (error) {
           console.error('Error optimizing image:', error);
           setHasError(true);
-          toast({
-            title: "Image Load Issue",
-            description: "Some images may not display at optimal quality. We're working on fixing this.",
-            variant: "destructive",
-          });
+          if (!toastShown) {
+            toast({
+              title: "Image Load Issue",
+              description: "Some images may not display at optimal quality. We're working on fixing this.",
+              variant: "destructive",
+            });
+            setToastShown(true);
+          }
         }
       }
     };
@@ -50,11 +54,12 @@ export const BlurImage = ({
     } else {
       optimizeImage();
     }
-  }, [src, priority, toast]);
+  }, [src, priority, toast, toastShown]);
 
   const handleImageError = () => {
     setHasError(true);
     setIsLoaded(true);
+    setImageSrc(src); // Fallback to original source on error
   };
 
   return (
