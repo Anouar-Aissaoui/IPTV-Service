@@ -13,8 +13,9 @@ export const PerformanceMonitor = () => {
           let clsValue = 0;
           new PerformanceObserver((entryList) => {
             for (const entry of entryList.getEntries()) {
-              if (!entry.hadRecentInput) {
-                clsValue += (entry as any).value;
+              const layoutShift = entry as LayoutShift;
+              if (!layoutShift.hadRecentInput) {
+                clsValue += layoutShift.value;
               }
             }
             resolve(clsValue);
@@ -43,3 +44,9 @@ export const PerformanceMonitor = () => {
 
   return null;
 };
+
+// Add LayoutShift type definition
+interface LayoutShift extends PerformanceEntry {
+  value: number;
+  hadRecentInput: boolean;
+}

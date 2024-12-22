@@ -11,7 +11,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 60 * 1000, // Consider data fresh for 1 minute
-      cacheTime: 5 * 60 * 1000, // Keep unused data in cache for 5 minutes
+      gcTime: 5 * 60 * 1000, // Keep unused data in cache for 5 minutes (renamed from cacheTime)
     },
   },
 });
