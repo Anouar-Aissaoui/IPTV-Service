@@ -8,73 +8,28 @@ import {
 import { useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { BlurImage } from "./ui/blur-image";
-import { uploadImage } from "@/utils/supabaseStorage";
 import { useToast } from "@/components/ui/use-toast";
 
 const initialBrands = [
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item05-150x46-1-2.webp",
+    src: "/lovable-uploads/74cadd1d-7f11-4677-9cfc-3342545d312f.png",
     alt: "brand_item05"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item06-150x46-1-2.webp",
+    src: "/lovable-uploads/68c06c7a-d842-491a-a970-14726b960bc0.png",
     alt: "brand_item06"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item08-150x46-1-2.webp",
+    src: "/lovable-uploads/eb41a9e5-0a89-4fbb-9995-ac1735cd4aaf.png",
     alt: "brand_item08"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item09-150x46-1-2.webp",
+    src: "/lovable-uploads/00c90df3-a23d-47e3-b967-8806209cd5b1.png",
     alt: "brand_item09"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item10-150x46-1-2.webp",
+    src: "/lovable-uploads/62b3cd9e-1589-432c-b117-d855ac8f0b81.png",
     alt: "brand_item10"
-  },
-  {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item11-2.webp",
-    alt: "brand_item11"
-  },
-  {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item12-2.webp",
-    alt: "brand_item12"
-  },
-  {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item13-150x46-1-2.webp",
-    alt: "brand_item13"
-  },
-  {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item14-150x46-1-2.webp",
-    alt: "brand_item14"
-  },
-  {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item15-150x46-1-2.webp",
-    alt: "brand_item15"
-  },
-  {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item16-150x46-1-2.webp",
-    alt: "brand_item16"
-  },
-  {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item17-150x46-1-2.webp",
-    alt: "brand_item17"
-  },
-  {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item18-150x46-1-2.webp",
-    alt: "brand_item18"
-  },
-  {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item21-150x46-1-2.webp",
-    alt: "brand_item21"
-  },
-  {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item22-150x46-1-2.webp",
-    alt: "brand_item22"
-  },
-  {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/FOX-150x58.webp",
-    alt: "FOX"
   }
 ];
 
@@ -91,33 +46,6 @@ export const BrandCarousel = () => {
       autoplay.reset();
     });
   }, [api, autoplay]);
-
-  useEffect(() => {
-    const uploadBrandImages = async () => {
-      try {
-        const updatedBrands = await Promise.all(
-          brands.map(async (brand) => {
-            const fileName = brand.src.split('/').pop() || 'brand.webp';
-            const supabaseUrl = await uploadImage(brand.src, fileName);
-            return {
-              ...brand,
-              src: supabaseUrl,
-            };
-          })
-        );
-        setBrands(updatedBrands);
-      } catch (error) {
-        console.error('Error uploading brand images:', error);
-        toast({
-          title: "Warning",
-          description: "Some images may not load properly. We're working on fixing this.",
-          variant: "destructive",
-        });
-      }
-    };
-
-    uploadBrandImages();
-  }, [toast]);
 
   return (
     <div className="bg-black py-6 md:py-8 relative">
