@@ -28,7 +28,7 @@ export const Navigation = () => {
           <Link to="/" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Home</Link>
           <Link to="/pricing" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Pricing</Link>
           <a href="#" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Channel List</a>
-          <a href="#" className="hover:text-primary transition-colors duration-300 text-sm font-medium">FAQ</a>
+          <Link to="/faq" className="hover:text-primary transition-colors duration-300 text-sm font-medium">FAQ</Link>
           <a href="#" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Contact Us</a>
         </div>
         
@@ -42,7 +42,7 @@ export const Navigation = () => {
           <Link to="/" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Home</Link>
           <Link to="/pricing" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Pricing</Link>
           <a href="#" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Channel List</a>
-          <a href="#" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">FAQ</a>
+          <Link to="/faq" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">FAQ</Link>
           <a href="#" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Contact Us</a>
           <Button className="w-full bg-primary/90 text-white hover:bg-primary shadow-lg shadow-primary/20 font-medium">
             Free Trial

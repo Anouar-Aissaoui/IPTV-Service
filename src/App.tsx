@@ -7,6 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import { PerformanceMonitor } from "./components/PerformanceMonitor";
 import Index from "./pages/Index";
 import Pricing from "./pages/Pricing";
+import FAQ from "./pages/FAQ";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,6 +27,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/faq" element={<FAQ />} />
         </Routes>
         <Toaster />
         <Sonner />
