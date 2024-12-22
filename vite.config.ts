@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
+        manualChunks(id) {
           // Bundle core React dependencies together
           if (id.includes('node_modules/react') || 
               id.includes('node_modules/react-dom')) {
