@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { BlurImage } from "./ui/blur-image";
 import { uploadImage } from "@/utils/supabaseStorage";
+import { useToast } from "@/components/ui/use-toast";
 
 const initialBrands = [
   {
@@ -81,6 +82,7 @@ export const BrandCarousel = () => {
   const [api, setApi] = useState<any>(null);
   const [brands, setBrands] = useState(initialBrands);
   const autoplay = Autoplay({ delay: 2500, stopOnInteraction: true });
+  const { toast } = useToast();
 
   useEffect(() => {
     if (!api) return;
@@ -92,21 +94,30 @@ export const BrandCarousel = () => {
 
   useEffect(() => {
     const uploadBrandImages = async () => {
-      const updatedBrands = await Promise.all(
-        brands.map(async (brand) => {
-          const fileName = brand.src.split('/').pop() || 'brand.webp';
-          const supabaseUrl = await uploadImage(brand.src, fileName);
-          return {
-            ...brand,
-            src: supabaseUrl,
-          };
-        })
-      );
-      setBrands(updatedBrands);
+      try {
+        const updatedBrands = await Promise.all(
+          brands.map(async (brand) => {
+            const fileName = brand.src.split('/').pop() || 'brand.webp';
+            const supabaseUrl = await uploadImage(brand.src, fileName);
+            return {
+              ...brand,
+              src: supabaseUrl,
+            };
+          })
+        );
+        setBrands(updatedBrands);
+      } catch (error) {
+        console.error('Error uploading brand images:', error);
+        toast({
+          title: "Warning",
+          description: "Some images may not load properly. We're working on fixing this.",
+          variant: "destructive",
+        });
+      }
     };
 
     uploadBrandImages();
-  }, []);
+  }, [toast]);
 
   return (
     <div className="bg-black py-6 md:py-8 relative">
