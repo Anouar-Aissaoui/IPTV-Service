@@ -24,29 +24,31 @@ async function createServer() {
   } else {
     app.use(sirv('dist/client', { 
       gzip: true,
-      single: true // Enable SPA mode
+      single: true
     }));
   }
 
-  app.use('*', async (req, res, next) => {
-    const url = req.originalUrl;
-
+  // Handle all routes
+  app.use('*', async (req, res) => {
     try {
-      let template = fs.readFileSync(
+      const url = req.originalUrl;
+      const template = fs.readFileSync(
         isProduction ? resolve('dist/client/index.html') : resolve('index.html'),
         'utf-8'
       );
 
+      let transformedTemplate = template;
+      let render;
+
       if (!isProduction) {
-        template = await vite.transformIndexHtml(url, template);
+        transformedTemplate = await vite.transformIndexHtml(url, template);
+        render = (await vite.ssrLoadModule('/src/entry-server.tsx')).render;
+      } else {
+        render = (await import('./dist/server/entry-server.js')).render;
       }
 
-      const { render } = isProduction
-        ? await import('./dist/server/entry-server.js')
-        : await vite.ssrLoadModule('/src/entry-server.tsx');
-
       const appHtml = await render(url);
-      const html = template.replace(`<div id="root"></div>`, `<div id="root">${appHtml}</div>`);
+      const html = transformedTemplate.replace(`<div id="root"></div>`, `<div id="root">${appHtml}</div>`);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
@@ -54,17 +56,8 @@ async function createServer() {
         vite.ssrFixStacktrace(e);
       }
       console.error(e.stack);
-      next(e);
+      res.status(500).end(e.stack);
     }
-  });
-
-  // Handle 404s by serving index.html
-  app.use((req, res) => {
-    const indexPath = isProduction 
-      ? resolve('dist/client/index.html')
-      : resolve('index.html');
-    
-    res.sendFile(indexPath);
   });
 
   const port = process.env.PORT || 8080;
