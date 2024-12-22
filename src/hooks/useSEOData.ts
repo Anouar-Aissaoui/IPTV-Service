@@ -9,7 +9,7 @@ export const useSEOData = (route: string) => {
         .from('seo_metrics')
         .select('*')
         .eq('route', route)
-        .single();
+        .maybeSingle();
 
       if (error) {
         console.error('Error fetching SEO data:', error);
