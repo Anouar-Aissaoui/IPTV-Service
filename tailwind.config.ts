@@ -19,7 +19,8 @@ export default {
     },
     extend: {
       colors: {
-        neon: "#9EFF00",
+        primary: "#F97316",
+        neon: "#F97316",
         dark: "#000000",
         "dark-gray": "#0A0A0A",
         border: "hsl(var(--border))",
@@ -27,10 +28,6 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
