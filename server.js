@@ -22,12 +22,16 @@ async function createServer() {
     });
     app.use(vite.middlewares);
   } else {
-    app.use(sirv('dist/client', { gzip: true }));
+    app.use(sirv('dist/client', { 
+      gzip: true,
+      single: true // Enable SPA mode
+    }));
   }
 
-  app.use('*', async (req, res) => {
+  app.use('*', async (req, res, next) => {
+    const url = req.originalUrl;
+
     try {
-      const url = req.originalUrl;
       let template = fs.readFileSync(
         isProduction ? resolve('dist/client/index.html') : resolve('index.html'),
         'utf-8'
@@ -50,8 +54,17 @@ async function createServer() {
         vite.ssrFixStacktrace(e);
       }
       console.error(e.stack);
-      res.status(500).end(e.stack);
+      next(e);
     }
+  });
+
+  // Handle 404s by serving index.html
+  app.use((req, res) => {
+    const indexPath = isProduction 
+      ? resolve('dist/client/index.html')
+      : resolve('index.html');
+    
+    res.sendFile(indexPath);
   });
 
   const port = process.env.PORT || 8080;
