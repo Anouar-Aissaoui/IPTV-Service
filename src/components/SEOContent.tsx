@@ -23,7 +23,21 @@ export const SEOContent = () => {
       "@type": "AggregateRating",
       "ratingValue": "4.8",
       "reviewCount": "1250"
-    }
+    },
+    "image": "https://iptvsubscription.news/og-image.png",
+    "url": "https://iptvsubscription.news",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Channels",
+        "value": "40000+"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "VOD Content",
+        "value": "54000+"
+      }
+    ]
   };
 
   return (
@@ -32,7 +46,7 @@ export const SEOContent = () => {
         <title>Premium IPTV Subscription | Best USA IPTV Service 2024 - 4K & HD</title>
         <meta name="description" content="Get premium IPTV subscription with 40,000+ channels and VOD content in 4K & HD quality. Best IPTV provider in USA with 24/7 support." />
         <meta name="keywords" content="IPTV subscription, buy IPTV, best IPTV service, 4K IPTV, HD channels, USA IPTV, streaming service" />
-        <link rel="canonical" href={window.location.href} />
+        <link rel="canonical" href="https://iptvsubscription.news" />
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
@@ -42,16 +56,16 @@ export const SEOContent = () => {
         <div className="container mx-auto px-4 max-w-4xl">
           <article className="prose prose-invert max-w-none">
             <h1 className="text-5xl font-bold mb-10 text-white bg-gradient-to-r from-neon to-white bg-clip-text text-transparent">
-              Best IPTV Subscription
+              Best IPTV Subscription Service
             </h1>
             
             <section>
               <h2 className="text-3xl font-semibold mb-8 text-neon">
-                Ultimate Guide to Premium IPTV Service in 2025
+                Ultimate Guide to Premium IPTV Service in 2024
               </h2>
               
               <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-                Looking for the best IPTV service in 2025? Our premium IPTV subscription offers an unparalleled streaming experience with over 40,000 channels and 54,000+ VOD content in stunning 4K and HD quality. Whether you're a sports enthusiast, movie buff, or TV show fanatic, our comprehensive IPTV service delivers entertainment right to your preferred device.
+                Looking for the best IPTV service in 2024? Our premium IPTV subscription offers an unparalleled streaming experience with over 40,000 channels and 54,000+ VOD content in stunning 4K and HD quality. Whether you're a sports enthusiast, movie buff, or TV show fanatic, our comprehensive IPTV service delivers entertainment right to your preferred device.
               </p>
             </section>
 
