@@ -41,28 +41,6 @@ export const Hero = () => {
                 alt="Supported Devices"
                 className="w-full max-w-[366px] h-auto"
               />
-              <div className="flex gap-8">
-                <div className="flex flex-col items-center text-gray-400 text-sm">
-                  <Monitor className="w-8 h-8 mb-2" />
-                  <span>Smart TV</span>
-                </div>
-                <div className="flex flex-col items-center text-gray-400 text-sm">
-                  <Laptop className="w-8 h-8 mb-2" />
-                  <span>Laptops/PC</span>
-                </div>
-                <div className="flex flex-col items-center text-gray-400 text-sm">
-                  <Smartphone className="w-8 h-8 mb-2" />
-                  <span>Android</span>
-                </div>
-                <div className="flex flex-col items-center text-gray-400 text-sm">
-                  <Apple className="w-8 h-8 mb-2" />
-                  <span>iOS</span>
-                </div>
-                <div className="flex flex-col items-center text-gray-400 text-sm">
-                  <MonitorPlay className="w-8 h-8 mb-2" />
-                  <span>Windows</span>
-                </div>
-              </div>
             </div>
           </div>
           <div className="lg:w-1/2">
