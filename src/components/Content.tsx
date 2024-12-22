@@ -1,23 +1,23 @@
 const movies = [
   {
-    title: "Movie 1",
-    image: "https://via.placeholder.com/300x450",
+    title: "Madame Web",
+    image: "https://image.tmdb.org/t/p/w342/sjMN7DRi4sGiledsmllEw5HJjPy.jpg",
   },
   {
-    title: "Movie 2",
-    image: "https://via.placeholder.com/300x450",
+    title: "Dune: Part Two",
+    image: "https://image.tmdb.org/t/p/w342/cdqLnri3NEGcmfnqwk2TSIYtddg.jpg",
   },
   {
-    title: "Movie 3",
-    image: "https://via.placeholder.com/300x450",
+    title: "Argylle",
+    image: "https://image.tmdb.org/t/p/w342/aosm8NMQ3UyoBVpSxyimorCQykC.jpg",
   },
   {
-    title: "Movie 4",
-    image: "https://via.placeholder.com/300x450",
+    title: "Migration",
+    image: "https://image.tmdb.org/t/p/w342/4YZpsylmjHbqeWzjKpUEF8gcLNW.jpg",
   },
   {
-    title: "Movie 5",
-    image: "https://via.placeholder.com/300x450",
+    title: "Anyone But You",
+    image: "https://image.tmdb.org/t/p/w342/lurEK87kukWNaHd0zYnsi3yzJrs.jpg",
   },
 ];
 
