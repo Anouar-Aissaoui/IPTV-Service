@@ -1,8 +1,6 @@
 import { BlurImage } from "./ui/blur-image";
-import { useEffect, useState } from "react";
-import { uploadImage } from "@/utils/supabaseStorage";
 
-const initialMovies = [
+const movies = [
   {
     title: "Madame Web",
     image: "https://image.tmdb.org/t/p/w342/sjMN7DRi4sGiledsmllEw5HJjPy.jpg",
@@ -31,26 +29,6 @@ const initialMovies = [
 ];
 
 export const Content = () => {
-  const [movies, setMovies] = useState(initialMovies);
-
-  useEffect(() => {
-    const uploadMovieImages = async () => {
-      const updatedMovies = await Promise.all(
-        movies.map(async (movie) => {
-          const fileName = movie.image.split('/').pop() || 'movie.jpg';
-          const supabaseUrl = await uploadImage(movie.image, fileName);
-          return {
-            ...movie,
-            image: supabaseUrl,
-          };
-        })
-      );
-      setMovies(updatedMovies);
-    };
-
-    uploadMovieImages();
-  }, []);
-
   return (
     <div className="bg-dark py-20">
       <div className="container mx-auto px-4">

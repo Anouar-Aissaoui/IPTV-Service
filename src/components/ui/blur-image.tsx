@@ -1,66 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Blurhash } from "react-blurhash";
-import { optimizeAndUploadImage } from "@/utils/imageOptimization";
-import { useToast } from "@/hooks/use-toast";
 
 interface BlurImageProps {
   src: string;
   alt: string;
   hash?: string;
   className?: string;
-  priority?: boolean;
 }
 
-export const BlurImage = ({ 
-  src, 
-  alt, 
-  hash = "L6PZfSi_.AyE_3t7t7R**0o#DgR4", 
-  className = "",
-  priority = false 
-}: BlurImageProps) => {
+export const BlurImage = ({ src, alt, hash = "L6PZfSi_.AyE_3t7t7R**0o#DgR4", className = "" }: BlurImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [imageSrc, setImageSrc] = useState(src);
-  const { toast } = useToast();
-  const [hasError, setHasError] = useState(false);
-  const [toastShown, setToastShown] = useState(false);
-
-  useEffect(() => {
-    const optimizeImage = async () => {
-      if (src.startsWith('http')) {
-        try {
-          const fileName = src.split('/').pop() || 'image.jpg';
-          const optimizedUrl = await optimizeAndUploadImage(src, fileName);
-          setImageSrc(optimizedUrl);
-        } catch (error) {
-          console.error('Error optimizing image:', error);
-          setHasError(true);
-          if (!toastShown) {
-            toast({
-              title: "Image Load Issue",
-              description: "Some images may not display at optimal quality. We're working on fixing this.",
-              variant: "destructive",
-            });
-            setToastShown(true);
-          }
-        }
-      }
-    };
-
-    if (!priority) {
-      // Only optimize non-priority images after initial load
-      window.requestIdleCallback ? 
-        window.requestIdleCallback(() => optimizeImage()) : 
-        setTimeout(optimizeImage, 1000);
-    } else {
-      optimizeImage();
-    }
-  }, [src, priority, toast, toastShown]);
-
-  const handleImageError = () => {
-    setHasError(true);
-    setIsLoaded(true);
-    setImageSrc(src); // Fallback to original source on error
-  };
 
   return (
     <div className="relative w-full h-full">
@@ -77,14 +26,11 @@ export const BlurImage = ({
         </div>
       )}
       <img
-        src={imageSrc}
+        src={src}
         alt={alt}
         className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
         onLoad={() => setIsLoaded(true)}
-        onError={handleImageError}
-        loading={priority ? "eager" : "lazy"}
-        decoding={priority ? "sync" : "async"}
-        fetchPriority={priority ? "high" : "auto"}
+        loading="lazy"
       />
     </div>
   );
