@@ -13,9 +13,8 @@ export const SEOContentSection = () => {
             
             <meta itemProp="datePublished" content="2024-03-19" />
             <meta itemProp="dateModified" content="2024-03-19" />
-            <meta itemProp="author" content="Premium IPTV Service" />
-            <meta itemProp="publisher" content="Premium IPTV Service" />
             
+            {/* Keywords meta tag */}
             <meta name="keywords" content="buy IPTV, IPTV service, best IPTV service, IPTV subscription, premium IPTV, HD IPTV service, streaming TV channels, live TV streaming, 4K IPTV service, affordable IPTV subscription" />
           </header>
           
@@ -26,8 +25,7 @@ export const SEOContentSection = () => {
             
             <div itemProp="articleBody">
               <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-                Looking for the best <a href="https://iptvsubscription.news" className="text-neon hover:text-white transition-colors" rel="dofollow">IPTV subscription</a>? 
-                Our premium IPTV subscription delivers an unmatched streaming experience with over 40,000+ channels and extensive VOD content in stunning 4K quality. Whether you're a sports enthusiast, movie lover, or TV show fan, our comprehensive IPTV service brings entertainment directly to your preferred device.
+                Looking for the best <a href="https://www.iptvservice.site/" className="text-neon hover:text-white transition-colors" rel="dofollow">IPTV subscription</a>? Our premium IPTV subscription delivers an unmatched streaming experience with over 40,000+ channels and extensive VOD content in stunning 4K quality. Whether you're a sports enthusiast, movie lover, or TV show fan, our comprehensive IPTV service brings entertainment directly to your preferred device.
               </p>
 
               <h3 className="text-2xl font-semibold mb-6 text-white">
@@ -92,12 +90,41 @@ export const SEOContentSection = () => {
                 </div>
               </div>
 
+              <h3 className="text-2xl font-semibold mb-6 text-white">
+                Why We're the Best IPTV Provider in USA
+              </h3>
+
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <div className="space-y-3">
+                  <p className="text-gray-300">
+                    <span className="text-neon font-semibold">✓ Extensive Channel Selection:</span> Access to premium USA channels
+                  </p>
+                  <p className="text-gray-300">
+                    <span className="text-neon font-semibold">✓ 4K & HD Quality:</span> Crystal clear streaming experience
+                  </p>
+                  <p className="text-gray-300">
+                    <span className="text-neon font-semibold">✓ 24/7 Support:</span> Expert assistance whenever needed
+                  </p>
+                </div>
+                <div className="space-y-3">
+                  <p className="text-gray-300">
+                    <span className="text-neon font-semibold">✓ Regular Updates:</span> New channels added frequently
+                  </p>
+                  <p className="text-gray-300">
+                    <span className="text-neon font-semibold">✓ High-Speed Servers:</span> Minimal buffering time
+                  </p>
+                  <p className="text-gray-300">
+                    <span className="text-neon font-semibold">✓ Anti-freeze Technology:</span> Stable playback
+                  </p>
+                </div>
+              </div>
+
               <div className="bg-gradient-to-r from-dark to-dark-gray p-8 rounded-xl border border-neon/20 mb-8">
                 <h3 className="text-2xl font-semibold mb-4 text-white">
                   Buy IPTV Subscription Today
                 </h3>
                 <p className="text-gray-300 text-lg leading-relaxed">
-                  As a leading <a href="https://iptvsubscription.news" className="text-neon hover:text-white transition-colors" rel="dofollow">IPTV subscription</a> provider in the USA, we offer unmatched quality, reliability, and customer support. Our premium IPTV service provides access to the best entertainment content at competitive prices, with flexible payment options and instant activation.
+                  As a leading <a href="https://www.iptvservice.site/" className="text-neon hover:text-white transition-colors" rel="dofollow">IPTV subscription</a> provider in the USA, we offer unmatched quality, reliability, and customer support. Our premium IPTV service provides access to the best entertainment content at competitive prices, with flexible payment options and instant activation. Experience the future of television with our cutting-edge IPTV subscription service.
                 </p>
               </div>
 
@@ -106,7 +133,7 @@ export const SEOContentSection = () => {
                   Ready to Experience Premium IPTV?
                 </h4>
                 <p className="text-gray-300 text-center">
-                  Join thousands of satisfied customers who have already discovered the best IPTV service in the USA. Start your journey with our risk-free trial today!
+                  Join thousands of satisfied customers who have already discovered the best IPTV service in the USA. Start your journey with our risk-free trial today and elevate your entertainment experience!
                 </p>
               </div>
             </div>

@@ -1,21 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /api/
-Disallow: /admin/
-Disallow: /private/
-
-# Crawl-delay
-Crawl-delay: 10
-
-# Sitemaps
 Sitemap: https://iptvsubscription.news/sitemap.xml
-
-# Additional directives for specific bots
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
