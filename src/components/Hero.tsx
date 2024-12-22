@@ -110,19 +110,8 @@ export const Hero = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
-          {[
-            { value: "+7K", label: "Happy Customers" },
-            { value: "+40K", label: "Channels" },
-            { value: "+1,500", label: "Sport Channels" },
-            { value: "+54K", label: "Movies & TV Shows" }
-          ].map((stat, index) => (
-            <div key={index} className="bg-dark-gray/50 backdrop-blur-lg border border-gray-800/30 p-6 rounded-2xl hover:border-primary/50 hover:scale-105 transition-all duration-300">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
-              <div className="text-primary text-sm font-medium">{stat.label}</div>
-            </div>
-          ))}
-        </div>
+        {/* Removed the statistics grid as requested */}
+
       </div>
 
       <div className="absolute inset-0 -z-10 overflow-hidden">
