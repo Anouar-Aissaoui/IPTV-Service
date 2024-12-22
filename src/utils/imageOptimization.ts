@@ -25,7 +25,7 @@ export const optimizeAndUploadImage = async (imageUrl: string, fileName: string)
           'Accept': 'image/webp,image/jpeg,image/png,*/*',
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         },
-        referrerPolicy: 'no-referrer'
+        referrerPolicy: 'no-referrer' as ReferrerPolicy
       },
       // Finally try with minimal headers
       { headers: { 'Accept': '*/*' } }
