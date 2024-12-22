@@ -112,14 +112,21 @@ export const Hero = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
           {[
-            { value: "+7K", label: "Happy Customers" },
-            { value: "+40K", label: "Channels" },
-            { value: "+1,500", label: "Sport Channels" },
-            { value: "+54K", label: "Movies & TV Shows" }
+            { value: "+7K", label: "Happy Customers", icon: "👥" },
+            { value: "+40K", label: "Channels", icon: "📺" },
+            { value: "+1,500", label: "Sport Channels", icon: "⚽" },
+            { value: "+54K", label: "Movies & TV Shows", icon: "🎬" }
           ].map((stat, index) => (
-            <div key={index} className="bg-dark-gray/50 backdrop-blur-lg border border-gray-800/30 p-6 rounded-2xl hover:border-primary/50 hover:scale-105 transition-all duration-300">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
-              <div className="text-primary text-sm font-medium">{stat.label}</div>
+            <div 
+              key={index} 
+              className="relative group bg-dark-gray/50 backdrop-blur-lg border border-gray-800/30 p-6 rounded-2xl hover:border-primary/50 transition-all duration-500 overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-gradient-radial from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10 flex flex-col items-center space-y-2">
+                <span className="text-4xl mb-2">{stat.icon}</span>
+                <div className="text-3xl md:text-4xl font-bold text-white bg-gradient-to-r from-white via-primary to-white bg-clip-text text-transparent animate-gradient">{stat.value}</div>
+                <div className="text-primary/80 text-sm font-medium tracking-wider uppercase">{stat.label}</div>
+              </div>
             </div>
           ))}
         </div>
