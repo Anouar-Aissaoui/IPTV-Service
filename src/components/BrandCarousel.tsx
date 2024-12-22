@@ -8,54 +8,81 @@ import {
 import { useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { BlurImage } from "./ui/blur-image";
+import { uploadImage } from "@/utils/supabaseStorage";
+import { useToast } from "@/components/ui/use-toast";
 
 const initialBrands = [
   {
-    src: "/brand-logos/brand1.webp",
-    alt: "HBO"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item05-150x46-1-2.webp",
+    alt: "brand_item05"
   },
   {
-    src: "/brand-logos/brand2.webp",
-    alt: "Netflix"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item06-150x46-1-2.webp",
+    alt: "brand_item06"
   },
   {
-    src: "/brand-logos/brand3.webp",
-    alt: "Disney+"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item08-150x46-1-2.webp",
+    alt: "brand_item08"
   },
   {
-    src: "/brand-logos/brand4.webp",
-    alt: "Amazon Prime"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item09-150x46-1-2.webp",
+    alt: "brand_item09"
   },
   {
-    src: "/brand-logos/brand5.webp",
-    alt: "Apple TV+"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item10-150x46-1-2.webp",
+    alt: "brand_item10"
   },
   {
-    src: "/brand-logos/brand6.webp",
-    alt: "ESPN"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item11-2.webp",
+    alt: "brand_item11"
   },
   {
-    src: "/brand-logos/brand7.webp",
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item12-2.webp",
+    alt: "brand_item12"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item13-150x46-1-2.webp",
+    alt: "brand_item13"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item14-150x46-1-2.webp",
+    alt: "brand_item14"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item15-150x46-1-2.webp",
+    alt: "brand_item15"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item16-150x46-1-2.webp",
+    alt: "brand_item16"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item17-150x46-1-2.webp",
+    alt: "brand_item17"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item18-150x46-1-2.webp",
+    alt: "brand_item18"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item21-150x46-1-2.webp",
+    alt: "brand_item21"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item22-150x46-1-2.webp",
+    alt: "brand_item22"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/FOX-150x58.webp",
     alt: "FOX"
-  },
-  {
-    src: "/brand-logos/brand8.webp",
-    alt: "NBC"
-  },
-  {
-    src: "/brand-logos/brand9.webp",
-    alt: "CBS"
-  },
-  {
-    src: "/brand-logos/brand10.webp",
-    alt: "ABC"
   }
 ];
 
 export const BrandCarousel = () => {
   const [api, setApi] = useState<any>(null);
-  const [brands] = useState(initialBrands);
+  const [brands, setBrands] = useState(initialBrands);
   const autoplay = Autoplay({ delay: 2500, stopOnInteraction: true });
+  const { toast } = useToast();
 
   useEffect(() => {
     if (!api) return;
@@ -64,6 +91,33 @@ export const BrandCarousel = () => {
       autoplay.reset();
     });
   }, [api, autoplay]);
+
+  useEffect(() => {
+    const uploadBrandImages = async () => {
+      try {
+        const updatedBrands = await Promise.all(
+          brands.map(async (brand) => {
+            const fileName = brand.src.split('/').pop() || 'brand.webp';
+            const supabaseUrl = await uploadImage(brand.src, fileName);
+            return {
+              ...brand,
+              src: supabaseUrl,
+            };
+          })
+        );
+        setBrands(updatedBrands);
+      } catch (error) {
+        console.error('Error uploading brand images:', error);
+        toast({
+          title: "Warning",
+          description: "Some images may not load properly. We're working on fixing this.",
+          variant: "destructive",
+        });
+      }
+    };
+
+    uploadBrandImages();
+  }, [toast]);
 
   return (
     <div className="bg-black py-6 md:py-8 relative">
@@ -91,7 +145,6 @@ export const BrandCarousel = () => {
                       src={brand.src}
                       alt={brand.alt}
                       className="object-contain w-full h-full opacity-50 hover:opacity-100 transition-opacity duration-300 scale-75 hover:scale-90"
-                      priority={index < 4} // Prioritize loading first 4 images
                     />
                   </figure>
                 </div>
