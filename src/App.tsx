@@ -12,7 +12,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <SpeedInsights />
+        <SpeedInsights endpoint="bob-app.vercel.sh/_vercel/speed-insights/vitals" />
         <Routes>
           <Route path="/" element={<Index />} />
         </Routes>
