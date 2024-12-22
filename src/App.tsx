@@ -6,12 +6,13 @@ import { Routes, Route } from "react-router-dom";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { PerformanceMonitor } from "./components/PerformanceMonitor";
 import Index from "./pages/Index";
+import Pricing from "./pages/Pricing";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 60 * 1000, // Consider data fresh for 1 minute
-      gcTime: 5 * 60 * 1000, // Keep unused data in cache for 5 minutes (renamed from cacheTime)
+      staleTime: 60 * 1000,
+      gcTime: 5 * 60 * 1000,
     },
   },
 });
@@ -24,6 +25,7 @@ const App = () => {
         <PerformanceMonitor />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/pricing" element={<Pricing />} />
         </Routes>
         <Toaster />
         <Sonner />

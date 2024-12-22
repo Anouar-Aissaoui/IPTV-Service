@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Monitor, Laptop, Smartphone, Apple, MonitorPlay, Menu } from "lucide-react";
 import { BlurImage } from "./ui/blur-image";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Hero = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -14,9 +15,9 @@ export const Hero = () => {
     <div className="relative bg-gradient-to-b from-dark to-dark-gray min-h-screen">
       <nav className="container mx-auto px-4 py-6 border-b border-gray-800/30">
         <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold text-white tracking-tight hover:text-primary transition-colors duration-300">
+          <Link to="/" className="text-2xl font-bold text-white tracking-tight hover:text-primary transition-colors duration-300">
             IPTV Subscription
-          </div>
+          </Link>
           
           <button 
             className="md:hidden text-white hover:text-primary transition-colors duration-300"
@@ -26,8 +27,8 @@ export const Hero = () => {
           </button>
 
           <div className="hidden md:flex items-center space-x-8 text-gray-300">
-            <a href="#" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Home</a>
-            <a href="#" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Pricing</a>
+            <Link to="/" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Home</Link>
+            <Link to="/pricing" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Pricing</Link>
             <a href="#" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Channel List</a>
             <a href="#" className="hover:text-primary transition-colors duration-300 text-sm font-medium">FAQ</a>
             <a href="#" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Contact Us</a>
@@ -40,8 +41,8 @@ export const Hero = () => {
 
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 bg-dark-gray/80 backdrop-blur-lg rounded-xl p-4 space-y-4 border border-gray-800/30">
-            <a href="#" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Home</a>
-            <a href="#" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Pricing</a>
+            <Link to="/" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Home</Link>
+            <Link to="/pricing" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Pricing</Link>
             <a href="#" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Channel List</a>
             <a href="#" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">FAQ</a>
             <a href="#" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Contact Us</a>
