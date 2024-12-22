@@ -11,36 +11,68 @@ import { BlurImage } from "./ui/blur-image";
 
 const brands = [
   {
-    src: "/brands/brand1.webp",
-    alt: "HBO"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item05-150x46-1-2.webp",
+    alt: "brand_item05"
   },
   {
-    src: "/brands/brand2.webp",
-    alt: "Netflix"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item06-150x46-1-2.webp",
+    alt: "brand_item06"
   },
   {
-    src: "/brands/brand3.webp",
-    alt: "Disney+"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item08-150x46-1-2.webp",
+    alt: "brand_item08"
   },
   {
-    src: "/brands/brand4.webp",
-    alt: "Prime Video"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item09-150x46-1-2.webp",
+    alt: "brand_item09"
   },
   {
-    src: "/brands/brand5.webp",
-    alt: "Apple TV+"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item10-150x46-1-2.webp",
+    alt: "brand_item10"
   },
   {
-    src: "/brands/brand6.webp",
-    alt: "Paramount+"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item11-2.webp",
+    alt: "brand_item11"
   },
   {
-    src: "/brands/brand7.webp",
-    alt: "Peacock"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item12-2.webp",
+    alt: "brand_item12"
   },
   {
-    src: "/brands/brand8.webp",
-    alt: "ESPN+"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item13-150x46-1-2.webp",
+    alt: "brand_item13"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item14-150x46-1-2.webp",
+    alt: "brand_item14"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item15-150x46-1-2.webp",
+    alt: "brand_item15"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item16-150x46-1-2.webp",
+    alt: "brand_item16"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item17-150x46-1-2.webp",
+    alt: "brand_item17"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item18-150x46-1-2.webp",
+    alt: "brand_item18"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item21-150x46-1-2.webp",
+    alt: "brand_item21"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item22-150x46-1-2.webp",
+    alt: "brand_item22"
+  },
+  {
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/FOX-150x58.webp",
+    alt: "FOX"
   }
 ];
 
