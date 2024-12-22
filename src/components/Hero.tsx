@@ -29,9 +29,9 @@ export const Hero = () => {
           <div className="hidden md:flex items-center space-x-8 text-gray-300">
             <Link to="/" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Home</Link>
             <Link to="/pricing" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Pricing</Link>
-            <a href="#" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Channel List</a>
-            <a href="#" className="hover:text-primary transition-colors duration-300 text-sm font-medium">FAQ</a>
-            <a href="#" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Contact Us</a>
+            <Link to="/channels" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Channel List</Link>
+            <Link to="/faq" className="hover:text-primary transition-colors duration-300 text-sm font-medium">FAQ</Link>
+            <Link to="/contact" className="hover:text-primary transition-colors duration-300 text-sm font-medium">Contact Us</Link>
           </div>
           
           <Button className="hidden md:flex bg-primary/90 text-white hover:bg-primary shadow-lg shadow-primary/20 font-medium px-6 transform hover:scale-105 transition-all duration-300">
@@ -43,9 +43,9 @@ export const Hero = () => {
           <div className="md:hidden mt-4 bg-dark-gray/80 backdrop-blur-lg rounded-xl p-4 space-y-4 border border-gray-800/30">
             <Link to="/" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Home</Link>
             <Link to="/pricing" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Pricing</Link>
-            <a href="#" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Channel List</a>
-            <a href="#" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">FAQ</a>
-            <a href="#" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Contact Us</a>
+            <Link to="/channels" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Channel List</Link>
+            <Link to="/faq" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">FAQ</Link>
+            <Link to="/contact" className="block text-gray-300 hover:text-primary transition-colors duration-300 text-sm font-medium">Contact Us</Link>
             <Button className="w-full bg-primary/90 text-white hover:bg-primary shadow-lg shadow-primary/20 font-medium">
               Free Trial
             </Button>
