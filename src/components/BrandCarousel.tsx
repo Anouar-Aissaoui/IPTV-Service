@@ -77,7 +77,7 @@ const brands = [
 
 export const BrandCarousel = () => {
   const [api, setApi] = useState<any>(null);
-  const autoplay = Autoplay({ delay: 1500, stopOnInteraction: true });
+  const autoplay = Autoplay({ delay: 2500, stopOnInteraction: true });
 
   useEffect(() => {
     if (!api) return;
@@ -88,27 +88,26 @@ export const BrandCarousel = () => {
   }, [api, autoplay]);
 
   return (
-    <div className="bg-gradient-radial from-dark-gray via-dark to-dark py-12 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(158,255,0,0.02)_0%,transparent_70%)]"></div>
+    <div className="bg-black py-16 relative">
       <div className="container mx-auto px-4 relative z-10">
         <Carousel
           opts={{
-            align: "start",
+            align: "center",
             loop: true,
           }}
           plugins={[autoplay]}
           setApi={setApi}
-          className="w-full"
+          className="w-full max-w-[1400px] mx-auto"
         >
           <CarouselContent>
             {brands.map((brand, index) => (
-              <CarouselItem key={index} className="md:basis-1/3 lg:basis-1/6">
-                <div className="p-1">
-                  <figure className="relative aspect-[3/1] w-full overflow-hidden rounded-lg bg-black/50">
+              <CarouselItem key={index} className="md:basis-1/4 lg:basis-1/6 pl-4">
+                <div className="p-2">
+                  <figure className="relative aspect-[3/1] w-full">
                     <img
                       src={brand.src}
                       alt={brand.alt}
-                      className="object-contain w-full h-full hover:opacity-80 transition-opacity"
+                      className="object-contain w-full h-full opacity-70 hover:opacity-100 transition-opacity duration-300"
                       loading="lazy"
                     />
                   </figure>
@@ -116,8 +115,8 @@ export const BrandCarousel = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex" />
-          <CarouselNext className="hidden md:flex" />
+          <CarouselPrevious className="hidden md:flex -left-8 bg-transparent border-none hover:bg-black/10 text-white" />
+          <CarouselNext className="hidden md:flex -right-8 bg-transparent border-none hover:bg-black/10 text-white" />
         </Carousel>
       </div>
     </div>

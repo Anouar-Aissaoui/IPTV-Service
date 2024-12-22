@@ -20,8 +20,8 @@ export default {
     extend: {
       colors: {
         neon: "#9EFF00",
-        dark: "#000000", // Updated to pure black
-        "dark-gray": "#0A0A0A", // Made darker
+        dark: "#000000",
+        "dark-gray": "#0A0A0A",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
