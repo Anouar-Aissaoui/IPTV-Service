@@ -5,27 +5,27 @@ import { uploadImage } from "@/utils/supabaseStorage";
 const initialMovies = [
   {
     title: "Madame Web",
-    image: "/lovable-uploads/movies/madame-web.jpg",
+    image: "https://image.tmdb.org/t/p/w342/sjMN7DRi4sGiledsmllEw5HJjPy.jpg",
     hash: "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
   },
   {
     title: "Dune: Part Two",
-    image: "/lovable-uploads/movies/dune.jpg",
+    image: "https://image.tmdb.org/t/p/w342/cdqLnri3NEGcmfnqwk2TSIYtddg.jpg",
     hash: "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
   },
   {
     title: "Argylle",
-    image: "/lovable-uploads/movies/argylle.jpg",
+    image: "https://image.tmdb.org/t/p/w342/aosm8NMQ3UyoBVpSxyimorCQykC.jpg",
     hash: "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
   },
   {
     title: "Migration",
-    image: "/lovable-uploads/movies/migration.jpg",
+    image: "https://image.tmdb.org/t/p/w342/4YZpsylmjHbqeWzjKpUEF8gcLNW.jpg",
     hash: "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
   },
   {
     title: "Anyone But You",
-    image: "/lovable-uploads/movies/anyone-but-you.jpg",
+    image: "https://image.tmdb.org/t/p/w342/lurEK87kukWNaHd0zYnsi3yzJrs.jpg",
     hash: "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
   },
 ];
@@ -35,22 +35,17 @@ export const Content = () => {
 
   useEffect(() => {
     const uploadMovieImages = async () => {
-      try {
-        const updatedMovies = await Promise.all(
-          movies.map(async (movie) => {
-            const fileName = movie.image.split('/').pop() || 'movie.jpg';
-            const supabaseUrl = await uploadImage(movie.image, fileName);
-            return {
-              ...movie,
-              image: supabaseUrl || movie.image, // Fallback to local URL if upload fails
-            };
-          })
-        );
-        setMovies(updatedMovies);
-      } catch (error) {
-        console.error('Error uploading movie images:', error);
-        // Keep using local images if upload fails
-      }
+      const updatedMovies = await Promise.all(
+        movies.map(async (movie) => {
+          const fileName = movie.image.split('/').pop() || 'movie.jpg';
+          const supabaseUrl = await uploadImage(movie.image, fileName);
+          return {
+            ...movie,
+            image: supabaseUrl,
+          };
+        })
+      );
+      setMovies(updatedMovies);
     };
 
     uploadMovieImages();
