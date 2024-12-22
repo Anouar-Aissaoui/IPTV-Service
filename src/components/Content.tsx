@@ -1,5 +1,5 @@
 import { BlurImage } from "./ui/blur-image";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useCallback, useEffect } from "react";
 
 // Moved movies data outside component to prevent re-creation on each render
 const movies = [
@@ -40,10 +40,29 @@ const movies = [
   },
 ];
 
+// Performance monitoring
+const reportWebVitals = (metric: any) => {
+  console.log(metric);
+};
+
 // Lazy load MovieCard component
 const MovieCard = lazy(() => import("./MovieCard"));
 
 export const Content = () => {
+  // Monitor component renders
+  useEffect(() => {
+    performance.mark('content-component-rendered');
+    
+    return () => {
+      performance.measure('content-render-time', 'content-component-rendered');
+    };
+  }, []);
+
+  // Memoized handler for future interactions
+  const handleMovieClick = useCallback((movieTitle: string) => {
+    console.log(`Movie clicked: ${movieTitle}`);
+  }, []);
+
   return (
     <div className="bg-dark py-20">
       <div className="container mx-auto px-4">
@@ -58,7 +77,9 @@ export const Content = () => {
                 <div className="aspect-[2/3] bg-gray-800 animate-pulse rounded-lg"></div>
               }
             >
-              <MovieCard movie={movie} />
+              <div onClick={() => handleMovieClick(movie.title)}>
+                <MovieCard movie={movie} />
+              </div>
             </Suspense>
           ))}
         </div>
@@ -66,3 +87,14 @@ export const Content = () => {
     </div>
   );
 };
+
+// Add performance observer
+if (typeof window !== 'undefined') {
+  const observer = new PerformanceObserver((list) => {
+    list.getEntries().forEach((entry) => {
+      reportWebVitals(entry);
+    });
+  });
+
+  observer.observe({ entryTypes: ['measure'] });
+}

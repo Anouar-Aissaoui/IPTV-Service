@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { BlurImage } from "./ui/blur-image";
 
 interface MovieProps {
@@ -10,7 +11,7 @@ interface MovieProps {
   };
 }
 
-const MovieCard = ({ movie }: MovieProps) => {
+const MovieCard = memo(({ movie }: MovieProps) => {
   return (
     <div className="relative group overflow-hidden rounded-lg aspect-[2/3] border border-neon/20 hover:border-neon/40 transition-colors duration-300">
       <BlurImage
@@ -29,6 +30,8 @@ const MovieCard = ({ movie }: MovieProps) => {
       </div>
     </div>
   );
-};
+});
+
+MovieCard.displayName = 'MovieCard';
 
 export default MovieCard;
