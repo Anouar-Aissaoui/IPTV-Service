@@ -89,7 +89,7 @@ export const BrandCarousel = () => {
 
   return (
     <div className="bg-gradient-radial from-dark-gray via-dark to-dark py-12 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(158,255,0,0.03)_0%,transparent_70%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(158,255,0,0.02)_0%,transparent_70%)]"></div>
       <div className="container mx-auto px-4 relative z-10">
         <Carousel
           opts={{
@@ -104,7 +104,7 @@ export const BrandCarousel = () => {
             {brands.map((brand, index) => (
               <CarouselItem key={index} className="md:basis-1/3 lg:basis-1/6">
                 <div className="p-1">
-                  <figure className="relative aspect-[3/1] w-full overflow-hidden rounded-lg bg-dark/50">
+                  <figure className="relative aspect-[3/1] w-full overflow-hidden rounded-lg bg-black/50">
                     <img
                       src={brand.src}
                       alt={brand.alt}
