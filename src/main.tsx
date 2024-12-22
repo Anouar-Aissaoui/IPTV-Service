@@ -1,3 +1,6 @@
 import './index.css';
+import renderClient from './entry-client';
 
-export { default } from './entry-client';
+renderClient();
+
+export default renderClient;

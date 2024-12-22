@@ -4,11 +4,17 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 
-ReactDOM.hydrateRoot(
-  document.getElementById('root') as HTMLElement,
+const ClientApp = () => (
   <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>
 );
+
+export default function renderClient() {
+  ReactDOM.hydrateRoot(
+    document.getElementById('root') as HTMLElement,
+    <ClientApp />
+  );
+}
