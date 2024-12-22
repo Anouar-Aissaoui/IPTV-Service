@@ -37,11 +37,12 @@ export const Hero = () => {
               Discover an expansive library with over <span className="text-neon font-semibold">40,000 channels</span> and more than <span className="text-neon font-semibold">54,000 VOD</span> options.
             </p>
             {/* Devices Image */}
-            <div className="w-full max-w-[366px]">
+            <div className="relative w-full max-w-[366px] mx-auto lg:mx-0 animate-float">
+              <div className="absolute -inset-1 bg-neon/10 rounded-lg blur-sm"></div>
               <img 
                 src="https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/devices-4.webp"
                 alt="Supported Devices"
-                className="w-full h-auto"
+                className="relative w-full h-auto hover:scale-105 transition-transform duration-300"
               />
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
