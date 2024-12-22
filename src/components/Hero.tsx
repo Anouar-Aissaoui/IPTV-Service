@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Monitor, Laptop, Smartphone, Apple, MonitorPlay } from "lucide-react";
+import { BlurImage } from "./ui/blur-image";
 
 export const Hero = () => {
   return (
@@ -36,7 +37,7 @@ export const Hero = () => {
               Free Trial
             </Button>
             <div className="space-y-6">
-              <img 
+              <BlurImage 
                 src="https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/devices-4.webp"
                 alt="Supported Devices"
                 className="w-full max-w-[366px] h-auto"
@@ -44,7 +45,7 @@ export const Hero = () => {
             </div>
           </div>
           <div className="lg:w-1/2">
-            <img
+            <BlurImage
               src="/lovable-uploads/00c90df3-a23d-47e3-b967-8806209cd5b1.png"
               alt="IPTV Service Preview"
               className="rounded-lg shadow-2xl w-full h-auto"
