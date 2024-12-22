@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Blurhash } from "react-blurhash";
 import { optimizeAndUploadImage } from "@/utils/imageOptimization";
+import { useToast } from "@/hooks/use-toast";
 
 interface BlurImageProps {
   src: string;
@@ -18,14 +19,26 @@ export const BlurImage = ({
   priority = false 
 }: BlurImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [optimizedSrc, setOptimizedSrc] = useState(src);
+  const [imageSrc, setImageSrc] = useState(src);
+  const { toast } = useToast();
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const optimizeImage = async () => {
       if (src.startsWith('http')) {
-        const fileName = src.split('/').pop() || 'image.jpg';
-        const optimizedUrl = await optimizeAndUploadImage(src, fileName);
-        setOptimizedSrc(optimizedUrl);
+        try {
+          const fileName = src.split('/').pop() || 'image.jpg';
+          const optimizedUrl = await optimizeAndUploadImage(src, fileName);
+          setImageSrc(optimizedUrl);
+        } catch (error) {
+          console.error('Error optimizing image:', error);
+          setHasError(true);
+          toast({
+            title: "Image Load Issue",
+            description: "Some images may not display at optimal quality. We're working on fixing this.",
+            variant: "destructive",
+          });
+        }
       }
     };
 
@@ -37,7 +50,12 @@ export const BlurImage = ({
     } else {
       optimizeImage();
     }
-  }, [src, priority]);
+  }, [src, priority, toast]);
+
+  const handleImageError = () => {
+    setHasError(true);
+    setIsLoaded(true);
+  };
 
   return (
     <div className="relative w-full h-full">
@@ -54,10 +72,11 @@ export const BlurImage = ({
         </div>
       )}
       <img
-        src={optimizedSrc}
+        src={imageSrc}
         alt={alt}
         className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
         onLoad={() => setIsLoaded(true)}
+        onError={handleImageError}
         loading={priority ? "eager" : "lazy"}
         decoding={priority ? "sync" : "async"}
         fetchPriority={priority ? "high" : "auto"}
