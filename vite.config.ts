@@ -22,9 +22,16 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          ui: ['@/components/ui'],
+        manualChunks: (id) => {
+          // Bundle core React dependencies together
+          if (id.includes('node_modules/react') || 
+              id.includes('node_modules/react-dom')) {
+            return 'vendor';
+          }
+          // Bundle shadcn components together
+          if (id.includes('components/ui/')) {
+            return 'shadcn';
+          }
         },
       },
     },
