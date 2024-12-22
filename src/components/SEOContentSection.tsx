@@ -13,6 +13,9 @@ export const SEOContentSection = () => {
             
             <meta itemProp="datePublished" content="2024-03-19" />
             <meta itemProp="dateModified" content="2024-03-19" />
+            
+            {/* Keywords meta tag */}
+            <meta name="keywords" content="buy IPTV, IPTV service, best IPTV service, IPTV subscription, premium IPTV, HD IPTV service, streaming TV channels, live TV streaming, 4K IPTV service, affordable IPTV subscription" />
           </header>
           
           <section>
@@ -22,7 +25,7 @@ export const SEOContentSection = () => {
             
             <div itemProp="articleBody">
               <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-                Looking for the best IPTV service in 2024? Our premium IPTV subscription delivers an unmatched streaming experience with over 40,000+ channels and extensive VOD content in stunning 4K quality. Whether you're a sports enthusiast, movie lover, or TV show fan, our comprehensive IPTV service brings entertainment directly to your preferred device.
+                Looking for the best <a href="https://www.iptvservice.site/" className="text-neon hover:text-white transition-colors" rel="dofollow">IPTV subscription</a>? Our premium IPTV subscription delivers an unmatched streaming experience with over 40,000+ channels and extensive VOD content in stunning 4K quality. Whether you're a sports enthusiast, movie lover, or TV show fan, our comprehensive IPTV service brings entertainment directly to your preferred device.
               </p>
 
               <h3 className="text-2xl font-semibold mb-6 text-white">
@@ -121,7 +124,7 @@ export const SEOContentSection = () => {
                   Buy IPTV Subscription Today
                 </h3>
                 <p className="text-gray-300 text-lg leading-relaxed">
-                  As a leading IPTV provider in the USA, we offer unmatched quality, reliability, and customer support. Our premium IPTV service provides access to the best entertainment content at competitive prices, with flexible payment options and instant activation. Experience the future of television with our cutting-edge IPTV subscription service.
+                  As a leading <a href="https://www.iptvservice.site/" className="text-neon hover:text-white transition-colors" rel="dofollow">IPTV subscription</a> provider in the USA, we offer unmatched quality, reliability, and customer support. Our premium IPTV service provides access to the best entertainment content at competitive prices, with flexible payment options and instant activation. Experience the future of television with our cutting-edge IPTV subscription service.
                 </p>
               </div>
 

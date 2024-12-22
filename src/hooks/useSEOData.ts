@@ -23,7 +23,7 @@ export const useSEOData = (route: string) => {
           description: "Get premium IPTV subscription with 40,000+ channels and VOD content in 4K & HD quality. Best IPTV provider in USA with 24/7 support.",
           canonical_url: "https://iptvsubscription.news",
           meta_tags: {
-            keywords: "buy IPTV, IPTV service, best IPTV service, IPTV subscription, buy IPTV USA, premium IPTV service, IPTV provider USA, HD IPTV, 4K IPTV",
+            keywords: "buy IPTV, IPTV service, best IPTV service, IPTV subscription, premium IPTV, HD IPTV service, streaming TV channels, live TV streaming, 4K IPTV service, affordable IPTV subscription",
           },
           structured_data: {
             "@context": "https://schema.org",
@@ -35,6 +35,11 @@ export const useSEOData = (route: string) => {
               "price": "14.99",
               "priceCurrency": "USD",
               "availability": "https://schema.org/InStock"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.8",
+              "reviewCount": "1250"
             }
           }
         };
