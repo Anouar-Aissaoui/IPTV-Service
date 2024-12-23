@@ -12,27 +12,27 @@ interface SportProps {
 const sports = [
   {
     title: "NBA",
-    image: "/lovable-uploads/nba-basketball-live-sports-streaming-iptv.png",
+    image: "/lovable-uploads/nba-basketball-live-sports-streaming.png",
     description: "Watch live NBA games and playoffs"
   },
   {
     title: "Premier League",
-    image: "/lovable-uploads/premier-league-football-live-sports-streaming-iptv.png",
+    image: "/lovable-uploads/premier-league-football-live-sports.png",
     description: "Experience the best of English football"
   },
   {
     title: "UEFA Champions League",
-    image: "/lovable-uploads/champions-league-soccer-live-stream-iptv.png",
+    image: "/lovable-uploads/champions-league-soccer-live-stream.png",
     description: "Europe's elite football competition"
   },
   {
     title: "Bundesliga",
-    image: "/lovable-uploads/bundesliga-german-football-live-streaming-iptv.png",
+    image: "/lovable-uploads/bundesliga-german-football-live.png",
     description: "German football at its finest"
   },
   {
     title: "La Liga",
-    image: "/lovable-uploads/la-liga-spanish-football-live-streaming-iptv.png",
+    image: "/lovable-uploads/la-liga-spanish-football-live.png",
     description: "Spanish football's top division"
   }
 ];

@@ -1,47 +1,55 @@
-import React, { Suspense, useEffect, useCallback } from "react";
+import { Suspense, lazy, useCallback, useEffect } from "react";
 import { BlurImage } from "./ui/blur-image";
 
+// Moved movies data outside component to prevent re-creation on each render
 const movies = [
   {
     title: "Madame Web",
-    image: "https://image.tmdb.org/t/p/w342/madame-web-2024-movie-poster-premium-iptv.jpg",
+    image: "https://image.tmdb.org/t/p/w342/sjMN7DRi4sGiledsmllEw5HJjPy.jpg",
     hash: "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
     width: 342,
     height: 513,
   },
   {
     title: "Dune: Part Two",
-    image: "https://image.tmdb.org/t/p/w342/dune-part-two-2024-movie-streaming-iptv.jpg",
+    image: "https://image.tmdb.org/t/p/w342/cdqLnri3NEGcmfnqwk2TSIYtddg.jpg",
     hash: "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
     width: 342,
     height: 513,
   },
   {
     title: "Argylle",
-    image: "https://image.tmdb.org/t/p/w342/argylle-2024-movie-streaming-premium-iptv.jpg",
+    image: "https://image.tmdb.org/t/p/w342/aosm8NMQ3UyoBVpSxyimorCQykC.jpg",
     hash: "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
     width: 342,
     height: 513,
   },
   {
     title: "Migration",
-    image: "https://image.tmdb.org/t/p/w342/migration-2024-animated-movie-streaming-iptv.jpg",
+    image: "https://image.tmdb.org/t/p/w342/4YZpsylmjHbqeWzjKpUEF8gcLNW.jpg",
     hash: "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
     width: 342,
     height: 513,
   },
   {
     title: "Anyone But You",
-    image: "https://image.tmdb.org/t/p/w342/anyone-but-you-2024-movie-streaming-iptv.jpg",
+    image: "https://image.tmdb.org/t/p/w342/lurEK87kukWNaHd0zYnsi3yzJrs.jpg",
     hash: "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
     width: 342,
     height: 513,
   },
 ];
 
-const MovieCard = React.lazy(() => import("./MovieCard"));
+// Performance monitoring
+const reportWebVitals = (metric: any) => {
+  console.log(metric);
+};
 
-export const Content: React.FC = () => {
+// Lazy load MovieCard component
+const MovieCard = lazy(() => import("./MovieCard"));
+
+export const Content = () => {
+  // Monitor component renders
   useEffect(() => {
     performance.mark('content-component-rendered');
     
@@ -50,6 +58,7 @@ export const Content: React.FC = () => {
     };
   }, []);
 
+  // Memoized handler for future interactions
   const handleMovieClick = useCallback((movieTitle: string) => {
     console.log(`Movie clicked: ${movieTitle}`);
   }, []);
@@ -78,3 +87,14 @@ export const Content: React.FC = () => {
     </div>
   );
 };
+
+// Add performance observer
+if (typeof window !== 'undefined') {
+  const observer = new PerformanceObserver((list) => {
+    list.getEntries().forEach((entry) => {
+      reportWebVitals(entry);
+    });
+  });
+
+  observer.observe({ entryTypes: ['measure'] });
+}
