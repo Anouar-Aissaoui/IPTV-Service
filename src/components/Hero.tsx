@@ -38,7 +38,7 @@ const Hero: React.FC = () => {
           <div className="hidden md:flex items-center space-x-6 text-white">
             <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Home</a>
             <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Pricing</a>
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Channel List</a>
+            <a href="/best-iptv-provider" className="hover:text-neon transition-colors duration-300 hover:scale-105">Best IPTV Providers</a>
             <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">FAQ</a>
             <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Contact Us</a>
           </div>
