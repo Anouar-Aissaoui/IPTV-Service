@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { Suspense } from "react";
 import { BlurImage } from "./ui/blur-image";
 
 const movies = [

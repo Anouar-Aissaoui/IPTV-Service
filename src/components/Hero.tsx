@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Monitor, Laptop, Smartphone, Apple, MonitorPlay } from "lucide-react";
 import { BlurImage } from "./ui/blur-image";
