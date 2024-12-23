@@ -1,4 +1,4 @@
-import { useState } from "react";
+import * as React from "react";
 import { Blurhash } from "react-blurhash";
 
 interface BlurImageProps {
@@ -13,7 +13,7 @@ interface BlurImageProps {
   fetchPriority?: "high" | "low" | "auto";
 }
 
-export const BlurImage = ({ 
+export const BlurImage: React.FC<BlurImageProps> = ({ 
   src, 
   alt, 
   hash = "L6PZfSi_.AyE_3t7t7R**0o#DgR4", 
@@ -22,9 +22,9 @@ export const BlurImage = ({
   height,
   loading = "lazy",
   decoding = "async",
-  fetchPriority = "low"
+  fetchPriority = "auto"
 }: BlurImageProps) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = React.useState(false);
 
   return (
     <div className="relative w-full h-full">
