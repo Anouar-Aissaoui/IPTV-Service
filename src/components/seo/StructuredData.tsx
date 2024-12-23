@@ -8,7 +8,7 @@ export const getStructuredData = () => ({
       "url": "https://iptvsubscription.news",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://iptvsubscription.news/og-image.png"
+        "url": "https://iptvsubscription.news/iptv-subscription.png"
       },
       "sameAs": [
         "https://twitter.com/iptvsubscription",
@@ -43,7 +43,7 @@ export const getStructuredData = () => ({
       },
       "primaryImageOfPage": {
         "@type": "ImageObject",
-        "url": "https://iptvsubscription.news/og-image.png"
+        "url": "https://iptvsubscription.news/iptv-subscription.png"
       },
       "datePublished": "2024-03-19",
       "dateModified": "2024-03-19"
@@ -80,7 +80,7 @@ export const getStructuredData = () => ({
       "@type": "LocalBusiness",
       "@id": "https://iptvsubscription.news/#localbusiness",
       "name": "Best IPTV Service Provider",
-      "image": "https://iptvsubscription.news/og-image.png",
+      "image": "https://iptvsubscription.news/iptv-subscription.png",
       "url": "https://iptvsubscription.news",
       "telephone": "+1-000-000-0000",
       "address": {

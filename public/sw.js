@@ -5,7 +5,7 @@ const urlsToCache = [
   '/src/main.tsx',
   '/src/App.tsx',
   '/src/index.css',
-  '/og-image.png',
+  '/iptv-subscription.png',
   // Cache images
   '/lovable-uploads/00c90df3-a23d-47e3-b967-8806209cd5b1.png',
   '/lovable-uploads/62b3cd9e-1589-432c-b117-d855ac8f0b81.png',
