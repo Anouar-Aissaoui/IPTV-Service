@@ -37,7 +37,7 @@ const movies = [
 
 const MovieCard = React.lazy(() => import("./MovieCard"));
 
-export const Content = () => {
+export const Content: React.FC = () => {
   const { toast } = useToast();
 
   React.useEffect(() => {

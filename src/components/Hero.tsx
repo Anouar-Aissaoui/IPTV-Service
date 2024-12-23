@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
           <div className="md:hidden mt-4 bg-dark-gray rounded-lg p-4 space-y-4">
             <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Home</a>
             <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Pricing</a>
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Channel List</a>
+            <a href="/best-iptv-provider" className="block text-white hover:text-neon transition-colors duration-300">Best IPTV Providers</a>
             <a href="#" className="block text-white hover:text-neon transition-colors duration-300">FAQ</a>
             <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Contact Us</a>
             <Button className="w-full bg-[#F97316] text-white hover:bg-[#F97316]/90 shadow-lg shadow-[#F97316]/30 font-bold">
