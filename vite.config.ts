@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
+// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
@@ -21,28 +22,16 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor': [
-            'react',
-            'react-dom',
-            'react-router-dom',
-            '@tanstack/react-query',
-            'react-helmet'
-          ],
-          'ui': [
-            '@radix-ui/react-accordion',
-            '@radix-ui/react-alert-dialog',
-            '@radix-ui/react-avatar',
-            '@radix-ui/react-dialog',
-            '@radix-ui/react-dropdown-menu',
-            '@radix-ui/react-label',
-            '@radix-ui/react-popover',
-            '@radix-ui/react-select',
-            '@radix-ui/react-slot',
-            '@radix-ui/react-toast',
-          ],
-          'icons': ['lucide-react'],
-          'utils': ['clsx', 'tailwind-merge', 'class-variance-authority']
+        manualChunks(id) {
+          // Bundle core React dependencies together
+          if (id.includes('node_modules/react') || 
+              id.includes('node_modules/react-dom')) {
+            return 'vendor';
+          }
+          // Bundle shadcn components together
+          if (id.includes('components/ui/')) {
+            return 'shadcn';
+          }
         },
       },
     },
@@ -54,11 +43,5 @@ export default defineConfig(({ mode }) => ({
         drop_debugger: true,
       },
     },
-    reportCompressedSize: false,
-    cssCodeSplit: true,
-    sourcemap: false,
-  },
-  optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
   },
 }));
