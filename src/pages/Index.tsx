@@ -1,5 +1,4 @@
 import { Hero } from "@/components/Hero";
-import { LiveSports } from "@/components/LiveSports";
 import { Pricing } from "@/components/Pricing";
 import { Content } from "@/components/Content";
 import { FAQ } from "@/components/FAQ";
@@ -11,7 +10,6 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-dark text-white">
       <Hero />
-      <LiveSports />
       <BrandCarousel />
       <Pricing />
       <Content />
