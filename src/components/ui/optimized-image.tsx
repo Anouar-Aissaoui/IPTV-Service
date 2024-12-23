@@ -23,9 +23,9 @@ export const OptimizedImage = ({
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   
-  // Convert local image paths to use Vercel's Image Optimization
+  // Convert to Next.js-style image URL format
   const optimizedSrc = src.startsWith('/') 
-    ? `/_vercel/image?url=${encodeURIComponent(src)}&w=${width || 1200}&q=75` 
+    ? `/_next/image?url=${encodeURIComponent(src)}&w=${width || 1200}&q=75` 
     : src;
 
   return (
