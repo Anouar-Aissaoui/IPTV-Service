@@ -1,7 +1,6 @@
 import React, { Suspense, lazy, useCallback, useEffect } from "react";
 import { BlurImage } from "./ui/blur-image";
 
-// Moved movies data outside component to prevent re-creation on each render
 const movies = [
   {
     title: "Madame Web",
@@ -49,7 +48,6 @@ const reportWebVitals = (metric: any) => {
 const MovieCard = lazy(() => import("./MovieCard"));
 
 export const Content = () => {
-  // Monitor component renders
   useEffect(() => {
     performance.mark('content-component-rendered');
     
@@ -58,7 +56,6 @@ export const Content = () => {
     };
   }, []);
 
-  // Memoized handler for future interactions
   const handleMovieClick = useCallback((movieTitle: string) => {
     console.log(`Movie clicked: ${movieTitle}`);
   }, []);
