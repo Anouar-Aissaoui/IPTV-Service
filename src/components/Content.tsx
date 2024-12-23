@@ -37,7 +37,7 @@ const movies = [
 
 const MovieCard = React.lazy(() => import("./MovieCard"));
 
-export const Content: React.FC = () => {
+const Content: React.FC = () => {
   const { toast } = useToast();
 
   React.useEffect(() => {
@@ -78,4 +78,5 @@ export const Content: React.FC = () => {
   );
 };
 
+// Remove the named export
 export default Content;
