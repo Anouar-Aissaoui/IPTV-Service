@@ -5,14 +5,12 @@ import { FAQ } from "@/components/FAQ";
 import { Contact } from "@/components/Contact";
 import { BrandCarousel } from "@/components/BrandCarousel";
 import { SEOContent } from "@/components/SEOContent";
-import { IPTVProviders } from "@/components/IPTVProviders";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-dark text-white">
       <Hero />
       <BrandCarousel />
-      <IPTVProviders />
       <Pricing />
       <LiveSports />
       <FAQ />
