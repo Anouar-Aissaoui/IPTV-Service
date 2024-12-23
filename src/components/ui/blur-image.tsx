@@ -1,8 +1,6 @@
 import * as React from "react";
-import { Blurhash } from "react-blurhash";
 
 interface BlurImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  hash?: string;
   sizes?: string;
 }
 
@@ -10,7 +8,6 @@ export const BlurImage: React.FC<BlurImageProps> = ({
   src,
   alt,
   className,
-  hash = "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
   width,
   height,
   sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
@@ -50,17 +47,8 @@ export const BlurImage: React.FC<BlurImageProps> = ({
 
   return (
     <div className="relative w-full h-full">
-      {isLoading && hash && (
-        <div className="absolute inset-0 z-10">
-          <Blurhash
-            hash={hash}
-            width="100%"
-            height="100%"
-            resolutionX={32}
-            resolutionY={32}
-            punch={1}
-          />
-        </div>
+      {isLoading && (
+        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
       )}
       <img
         src={currentSrc}

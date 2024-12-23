@@ -117,7 +117,6 @@ const Hero: React.FC = () => {
                 src="/iptv-subscription.png"
                 alt="IPTV Service Preview"
                 className="relative rounded-lg shadow-2xl w-full h-auto object-cover"
-                hash="LRG8}V?bxuWB~qofM{WB%MWBRjay"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 480px"
                 width={480}
                 height={320}
