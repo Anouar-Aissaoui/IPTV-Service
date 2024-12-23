@@ -40,13 +40,9 @@ const movies = [
   },
 ];
 
-const reportWebVitals = (metric: any) => {
-  console.log(metric);
-};
-
 const MovieCard = React.lazy(() => import("./MovieCard"));
 
-export const Content: React.FC = () => {
+function Content() {
   const { toast } = useToast();
 
   React.useEffect(() => {
@@ -85,14 +81,6 @@ export const Content: React.FC = () => {
       </div>
     </div>
   );
-};
-
-if (typeof window !== 'undefined') {
-  const observer = new PerformanceObserver((list) => {
-    list.getEntries().forEach((entry) => {
-      reportWebVitals(entry);
-    });
-  });
-
-  observer.observe({ entryTypes: ['measure'] });
 }
+
+export default Content;
