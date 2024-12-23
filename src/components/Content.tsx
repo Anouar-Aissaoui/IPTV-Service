@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useCallback } from "react";
 import { BlurImage } from "./ui/blur-image";
 
 const movies = [
@@ -42,7 +42,7 @@ const movies = [
 const MovieCard = React.lazy(() => import("./MovieCard"));
 
 export const Content: React.FC = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     performance.mark('content-component-rendered');
     
     return () => {
@@ -50,7 +50,7 @@ export const Content: React.FC = () => {
     };
   }, []);
 
-  const handleMovieClick = React.useCallback((movieTitle: string) => {
+  const handleMovieClick = useCallback((movieTitle: string) => {
     console.log(`Movie clicked: ${movieTitle}`);
   }, []);
 
