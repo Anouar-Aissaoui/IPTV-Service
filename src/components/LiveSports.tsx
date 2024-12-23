@@ -44,7 +44,7 @@ const sports = [
 
 const SportCard = memo(({ sport }: SportProps) => {
   return (
-    <div className="relative group overflow-hidden rounded-lg aspect-[3/4] border border-neon/20 hover:border-neon/40 transition-colors duration-300">
+    <div className="relative group overflow-hidden rounded-lg aspect-[2/3] border border-neon/20 hover:border-neon/40 transition-colors duration-300">
       <BlurImage
         src={sport.image}
         alt={sport.title}
@@ -73,7 +73,7 @@ export const LiveSports = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           Live <span className="text-neon">Sports</span>
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {sports.map((sport) => (
             <SportCard key={sport.title} sport={sport} />
           ))}
