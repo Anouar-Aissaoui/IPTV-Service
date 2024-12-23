@@ -1,31 +1,67 @@
 import * as React from "react";
-import { cn } from "@/lib/utils";
 
 interface BlurImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  src: string;
-  alt: string;
+  sizes?: string;
 }
 
-export const BlurImage = React.forwardRef<HTMLImageElement, BlurImageProps>(
-  ({ className, src, alt, ...props }, ref) => {
-    const [isLoading, setIsLoading] = React.useState(true);
+export const BlurImage: React.FC<BlurImageProps> = ({
+  src,
+  alt,
+  className,
+  width,
+  height,
+  sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+  ...props
+}) => {
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [currentSrc, setCurrentSrc] = React.useState(src);
 
-    return (
-      <div className={cn("overflow-hidden", className)}>
-        <img
-          ref={ref}
-          src={src}
-          alt={alt}
-          className={cn(
-            "duration-700 ease-in-out",
-            isLoading ? "scale-110 blur-2xl" : "scale-100 blur-0"
-          )}
-          onLoad={() => setIsLoading(false)}
-          {...props}
-        />
-      </div>
-    );
-  }
-);
+  React.useEffect(() => {
+    const img = new Image();
+    img.src = src || "";
+    img.onload = () => {
+      setIsLoading(false);
+      setCurrentSrc(src);
+    };
+  }, [src]);
 
-BlurImage.displayName = "BlurImage";
+  // Generate srcSet for responsive images
+  const generateSrcSet = () => {
+    if (!src) return "";
+    if (src.startsWith("data:") || src.startsWith("blob:")) return src;
+    
+    // For images from external sources that don't support dynamic resizing
+    if (!src.includes("images.unsplash.com")) return src;
+
+    // For Unsplash images, we can use their dynamic resizing
+    const sizes = [320, 640, 768, 1024, 1280, 1536];
+    return sizes
+      .map((size) => {
+        const imgSrc = src.includes("?")
+          ? `${src}&w=${size}`
+          : `${src}?w=${size}`;
+        return `${imgSrc} ${size}w`;
+      })
+      .join(", ");
+  };
+
+  return (
+    <div className="relative w-full h-full">
+      {isLoading && (
+        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+      )}
+      <img
+        src={currentSrc}
+        alt={alt}
+        className={`${className} ${
+          isLoading ? "opacity-0" : "opacity-100"
+        } transition-opacity duration-500 ease-in-out`}
+        loading="lazy"
+        decoding="async"
+        sizes={sizes}
+        srcSet={generateSrcSet()}
+        {...props}
+      />
+    </div>
+  );
+};
