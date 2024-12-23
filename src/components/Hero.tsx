@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Monitor, Laptop, Smartphone, Apple, MonitorPlay } from "lucide-react";
 import { BlurImage } from "./ui/blur-image";
 import { Menu } from "lucide-react";
-import { useState } from "react";
 
 export const Hero = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -116,7 +115,6 @@ export const Hero = () => {
                 src="/lovable-uploads/62b3cd9e-1589-432c-b117-d855ac8f0b81.png"
                 alt="IPTV Service Preview"
                 className="relative rounded-lg shadow-2xl w-full h-auto object-cover"
-                hash="LRG8}V?bxuWB~qofM{WB%MWBRjay"
               />
             </div>
           </div>

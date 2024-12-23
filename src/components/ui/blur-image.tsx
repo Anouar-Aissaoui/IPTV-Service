@@ -1,4 +1,4 @@
-import { useState } from "react";
+import * as React from "react";
 
 interface BlurImageProps {
   src: string;
@@ -21,7 +21,7 @@ export const BlurImage = ({
   decoding = "async",
   fetchPriority = "low"
 }: BlurImageProps) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = React.useState(false);
 
   return (
     <div className="relative w-full h-full">
