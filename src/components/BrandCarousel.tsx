@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
-import { BlurImage } from "./ui/blur-image";
+import { OptimizedImage } from "./ui/optimized-image";
 
 const brands = [
   {
@@ -110,7 +110,7 @@ export const BrandCarousel = () => {
               >
                 <div className="p-1 md:p-2">
                   <figure className="relative aspect-[3/1] w-full">
-                    <BlurImage
+                    <OptimizedImage
                       src={brand.src}
                       alt={brand.alt}
                       className="object-contain w-full h-full opacity-50 hover:opacity-100 transition-opacity duration-300 scale-75 hover:scale-90"
