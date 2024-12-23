@@ -82,10 +82,13 @@ export const Hero: React.FC = () => {
             {/* Devices Image */}
             <div className="relative w-full max-w-[280px] mx-auto lg:mx-0 animate-float">
               <div className="absolute -inset-1 bg-[#F97316]/20 rounded-lg blur-sm"></div>
-              <img 
+              <BlurImage 
                 src="https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/devices-4.webp"
                 alt="Supported Devices"
                 className="relative w-full h-auto hover:scale-105 transition-transform duration-300"
+                sizes="(max-width: 640px) 280px, (max-width: 1024px) 240px, 280px"
+                width={280}
+                height={160}
               />
             </div>
 
@@ -115,6 +118,9 @@ export const Hero: React.FC = () => {
                 alt="IPTV Service Preview"
                 className="relative rounded-lg shadow-2xl w-full h-auto object-cover"
                 hash="LRG8}V?bxuWB~qofM{WB%MWBRjay"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 480px"
+                width={480}
+                height={320}
               />
             </div>
           </div>
