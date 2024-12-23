@@ -1,4 +1,5 @@
-import { Suspense, lazy, useCallback, useEffect } from "react";
+import * as React from "react";
+import { lazy } from "react";
 import { BlurImage } from "./ui/blur-image";
 
 // Moved movies data outside component to prevent re-creation on each render
@@ -50,7 +51,7 @@ const MovieCard = lazy(() => import("./MovieCard"));
 
 export const Content = () => {
   // Monitor component renders
-  useEffect(() => {
+  React.useEffect(() => {
     performance.mark('content-component-rendered');
     
     return () => {
@@ -59,7 +60,7 @@ export const Content = () => {
   }, []);
 
   // Memoized handler for future interactions
-  const handleMovieClick = useCallback((movieTitle: string) => {
+  const handleMovieClick = React.useCallback((movieTitle: string) => {
     console.log(`Movie clicked: ${movieTitle}`);
   }, []);
 
@@ -71,7 +72,7 @@ export const Content = () => {
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {movies.map((movie) => (
-            <Suspense
+            <React.Suspense
               key={movie.title}
               fallback={
                 <div className="aspect-[2/3] bg-gray-800 animate-pulse rounded-lg"></div>
@@ -80,7 +81,7 @@ export const Content = () => {
               <div onClick={() => handleMovieClick(movie.title)}>
                 <MovieCard movie={movie} />
               </div>
-            </Suspense>
+            </React.Suspense>
           ))}
         </div>
       </div>
