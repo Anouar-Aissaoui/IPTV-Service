@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useCallback, useEffect } from "react";
+import * as React from "react";
 import { BlurImage } from "./ui/blur-image";
 
 const movies = [
@@ -39,16 +39,10 @@ const movies = [
   },
 ];
 
-// Performance monitoring
-const reportWebVitals = (metric: any) => {
-  console.log(metric);
-};
+const MovieCard = React.lazy(() => import("./MovieCard"));
 
-// Lazy load MovieCard component
-const MovieCard = lazy(() => import("./MovieCard"));
-
-export const Content = () => {
-  useEffect(() => {
+export const Content: React.FC = () => {
+  React.useEffect(() => {
     performance.mark('content-component-rendered');
     
     return () => {
@@ -56,7 +50,7 @@ export const Content = () => {
     };
   }, []);
 
-  const handleMovieClick = useCallback((movieTitle: string) => {
+  const handleMovieClick = React.useCallback((movieTitle: string) => {
     console.log(`Movie clicked: ${movieTitle}`);
   }, []);
 
@@ -84,14 +78,3 @@ export const Content = () => {
     </div>
   );
 };
-
-// Add performance observer
-if (typeof window !== 'undefined') {
-  const observer = new PerformanceObserver((list) => {
-    list.getEntries().forEach((entry) => {
-      reportWebVitals(entry);
-    });
-  });
-
-  observer.observe({ entryTypes: ['measure'] });
-}
