@@ -78,5 +78,4 @@ const Content: React.FC = () => {
   );
 };
 
-// Remove the named export
 export default Content;
