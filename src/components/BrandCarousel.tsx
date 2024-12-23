@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
 import {
   Carousel,
   CarouselContent,
@@ -76,11 +76,11 @@ const brands = [
   }
 ];
 
-export const BrandCarousel = () => {
-  const [api, setApi] = useState<any>(null);
+export const BrandCarousel: React.FC = () => {
+  const [api, setApi] = React.useState<any>(null);
   const autoplay = Autoplay({ delay: 2500, stopOnInteraction: true });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!api) return;
 
     api.on("select", () => {

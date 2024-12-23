@@ -1,5 +1,4 @@
-import React from "react";
-import { Suspense, lazy, useCallback, useEffect } from "react";
+import * as React from "react";
 import { BlurImage } from "./ui/blur-image";
 
 const movies = [
@@ -44,10 +43,10 @@ const reportWebVitals = (metric: any) => {
   console.log(metric);
 };
 
-const MovieCard = lazy(() => import("./MovieCard"));
+const MovieCard = React.lazy(() => import("./MovieCard"));
 
 export const Content: React.FC = () => {
-  useEffect(() => {
+  React.useEffect(() => {
     performance.mark('content-component-rendered');
     
     return () => {
@@ -55,7 +54,7 @@ export const Content: React.FC = () => {
     };
   }, []);
 
-  const handleMovieClick = useCallback((movieTitle: string) => {
+  const handleMovieClick = React.useCallback((movieTitle: string) => {
     console.log(`Movie clicked: ${movieTitle}`);
   }, []);
 
@@ -67,7 +66,7 @@ export const Content: React.FC = () => {
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {movies.map((movie) => (
-            <Suspense
+            <React.Suspense
               key={movie.title}
               fallback={
                 <div className="aspect-[2/3] bg-gray-800 animate-pulse rounded-lg"></div>
@@ -76,7 +75,7 @@ export const Content: React.FC = () => {
               <div onClick={() => handleMovieClick(movie.title)}>
                 <MovieCard movie={movie} />
               </div>
-            </Suspense>
+            </React.Suspense>
           ))}
         </div>
       </div>
