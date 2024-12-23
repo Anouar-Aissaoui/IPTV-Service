@@ -21,8 +21,8 @@ export default {
       colors: {
         primary: "#F97316",
         neon: "#F97316",
-        dark: "#1A1F2C",
-        "dark-gray": "#1E2435",
+        dark: "#000000",
+        "dark-gray": "#0A0A0A",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

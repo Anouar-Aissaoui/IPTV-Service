@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Check, Monitor } from "lucide-react";
+import { Check } from "lucide-react";
 import { Helmet } from "react-helmet";
 
 const keywords = [
@@ -20,33 +20,36 @@ const plans = [
     name: "1 Month",
     price: "14.99",
     features: [
-      "HD/4K/8K IPTV",
-      "+15.000 Channels",
-      "+100.000 Vod",
-      "Watch Channels",
-      "7 days money back guarantee",
+      "7000+ Live Channels",
+      "40000+ VOD Movies",
+      "1500+ TV Shows",
+      "HD & SD Quality",
+      "24/7 Support",
     ],
   },
   {
     name: "3 Months",
     price: "24.99",
     features: [
-      "HD/4K/8K IPTV",
-      "+15.000 Channels",
-      "+100.000 Vod",
-      "Watch Channels",
-      "7 days money back guarantee",
+      "7000+ Live Channels",
+      "40000+ VOD Movies",
+      "1500+ TV Shows",
+      "HD & SD Quality",
+      "24/7 Support",
+      "3 Connections",
     ],
   },
   {
     name: "6 Months",
     price: "39.99",
     features: [
-      "HD/4K/8K IPTV",
-      "+15.000 Channels",
-      "+100.000 Vod",
-      "Watch Channels",
-      "7 days money back guarantee",
+      "7000+ Live Channels",
+      "40000+ VOD Movies",
+      "1500+ TV Shows",
+      "HD & SD Quality",
+      "24/7 Support",
+      "3 Connections",
+      "PPV Events",
     ],
     popular: true,
   },
@@ -54,11 +57,14 @@ const plans = [
     name: "12 Months",
     price: "59.99",
     features: [
-      "HD/4K/8K IPTV",
-      "+15.000 Channels",
-      "+100.000 Vod",
-      "Watch Channels",
-      "7 days money back guarantee",
+      "7000+ Live Channels",
+      "40000+ VOD Movies",
+      "1500+ TV Shows",
+      "HD & SD Quality",
+      "24/7 Support",
+      "4 Connections",
+      "PPV Events",
+      "Premium Support",
     ],
   },
 ];
@@ -73,49 +79,64 @@ export const Pricing = () => {
         <link rel="canonical" href="https://iptvsubscription.news/pricing" />
       </Helmet>
 
-      <div className="bg-[#1A1F2C] py-20">
+      <div className="bg-dark py-20">
         <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
+            Choose Your <span className="text-neon">IPTV Plan</span>
+          </h2>
+          
+          <p className="text-gray-300 text-center mb-12 max-w-2xl mx-auto">
+            Get the best <a href="https://www.iptvservice.site/" className="text-neon hover:underline" rel="dofollow">IPTV subscription</a> plans 
+            with premium features, HD quality, and extensive content library. Our plans are designed to provide the ultimate streaming experience.
+          </p>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {plans.map((plan) => (
               <div
                 key={plan.name}
-                className={`relative rounded-2xl p-8 bg-[#1E2435] border border-gray-800 hover:border-neon/40 transition-all duration-300`}
+                className={`relative rounded-xl p-6 ${
+                  plan.popular
+                    ? "bg-dark border-2 border-neon"
+                    : "bg-dark border border-neon/20"
+                }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-500 text-white px-4 py-1 rounded-full text-sm font-medium">
-                    Popular
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-neon text-dark px-4 py-1 rounded-full text-sm font-bold">
+                    Most Popular
                   </div>
                 )}
                 <div className="text-xl font-bold mb-4 text-white">{plan.name}</div>
-                <div className="text-5xl font-bold mb-2 text-white">
+                <div className="text-4xl font-bold mb-6 text-white">
                   ${plan.price}
+                  <span className="text-sm text-gray-400">/month</span>
                 </div>
-                <div className="text-purple-400 text-sm mb-8">+1 Month Free</div>
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-3 text-gray-300">
-                      <Check className="w-5 h-5 text-purple-400" />
-                      <span>{feature}</span>
+                    <li key={feature} className="flex items-center gap-2">
+                      <Check className="w-5 h-5 text-neon" />
+                      <span className="text-gray-300">{feature}</span>
                     </li>
                   ))}
                 </ul>
                 <Button
-                  className="w-full bg-[#F97316] hover:bg-[#F97316]/90 text-white gap-2"
+                  className={`w-full ${
+                    plan.popular
+                      ? "bg-neon text-dark hover:bg-neon/90"
+                      : "bg-dark border border-neon/40 text-neon hover:border-neon"
+                  }`}
                 >
-                  <Monitor className="w-5 h-5" />
-                  Buy Now
+                  Get Started
                 </Button>
-                <div className="mt-4 text-center text-sm text-gray-400">
-                  Ready within 5-7mins
-                </div>
-                <div className="flex justify-center gap-4 mt-4">
-                  <img src="/apple.svg" alt="Apple" className="h-5 w-5 opacity-50" />
-                  <img src="/android.svg" alt="Android" className="h-5 w-5 opacity-50" />
-                  <img src="/windows.svg" alt="Windows" className="h-5 w-5 opacity-50" />
-                  <img src="/youtube.svg" alt="Youtube" className="h-5 w-5 opacity-50" />
-                </div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <h3 className="text-2xl font-bold mb-4 text-white">Why Choose Our IPTV Service?</h3>
+            <p className="text-gray-300 max-w-3xl mx-auto">
+              Experience the best streaming quality with our premium <a href="https://www.iptvservice.site/" className="text-neon hover:underline" rel="dofollow">IPTV subscription</a> service. 
+              We offer extensive channel selection, reliable streams, and dedicated customer support to ensure the best viewing experience.
+            </p>
           </div>
         </div>
       </div>
