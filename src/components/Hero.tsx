@@ -83,7 +83,7 @@ const Hero: React.FC = () => {
             <div className="relative w-full max-w-[280px] mx-auto lg:mx-0 animate-float">
               <div className="absolute -inset-1 bg-[#F97316]/20 rounded-lg blur-sm"></div>
               <BlurImage 
-                src="https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/devices-4.webp"
+                src="/devices.png"
                 alt="Supported Devices"
                 className="relative w-full h-auto hover:scale-105 transition-transform duration-300"
                 sizes="(max-width: 640px) 280px, (max-width: 1024px) 240px, 280px"
@@ -145,7 +145,6 @@ const Hero: React.FC = () => {
             <div className="text-[#F97316] text-xs md:text-sm font-semibold">Movies & TV Shows</div>
           </div>
         </div>
-
       </div>
 
       {/* Background Effect */}
