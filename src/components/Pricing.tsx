@@ -1,7 +1,7 @@
+import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { Helmet } from "react-helmet";
-import { useState } from "react";
 import { BuyerInfoDialog } from "./BuyerInfoDialog";
 
 const keywords = [
@@ -71,9 +71,9 @@ const plans = [
   },
 ];
 
-export const Pricing = () => {
-  const [selectedPlan, setSelectedPlan] = useState("");
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+export const Pricing: React.FC = () => {
+  const [selectedPlan, setSelectedPlan] = React.useState("");
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
 
   const handleGetStarted = (planName: string) => {
     setSelectedPlan(planName);
