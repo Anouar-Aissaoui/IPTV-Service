@@ -1,34 +1,21 @@
 import * as React from "react";
 import { Blurhash } from "react-blurhash";
 
-interface BlurImageProps {
-  src: string;
-  alt: string;
+interface BlurImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   hash?: string;
-  className?: string;
-  width?: number;
-  height?: number;
-  loading?: "lazy" | "eager";
-  decoding?: "async" | "sync" | "auto";
-  fetchPriority?: "high" | "low" | "auto";
 }
 
 export const BlurImage: React.FC<BlurImageProps> = ({ 
   src, 
   alt, 
-  hash = "L6PZfSi_.AyE_3t7t7R**0o#DgR4", 
-  className = "",
-  width,
-  height,
-  loading = "lazy",
-  decoding = "async",
-  fetchPriority = "auto"
-}: BlurImageProps) => {
-  const [isLoaded, setIsLoaded] = React.useState(false);
+  hash = "L6PZfSi_.AyE_3t7t7R**0o#DgR4",
+  ...props 
+}) => {
+  const [imageLoaded, setImageLoaded] = React.useState(false);
 
   return (
     <div className="relative w-full h-full">
-      {!isLoaded && (
+      {!imageLoaded && hash && (
         <div className="absolute inset-0">
           <Blurhash
             hash={hash}
@@ -43,13 +30,10 @@ export const BlurImage: React.FC<BlurImageProps> = ({
       <img
         src={src}
         alt={alt}
-        width={width}
-        height={height}
-        loading={loading}
-        decoding={decoding}
-        fetchPriority={fetchPriority}
-        className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}
-        onLoad={() => setIsLoaded(true)}
+        onLoad={() => setImageLoaded(true)}
+        style={{ opacity: imageLoaded ? 1 : 0 }}
+        className="transition-opacity duration-500 w-full h-full"
+        {...props}
       />
     </div>
   );
