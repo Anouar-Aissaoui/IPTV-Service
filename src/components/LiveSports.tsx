@@ -12,27 +12,27 @@ interface SportProps {
 const sports = [
   {
     title: "NBA",
-    image: "/images/335b1140-b919-417d-98ac-b31297c89748.png",
+    image: "/lovable-uploads/335b1140-b919-417d-98ac-b31297c89748.png",
     description: "Watch live NBA games and playoffs"
   },
   {
     title: "Premier League",
-    image: "/images/19ad620b-a0e6-47e2-af10-16f9dcad77ac.png",
+    image: "/lovable-uploads/19ad620b-a0e6-47e2-af10-16f9dcad77ac.png",
     description: "Experience the best of English football"
   },
   {
     title: "UEFA Champions League",
-    image: "/images/df29e2ce-114a-4085-ae32-d6da18f0b141.png",
+    image: "/lovable-uploads/df29e2ce-114a-4085-ae32-d6da18f0b141.png",
     description: "Europe's elite football competition"
   },
   {
     title: "Bundesliga",
-    image: "/images/0c8fc151-d705-40c7-96a3-9d65353108b4.png",
+    image: "/lovable-uploads/0c8fc151-d705-40c7-96a3-9d65353108b4.png",
     description: "German football at its finest"
   },
   {
     title: "La Liga",
-    image: "/images/57484adf-5f2f-40c6-86ed-cd6bb50392b4.png",
+    image: "/lovable-uploads/57484adf-5f2f-40c6-86ed-cd6bb50392b4.png",
     description: "Spanish football's top division"
   }
 ];
