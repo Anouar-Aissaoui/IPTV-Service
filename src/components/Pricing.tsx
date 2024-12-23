@@ -17,19 +17,8 @@ const keywords = [
 
 const plans = [
   {
-    name: "1 Month",
-    price: "14.99",
-    features: [
-      "HD/4K/8K IPTV",
-      "+15.000 Channels",
-      "+100.000 Vod",
-      "Watch Channels",
-      "7 days money back guarantee",
-    ],
-  },
-  {
-    name: "3 Months",
-    price: "24.99",
+    name: "12 Months",
+    price: "59.99",
     features: [
       "HD/4K/8K IPTV",
       "+15.000 Channels",
@@ -51,8 +40,19 @@ const plans = [
     popular: true,
   },
   {
-    name: "12 Months",
-    price: "59.99",
+    name: "3 Months",
+    price: "24.99",
+    features: [
+      "HD/4K/8K IPTV",
+      "+15.000 Channels",
+      "+100.000 Vod",
+      "Watch Channels",
+      "7 days money back guarantee",
+    ],
+  },
+  {
+    name: "1 Month",
+    price: "14.99",
     features: [
       "HD/4K/8K IPTV",
       "+15.000 Channels",
@@ -79,16 +79,17 @@ export const Pricing = () => {
             {plans.map((plan) => (
               <div
                 key={plan.name}
-                className={`relative rounded-2xl p-8 bg-[#1E2435] border border-gray-800 hover:border-neon/40 transition-all duration-300`}
+                className={`relative rounded-[24px] p-8 bg-[#1E2435] border-2 border-gray-800/30 hover:border-[#F97316]/20 transition-all duration-300 backdrop-blur-sm`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-500 text-white px-4 py-1 rounded-full text-sm font-medium">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-500 text-white px-6 py-1 rounded-full text-sm font-medium">
                     Popular
                   </div>
                 )}
                 <div className="text-xl font-bold mb-4 text-white">{plan.name}</div>
-                <div className="text-5xl font-bold mb-2 text-white">
-                  ${plan.price}
+                <div className="flex items-baseline gap-0.5 mb-2">
+                  <span className="text-5xl font-bold text-white">$</span>
+                  <span className="text-5xl font-bold text-white">{plan.price}</span>
                 </div>
                 <div className="text-purple-400 text-sm mb-8">+1 Month Free</div>
                 <ul className="space-y-4 mb-8">
@@ -100,7 +101,7 @@ export const Pricing = () => {
                   ))}
                 </ul>
                 <Button
-                  className="w-full bg-[#F97316] hover:bg-[#F97316]/90 text-white gap-2"
+                  className="w-full bg-[#F97316] hover:bg-[#F97316]/90 text-white gap-2 h-12 text-base font-medium rounded-xl"
                 >
                   <Monitor className="w-5 h-5" />
                   Buy Now
@@ -109,10 +110,10 @@ export const Pricing = () => {
                   Ready within 5-7mins
                 </div>
                 <div className="flex justify-center gap-4 mt-4">
-                  <img src="/apple.svg" alt="Apple" className="h-5 w-5 opacity-50" />
-                  <img src="/android.svg" alt="Android" className="h-5 w-5 opacity-50" />
-                  <img src="/windows.svg" alt="Windows" className="h-5 w-5 opacity-50" />
-                  <img src="/youtube.svg" alt="Youtube" className="h-5 w-5 opacity-50" />
+                  <img src="/apple.svg" alt="Apple" className="h-5 w-5 opacity-50 hover:opacity-100 transition-opacity" />
+                  <img src="/android.svg" alt="Android" className="h-5 w-5 opacity-50 hover:opacity-100 transition-opacity" />
+                  <img src="/windows.svg" alt="Windows" className="h-5 w-5 opacity-50 hover:opacity-100 transition-opacity" />
+                  <img src="/youtube.svg" alt="Youtube" className="h-5 w-5 opacity-50 hover:opacity-100 transition-opacity" />
                 </div>
               </div>
             ))}
