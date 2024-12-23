@@ -34,11 +34,6 @@ const sports = [
     title: "La Liga",
     image: "/lovable-uploads/57484adf-5f2f-40c6-86ed-cd6bb50392b4.png",
     description: "Spanish football's top division"
-  },
-  {
-    title: "Formula 1",
-    image: "/lovable-uploads/7b0e5f14-995d-47d0-8c7a-108c30d9fd42.png",
-    description: "High-speed racing action"
   }
 ];
 
