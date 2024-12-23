@@ -11,68 +11,68 @@ import { BlurImage } from "./ui/blur-image";
 
 const brands = [
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item05-150x46-1-2.webp",
-    alt: "brand_item05"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/hbo-premium-tv-channel-logo.webp",
+    alt: "HBO Premium TV Channel - Available on our IPTV Service"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item06-150x46-1-2.webp",
-    alt: "brand_item06"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/netflix-streaming-platform-logo.webp",
+    alt: "Netflix Streaming Platform - Premium Content Provider"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item08-150x46-1-2.webp",
-    alt: "brand_item08"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/disney-plus-streaming-service-logo.webp",
+    alt: "Disney Plus Streaming Service - Family Entertainment"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item09-150x46-1-2.webp",
-    alt: "brand_item09"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/amazon-prime-video-platform-logo.webp",
+    alt: "Amazon Prime Video Platform - Premium Streaming Content"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item10-150x46-1-2.webp",
-    alt: "brand_item10"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/espn-sports-channel-logo.webp",
+    alt: "ESPN Sports Channel - Live Sports Streaming"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item11-2.webp",
-    alt: "brand_item11"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/fox-news-channel-logo.webp",
+    alt: "Fox News Channel - News Broadcasting Network"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item12-2.webp",
-    alt: "brand_item12"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/cnn-news-network-logo.webp",
+    alt: "CNN News Network - Global News Coverage"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item13-150x46-1-2.webp",
-    alt: "brand_item13"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/bbc-broadcasting-network-logo.webp",
+    alt: "BBC Broadcasting Network - International News and Entertainment"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item14-150x46-1-2.webp",
-    alt: "brand_item14"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/sky-sports-channel-logo.webp",
+    alt: "Sky Sports Channel - Premium Sports Coverage"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item15-150x46-1-2.webp",
-    alt: "brand_item15"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/bt-sport-network-logo.webp",
+    alt: "BT Sport Network - Live Sports Broadcasting"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item16-150x46-1-2.webp",
-    alt: "brand_item16"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/nbc-television-network-logo.webp",
+    alt: "NBC Television Network - American Broadcasting"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item17-150x46-1-2.webp",
-    alt: "brand_item17"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/abc-broadcasting-company-logo.webp",
+    alt: "ABC Broadcasting Company - Entertainment Network"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item18-150x46-1-2.webp",
-    alt: "brand_item18"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/cbs-television-network-logo.webp",
+    alt: "CBS Television Network - American TV Broadcasting"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item21-150x46-1-2.webp",
-    alt: "brand_item21"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/showtime-premium-channel-logo.webp",
+    alt: "Showtime Premium Channel - Premium Entertainment"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item22-150x46-1-2.webp",
-    alt: "brand_item22"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/starz-premium-network-logo.webp",
+    alt: "Starz Premium Network - Movie and Series Streaming"
   },
   {
-    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/FOX-150x58.webp",
-    alt: "FOX"
+    src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/fox-broadcasting-network-logo.webp",
+    alt: "Fox Broadcasting Network - Entertainment and News"
   }
 ];
 

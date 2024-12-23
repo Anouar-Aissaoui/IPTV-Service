@@ -83,10 +83,11 @@ export const Hero = () => {
             {/* Devices Image */}
             <div className="relative w-full max-w-[280px] mx-auto lg:mx-0 animate-float">
               <div className="absolute -inset-1 bg-[#F97316]/20 rounded-lg blur-sm"></div>
-              <img 
-                src="https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/devices-4.webp"
-                alt="Supported Devices"
-                className="relative w-full h-auto hover:scale-105 transition-transform duration-300"
+              <BlurImage 
+                src="/lovable-uploads/best-iptv-service-provider-streaming-platform.png" 
+                alt="Premium IPTV Service - High Quality Streaming Platform Interface" 
+                className="relative rounded-lg shadow-2xl w-full h-auto object-cover" 
+                hash="LRG8}V?bxuWB~qofM{WB%MWBRjay" 
               />
             </div>
 
@@ -112,8 +113,8 @@ export const Hero = () => {
             <div className="relative max-w-[480px] mx-auto transform hover:scale-105 transition-duration-300">
               <div className="absolute -inset-1 bg-[#F97316]/30 rounded-lg blur"></div>
               <BlurImage
-                src="/lovable-uploads/62b3cd9e-1589-432c-b117-d855ac8f0b81.png"
-                alt="IPTV Service Preview"
+                src="/lovable-uploads/best-iptv-service-provider-streaming-platform.png"
+                alt="Premium IPTV Service - High Quality Streaming Platform Interface"
                 className="relative rounded-lg shadow-2xl w-full h-auto object-cover"
                 hash="LRG8}V?bxuWB~qofM{WB%MWBRjay"
               />
