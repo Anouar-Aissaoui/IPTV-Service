@@ -1,5 +1,7 @@
 import * as React from "react";
 import { BlurImage } from "./ui/blur-image";
+import { uploadImage, getImageUrl } from "@/utils/uploadImage";
+import { useToast } from "@/components/ui/use-toast";
 
 const movies = [
   {
@@ -46,6 +48,9 @@ const reportWebVitals = (metric: any) => {
 const MovieCard = React.lazy(() => import("./MovieCard"));
 
 export const Content: React.FC = () => {
+  const { toast } = useToast();
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
   React.useEffect(() => {
     performance.mark('content-component-rendered');
     
@@ -58,12 +63,50 @@ export const Content: React.FC = () => {
     console.log(`Movie clicked: ${movieTitle}`);
   }, []);
 
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const result = await uploadImage(file);
+      toast({
+        title: "Success",
+        description: "Image uploaded successfully",
+      });
+      console.log('Upload result:', result);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to upload image",
+        variant: "destructive",
+      });
+      console.error('Upload error:', error);
+    }
+  };
+
   return (
     <div className="bg-dark py-20">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           Movies & <span className="text-neon">TV Shows</span>
         </h2>
+        
+        <div className="mb-8 flex justify-center">
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleImageUpload}
+            accept="image/*"
+            className="hidden"
+          />
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className="bg-neon text-white px-6 py-3 rounded-lg hover:bg-neon/80 transition-colors duration-300"
+          >
+            Upload Image
+          </button>
+        </div>
+
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {movies.map((movie) => (
             <React.Suspense

@@ -36,6 +36,33 @@ export type Database = {
         }
         Relationships: []
       }
+      images: {
+        Row: {
+          content_type: string
+          created_at: string | null
+          file_name: string
+          file_path: string
+          id: string
+          size: number
+        }
+        Insert: {
+          content_type: string
+          created_at?: string | null
+          file_name: string
+          file_path: string
+          id?: string
+          size: number
+        }
+        Update: {
+          content_type?: string
+          created_at?: string | null
+          file_name?: string
+          file_path?: string
+          id?: string
+          size?: number
+        }
+        Relationships: []
+      }
       performance_metrics: {
         Row: {
           cls: number
