@@ -7,11 +7,11 @@ const urlsToCache = [
   '/src/index.css',
   '/iptv-subscription.png',
   // Cache images
-  '/lovable-uploads/00c90df3-a23d-47e3-b967-8806209cd5b1.png',
-  '/lovable-uploads/62b3cd9e-1589-432c-b117-d855ac8f0b81.png',
-  '/lovable-uploads/68c06c7a-d842-491a-a970-14726b960bc0.png',
-  '/lovable-uploads/74cadd1d-7f11-4677-9cfc-3342545d312f.png',
-  '/lovable-uploads/eb41a9e5-0a89-4fbb-9995-ac1735cd4aaf.png'
+  '/images/00c90df3-a23d-47e3-b967-8806209cd5b1.png',
+  '/images/62b3cd9e-1589-432c-b117-d855ac8f0b81.png',
+  '/images/68c06c7a-d842-491a-a970-14726b960bc0.png',
+  '/images/74cadd1d-7f11-4677-9cfc-3342545d312f.png',
+  '/images/eb41a9e5-0a89-4fbb-9995-ac1735cd4aaf.png'
 ];
 
 self.addEventListener('install', (event) => {
