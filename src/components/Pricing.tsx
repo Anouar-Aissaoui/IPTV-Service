@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { Helmet } from "react-helmet";
+import { useState } from "react";
+import { BuyerInfoDialog } from "./BuyerInfoDialog";
 
 const keywords = [
   'buy IPTV',
@@ -70,6 +72,14 @@ const plans = [
 ];
 
 export const Pricing = () => {
+  const [selectedPlan, setSelectedPlan] = useState("");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleGetStarted = (planName: string) => {
+    setSelectedPlan(planName);
+    setIsDialogOpen(true);
+  };
+
   return (
     <>
       <Helmet>
@@ -124,6 +134,7 @@ export const Pricing = () => {
                       ? "bg-neon text-dark hover:bg-neon/90"
                       : "bg-dark border border-neon/40 text-neon hover:border-neon"
                   }`}
+                  onClick={() => handleGetStarted(plan.name)}
                 >
                   Get Started
                 </Button>
@@ -140,6 +151,12 @@ export const Pricing = () => {
           </div>
         </div>
       </div>
+
+      <BuyerInfoDialog
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+        selectedPlan={selectedPlan}
+      />
     </>
   );
 };
