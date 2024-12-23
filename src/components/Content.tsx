@@ -1,5 +1,5 @@
-import { BlurImage } from "./ui/blur-image";
 import { Suspense, lazy, useCallback, useEffect } from "react";
+import { BlurImage } from "./ui/blur-image";
 
 // Moved movies data outside component to prevent re-creation on each render
 const movies = [
