@@ -1,11 +1,11 @@
-import * as React from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Monitor, Laptop, Smartphone, Apple, MonitorPlay } from "lucide-react";
 import { OptimizedImage } from "./ui/optimized-image";
 import { Menu } from "lucide-react";
 
 export const Hero = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const handleWhatsAppClick = () => {
     window.open('https://wa.me/your_number_here', '_blank');

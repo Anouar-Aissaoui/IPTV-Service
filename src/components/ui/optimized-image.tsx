@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 
 interface OptimizedImageProps {
   src: string;
@@ -21,7 +21,7 @@ export const OptimizedImage = ({
   decoding = "async",
   fetchPriority = "low"
 }: OptimizedImageProps) => {
-  const [isLoaded, setIsLoaded] = React.useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   
   // Convert local image paths to use Vercel's Image Optimization
   const optimizedSrc = src.startsWith('/') 
