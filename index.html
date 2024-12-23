@@ -29,10 +29,22 @@
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="alternate" hreflang="en" href="https://iptvsubscription.news" />
     <link rel="alternate" hreflang="x-default" href="https://iptvsubscription.news" />
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/src/main.tsx" as="script" type="module" />
+    <link rel="preload" href="/src/index.css" as="style" />
+    <link rel="modulepreload" href="/src/App.tsx" />
+    
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="//www.iptvthemes.shop" />
+    <link rel="dns-prefetch" href="//image.tmdb.org" />
+    
+    <!-- Preconnect to critical origins -->
+    <link rel="preconnect" href="https://www.iptvthemes.shop" crossorigin />
+    <link rel="preconnect" href="https://image.tmdb.org" crossorigin />
   </head>
   <body>
     <div id="root"></div>
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
     <script>
       if ('serviceWorker' in navigator) {
