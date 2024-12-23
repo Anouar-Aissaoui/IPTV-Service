@@ -114,7 +114,7 @@ const Hero: React.FC = () => {
             <div className="relative max-w-[480px] mx-auto transform hover:scale-105 transition-duration-300">
               <div className="absolute -inset-1 bg-[#F97316]/30 rounded-lg blur"></div>
               <BlurImage
-                src="/images/62b3cd9e-1589-432c-b117-d855ac8f0b81.png"
+                src="/iptv-subscription.png"
                 alt="IPTV Service Preview"
                 className="relative rounded-lg shadow-2xl w-full h-auto object-cover"
                 hash="LRG8}V?bxuWB~qofM{WB%MWBRjay"
@@ -145,6 +145,7 @@ const Hero: React.FC = () => {
             <div className="text-[#F97316] text-xs md:text-sm font-semibold">Movies & TV Shows</div>
           </div>
         </div>
+
       </div>
 
       {/* Background Effect */}
