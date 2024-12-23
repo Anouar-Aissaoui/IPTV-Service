@@ -1,4 +1,5 @@
-import React, { Suspense, lazy, useCallback, useEffect } from "react";
+import React from "react";
+import { Suspense, lazy, useCallback, useEffect } from "react";
 import { BlurImage } from "./ui/blur-image";
 
 const movies = [
@@ -39,16 +40,13 @@ const movies = [
   },
 ];
 
-// Performance monitoring
 const reportWebVitals = (metric: any) => {
   console.log(metric);
 };
 
-// Lazy load MovieCard component
 const MovieCard = lazy(() => import("./MovieCard"));
 
-export const Content = () => {
-  // Monitor component renders
+export const Content: React.FC = () => {
   useEffect(() => {
     performance.mark('content-component-rendered');
     

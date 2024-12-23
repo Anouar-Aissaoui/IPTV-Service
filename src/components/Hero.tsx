@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Monitor, Laptop, Smartphone, Apple, MonitorPlay } from "lucide-react";
 import { BlurImage } from "./ui/blur-image";
 import { Menu } from "lucide-react";
 
-export const Hero = () => {
+export const Hero: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const handleWhatsAppClick = () => {
