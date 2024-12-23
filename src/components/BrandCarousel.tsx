@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -5,7 +6,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { BlurImage } from "./ui/blur-image";
 
