@@ -19,16 +19,16 @@ export const IPTVProviders = () => {
     <section className="py-16 bg-dark">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          Best <span className="text-neon">IPTV Providers</span>
+          Best <span className="text-[#F97316]">IPTV Providers</span>
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {providers.map((provider) => (
-            <Card key={provider.name} className="bg-dark-gray border border-neon/20 hover:border-neon/40 transition-colors">
+            <Card key={provider.name} className="bg-dark border border-[#F97316]/20 hover:border-[#F97316]/40 transition-colors">
               <CardContent className="p-6">
-                <div className="aspect-video bg-dark-gray rounded-lg border border-neon/10 flex items-center justify-center mb-4">
+                <div className="aspect-video bg-dark rounded-lg border border-[#F97316]/10 flex items-center justify-center mb-4">
                   <Button variant="ghost" size="icon" className="h-12 w-12 rounded-full bg-white/10 hover:bg-white/20">
-                    <Plus className="h-6 w-6 text-neon" />
+                    <Plus className="h-6 w-6 text-[#F97316]" />
                   </Button>
                 </div>
                 <h3 className="text-lg font-semibold text-white text-center">{provider.name}</h3>
@@ -43,7 +43,7 @@ export const IPTVProviders = () => {
           </h2>
           
           <p>
-            Looking for the best <a href="#" className="text-neon hover:underline">IPTV subscription</a>? 
+            Looking for the best <a href="#" className="text-[#F97316] hover:underline">IPTV subscription</a>? 
             Our comprehensive guide helps you understand everything you need to know about IPTV services 
             and how to choose the right provider for your streaming needs.
           </p>
@@ -67,7 +67,7 @@ export const IPTVProviders = () => {
 
           <h3>How to Choose the Best IPTV Service</h3>
           <p>
-            When selecting an <a href="#" className="text-neon hover:underline">IPTV service</a>, 
+            When selecting an <a href="#" className="text-[#F97316] hover:underline">IPTV service</a>, 
             consider these essential factors:
           </p>
           <ol>
@@ -91,7 +91,7 @@ export const IPTVProviders = () => {
 
           <h3>Why Choose Our IPTV Providers?</h3>
           <p>
-            Our curated list of <a href="#" className="text-neon hover:underline">best IPTV service</a> providers 
+            Our curated list of <a href="#" className="text-[#F97316] hover:underline">best IPTV service</a> providers 
             offers:
           </p>
           <ul>
@@ -103,7 +103,7 @@ export const IPTVProviders = () => {
             <li>Dedicated customer support</li>
           </ul>
 
-          <div className="bg-dark-gray p-6 rounded-lg border border-neon/20 mt-8">
+          <div className="bg-dark p-6 rounded-lg border border-[#F97316]/20 mt-8">
             <h4 className="text-xl font-semibold mb-4">Ready to Get Started?</h4>
             <p>
               Choose from our selection of top IPTV providers and enjoy premium entertainment 
