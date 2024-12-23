@@ -1,8 +1,10 @@
-import * as React from "react";
+import { useState } from "react";
+import { Blurhash } from "react-blurhash";
 
 interface BlurImageProps {
   src: string;
   alt: string;
+  hash?: string;
   className?: string;
   width?: number;
   height?: number;
@@ -13,7 +15,8 @@ interface BlurImageProps {
 
 export const BlurImage = ({ 
   src, 
-  alt,
+  alt, 
+  hash = "L6PZfSi_.AyE_3t7t7R**0o#DgR4", 
   className = "",
   width,
   height,
@@ -21,12 +24,21 @@ export const BlurImage = ({
   decoding = "async",
   fetchPriority = "low"
 }: BlurImageProps) => {
-  const [isLoaded, setIsLoaded] = React.useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <div className="relative w-full h-full">
       {!isLoaded && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+        <div className="absolute inset-0">
+          <Blurhash
+            hash={hash}
+            width="100%"
+            height="100%"
+            resolutionX={32}
+            resolutionY={32}
+            punch={1}
+          />
+        </div>
       )}
       <img
         src={src}

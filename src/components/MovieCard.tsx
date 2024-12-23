@@ -1,10 +1,11 @@
 import { memo } from 'react';
-import { OptimizedImage } from "./ui/optimized-image";
+import { BlurImage } from "./ui/blur-image";
 
 interface MovieProps {
   movie: {
     title: string;
     image: string;
+    hash: string;
     width: number;
     height: number;
   };
@@ -13,9 +14,10 @@ interface MovieProps {
 const MovieCard = memo(({ movie }: MovieProps) => {
   return (
     <div className="relative group overflow-hidden rounded-lg aspect-[2/3] border border-neon/20 hover:border-neon/40 transition-colors duration-300">
-      <OptimizedImage
+      <BlurImage
         src={movie.image}
         alt={movie.title}
+        hash={movie.hash}
         width={movie.width}
         height={movie.height}
         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
