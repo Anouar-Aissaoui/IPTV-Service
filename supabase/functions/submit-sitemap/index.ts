@@ -2,6 +2,7 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 
 const GOOGLE_URL = "https://www.google.com/ping?sitemap="
 const YANDEX_URL = "https://www.yandex.com/webmaster/site/indexNow?url="
+const BING_URL = "https://www.bing.com/ping?sitemap="
 
 const submitSitemap = async (sitemapUrl: string) => {
   try {
@@ -13,9 +14,14 @@ const submitSitemap = async (sitemapUrl: string) => {
     const yandexResponse = await fetch(`${YANDEX_URL}${sitemapUrl}`)
     console.log('Yandex submission status:', yandexResponse.status)
 
+    // Submit to Bing
+    const bingResponse = await fetch(`${BING_URL}${sitemapUrl}`)
+    console.log('Bing submission status:', bingResponse.status)
+
     return {
       google: googleResponse.status,
-      yandex: yandexResponse.status
+      yandex: yandexResponse.status,
+      bing: bingResponse.status
     }
   } catch (error) {
     console.error('Error submitting sitemap:', error)
