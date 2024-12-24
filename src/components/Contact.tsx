@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
-import { Link } from "react-router-dom";
 
 export const Contact = () => {
   return (
@@ -13,11 +12,9 @@ export const Contact = () => {
           If you're having any questions or need help, don't hesitate to contact
           our team. We're here to help 24/7.
         </p>
-        <Link to="/contact">
-          <Button className="bg-neon text-dark hover:bg-neon/90 text-lg px-8 py-6">
-            <MessageCircle className="mr-2" /> Contact Support
-          </Button>
-        </Link>
+        <Button className="bg-neon text-dark hover:bg-neon/90 text-lg px-8 py-6">
+          <MessageCircle className="mr-2" /> Contact Support
+        </Button>
       </div>
     </div>
   );
