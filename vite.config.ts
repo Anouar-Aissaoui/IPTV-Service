@@ -13,6 +13,29 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' &&
     componentTagger(),
+    {
+      name: 'submit-sitemap',
+      closeBundle: async () => {
+        if (mode === 'production') {
+          try {
+            const response = await fetch('https://nzemomqyeyamurngohfl.supabase.co/functions/v1/submit-sitemap', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                sitemapUrl: 'https://iptvsubscription.news/sitemap.xml'
+              })
+            });
+            
+            const result = await response.json();
+            console.log('Sitemap submission result:', result);
+          } catch (error) {
+            console.error('Failed to submit sitemap:', error);
+          }
+        }
+      }
+    }
   ].filter(Boolean),
   resolve: {
     alias: {
