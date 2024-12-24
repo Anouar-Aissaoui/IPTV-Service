@@ -67,13 +67,17 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-4 py-8 md:py-12">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="lg:w-1/2 space-y-6">
-            <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold text-white leading-tight animate-fade-in">
+            <h2 className="text-3xl md:text-4xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight">
               Best IPTV Service at an{" "}
-              <span className="text-[#F97316] bg-gradient-to-r from-[#F97316] to-neon bg-clip-text text-transparent">
-                Affordable Price
+              <span className="relative inline-block">
+                <span className="relative z-10 text-[#F97316] bg-gradient-to-r from-[#F97316] to-neon bg-clip-text text-transparent px-2">
+                  Affordable Price
+                </span>
+                <span className="absolute inset-0 bg-[#F97316]/10 -skew-y-2 transform"></span>
               </span>
             </h2>
             
+            {/* Rest of the Hero content */}
             <p className="text-base md:text-lg lg:text-xl leading-relaxed text-gray-300">
               Experience breathtaking 4K visuals on any device, at any place, at any time. 
               Discover an expansive library with over <span className="text-[#F97316] font-semibold">40,000 channels</span> and more than <span className="text-[#F97316] font-semibold">54,000 VOD</span> options.
