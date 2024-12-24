@@ -14,6 +14,16 @@
     <image:image>
       <image:loc>https://iptvsubscription.news/iptv-subscription.png</image:loc>
       <image:title>Best IPTV Service Provider</image:title>
+      <image:caption>Premium IPTV Subscription Service</image:caption>
     </image:image>
+    <mobile:mobile/>
+    <news:news>
+      <news:publication>
+        <news:name>IPTV Subscription News</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2024-03-19</news:publication_date>
+      <news:title>Best IPTV Service Provider | Premium Channels & VOD Content</news:title>
+    </news:news>
   </url>
 </urlset>

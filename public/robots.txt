@@ -1,3 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+
+# Crawl-delay: 10
+# Request-rate: 1/10
+
 Sitemap: https://iptvsubscription.news/sitemap.xml

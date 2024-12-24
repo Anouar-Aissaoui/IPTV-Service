@@ -10,14 +10,21 @@ export const getStructuredData = () => ({
         "@type": "ImageObject",
         "url": "https://iptvsubscription.news/iptv-subscription.png",
         "width": 480,
-        "height": 320
+        "height": 320,
+        "caption": "Premium IPTV Service Provider Logo"
       },
       "description": "Premium IPTV service provider offering 40,000+ channels and 54,000+ VOD content worldwide",
       "sameAs": [
         "https://twitter.com/iptvsubscription",
         "https://facebook.com/iptvsubscription",
         "https://instagram.com/iptvsubscription"
-      ]
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "availableLanguage": ["English", "Spanish", "French"],
+        "email": "support@iptvsubscription.news"
+      }
     },
     {
       "@type": "WebSite",
@@ -31,7 +38,8 @@ export const getStructuredData = () => ({
         "@type": "SearchAction",
         "target": "https://iptvsubscription.news/search?q={search_term_string}",
         "query-input": "required name=search_term_string"
-      }
+      },
+      "inLanguage": "en-US"
     },
     {
       "@type": "WebPage",
@@ -46,10 +54,12 @@ export const getStructuredData = () => ({
       },
       "primaryImageOfPage": {
         "@type": "ImageObject",
-        "url": "https://iptvsubscription.news/iptv-subscription.png"
+        "url": "https://iptvsubscription.news/iptv-subscription.png",
+        "width": 480,
+        "height": 320
       },
-      "datePublished": "2024-03-19",
-      "dateModified": "2024-03-19",
+      "datePublished": "2024-03-19T00:00:00+00:00",
+      "dateModified": new Date().toISOString(),
       "description": "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40,000+ channels and 54,000+ VOD content. Subscribe now!",
       "breadcrumb": {
         "@type": "BreadcrumbList",
@@ -62,6 +72,13 @@ export const getStructuredData = () => ({
               "name": "Home"
             }
           }
+        ]
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": [
+          "/html/head/title",
+          "/html/head/meta[@name='description']/@content"
         ]
       }
     },
@@ -85,35 +102,55 @@ export const getStructuredData = () => ({
             "name": "1 Month Plan",
             "price": "14.99",
             "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
+            "availability": "https://schema.org/InStock",
+            "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]
           },
           {
             "@type": "Offer",
             "name": "3 Months Plan",
             "price": "34.99",
             "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
+            "availability": "https://schema.org/InStock",
+            "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]
           },
           {
             "@type": "Offer",
             "name": "6 Months Plan",
             "price": "59.99",
             "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
+            "availability": "https://schema.org/InStock",
+            "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]
           },
           {
             "@type": "Offer",
             "name": "12 Months Plan",
             "price": "99.99",
             "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
+            "availability": "https://schema.org/InStock",
+            "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]
           }
         ]
       },
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.8",
-        "reviewCount": "7520"
+        "reviewCount": "7520",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "John Smith"
+        },
+        "datePublished": "2024-03-19",
+        "reviewBody": "Excellent IPTV service with amazing channel selection and quality. The 4K streams are fantastic!"
       }
     },
     {
@@ -124,15 +161,15 @@ export const getStructuredData = () => ({
           "name": "What devices are compatible with your IPTV service?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Our IPTV service is compatible with Smart TVs, Android devices, iOS devices, Fire TV Stick, MAG boxes, and more. You can use it on multiple devices simultaneously."
+            "text": "Our IPTV service is compatible with Smart TVs (Samsung, LG, Android TV), smartphones (iOS and Android), tablets, Amazon Fire Stick, MAG devices, and more. You can enjoy seamless streaming across multiple devices simultaneously."
           }
         },
         {
           "@type": "Question",
-          "name": "Do you offer a free trial?",
+          "name": "How reliable is your IPTV streaming service?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, we offer a free trial period so you can test our service quality and content library before subscribing."
+            "text": "We maintain a 99.9% uptime guarantee with our premium servers located globally. Our anti-buffering technology ensures smooth streaming experience, and we provide 24/7 technical support to address any concerns immediately."
           }
         },
         {
@@ -140,7 +177,7 @@ export const getStructuredData = () => ({
           "name": "What content is included in the subscription?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Our subscription includes 40,000+ live channels, 54,000+ VOD content, sports channels, movies, TV shows, and international channels in HD and 4K quality."
+            "text": "Our comprehensive content library includes 40,000+ live channels, 54,000+ VOD content including latest movies and TV shows, premium sports channels, news networks, and international channels from various countries. All content is available in HD and 4K quality where applicable."
           }
         }
       ]
