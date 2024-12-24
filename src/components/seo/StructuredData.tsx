@@ -8,8 +8,11 @@ export const getStructuredData = () => ({
       "url": "https://iptvsubscription.news",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://iptvsubscription.news/iptv-subscription.png"
+        "url": "https://iptvsubscription.news/iptv-subscription.png",
+        "width": 480,
+        "height": 320
       },
+      "description": "Premium IPTV service provider offering 40,000+ channels and 54,000+ VOD content worldwide",
       "sameAs": [
         "https://twitter.com/iptvsubscription",
         "https://facebook.com/iptvsubscription",
@@ -46,68 +49,101 @@ export const getStructuredData = () => ({
         "url": "https://iptvsubscription.news/iptv-subscription.png"
       },
       "datePublished": "2024-03-19",
-      "dateModified": "2024-03-19"
-    },
-    {
-      "@type": "Service",
-      "name": "IPTV Subscription Service",
-      "description": "Premium IPTV service with 40,000+ channels and 54,000+ VOD content",
-      "provider": {
-        "@id": "https://iptvsubscription.news/#organization"
-      },
-      "areaServed": {
-        "@type": "Country",
-        "name": "United States"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "IPTV Packages",
+      "dateModified": "2024-03-19",
+      "description": "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40,000+ channels and 54,000+ VOD content. Subscribe now!",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
         "itemListElement": [
           {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Premium IPTV Package",
-              "description": "Access to 40,000+ live channels and 54,000+ VOD content",
-              "price": "14.99",
-              "priceCurrency": "USD"
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@id": "https://iptvsubscription.news",
+              "name": "Home"
             }
           }
         ]
       }
     },
     {
-      "@type": "LocalBusiness",
-      "@id": "https://iptvsubscription.news/#localbusiness",
-      "name": "Best IPTV Service Provider",
-      "image": "https://iptvsubscription.news/iptv-subscription.png",
-      "url": "https://iptvsubscription.news",
-      "telephone": "+1-000-000-0000",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "US",
-        "addressRegion": "NY"
+      "@type": "Product",
+      "name": "Premium IPTV Subscription",
+      "description": "Access to 40,000+ live channels and 54,000+ VOD content with HD and 4K quality",
+      "brand": {
+        "@type": "Brand",
+        "name": "Best IPTV Service Provider"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "37.09024",
-        "longitude": "-95.712891"
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "USD",
+        "lowPrice": "14.99",
+        "highPrice": "99.99",
+        "offerCount": "4",
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "1 Month Plan",
+            "price": "14.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          },
+          {
+            "@type": "Offer",
+            "name": "3 Months Plan",
+            "price": "34.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          },
+          {
+            "@type": "Offer",
+            "name": "6 Months Plan",
+            "price": "59.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          },
+          {
+            "@type": "Offer",
+            "name": "12 Months Plan",
+            "price": "99.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        ]
       },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "opens": "00:00",
-        "closes": "23:59"
-      },
-      "priceRange": "$$"
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "7520"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What devices are compatible with your IPTV service?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our IPTV service is compatible with Smart TVs, Android devices, iOS devices, Fire TV Stick, MAG boxes, and more. You can use it on multiple devices simultaneously."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer a free trial?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we offer a free trial period so you can test our service quality and content library before subscribing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What content is included in the subscription?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our subscription includes 40,000+ live channels, 54,000+ VOD content, sports channels, movies, TV shows, and international channels in HD and 4K quality."
+          }
+        }
+      ]
     }
   ]
 });
