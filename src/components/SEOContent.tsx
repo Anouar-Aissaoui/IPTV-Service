@@ -8,36 +8,43 @@ import { useLocation } from 'react-router-dom';
 
 export const SEOContent = () => {
   const location = useLocation();
+  const isPreviewDomain = window.location.hostname.includes('preview--clone-landing-tech.lovable.app');
   
   useEffect(() => {
-    const pageData = {
-      title: "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide",
-      description: "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40,000+ channels and 54,000+ VOD content. Subscribe now!",
-      keywords: seoKeywords,
-      imageUrl: "https://iptvsubscription.news/iptv-subscription.png"
-    };
+    if (!isPreviewDomain) {
+      const pageData = {
+        title: "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide",
+        description: "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40,000+ channels and 54,000+ VOD content. Subscribe now!",
+        keywords: seoKeywords,
+        imageUrl: "https://iptvsubscription.news/iptv-subscription.png"
+      };
 
-    const { title, metaTags } = generateDynamicMetaTags(pageData);
-    const structuredData = getStructuredData();
+      const { title, metaTags } = generateDynamicMetaTags(pageData);
+      const structuredData = getStructuredData();
 
-    trackPageSEO({
-      route: location.pathname,
-      title: title,
-      description: metaTags.description,
-      canonicalUrl: `https://iptvsubscription.news${location.pathname}`,
-      metaTags: metaTags,
-      structuredData: structuredData
-    });
-  }, [location.pathname]);
+      trackPageSEO({
+        route: location.pathname,
+        title: title,
+        description: metaTags.description,
+        canonicalUrl: `https://iptvsubscription.news${location.pathname}`,
+        metaTags: metaTags,
+        structuredData: structuredData
+      });
+    }
+  }, [location.pathname, isPreviewDomain]);
 
   return (
     <>
       <Helmet>
         <html lang="en" />
         <title>Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide</title>
+        {isPreviewDomain ? (
+          <meta name="robots" content="noindex, nofollow" />
+        ) : (
+          <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        )}
         <meta name="description" content="Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40,000+ channels and 54,000+ VOD content. Subscribe now!" />
         <meta name="keywords" content={seoKeywords.join(', ')} />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <link rel="canonical" href={`https://iptvsubscription.news${location.pathname}`} />
         
         {/* Open Graph / Facebook */}

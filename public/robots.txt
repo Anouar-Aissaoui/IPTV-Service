@@ -3,6 +3,7 @@ Allow: /
 Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
+Disallow: https://preview--clone-landing-tech.lovable.app/
 
 # Crawl-delay: 10
 # Request-rate: 1/10
