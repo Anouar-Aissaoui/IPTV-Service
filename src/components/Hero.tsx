@@ -1,12 +1,10 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { BlurImage } from "./ui/blur-image";
-import { Menu, ChevronRight } from "lucide-react";
-import { Link } from "react-router-dom";
 import { BuyerInfoDialog } from "./BuyerInfoDialog";
+import { Navigation } from "./navigation/Navigation";
 
 const Hero: React.FC = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const [selectedPlan, setSelectedPlan] = React.useState("");
   
@@ -23,91 +21,12 @@ const Hero: React.FC = () => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
     }
   };
 
-  const navItems = [
-    { name: "Home", action: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
-    { name: "Pricing", action: () => scrollToSection('pricing-section') },
-    { name: "Channel List", action: () => scrollToSection('channel-list') },
-    { name: "FAQ", action: () => scrollToSection('faq-section') },
-    { name: "Contact Us", action: () => null, isLink: true, to: "/contact" }
-  ];
-
   return (
     <div className="relative bg-dark">
-      <nav className="container mx-auto px-4 py-6 relative z-50">
-        <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold text-white">
-            <a 
-              href="https://www.iptvservice.site/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:text-[#F97316] transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-2"
-            >
-              IPTV Service
-            </a>
-          </div>
-          
-          <button 
-            className="md:hidden text-[#F97316] hover:text-[#F97316]/80 transition-colors p-2 hover:bg-white/10 rounded-lg"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            <Menu className="h-6 w-6" />
-          </button>
-
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              item.isLink ? (
-                <Link
-                  key={item.name}
-                  to={item.to}
-                  className="group relative text-white hover:text-[#F97316] transition-all duration-300 text-base font-medium flex items-center gap-1"
-                >
-                  {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F97316] transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              ) : (
-                <button
-                  key={item.name}
-                  onClick={item.action}
-                  className="group relative text-white hover:text-[#F97316] transition-all duration-300 text-base font-medium flex items-center gap-1"
-                >
-                  {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F97316] transition-all duration-300 group-hover:w-full"></span>
-                </button>
-              )
-            ))}
-          </div>
-        </div>
-
-        {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 mt-2 mx-4 bg-black/95 backdrop-blur-sm rounded-xl p-4 space-y-2 border border-[#F97316]/20 animate-in slide-in-from-top duration-300 shadow-xl">
-            {navItems.map((item) => (
-              item.isLink ? (
-                <Link
-                  key={item.name}
-                  to={item.to}
-                  className="flex items-center justify-between text-white hover:text-[#F97316] transition-all duration-300 text-lg font-medium py-3 px-4 rounded-lg hover:bg-white/5 group w-full"
-                >
-                  {item.name}
-                  <ChevronRight className="h-4 w-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 text-[#F97316]" />
-                </Link>
-              ) : (
-                <button
-                  key={item.name}
-                  onClick={item.action}
-                  className="flex items-center justify-between text-white hover:text-[#F97316] transition-all duration-300 text-lg font-medium py-3 px-4 rounded-lg hover:bg-white/5 group w-full"
-                >
-                  {item.name}
-                  <ChevronRight className="h-4 w-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 text-[#F97316]" />
-                </button>
-              )
-            ))}
-          </div>
-        )}
-      </nav>
+      <Navigation onScrollToSection={scrollToSection} />
 
       <div className="container mx-auto px-4 py-8 md:py-12">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
