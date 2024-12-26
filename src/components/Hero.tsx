@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { BlurImage } from "./ui/blur-image";
-import { Menu } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
 
 const Hero: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -12,48 +12,59 @@ const Hero: React.FC = () => {
 
   return (
     <div className="relative bg-dark">
-      <nav className="container mx-auto px-4 py-4">
+      <nav className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between">
-          <div className="text-xl font-bold text-white">
+          <div className="text-2xl font-bold text-white">
             <a 
               href="https://www.iptvservice.site/" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="hover:text-[#F97316] transition-colors"
+              className="hover:text-[#F97316] transition-all duration-300 ease-in-out transform hover:scale-105"
             >
               IPTV Service
             </a>
           </div>
           
           <button 
-            className="md:hidden text-white"
+            className="md:hidden text-[#F97316] hover:text-[#F97316]/80 transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            <Menu className="h-6 w-6" />
+            <Menu className="h-7 w-7" />
           </button>
 
-          <div className="hidden md:flex items-center space-x-6 text-white">
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Home</a>
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Pricing</a>
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Channel List</a>
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">FAQ</a>
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Contact Us</a>
+          <div className="hidden md:flex items-center space-x-8">
+            {["Home", "Pricing", "Channel List", "FAQ", "Contact Us"].map((item) => (
+              <a
+                key={item}
+                href="#"
+                className="group relative text-white hover:text-[#F97316] transition-all duration-300 text-base font-medium"
+              >
+                {item}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F97316] transition-all duration-300 group-hover:w-full"></span>
+              </a>
+            ))}
           </div>
           
-          <Button className="hidden md:flex bg-[#F97316] text-white hover:bg-[#F97316]/90 shadow-lg shadow-[#F97316]/30 font-bold transform hover:scale-105 transition-all duration-300">
+          <Button className="hidden md:flex bg-[#F97316] text-white hover:bg-[#F97316]/90 shadow-lg shadow-[#F97316]/30 font-bold transform hover:scale-105 transition-all duration-300 px-6">
             Free Trial
+            <ChevronDown className="ml-2 h-4 w-4" />
           </Button>
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 bg-dark-gray rounded-lg p-4 space-y-4">
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Home</a>
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Pricing</a>
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Channel List</a>
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">FAQ</a>
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Contact Us</a>
-            <Button className="w-full bg-[#F97316] text-white hover:bg-[#F97316]/90 shadow-lg shadow-[#F97316]/30 font-bold">
+          <div className="md:hidden mt-4 bg-black/95 backdrop-blur-sm rounded-xl p-6 space-y-4 border border-[#F97316]/20 animate-in slide-in-from-top duration-300">
+            {["Home", "Pricing", "Channel List", "FAQ", "Contact Us"].map((item) => (
+              <a
+                key={item}
+                href="#"
+                className="block text-white hover:text-[#F97316] transition-all duration-300 text-lg font-medium py-2 border-b border-[#F97316]/10 last:border-0"
+              >
+                {item}
+              </a>
+            ))}
+            <Button className="w-full bg-[#F97316] text-white hover:bg-[#F97316]/90 shadow-lg shadow-[#F97316]/30 font-bold mt-4">
               Free Trial
+              <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
           </div>
         )}
