@@ -80,7 +80,7 @@ export const SEOContent = () => {
                 className="text-5xl font-bold mb-10 text-white bg-gradient-to-r from-neon to-white bg-clip-text text-transparent"
                 itemProp="headline"
               >
-                Premium IPTV Subscription Service
+                Best IPTV Service
               </h1>
               
               <meta itemProp="datePublished" content="2024-03-19" />
