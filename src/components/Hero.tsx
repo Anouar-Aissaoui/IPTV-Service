@@ -2,9 +2,11 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { BlurImage } from "./ui/blur-image";
 import { Menu } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const Hero: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const location = useLocation();
   
   const handleWhatsAppClick = () => {
     window.open('https://wa.me/your_number_here', '_blank');
@@ -15,14 +17,12 @@ const Hero: React.FC = () => {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="text-xl font-bold text-white">
-            <a 
-              href="https://www.iptvservice.site/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <Link 
+              to="/"
               className="hover:text-[#F97316] transition-colors"
             >
               IPTV Service
-            </a>
+            </Link>
           </div>
           
           <button 
@@ -33,11 +33,11 @@ const Hero: React.FC = () => {
           </button>
 
           <div className="hidden md:flex items-center space-x-6 text-white">
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Home</a>
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Pricing</a>
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Channel List</a>
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">FAQ</a>
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Contact Us</a>
+            <Link to="/" className={`hover:text-neon transition-colors duration-300 hover:scale-105 ${location.pathname === '/' ? 'text-neon' : ''}`}>Home</Link>
+            <a href="#pricing" className="hover:text-neon transition-colors duration-300 hover:scale-105">Pricing</a>
+            <a href="#channels" className="hover:text-neon transition-colors duration-300 hover:scale-105">Channel List</a>
+            <a href="#faq" className="hover:text-neon transition-colors duration-300 hover:scale-105">FAQ</a>
+            <Link to="/contact" className={`hover:text-neon transition-colors duration-300 hover:scale-105 ${location.pathname === '/contact' ? 'text-neon' : ''}`}>Contact Us</Link>
           </div>
           
           <Button className="hidden md:flex bg-[#F97316] text-white hover:bg-[#F97316]/90 shadow-lg shadow-[#F97316]/30 font-bold transform hover:scale-105 transition-all duration-300">
@@ -47,11 +47,11 @@ const Hero: React.FC = () => {
 
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 bg-dark-gray rounded-lg p-4 space-y-4">
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Home</a>
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Pricing</a>
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Channel List</a>
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">FAQ</a>
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Contact Us</a>
+            <Link to="/" className={`block text-white hover:text-neon transition-colors duration-300 ${location.pathname === '/' ? 'text-neon' : ''}`}>Home</Link>
+            <a href="#pricing" className="block text-white hover:text-neon transition-colors duration-300">Pricing</a>
+            <a href="#channels" className="block text-white hover:text-neon transition-colors duration-300">Channel List</a>
+            <a href="#faq" className="block text-white hover:text-neon transition-colors duration-300">FAQ</a>
+            <Link to="/contact" className={`block text-white hover:text-neon transition-colors duration-300 ${location.pathname === '/contact' ? 'text-neon' : ''}`}>Contact Us</Link>
             <Button className="w-full bg-[#F97316] text-white hover:bg-[#F97316]/90 shadow-lg shadow-[#F97316]/30 font-bold">
               Free Trial
             </Button>
