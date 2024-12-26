@@ -3,12 +3,20 @@ import { Button } from "@/components/ui/button";
 import { BlurImage } from "./ui/blur-image";
 import { Menu, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { BuyerInfoDialog } from "./BuyerInfoDialog";
 
 const Hero: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+  const [selectedPlan, setSelectedPlan] = React.useState("");
   
   const handleWhatsAppClick = () => {
     window.open('https://wa.me/message/R5IYJF3GG635D1', '_blank');
+  };
+
+  const handleTrialClick = () => {
+    setSelectedPlan("Free Trial");
+    setIsDialogOpen(true);
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -133,6 +141,7 @@ const Hero: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
+                onClick={handleTrialClick}
                 className="bg-[#F97316] text-white hover:bg-[#F97316]/90 text-base md:text-lg px-6 md:px-8 py-4 md:py-6 font-bold shadow-lg shadow-[#F97316]/30 transform hover:scale-105 transition-all duration-300 animate-pulse w-full sm:w-auto"
               >
                 Start Free Trial Now
@@ -187,6 +196,12 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.15)_0%,transparent_70%)]"></div>
       </div>
+
+      <BuyerInfoDialog 
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+        selectedPlan={selectedPlan}
+      />
     </div>
   );
 };
