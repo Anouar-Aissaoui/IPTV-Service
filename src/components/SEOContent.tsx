@@ -95,8 +95,8 @@ export const SEOContent = () => {
     }
   }, [location.pathname, isPreviewDomain, pseoData]);
 
-  const seoTitle = pseoData?.title || "Premium IPTV Service Provider | Best IPTV Subscription 2024";
-  const seoDescription = pseoData?.description || "Experience the ultimate IPTV service with 40,000+ live channels & 54,000+ VOD content. Premium IPTV subscription with 4K quality, instant activation & 24/7 support. Try now!";
+  const seoTitle = pseoData?.title || "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide";
+  const seoDescription = pseoData?.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 24K+ channels. Subscribe now!";
   const seoKeywordsList = pseoData?.keywords || seoKeywords;
   const seoH1 = pseoData?.h1 || "Premium IPTV Service Provider";
   const content = pseoData?.content || {} as PSEOContent;
