@@ -58,7 +58,7 @@ export const getStructuredData = () => ({
         "width": 480,
         "height": 320
       },
-      "datePublished": "2024-03-19T00:00:00+00:00",
+      "datePublished": "2025-03-19T00:00:00+00:00",
       "dateModified": new Date().toISOString(),
       "description": "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40,000+ channels and 54,000+ VOD content. Subscribe now!",
       "breadcrumb": {
@@ -149,7 +149,7 @@ export const getStructuredData = () => ({
           "@type": "Person",
           "name": "John Smith"
         },
-        "datePublished": "2024-03-19",
+        "datePublished": "2025-03-19",
         "reviewBody": "Excellent IPTV service with amazing channel selection and quality. The 4K streams are fantastic!"
       }
     },
