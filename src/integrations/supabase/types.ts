@@ -156,6 +156,65 @@ export type Database = {
         }
         Relationships: []
       }
+      pseo_variations: {
+        Row: {
+          content: Json
+          created_at: string
+          description: string
+          h1: string
+          id: string
+          is_indexed: boolean
+          keywords: string[]
+          meta_tags: Json
+          priority: number
+          slug: string
+          structured_data: Json
+          template_id: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content?: Json
+          created_at?: string
+          description: string
+          h1: string
+          id?: string
+          is_indexed?: boolean
+          keywords?: string[]
+          meta_tags?: Json
+          priority?: number
+          slug: string
+          structured_data?: Json
+          template_id?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          description?: string
+          h1?: string
+          id?: string
+          is_indexed?: boolean
+          keywords?: string[]
+          meta_tags?: Json
+          priority?: number
+          slug?: string
+          structured_data?: Json
+          template_id?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pseo_variations_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "seo_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       seo_metrics: {
         Row: {
           canonical_url: string
