@@ -8,15 +8,28 @@ import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 
+// Define the shape of our content object
+interface PSEOContent {
+  main_content?: string;
+  features?: string[];
+}
+
+interface PSEOVariation {
+  title: string;
+  description: string;
+  h1: string;
+  keywords: string[];
+  content: PSEOContent;
+}
+
 export const SEOContent = () => {
   const location = useLocation();
   const isPreviewDomain = window.location.hostname.includes('preview--clone-landing-tech.lovable.app');
   
-  // Fetch pSEO variation based on current route
-  const { data: pseoData } = useQuery({
+  const { data: pseoData } = useQuery<PSEOVariation | null>({
     queryKey: ['pseo', location.pathname],
     queryFn: async () => {
-      const slug = location.pathname.slice(1) || 'best-iptv-service-usa'; // Default slug for homepage
+      const slug = location.pathname.slice(1) || 'best-iptv-service-usa';
       const { data, error } = await supabase
         .from('pseo_variations')
         .select('*')
@@ -59,7 +72,7 @@ export const SEOContent = () => {
   const seoDescription = pseoData?.description || "Experience the ultimate IPTV service with 40,000+ live channels & 54,000+ VOD content. Premium IPTV subscription with 4K quality, instant activation & 24/7 support. Try now!";
   const seoKeywordsList = pseoData?.keywords || seoKeywords;
   const seoH1 = pseoData?.h1 || "Premium IPTV Service Provider";
-  const content = pseoData?.content || {};
+  const content = pseoData?.content || {} as PSEOContent;
 
   return (
     <>
