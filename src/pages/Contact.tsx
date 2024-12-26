@@ -1,5 +1,4 @@
 import { ContactForm } from "@/components/ContactForm";
-import { SEOContent } from "@/components/SEOContent";
 
 const Contact = () => {
   return (
@@ -12,7 +11,6 @@ const Contact = () => {
           <ContactForm />
         </div>
       </div>
-      <SEOContent />
     </div>
   );
 };
