@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { BlurImage } from "./ui/blur-image";
-import { Menu, ChevronDown } from "lucide-react";
+import { Menu } from "lucide-react";
 
 const Hero: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -44,11 +44,6 @@ const Hero: React.FC = () => {
               </a>
             ))}
           </div>
-          
-          <Button className="hidden md:flex bg-[#F97316] text-white hover:bg-[#F97316]/90 shadow-lg shadow-[#F97316]/30 font-bold transform hover:scale-105 transition-all duration-300 px-6">
-            Free Trial
-            <ChevronDown className="ml-2 h-4 w-4" />
-          </Button>
         </div>
 
         {isMobileMenuOpen && (
@@ -62,10 +57,6 @@ const Hero: React.FC = () => {
                 {item}
               </a>
             ))}
-            <Button className="w-full bg-[#F97316] text-white hover:bg-[#F97316]/90 shadow-lg shadow-[#F97316]/30 font-bold mt-4">
-              Free Trial
-              <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
           </div>
         )}
       </nav>
