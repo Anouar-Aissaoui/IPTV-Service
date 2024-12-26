@@ -7,7 +7,7 @@ import { trackPageSEO, generateDynamicMetaTags } from '@/utils/seoUtils';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import type { PSEOVariation, SEOPageData } from '@/types/seo';
+import type { PSEOVariation, SEOPageData, PSEOContent } from '@/types/seo';
 
 export const SEOContent = () => {
   const location = useLocation();
