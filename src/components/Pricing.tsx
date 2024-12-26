@@ -83,7 +83,7 @@ export const Pricing: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Premium IPTV Subscription Plans & Pricing - Best IPTV Service 2025</title>
+        <title>Premium IPTV Subscription Plans & Pricing - Best IPTV Service 2024</title>
         <meta name="description" content="Choose from our flexible IPTV subscription plans starting at $14.99. Get access to 7000+ live channels, 40000+ VOD content in HD & 4K quality." />
         <meta name="keywords" content={keywords.join(', ')} />
         <link rel="canonical" href="https://www.iptvservice.site/pricing" />
