@@ -14,6 +14,24 @@ interface PSEOContent {
   features?: string[];
 }
 
+// Define the database response type
+interface PSEODatabaseRow {
+  id: string;
+  template_id: string | null;
+  slug: string;
+  title: string;
+  description: string;
+  h1: string;
+  content: Json;
+  keywords: string[];
+  meta_tags: Json;
+  structured_data: Json;
+  is_indexed: boolean;
+  priority: number;
+  created_at: string;
+  updated_at: string;
+}
+
 interface PSEOVariation {
   title: string;
   description: string;
@@ -41,7 +59,15 @@ export const SEOContent = () => {
         return null;
       }
       
-      return data;
+      // Transform the database row into our PSEOVariation type
+      const row = data as PSEODatabaseRow;
+      return {
+        title: row.title,
+        description: row.description,
+        h1: row.h1,
+        keywords: row.keywords,
+        content: row.content as PSEOContent
+      };
     }
   });
 
