@@ -13,7 +13,7 @@ const keywords = [
   'HD IPTV service',
   'streaming TV channels',
   'live TV streaming',
-  '4K IPTV service',
+  'USA IPTV service',
   'affordable IPTV subscription'
 ];
 
@@ -83,8 +83,8 @@ export const Pricing: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Premium IPTV Subscription Plans & Pricing - Best IPTV Service 2024</title>
-        <meta name="description" content="Choose from our flexible IPTV subscription plans starting at $14.99. Get access to 7000+ live channels, 40000+ VOD content in HD & 4K quality." />
+        <title>Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide</title>
+        <meta name="description" content="Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 24K+ channels. Subscribe now!" />
         <meta name="keywords" content={keywords.join(', ')} />
         <link rel="canonical" href="https://www.iptvservice.site/pricing" />
       </Helmet>

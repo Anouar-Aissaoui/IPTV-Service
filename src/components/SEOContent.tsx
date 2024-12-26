@@ -75,9 +75,9 @@ export const SEOContent = () => {
   useEffect(() => {
     if (!isPreviewDomain && pseoData) {
       const pageData = {
-        title: pseoData.title,
-        description: pseoData.description,
-        keywords: pseoData.keywords,
+        title: "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide",
+        description: "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 24K+ channels. Subscribe now!",
+        keywords: seoKeywords,
         imageUrl: "https://www.iptvservice.site/iptv-subscription.png"
       };
 
