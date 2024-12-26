@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import * as React from "react";
 import Index from "./pages/Index";
-import ChannelList from "./pages/ChannelList";
 
 // Create a client outside of the component
 const queryClient = new QueryClient({
@@ -27,9 +26,6 @@ const App = () => {
             <Sonner />
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/pricing" element={<Index />} />
-              <Route path="/channels" element={<ChannelList />} />
-              <Route path="/faq" element={<Index />} />
             </Routes>
           </BrowserRouter>
         </TooltipProvider>
