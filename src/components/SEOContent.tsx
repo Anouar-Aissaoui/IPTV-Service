@@ -7,6 +7,7 @@ import { trackPageSEO, generateDynamicMetaTags } from '@/utils/seoUtils';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
+import { Json } from '@/integrations/supabase/types';
 
 // Define the shape of our content object
 interface PSEOContent {
