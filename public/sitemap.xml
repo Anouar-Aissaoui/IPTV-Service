@@ -7,12 +7,12 @@
         xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
         xmlns:local="http://www.google.com/schemas/sitemap-local/1.0">
   <url>
-    <loc>https://iptvsubscription.news/</loc>
+    <loc>https://www.iptvservice.site/</loc>
     <lastmod>2024-03-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://iptvsubscription.news/iptv-subscription.png</image:loc>
+      <image:loc>https://www.iptvservice.site/iptv-subscription.png</image:loc>
       <image:title>Best IPTV Service Provider</image:title>
       <image:caption>Premium IPTV Subscription Service</image:caption>
     </image:image>

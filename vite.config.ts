@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => ({
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify({
-                sitemapUrl: 'https://iptvsubscription.news/sitemap.xml'
+                sitemapUrl: 'https://www.iptvservice.site/sitemap.xml'
               })
             });
             

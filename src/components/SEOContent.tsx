@@ -16,7 +16,7 @@ export const SEOContent = () => {
         title: "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide",
         description: "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40,000+ channels and 54,000+ VOD content. Subscribe now!",
         keywords: seoKeywords,
-        imageUrl: "https://iptvsubscription.news/iptv-subscription.png"
+        imageUrl: "https://www.iptvservice.site/iptv-subscription.png"
       };
 
       const { title, metaTags } = generateDynamicMetaTags(pageData);
@@ -26,7 +26,7 @@ export const SEOContent = () => {
         route: location.pathname,
         title: title,
         description: metaTags.description,
-        canonicalUrl: `https://iptvsubscription.news${location.pathname}`,
+        canonicalUrl: `https://www.iptvservice.site${location.pathname}`,
         metaTags: metaTags,
         structuredData: structuredData
       });
@@ -45,23 +45,22 @@ export const SEOContent = () => {
         )}
         <meta name="description" content="Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40,000+ channels and 54,000+ VOD content. Subscribe now!" />
         <meta name="keywords" content={seoKeywords.join(', ')} />
-        <link rel="canonical" href={`https://iptvsubscription.news${location.pathname}`} />
+        <link rel="canonical" href={`https://www.iptvservice.site${location.pathname}`} />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Best IPTV Service Provider | Premium Channels & VOD Content" />
         <meta property="og:description" content="Access 40,000+ channels and 54,000+ VOD content with our premium IPTV subscription. HD & 4K quality, multiple device support, and 24/7 customer service." />
-        <meta property="og:image" content="https://iptvsubscription.news/iptv-subscription.png" />
-        <meta property="og:url" content={`https://iptvsubscription.news${location.pathname}`} />
+        <meta property="og:image" content="https://www.iptvservice.site/iptv-subscription.png" />
+        <meta property="og:url" content={`https://www.iptvservice.site${location.pathname}`} />
         <meta property="og:site_name" content="Best IPTV Service Provider" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Best IPTV Service Provider | Premium Channels & VOD Content" />
         <meta name="twitter:description" content="Access 40,000+ channels and 54,000+ VOD content with our premium IPTV subscription. HD & 4K quality, multiple device support, and 24/7 customer service." />
-        <meta name="twitter:image" content="https://iptvsubscription.news/iptv-subscription.png" />
+        <meta name="twitter:image" content="https://www.iptvservice.site/iptv-subscription.png" />
         
-        {/* Additional SEO Meta Tags */}
         <meta name="author" content="Best IPTV Service Provider" />
         <meta name="geo.region" content="US" />
         <meta name="geo.placename" content="United States" />

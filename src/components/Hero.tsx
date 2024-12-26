@@ -12,12 +12,11 @@ const Hero: React.FC = () => {
 
   return (
     <div className="relative bg-dark">
-      {/* Navigation Bar */}
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="text-xl font-bold text-white">
             <a 
-              href="https://iptvsubscription.news/" 
+              href="https://www.iptvservice.site/" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="hover:text-[#F97316] transition-colors"
@@ -26,7 +25,6 @@ const Hero: React.FC = () => {
             </a>
           </div>
           
-          {/* Mobile Menu Button */}
           <button 
             className="md:hidden text-white"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -34,7 +32,6 @@ const Hero: React.FC = () => {
             <Menu className="h-6 w-6" />
           </button>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6 text-white">
             <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Home</a>
             <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Pricing</a>
@@ -48,7 +45,6 @@ const Hero: React.FC = () => {
           </Button>
         </div>
 
-        {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 bg-dark-gray rounded-lg p-4 space-y-4">
             <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Home</a>
@@ -63,7 +59,6 @@ const Hero: React.FC = () => {
         )}
       </nav>
 
-      {/* Hero Content */}
       <div className="container mx-auto px-4 py-8 md:py-12">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="lg:w-1/2 space-y-6">
@@ -77,13 +72,11 @@ const Hero: React.FC = () => {
               </span>
             </h2>
             
-            {/* Rest of the Hero content */}
             <p className="text-base md:text-lg lg:text-xl leading-relaxed text-gray-300">
               Experience breathtaking 4K visuals on any device, at any place, at any time. 
               Discover an expansive library with over <span className="text-[#F97316] font-semibold">40,000 channels</span> and more than <span className="text-[#F97316] font-semibold">54,000 VOD</span> options.
             </p>
             
-            {/* Devices Image */}
             <div className="relative w-full max-w-[280px] mx-auto lg:mx-0 animate-float">
               <div className="absolute -inset-1 bg-[#F97316]/20 rounded-lg blur-sm"></div>
               <BlurImage 
@@ -129,7 +122,6 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
           <div className="bg-dark border border-[#F97316]/20 p-4 md:p-6 rounded-xl hover:border-[#F97316] hover:scale-105 transition-all duration-300">
             <div className="text-2xl md:text-3xl font-bold text-white">+7K</div>
@@ -150,7 +142,6 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* Background Effect */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.15)_0%,transparent_70%)]"></div>
       </div>
