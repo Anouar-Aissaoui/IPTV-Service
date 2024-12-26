@@ -30,16 +30,27 @@
     <meta name="geo.position" content="37.09024;-95.712891" />
     <meta name="ICBM" content="37.09024, -95.712891" />
     <meta name="theme-color" content="#F97316" />
-    <link rel="preload" as="image" href="/devices.png" />
-    <link rel="preload" as="image" href="/iptv-subscription.png" />
+    
+    <!-- Resource Hints -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.gpteng.co" crossorigin />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+    <link rel="dns-prefetch" href="https://cdn.gpteng.co" />
+    
+    <!-- Preload Critical Assets -->
+    <link rel="preload" as="image" href="/devices.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="/iptv-subscription.png" fetchpriority="high" />
+    <link rel="preload" as="script" href="/src/main.tsx" />
+    <link rel="preload" as="script" href="https://cdn.gpteng.co/gptengineer.js" />
+    
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="alternate" hreflang="en" href="https://www.iptvservice.site" />
     <link rel="alternate" hreflang="x-default" href="https://www.iptvservice.site" />
   </head>
   <body>
     <div id="root"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-load-image/5.16.0/load-image.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-load-image/5.16.0/load-image.min.js" defer></script>
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
     <script>
