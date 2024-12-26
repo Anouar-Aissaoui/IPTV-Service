@@ -7,7 +7,7 @@ const Hero: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   
   const handleWhatsAppClick = () => {
-    window.open('https://wa.me/your_number_here', '_blank');
+    window.open('https://wa.me/message/R5IYJF3GG635D1', '_blank');
   };
 
   const scrollToSection = (sectionId: string) => {
