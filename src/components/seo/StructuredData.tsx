@@ -3,9 +3,9 @@ export const getStructuredData = () => ({
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://iptvsubscription.news/#organization",
+      "@id": "https://www.iptvservice.site/#organization",
       "name": "Best IPTV Service Provider",
-      "url": "https://iptvsubscription.news",
+      "url": "https://www.iptvservice.site",
       "logo": {
         "@type": "ImageObject",
         "url": "https://iptvsubscription.news/iptv-subscription.png",
@@ -23,16 +23,16 @@ export const getStructuredData = () => ({
         "@type": "ContactPoint",
         "contactType": "customer service",
         "availableLanguage": ["English", "Spanish", "French"],
-        "email": "support@iptvsubscription.news"
+        "email": "support@iptvservice.site"
       }
     },
     {
       "@type": "WebSite",
-      "@id": "https://iptvsubscription.news/#website",
-      "url": "https://iptvsubscription.news",
+      "@id": "https://www.iptvservice.site/#website",
+      "url": "https://www.iptvservice.site",
       "name": "Best IPTV Service Provider",
       "publisher": {
-        "@id": "https://iptvsubscription.news/#organization"
+        "@id": "https://www.iptvservice.site/#organization"
       },
       "potentialAction": {
         "@type": "SearchAction",
@@ -43,14 +43,14 @@ export const getStructuredData = () => ({
     },
     {
       "@type": "WebPage",
-      "@id": "https://iptvsubscription.news/#webpage",
-      "url": "https://iptvsubscription.news",
+      "@id": "https://www.iptvservice.site/#webpage",
+      "url": "https://www.iptvservice.site",
       "name": "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide",
       "isPartOf": {
-        "@id": "https://iptvsubscription.news/#website"
+        "@id": "https://www.iptvservice.site/#website"
       },
       "about": {
-        "@id": "https://iptvsubscription.news/#organization"
+        "@id": "https://www.iptvservice.site/#organization"
       },
       "primaryImageOfPage": {
         "@type": "ImageObject",
