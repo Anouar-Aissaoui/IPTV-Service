@@ -12,6 +12,13 @@
     <meta name="description" content="Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 24K+ channels. Subscribe now!" />
     <meta name="keywords" content="buy IPTV, IPTV service, best IPTV service, IPTV subscription, premium IPTV, HD IPTV service, streaming TV channels, live TV streaming, USA IPTV service, affordable IPTV subscription" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <script>
+      // Add noindex meta tag for preview domains
+      if (window.location.hostname.includes('preview--clone-landing-tech') || 
+          window.location.hostname.includes('lovable.app')) {
+        document.querySelector('meta[name="robots"]').content = 'noindex, nofollow';
+      }
+    </script>
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide" />
