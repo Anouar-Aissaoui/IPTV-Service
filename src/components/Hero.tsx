@@ -2,9 +2,12 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { BlurImage } from "./ui/blur-image";
 import { Menu } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Hero: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
   
   const handleWhatsAppClick = () => {
     window.open('https://wa.me/your_number_here', '_blank');
@@ -33,11 +36,21 @@ const Hero: React.FC = () => {
           </button>
 
           <div className="hidden md:flex items-center space-x-6 text-white">
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Home</a>
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Pricing</a>
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Channel List</a>
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">FAQ</a>
-            <a href="#" className="hover:text-neon transition-colors duration-300 hover:scale-105">Contact Us</a>
+            <a 
+              href="/" 
+              className={`hover:text-[#F97316] transition-colors duration-300 hover:scale-105 ${location.pathname === '/' ? 'text-[#F97316]' : ''}`}
+            >
+              Home
+            </a>
+            <a 
+              href="/pricing" 
+              className={`hover:text-[#F97316] transition-colors duration-300 hover:scale-105 ${location.pathname === '/pricing' ? 'text-[#F97316]' : ''}`}
+            >
+              Pricing
+            </a>
+            <a href="#" className="hover:text-[#F97316] transition-colors duration-300 hover:scale-105">Channel List</a>
+            <a href="#" className="hover:text-[#F97316] transition-colors duration-300 hover:scale-105">FAQ</a>
+            <a href="#" className="hover:text-[#F97316] transition-colors duration-300 hover:scale-105">Contact Us</a>
           </div>
           
           <Button className="hidden md:flex bg-[#F97316] text-white hover:bg-[#F97316]/90 shadow-lg shadow-[#F97316]/30 font-bold transform hover:scale-105 transition-all duration-300">
@@ -47,11 +60,21 @@ const Hero: React.FC = () => {
 
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 bg-dark-gray rounded-lg p-4 space-y-4">
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Home</a>
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Pricing</a>
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Channel List</a>
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">FAQ</a>
-            <a href="#" className="block text-white hover:text-neon transition-colors duration-300">Contact Us</a>
+            <a 
+              href="/" 
+              className={`block text-white hover:text-[#F97316] transition-colors duration-300 ${location.pathname === '/' ? 'text-[#F97316]' : ''}`}
+            >
+              Home
+            </a>
+            <a 
+              href="/pricing" 
+              className={`block text-white hover:text-[#F97316] transition-colors duration-300 ${location.pathname === '/pricing' ? 'text-[#F97316]' : ''}`}
+            >
+              Pricing
+            </a>
+            <a href="#" className="block text-white hover:text-[#F97316] transition-colors duration-300">Channel List</a>
+            <a href="#" className="block text-white hover:text-[#F97316] transition-colors duration-300">FAQ</a>
+            <a href="#" className="block text-white hover:text-[#F97316] transition-colors duration-300">Contact Us</a>
             <Button className="w-full bg-[#F97316] text-white hover:bg-[#F97316]/90 shadow-lg shadow-[#F97316]/30 font-bold">
               Free Trial
             </Button>
