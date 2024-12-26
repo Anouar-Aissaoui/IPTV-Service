@@ -1,8 +1,10 @@
 import { ContactForm } from "@/components/ContactForm";
+import Navigation from "@/components/Navigation";
 
 const Contact = () => {
   return (
     <div className="min-h-screen bg-dark text-white">
+      <Navigation />
       <div className="container mx-auto px-4 py-20">
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
           Contact <span className="text-neon">Us</span>

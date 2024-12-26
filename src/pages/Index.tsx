@@ -6,10 +6,12 @@ import { FAQ } from "@/components/FAQ";
 import { Contact } from "@/components/Contact";
 import { BrandCarousel } from "@/components/BrandCarousel";
 import { SEOContent } from "@/components/SEOContent";
+import Navigation from "@/components/Navigation";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-dark text-white">
+      <Navigation />
       <Hero />
       <BrandCarousel />
       <Pricing />
