@@ -147,7 +147,7 @@ export const SEOContent = () => {
             
             <section>
               <h2 className="text-3xl font-semibold mb-8 text-neon">
-                Elite IPTV Streaming Experience in 2024
+                Elite IPTV Streaming Experience in 2025
               </h2>
               
               <div itemProp="articleBody">
