@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
               rel="noopener noreferrer" 
               className="hover:text-[#F97316] transition-colors"
             >
-              IPTV Subscription
+              IPTV Service
             </a>
           </div>
           
