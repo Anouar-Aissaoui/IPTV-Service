@@ -158,48 +158,69 @@ export type Database = {
       }
       pseo_variations: {
         Row: {
+          alternate_urls: Json | null
           content: Json
           created_at: string
           description: string
           h1: string
           id: string
+          indexing_status: string | null
           is_indexed: boolean
           keywords: string[]
+          last_indexed: string | null
+          locale: string | null
           meta_tags: Json
+          page_type: string | null
           priority: number
+          schema_org: Json | null
           slug: string
+          social_tags: Json | null
           structured_data: Json
           template_id: string | null
           title: string
           updated_at: string
         }
         Insert: {
+          alternate_urls?: Json | null
           content?: Json
           created_at?: string
           description: string
           h1: string
           id?: string
+          indexing_status?: string | null
           is_indexed?: boolean
           keywords?: string[]
+          last_indexed?: string | null
+          locale?: string | null
           meta_tags?: Json
+          page_type?: string | null
           priority?: number
+          schema_org?: Json | null
           slug: string
+          social_tags?: Json | null
           structured_data?: Json
           template_id?: string | null
           title: string
           updated_at?: string
         }
         Update: {
+          alternate_urls?: Json | null
           content?: Json
           created_at?: string
           description?: string
           h1?: string
           id?: string
+          indexing_status?: string | null
           is_indexed?: boolean
           keywords?: string[]
+          last_indexed?: string | null
+          locale?: string | null
           meta_tags?: Json
+          page_type?: string | null
           priority?: number
+          schema_org?: Json | null
           slug?: string
+          social_tags?: Json | null
           structured_data?: Json
           template_id?: string | null
           title?: string

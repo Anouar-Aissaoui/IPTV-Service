@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { Json } from "@/integrations/supabase/types";
 
 export interface SEOMetrics {
   route: string;
@@ -7,6 +8,7 @@ export interface SEOMetrics {
   canonicalUrl: string;
   metaTags: Record<string, string>;
   structuredData: Record<string, any>;
+  socialTags?: Json;
 }
 
 export const trackPageSEO = async (metrics: SEOMetrics) => {
@@ -42,15 +44,19 @@ export const generateDynamicMetaTags = (pageData: {
   description: string;
   keywords: string[];
   imageUrl?: string;
+  locale?: string;
+  pageType?: string;
+  alternateUrls?: Record<string, string>;
 }) => {
-  const baseUrl = 'https://iptvsubscription.news';
+  const baseUrl = 'https://www.iptvservice.site';
   const currentUrl = window.location.pathname;
   
   return {
-    title: `${pageData.title} | Best IPTV Service Provider`,
+    title: pageData.title,
     metaTags: {
       description: pageData.description,
       keywords: pageData.keywords.join(', '),
+      'og:type': pageData.pageType || 'website',
       'og:title': pageData.title,
       'og:description': pageData.description,
       'og:url': `${baseUrl}${currentUrl}`,
@@ -58,6 +64,7 @@ export const generateDynamicMetaTags = (pageData: {
       'twitter:title': pageData.title,
       'twitter:description': pageData.description,
       'twitter:image': pageData.imageUrl || `${baseUrl}/iptv-subscription.png`,
+      'content-language': pageData.locale || 'en'
     }
   };
 };

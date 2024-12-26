@@ -9,28 +9,9 @@ import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Json } from '@/integrations/supabase/types';
 
-// Define the shape of our content object
 interface PSEOContent {
   main_content?: string;
   features?: string[];
-}
-
-// Define the database response type
-interface PSEODatabaseRow {
-  id: string;
-  template_id: string | null;
-  slug: string;
-  title: string;
-  description: string;
-  h1: string;
-  content: Json;
-  keywords: string[];
-  meta_tags: Json;
-  structured_data: Json;
-  is_indexed: boolean;
-  priority: number;
-  created_at: string;
-  updated_at: string;
 }
 
 interface PSEOVariation {
@@ -39,13 +20,18 @@ interface PSEOVariation {
   h1: string;
   keywords: string[];
   content: PSEOContent;
+  social_tags?: Json;
+  schema_org?: Json;
+  page_type?: string;
+  locale?: string;
+  alternate_urls?: Json;
 }
 
 export const SEOContent = () => {
   const location = useLocation();
   const isPreviewDomain = window.location.hostname.includes('preview--clone-landing-tech.lovable.app');
   
-  const { data: pseoData } = useQuery<PSEOVariation | null>({
+  const { data: pseoData } = useQuery({
     queryKey: ['pseo', location.pathname],
     queryFn: async () => {
       const slug = location.pathname.slice(1) || 'best-iptv-service-usa';
@@ -60,29 +46,24 @@ export const SEOContent = () => {
         return null;
       }
       
-      // Transform the database row into our PSEOVariation type
-      const row = data as PSEODatabaseRow;
-      return {
-        title: row.title,
-        description: row.description,
-        h1: row.h1,
-        keywords: row.keywords,
-        content: row.content as PSEOContent
-      };
+      return data as PSEOVariation;
     }
   });
 
   useEffect(() => {
     if (!isPreviewDomain && pseoData) {
       const pageData = {
-        title: "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide",
-        description: "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 24K+ channels. Subscribe now!",
-        keywords: seoKeywords,
-        imageUrl: "https://www.iptvservice.site/iptv-subscription.png"
+        title: pseoData.title || "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide",
+        description: pseoData.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 24K+ channels. Subscribe now!",
+        keywords: pseoData.keywords || seoKeywords,
+        imageUrl: "https://www.iptvservice.site/iptv-subscription.png",
+        locale: pseoData.locale || 'en',
+        pageType: pseoData.page_type || 'article',
+        alternateUrls: pseoData.alternate_urls || {}
       };
 
       const { title, metaTags } = generateDynamicMetaTags(pageData);
-      const structuredData = getStructuredData();
+      const structuredData = pseoData.schema_org || getStructuredData();
 
       trackPageSEO({
         route: location.pathname,
@@ -90,7 +71,8 @@ export const SEOContent = () => {
         description: metaTags.description,
         canonicalUrl: `https://www.iptvservice.site${location.pathname}`,
         metaTags: metaTags,
-        structuredData: structuredData
+        structuredData: structuredData,
+        socialTags: pseoData.social_tags || {}
       });
     }
   }, [location.pathname, isPreviewDomain, pseoData]);
@@ -100,11 +82,12 @@ export const SEOContent = () => {
   const seoKeywordsList = pseoData?.keywords || seoKeywords;
   const seoH1 = pseoData?.h1 || "Premium IPTV Service Provider";
   const content = pseoData?.content || {} as PSEOContent;
+  const alternateUrls = pseoData?.alternate_urls as Record<string, string> || {};
 
   return (
     <>
       <Helmet>
-        <html lang="en" />
+        <html lang={pseoData?.locale || "en"} />
         <title>{seoTitle}</title>
         {isPreviewDomain ? (
           <meta name="robots" content="noindex, nofollow" />
@@ -115,8 +98,13 @@ export const SEOContent = () => {
         <meta name="keywords" content={seoKeywordsList.join(', ')} />
         <link rel="canonical" href={`https://www.iptvservice.site${location.pathname}`} />
         
+        {/* Alternate language URLs */}
+        {Object.entries(alternateUrls).map(([lang, url]) => (
+          <link key={lang} rel="alternate" hrefLang={lang} href={url} />
+        ))}
+        
         {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content={pseoData?.page_type || "website"} />
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />
         <meta property="og:image" content="https://www.iptvservice.site/iptv-subscription.png" />
@@ -128,6 +116,11 @@ export const SEOContent = () => {
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />
         <meta name="twitter:image" content="https://www.iptvservice.site/iptv-subscription.png" />
+
+        {/* Schema.org structured data */}
+        <script type="application/ld+json">
+          {JSON.stringify(pseoData?.schema_org || getStructuredData())}
+        </script>
       </Helmet>
 
       <div className="bg-dark-gray py-24">
