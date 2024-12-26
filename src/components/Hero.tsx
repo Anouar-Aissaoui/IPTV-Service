@@ -10,6 +10,22 @@ const Hero: React.FC = () => {
     window.open('https://wa.me/your_number_here', '_blank');
   };
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsMobileMenuOpen(false);
+    }
+  };
+
+  const navItems = [
+    { name: "Home", action: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
+    { name: "Pricing", action: () => scrollToSection('pricing-section') },
+    { name: "Channel List", action: () => scrollToSection('channel-list') },
+    { name: "FAQ", action: () => scrollToSection('faq-section') },
+    { name: "Contact Us", action: () => scrollToSection('contact-section') }
+  ];
+
   return (
     <div className="relative bg-dark">
       <nav className="container mx-auto px-4 py-6 relative z-50">
@@ -33,30 +49,30 @@ const Hero: React.FC = () => {
           </button>
 
           <div className="hidden md:flex items-center space-x-8">
-            {["Home", "Pricing", "Channel List", "FAQ", "Contact Us"].map((item) => (
-              <a
-                key={item}
-                href="#"
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={item.action}
                 className="group relative text-white hover:text-[#F97316] transition-all duration-300 text-base font-medium flex items-center gap-1"
               >
-                {item}
+                {item.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F97316] transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              </button>
             ))}
           </div>
         </div>
 
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 mt-2 mx-4 bg-black/95 backdrop-blur-sm rounded-xl p-4 space-y-2 border border-[#F97316]/20 animate-in slide-in-from-top duration-300 shadow-xl">
-            {["Home", "Pricing", "Channel List", "FAQ", "Contact Us"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="flex items-center justify-between text-white hover:text-[#F97316] transition-all duration-300 text-lg font-medium py-3 px-4 rounded-lg hover:bg-white/5 group"
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={item.action}
+                className="flex items-center justify-between text-white hover:text-[#F97316] transition-all duration-300 text-lg font-medium py-3 px-4 rounded-lg hover:bg-white/5 group w-full"
               >
-                {item}
+                {item.name}
                 <ChevronRight className="h-4 w-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 text-[#F97316]" />
-              </a>
+              </button>
             ))}
           </div>
         )}

@@ -89,7 +89,7 @@ export const Pricing: React.FC = () => {
         <link rel="canonical" href="https://www.iptvservice.site/pricing" />
       </Helmet>
 
-      <div className="bg-dark py-20">
+      <div id="pricing-section" className="bg-dark py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
             Choose Your <span className="text-neon">IPTV Plan</span>
