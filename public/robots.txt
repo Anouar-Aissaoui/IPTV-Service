@@ -3,9 +3,20 @@ Allow: /
 Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
-Disallow: https://preview--clone-landing-tech.lovable.app/
+Disallow: /preview/
 
-# Crawl-delay: 10
-# Request-rate: 1/10
+# Optimize crawling rate
+Crawl-delay: 10
 
-Sitemap: https://iptvsubscription.news/sitemap.xml
+# Specify sitemap location
+Sitemap: https://www.iptvservice.site/sitemap.xml
+
+# Block specific bots (optional, uncomment if needed)
+# User-agent: GPTBot
+# Disallow: /
+
+# User-agent: ChatGPT-User
+# Disallow: /
+
+# Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content
+# Allow efficient crawling by removing tracking parameters
