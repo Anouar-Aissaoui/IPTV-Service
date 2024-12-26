@@ -1,5 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
-import { Json } from "@/integrations/supabase/types";
+import type { SEOPageData } from "@/types/seo";
 
 export interface SEOMetrics {
   route: string;
@@ -8,7 +8,7 @@ export interface SEOMetrics {
   canonicalUrl: string;
   metaTags: Record<string, string>;
   structuredData: Record<string, any>;
-  socialTags?: Json;
+  socialTags?: Record<string, any>;
 }
 
 export const trackPageSEO = async (metrics: SEOMetrics) => {
@@ -39,15 +39,7 @@ export const trackPageSEO = async (metrics: SEOMetrics) => {
   }
 };
 
-export const generateDynamicMetaTags = (pageData: {
-  title: string;
-  description: string;
-  keywords: string[];
-  imageUrl?: string;
-  locale?: string;
-  pageType?: string;
-  alternateUrls?: Record<string, string>;
-}) => {
+export const generateDynamicMetaTags = (pageData: SEOPageData) => {
   const baseUrl = 'https://www.iptvservice.site';
   const currentUrl = window.location.pathname;
   

@@ -7,25 +7,7 @@ import { trackPageSEO, generateDynamicMetaTags } from '@/utils/seoUtils';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { Json } from '@/integrations/supabase/types';
-
-interface PSEOContent {
-  main_content?: string;
-  features?: string[];
-}
-
-interface PSEOVariation {
-  title: string;
-  description: string;
-  h1: string;
-  keywords: string[];
-  content: PSEOContent;
-  social_tags?: Json;
-  schema_org?: Json;
-  page_type?: string;
-  locale?: string;
-  alternate_urls?: Json;
-}
+import type { PSEOVariation, SEOPageData } from '@/types/seo';
 
 export const SEOContent = () => {
   const location = useLocation();
@@ -52,14 +34,14 @@ export const SEOContent = () => {
 
   useEffect(() => {
     if (!isPreviewDomain && pseoData) {
-      const pageData = {
+      const pageData: SEOPageData = {
         title: pseoData.title || "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide",
         description: pseoData.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 24K+ channels. Subscribe now!",
         keywords: pseoData.keywords || seoKeywords,
         imageUrl: "https://www.iptvservice.site/iptv-subscription.png",
         locale: pseoData.locale || 'en',
         pageType: pseoData.page_type || 'article',
-        alternateUrls: pseoData.alternate_urls || {}
+        alternateUrls: pseoData.alternate_urls as Record<string, string> || {}
       };
 
       const { title, metaTags } = generateDynamicMetaTags(pageData);
