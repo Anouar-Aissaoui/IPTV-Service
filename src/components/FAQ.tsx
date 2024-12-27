@@ -35,22 +35,35 @@ export const FAQ = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           Frequently Asked <span className="text-neon">Questions</span>
         </h2>
-        <Accordion type="single" collapsible className="space-y-4">
-          {faqs.map((faq, index) => (
-            <AccordionItem
-              key={index}
-              value={`item-${index}`}
-              className="bg-dark border border-neon/20 rounded-lg px-6 hover:border-neon/40 transition-colors duration-300"
-            >
-              <AccordionTrigger className="text-left text-white hover:text-neon">
-                {faq.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-gray-400">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <div itemScope itemType="https://schema.org/FAQPage">
+          <Accordion type="single" collapsible className="space-y-4">
+            {faqs.map((faq, index) => (
+              <AccordionItem
+                key={index}
+                value={`item-${index}`}
+                className="bg-dark border border-neon/20 rounded-lg px-6 hover:border-neon/40 transition-colors duration-300"
+                itemScope
+                itemProp="mainEntity"
+                itemType="https://schema.org/Question"
+              >
+                <AccordionTrigger 
+                  className="text-left text-white hover:text-neon"
+                  itemProp="name"
+                >
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent 
+                  className="text-gray-400"
+                  itemScope
+                  itemProp="acceptedAnswer"
+                  itemType="https://schema.org/Answer"
+                >
+                  <div itemProp="text">{faq.answer}</div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </div>
     </div>
   );
