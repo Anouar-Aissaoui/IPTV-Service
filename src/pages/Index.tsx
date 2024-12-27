@@ -5,6 +5,7 @@ import { LiveSports } from "@/components/LiveSports";
 import { FAQ } from "@/components/FAQ";
 import { Contact } from "@/components/Contact";
 import { BrandCarousel } from "@/components/BrandCarousel";
+import { SEOContent } from "@/components/SEOContent";
 
 const Index = () => {
   return (
@@ -16,6 +17,7 @@ const Index = () => {
       <LiveSports />
       <FAQ />
       <Contact />
+      <SEOContent />
     </div>
   );
 };

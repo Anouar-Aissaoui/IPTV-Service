@@ -97,7 +97,44 @@ export const SEOContent = () => {
 
         {/* Schema.org structured data */}
         <script type="application/ld+json">
-          {JSON.stringify(getStructuredData())}
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Premium IPTV Service Provider",
+            "url": "https://www.iptvservice.site",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://www.iptvservice.site/search?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "Premium IPTV Subscription",
+            "description": "Access to 40,000+ live channels and 54,000+ VOD content with HD and 4K quality",
+            "brand": {
+              "@type": "Brand",
+              "name": "Best IPTV Service Provider"
+            },
+            "offers": {
+              "@type": "AggregateOffer",
+              "priceCurrency": "USD",
+              "lowPrice": "14.99",
+              "highPrice": "59.99",
+              "offerCount": "4",
+              "availability": "https://schema.org/InStock"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.8",
+              "reviewCount": "7520",
+              "bestRating": "5",
+              "worstRating": "1"
+            }
+          })}
         </script>
       </Helmet>
 
