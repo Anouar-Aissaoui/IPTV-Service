@@ -8,7 +8,7 @@ export const getStructuredData = () => ({
       "url": "https://www.iptvservice.site",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://iptvsubscription.news/iptv-subscription.png",
+        "url": "https://www.iptvservice.site/iptv-subscription.png",
         "width": 480,
         "height": 320,
         "caption": "Premium IPTV Service Provider Logo"
@@ -36,51 +36,23 @@ export const getStructuredData = () => ({
       },
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://iptvsubscription.news/search?q={search_term_string}",
+        "target": "https://www.iptvservice.site/search?q={search_term_string}",
         "query-input": "required name=search_term_string"
       },
       "inLanguage": "en-US"
     },
     {
-      "@type": "WebPage",
-      "@id": "https://www.iptvservice.site/#webpage",
-      "url": "https://www.iptvservice.site",
-      "name": "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide",
-      "isPartOf": {
-        "@id": "https://www.iptvservice.site/#website"
-      },
-      "about": {
-        "@id": "https://www.iptvservice.site/#organization"
-      },
-      "primaryImageOfPage": {
-        "@type": "ImageObject",
-        "url": "https://iptvsubscription.news/iptv-subscription.png",
-        "width": 480,
-        "height": 320
-      },
-      "datePublished": "2024-03-19T00:00:00+00:00",
-      "dateModified": new Date().toISOString(),
-      "description": "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40,000+ channels and 54,000+ VOD content. Subscribe now!",
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "item": {
-              "@id": "https://iptvsubscription.news",
-              "name": "Home"
-            }
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@id": "https://www.iptvservice.site",
+            "name": "Home"
           }
-        ]
-      },
-      "speakable": {
-        "@type": "SpeakableSpecification",
-        "xpath": [
-          "/html/head/title",
-          "/html/head/meta[@name='description']/@content"
-        ]
-      }
+        }
+      ]
     },
     {
       "@type": "Product",
@@ -90,6 +62,11 @@ export const getStructuredData = () => ({
         "@type": "Brand",
         "name": "Best IPTV Service Provider"
       },
+      "sku": "IPTV-PREMIUM",
+      "mpn": "IPTV2024",
+      "image": [
+        "https://www.iptvservice.site/iptv-subscription.png"
+      ],
       "offers": {
         "@type": "AggregateOffer",
         "priceCurrency": "USD",
@@ -103,7 +80,8 @@ export const getStructuredData = () => ({
             "price": "14.99",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
-            "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]
+            "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
+            "itemCondition": "https://schema.org/NewCondition"
           },
           {
             "@type": "Offer",
@@ -111,7 +89,8 @@ export const getStructuredData = () => ({
             "price": "34.99",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
-            "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]
+            "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
+            "itemCondition": "https://schema.org/NewCondition"
           },
           {
             "@type": "Offer",
@@ -119,7 +98,8 @@ export const getStructuredData = () => ({
             "price": "59.99",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
-            "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]
+            "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
+            "itemCondition": "https://schema.org/NewCondition"
           },
           {
             "@type": "Offer",
@@ -127,7 +107,8 @@ export const getStructuredData = () => ({
             "price": "99.99",
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
-            "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0]
+            "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
+            "itemCondition": "https://schema.org/NewCondition"
           }
         ]
       },
@@ -138,20 +119,36 @@ export const getStructuredData = () => ({
         "bestRating": "5",
         "worstRating": "1"
       },
-      "review": {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
+      "review": [
+        {
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "John Smith"
+          },
+          "datePublished": "2024-03-19",
+          "reviewBody": "Excellent IPTV service with amazing channel selection and quality. The 4K streams are fantastic!"
         },
-        "author": {
-          "@type": "Person",
-          "name": "John Smith"
-        },
-        "datePublished": "2024-03-19",
-        "reviewBody": "Excellent IPTV service with amazing channel selection and quality. The 4K streams are fantastic!"
-      }
+        {
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Sarah Johnson"
+          },
+          "datePublished": "2024-03-18",
+          "reviewBody": "Best IPTV service I've used. Great selection of international channels and very stable connection."
+        }
+      ]
     },
     {
       "@type": "FAQPage",
@@ -178,6 +175,14 @@ export const getStructuredData = () => ({
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Our comprehensive content library includes 40,000+ live channels, 54,000+ VOD content including latest movies and TV shows, premium sports channels, news networks, and international channels from various countries. All content is available in HD and 4K quality where applicable."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer a money-back guarantee?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we offer a 30-day money-back guarantee if you're not satisfied with our service. We want you to be completely confident in your subscription."
           }
         }
       ]

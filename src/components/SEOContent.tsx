@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { seoKeywords } from './seo/Keywords';
 import { getStructuredData } from './seo/StructuredData';
 import { ServiceFeatures } from './seo/ServiceFeatures';
+import { Breadcrumbs } from './seo/Breadcrumbs';
 import { trackPageSEO, generateDynamicMetaTags } from '@/utils/seoUtils';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -107,6 +108,7 @@ export const SEOContent = () => {
 
       <div className="bg-dark-gray py-24">
         <div className="container mx-auto px-4 max-w-4xl">
+          <Breadcrumbs />
           <article className="prose prose-invert max-w-none" itemScope itemType="https://schema.org/Article">
             <header>
               <h1 
