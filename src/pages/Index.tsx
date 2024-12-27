@@ -1,3 +1,4 @@
+import { BrowserRouter } from "react-router-dom";
 import Hero from "@/components/Hero";
 import { Pricing } from "@/components/Pricing";
 import Content from "@/components/Content";
@@ -10,14 +11,16 @@ import { SEOContent } from "@/components/SEOContent";
 const Index = () => {
   return (
     <div className="min-h-screen bg-dark text-white">
-      <Hero />
-      <BrandCarousel />
-      <Pricing />
-      <Content />
-      <LiveSports />
-      <FAQ />
-      <Contact />
-      <SEOContent />
+      <BrowserRouter>
+        <Hero />
+        <BrandCarousel />
+        <Pricing />
+        <Content />
+        <LiveSports />
+        <FAQ />
+        <Contact />
+        <SEOContent />
+      </BrowserRouter>
     </div>
   );
 };

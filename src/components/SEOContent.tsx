@@ -13,11 +13,12 @@ import type { PSEOVariation, SEOPageData, PSEOContent } from '@/types/seo';
 export const SEOContent = () => {
   const location = useLocation();
   const isPreviewDomain = window.location.hostname.includes('preview--clone-landing-tech.lovable.app');
+  const currentPath = location?.pathname || '/';
   
   const { data: pseoData } = useQuery({
-    queryKey: ['pseo', location.pathname],
+    queryKey: ['pseo', currentPath],
     queryFn: async () => {
-      const slug = location.pathname.slice(1) || 'best-iptv-service-usa';
+      const slug = currentPath.slice(1) || 'best-iptv-service-usa';
       const { data, error } = await supabase
         .from('pseo_variations')
         .select('*')
@@ -49,16 +50,16 @@ export const SEOContent = () => {
       const structuredData = pseoData.schema_org || getStructuredData();
 
       trackPageSEO({
-        route: location.pathname,
+        route: currentPath,
         title: title,
         description: metaTags.description,
-        canonicalUrl: `https://www.iptvservice.site${location.pathname}`,
+        canonicalUrl: `https://www.iptvservice.site${currentPath}`,
         metaTags: metaTags,
         structuredData: structuredData,
         socialTags: pseoData.social_tags || {}
       });
     }
-  }, [location.pathname, isPreviewDomain, pseoData]);
+  }, [currentPath, isPreviewDomain, pseoData]);
 
   const seoTitle = pseoData?.title || "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide";
   const seoDescription = pseoData?.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 24K+ channels. Subscribe now!";
@@ -79,7 +80,7 @@ export const SEOContent = () => {
         )}
         <meta name="description" content={seoDescription} />
         <meta name="keywords" content={seoKeywordsList.join(', ')} />
-        <link rel="canonical" href={`https://www.iptvservice.site${location.pathname}`} />
+        <link rel="canonical" href={`https://www.iptvservice.site${currentPath}`} />
         
         {/* Alternate language URLs */}
         {Object.entries(alternateUrls).map(([lang, url]) => (
@@ -91,7 +92,7 @@ export const SEOContent = () => {
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />
         <meta property="og:image" content="https://www.iptvservice.site/iptv-subscription.png" />
-        <meta property="og:url" content={`https://www.iptvservice.site${location.pathname}`} />
+        <meta property="og:url" content={`https://www.iptvservice.site${currentPath}`} />
         <meta property="og:site_name" content="Premium IPTV Service Provider" />
         
         {/* Twitter */}
