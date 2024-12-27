@@ -38,11 +38,11 @@ export const SEOContent = () => {
     if (!isPreviewDomain && pseoData) {
       const pageData: SEOPageData = {
         title: pseoData.title || "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide",
-        description: pseoData.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 24K+ channels. Subscribe now!",
+        description: pseoData.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40K+ channels and 54K+ VOD content. Subscribe now!",
         keywords: pseoData.keywords || seoKeywords,
         imageUrl: "https://www.iptvservice.site/iptv-subscription.png",
         locale: pseoData.locale || 'en',
-        pageType: pseoData.page_type || 'article',
+        pageType: pseoData.page_type || 'website',
         alternateUrls: pseoData.alternate_urls as Record<string, string> || {}
       };
 
@@ -62,11 +62,10 @@ export const SEOContent = () => {
   }, [currentPath, isPreviewDomain, pseoData]);
 
   const seoTitle = pseoData?.title || "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide";
-  const seoDescription = pseoData?.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 24K+ channels. Subscribe now!";
+  const seoDescription = pseoData?.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40K+ channels and 54K+ VOD content. Subscribe now!";
   const seoKeywordsList = pseoData?.keywords || seoKeywords;
   const seoH1 = pseoData?.h1 || "Premium IPTV Service Provider";
   const content = pseoData?.content || {} as PSEOContent;
-  const alternateUrls = pseoData?.alternate_urls as Record<string, string> || {};
 
   return (
     <>
@@ -81,11 +80,6 @@ export const SEOContent = () => {
         <meta name="description" content={seoDescription} />
         <meta name="keywords" content={seoKeywordsList.join(', ')} />
         <link rel="canonical" href={`https://www.iptvservice.site${currentPath}`} />
-        
-        {/* Alternate language URLs */}
-        {Object.entries(alternateUrls).map(([lang, url]) => (
-          <link key={lang} rel="alternate" hrefLang={lang} href={url} />
-        ))}
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content={pseoData?.page_type || "website"} />
@@ -103,7 +97,44 @@ export const SEOContent = () => {
 
         {/* Schema.org structured data */}
         <script type="application/ld+json">
-          {JSON.stringify(pseoData?.schema_org || getStructuredData())}
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Premium IPTV Service Provider",
+            "url": "https://www.iptvservice.site",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://www.iptvservice.site/search?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "Premium IPTV Subscription",
+            "description": "Access to 40,000+ live channels and 54,000+ VOD content with HD and 4K quality",
+            "brand": {
+              "@type": "Brand",
+              "name": "Best IPTV Service Provider"
+            },
+            "offers": {
+              "@type": "AggregateOffer",
+              "priceCurrency": "USD",
+              "lowPrice": "14.99",
+              "highPrice": "59.99",
+              "offerCount": "4",
+              "availability": "https://schema.org/InStock"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.8",
+              "reviewCount": "7520",
+              "bestRating": "5",
+              "worstRating": "1"
+            }
+          })}
         </script>
       </Helmet>
 
@@ -119,34 +150,26 @@ export const SEOContent = () => {
                 {seoH1}
               </h1>
               
-              <meta itemProp="datePublished" content="2024-03-19" />
-              <meta itemProp="dateModified" content="2024-03-19" />
+              <meta itemProp="datePublished" content={new Date().toISOString().split('T')[0]} />
+              <meta itemProp="dateModified" content={new Date().toISOString().split('T')[0]} />
             </header>
             
             <section>
               <h2 className="text-3xl font-semibold mb-8 text-neon">
-                Elite IPTV Streaming Experience in 2025
+                Elite IPTV Streaming Experience in {new Date().getFullYear()}
               </h2>
               
               <div itemProp="articleBody">
                 <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-                  {content.main_content || `Elevate your entertainment with our premium IPTV subscription service. Gain unlimited access to an extensive library of 
-                  40,000+ live channels and 54,000+ VOD content in stunning 4K and HD quality. Our comprehensive IPTV service 
-                  delivers unmatched entertainment across all your devices, featuring premium sports channels, international content, and the 
-                  latest movies and TV shows.`}
+                  {content.main_content || `Experience premium entertainment with our comprehensive IPTV subscription service. 
+                  Access an extensive library of 40,000+ live channels and 54,000+ VOD content in stunning 4K and HD quality. 
+                  Our service delivers unmatched streaming across all your devices, featuring premium sports channels, 
+                  international content, and the latest movies and TV shows.`}
                 </p>
               </div>
             </section>
 
             <ServiceFeatures />
-
-            <div className="bg-gradient-to-r from-dark-gray to-dark p-8 rounded-xl border border-neon/20 hover:border-neon/40 transition-colors text-center mt-12">
-              <h3 className="text-2xl font-semibold mb-4 text-neon">Ready to Experience Premium IPTV?</h3>
-              <p className="text-gray-300 text-lg">
-                Join thousands of satisfied customers worldwide. Start your journey with our risk-free trial and discover why we're the 
-                leading IPTV service provider. Premium entertainment awaits!
-              </p>
-            </div>
           </article>
         </div>
       </div>
