@@ -37,8 +37,8 @@ export const SEOContent = () => {
   useEffect(() => {
     if (!isPreviewDomain && pseoData) {
       const pageData: SEOPageData = {
-        title: pseoData.title || "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide",
-        description: pseoData.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40K+ channels and 54K+ VOD content. Subscribe now!",
+        title: pseoData.title || "Best IPTV Service Provider 2024 | Premium IPTV Subscription USA & UK",
+        description: pseoData.description || "Access 40,000+ live channels & 54,000+ VOD content with our premium IPTV subscription. HD & 4K quality, instant activation, 24/7 support. Try risk-free today!",
         keywords: pseoData.keywords || seoKeywords,
         imageUrl: "https://www.iptvservice.site/iptv-subscription.png",
         locale: pseoData.locale || 'en',
@@ -61,81 +61,49 @@ export const SEOContent = () => {
     }
   }, [currentPath, isPreviewDomain, pseoData]);
 
-  const seoTitle = pseoData?.title || "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide";
-  const seoDescription = pseoData?.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40K+ channels and 54K+ VOD content. Subscribe now!";
-  const seoKeywordsList = pseoData?.keywords || seoKeywords;
-  const seoH1 = pseoData?.h1 || "Premium IPTV Service Provider";
-  const content = pseoData?.content || {} as PSEOContent;
-
   return (
     <>
       <Helmet>
         <html lang={pseoData?.locale || "en"} />
-        <title>{seoTitle}</title>
+        <title>Best IPTV Service Provider 2024 | Premium IPTV Subscription USA & UK</title>
         {isPreviewDomain ? (
           <meta name="robots" content="noindex, nofollow" />
         ) : (
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         )}
-        <meta name="description" content={seoDescription} />
-        <meta name="keywords" content={seoKeywordsList.join(', ')} />
+        <meta name="description" content="Access 40,000+ live channels & 54,000+ VOD content with our premium IPTV subscription. HD & 4K quality, instant activation, 24/7 support. Try risk-free today!" />
+        <meta name="keywords" content={seoKeywords.join(', ')} />
         <link rel="canonical" href={`https://www.iptvservice.site${currentPath}`} />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content={pseoData?.page_type || "website"} />
-        <meta property="og:title" content={seoTitle} />
-        <meta property="og:description" content={seoDescription} />
+        <meta property="og:title" content="Best IPTV Service Provider 2024 | Premium IPTV Subscription USA & UK" />
+        <meta property="og:description" content="Access 40,000+ live channels & 54,000+ VOD content with our premium IPTV subscription. HD & 4K quality, instant activation, 24/7 support." />
         <meta property="og:image" content="https://www.iptvservice.site/iptv-subscription.png" />
         <meta property="og:url" content={`https://www.iptvservice.site${currentPath}`} />
         <meta property="og:site_name" content="Premium IPTV Service Provider" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={seoTitle} />
-        <meta name="twitter:description" content={seoDescription} />
+        <meta name="twitter:title" content="Best IPTV Service Provider 2024 | Premium IPTV Subscription USA & UK" />
+        <meta name="twitter:description" content="Access 40,000+ live channels & 54,000+ VOD content with our premium IPTV subscription. HD & 4K quality, instant activation, 24/7 support." />
         <meta name="twitter:image" content="https://www.iptvservice.site/iptv-subscription.png" />
 
-        {/* Schema.org structured data */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "Premium IPTV Service Provider",
-            "url": "https://www.iptvservice.site",
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": "https://www.iptvservice.site/search?q={search_term_string}",
-              "query-input": "required name=search_term_string"
-            }
-          })}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Product",
-            "name": "Premium IPTV Subscription",
-            "description": "Access to 40,000+ live channels and 54,000+ VOD content with HD and 4K quality",
-            "brand": {
-              "@type": "Brand",
-              "name": "Best IPTV Service Provider"
-            },
-            "offers": {
-              "@type": "AggregateOffer",
-              "priceCurrency": "USD",
-              "lowPrice": "14.99",
-              "highPrice": "59.99",
-              "offerCount": "4",
-              "availability": "https://schema.org/InStock"
-            },
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "4.8",
-              "reviewCount": "7520",
-              "bestRating": "5",
-              "worstRating": "1"
-            }
-          })}
-        </script>
+        {/* Geo Targeting */}
+        <meta name="geo.region" content="US" />
+        <meta name="geo.placename" content="United States" />
+        <meta name="geo.position" content="37.09024;-95.712891" />
+        <meta name="ICBM" content="37.09024, -95.712891" />
+
+        {/* Additional Meta Tags */}
+        <meta name="author" content="Premium IPTV Service Provider" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+        <meta name="theme-color" content="#F97316" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="application-name" content="Premium IPTV Service" />
+        <meta name="apple-mobile-web-app-title" content="Premium IPTV Service" />
+        <meta name="msapplication-TileColor" content="#F97316" />
       </Helmet>
 
       <div className="bg-dark-gray py-24">
@@ -147,7 +115,7 @@ export const SEOContent = () => {
                 className="text-5xl font-bold mb-10 text-white bg-gradient-to-r from-neon to-white bg-clip-text text-transparent"
                 itemProp="headline"
               >
-                {seoH1}
+                Premium IPTV Service Provider | Best Streaming Experience
               </h1>
               
               <meta itemProp="datePublished" content={new Date().toISOString().split('T')[0]} />
@@ -161,10 +129,10 @@ export const SEOContent = () => {
               
               <div itemProp="articleBody">
                 <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-                  {content.main_content || `Experience premium entertainment with our comprehensive IPTV subscription service. 
+                  Experience premium entertainment with our comprehensive IPTV subscription service. 
                   Access an extensive library of 40,000+ live channels and 54,000+ VOD content in stunning 4K and HD quality. 
                   Our service delivers unmatched streaming across all your devices, featuring premium sports channels, 
-                  international content, and the latest movies and TV shows.`}
+                  international content, and the latest movies and TV shows.
                 </p>
               </div>
             </section>
