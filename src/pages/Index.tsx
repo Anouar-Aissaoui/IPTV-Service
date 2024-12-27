@@ -10,6 +10,7 @@ import { SEOContent } from "@/components/SEOContent";
 const Index = () => {
   return (
     <div className="min-h-screen bg-dark text-white">
+      <SEOContent />
       <Hero />
       <BrandCarousel />
       <Pricing />
@@ -17,7 +18,6 @@ const Index = () => {
       <LiveSports />
       <FAQ />
       <Contact />
-      <SEOContent />
     </div>
   );
 };
