@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import { SEOContent } from "@/components/SEOContent";
 
 // Create a client
 const queryClient = new QueryClient({
@@ -22,6 +23,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <BrowserRouter>
+          <SEOContent />
           <Toaster />
           <Sonner />
           <Routes>
