@@ -42,8 +42,8 @@ export const FAQ = () => {
                 key={index}
                 value={`item-${index}`}
                 className="bg-dark border border-neon/20 rounded-lg px-6 hover:border-neon/40 transition-colors duration-300"
-                itemProp="mainEntity"
                 itemScope
+                itemProp="mainEntity"
                 itemType="https://schema.org/Question"
               >
                 <AccordionTrigger 
