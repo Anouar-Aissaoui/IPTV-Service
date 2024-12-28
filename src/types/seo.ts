@@ -14,6 +14,10 @@ export interface PSEOVariation {
   page_type?: string;
   locale?: string;
   alternate_urls?: Record<string, string>;
+  target_location?: string;
+  target_service_type?: string;
+  target_features?: string[];
+  target_audience?: string[];
 }
 
 export interface SEOPageData {
