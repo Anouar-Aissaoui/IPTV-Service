@@ -176,6 +176,10 @@ export type Database = {
           slug: string
           social_tags: Json | null
           structured_data: Json
+          target_audience: string[] | null
+          target_features: string[] | null
+          target_location: string | null
+          target_service_type: string | null
           template_id: string | null
           title: string
           updated_at: string
@@ -199,6 +203,10 @@ export type Database = {
           slug: string
           social_tags?: Json | null
           structured_data?: Json
+          target_audience?: string[] | null
+          target_features?: string[] | null
+          target_location?: string | null
+          target_service_type?: string | null
           template_id?: string | null
           title: string
           updated_at?: string
@@ -222,6 +230,10 @@ export type Database = {
           slug?: string
           social_tags?: Json | null
           structured_data?: Json
+          target_audience?: string[] | null
+          target_features?: string[] | null
+          target_location?: string | null
+          target_service_type?: string | null
           template_id?: string | null
           title?: string
           updated_at?: string

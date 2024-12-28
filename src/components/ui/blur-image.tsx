@@ -1,65 +1,28 @@
 import * as React from "react";
+import { cn } from "@/lib/utils";
 
 interface BlurImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  sizes?: string;
+  src: string;
+  alt: string;
+  className?: string;
 }
 
 export const BlurImage = React.forwardRef<HTMLImageElement, BlurImageProps>(
-  ({ 
-    src, 
-    alt, 
-    className, 
-    sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
-    ...props 
-  }, ref) => {
+  ({ src, alt, className, ...props }, ref) => {
     const [isLoading, setIsLoading] = React.useState(true);
-    const [currentSrc, setCurrentSrc] = React.useState(src);
-
-    React.useEffect(() => {
-      const img = new Image();
-      img.src = src || "";
-      img.onload = () => {
-        setIsLoading(false);
-        setCurrentSrc(src);
-      };
-    }, [src]);
-
-    // Generate srcSet for responsive images
-    const generateSrcSet = () => {
-      if (!src) return "";
-      if (src.startsWith("data:") || src.startsWith("blob:")) return src;
-      
-      // For images from external sources that don't support dynamic resizing
-      if (!src.includes("images.unsplash.com")) return src;
-
-      // For Unsplash images, we can use their dynamic resizing
-      const sizes = [320, 640, 768, 1024, 1280, 1536];
-      return sizes
-        .map((size) => {
-          const imgSrc = src.includes("?")
-            ? `${src}&w=${size}`
-            : `${src}?w=${size}`;
-          return `${imgSrc} ${size}w`;
-        })
-        .join(", ");
-    };
 
     return (
-      <div className="relative w-full h-full">
-        {isLoading && (
-          <div className="absolute inset-0 bg-gray-200 animate-pulse" />
-        )}
+      <div className={cn("overflow-hidden relative", className)}>
         <img
           ref={ref}
-          src={currentSrc}
+          src={src}
           alt={alt}
-          className={`${className} ${
-            isLoading ? "opacity-0" : "opacity-100"
-          } transition-opacity duration-500 ease-in-out`}
           loading="lazy"
-          decoding="async"
-          sizes={sizes}
-          srcSet={generateSrcSet()}
+          className={cn(
+            "duration-700 ease-in-out",
+            isLoading ? "scale-110 blur-2xl" : "scale-100 blur-0"
+          )}
+          onLoad={() => setIsLoading(false)}
           {...props}
         />
       </div>
