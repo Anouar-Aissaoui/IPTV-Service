@@ -25,22 +25,19 @@ export const BlurImage: React.FC<BlurImageProps> = ({
     };
   }, [src]);
 
-  // Generate srcSet for responsive images
+  // Generate srcSet for responsive images using Cloudflare
   const generateSrcSet = () => {
     if (!src) return "";
     if (src.startsWith("data:") || src.startsWith("blob:")) return src;
     
-    // For images from external sources that don't support dynamic resizing
-    if (!src.includes("images.unsplash.com")) return src;
-
-    // For Unsplash images, we can use their dynamic resizing
-    const sizes = [320, 640, 768, 1024, 1280, 1536];
-    return sizes
-      .map((size) => {
-        const imgSrc = src.includes("?")
-          ? `${src}&w=${size}`
-          : `${src}?w=${size}`;
-        return `${imgSrc} ${size}w`;
+    // Define widths for responsive images
+    const widths = [320, 640, 768, 1024, 1280, 1536];
+    
+    return widths
+      .map((w) => {
+        // Construct Cloudflare transformed URL
+        const transformedUrl = `${src}/cdn-cgi/image/width=${w},quality=80,format=auto`;
+        return `${transformedUrl} ${w}w`;
       })
       .join(", ");
   };
@@ -51,7 +48,7 @@ export const BlurImage: React.FC<BlurImageProps> = ({
         <div className="absolute inset-0 bg-gray-200 animate-pulse" />
       )}
       <img
-        src={currentSrc}
+        src={`${currentSrc}/cdn-cgi/image/quality=80,format=auto`}
         alt={alt}
         className={`${className} ${
           isLoading ? "opacity-0" : "opacity-100"
