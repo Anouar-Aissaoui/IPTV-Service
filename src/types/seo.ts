@@ -9,6 +9,7 @@ export interface PSEOVariation {
   h1: string;
   keywords: string[];
   content: PSEOContent;
+  meta_tags: Record<string, any>;
   social_tags?: Record<string, any>;
   schema_org?: Record<string, any>;
   page_type?: string;
