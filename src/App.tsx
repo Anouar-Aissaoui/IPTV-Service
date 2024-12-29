@@ -34,22 +34,28 @@ const LanguageWrapper = ({ language }: { language: string }) => {
   );
 };
 
+const AppContent = () => {
+  return (
+    <BrowserRouter>
+      <Toaster />
+      <Sonner />
+      <Routes>
+        <Route path="/" element={<Navigate to="/en" replace />} />
+        <Route path="/en/*" element={<LanguageWrapper language="en" />} />
+        <Route path="/es/*" element={<LanguageWrapper language="es" />} />
+        <Route path="/de/*" element={<LanguageWrapper language="de" />} />
+        <Route path="/fr/*" element={<LanguageWrapper language="fr" />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <BrowserRouter>
-          <Toaster />
-          <Sonner />
-          <Routes>
-            <Route path="/" element={<Navigate to="/en" replace />} />
-            <Route path="/en/*" element={<LanguageWrapper language="en" />} />
-            <Route path="/es/*" element={<LanguageWrapper language="es" />} />
-            <Route path="/de/*" element={<LanguageWrapper language="de" />} />
-            <Route path="/fr/*" element={<LanguageWrapper language="fr" />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <AppContent />
       </TooltipProvider>
     </QueryClientProvider>
   );
