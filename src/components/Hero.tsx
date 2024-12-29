@@ -38,7 +38,7 @@ const Hero: React.FC = () => {
             </h2>
             
             <p className="text-base md:text-lg lg:text-xl leading-relaxed text-gray-300">
-              {t('hero.subtitle')} {t('hero.description')}
+              Welcome to the future of television streaming with our premium IPTV service. As the leading IPTV service provider in the USA, we offer an unparalleled streaming experience with over 40,000 live TV channels and premium content in stunning HD quality. Whether you're looking to buy IPTV for entertainment, sports, or international content, our affordable IPTV subscription packages cater to all your streaming needs.
             </p>
             
             <div className="relative w-full max-w-[280px] mx-auto lg:mx-0 animate-float">
