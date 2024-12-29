@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Helmet } from "react-helmet";
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -15,11 +15,26 @@ export const SEOContent = () => {
   const location = useLocation();
   const isPreviewDomain = window.location.hostname.includes('preview--clone-landing-tech.lovable.app');
   const currentPath = location?.pathname || '/';
+  const locale = currentPath.split('/')[1] || 'en';
   
   const { data: pseoData } = useQuery({
-    queryKey: ['pseo', currentPath],
+    queryKey: ['pseo', locale],
     queryFn: async () => {
-      const slug = currentPath.slice(1) || 'best-iptv-service-usa';
+      let slug;
+      switch(locale) {
+        case 'es':
+          slug = 'mejor-servicio-iptv-espana';
+          break;
+        case 'de':
+          slug = 'bester-iptv-dienst-deutschland';
+          break;
+        case 'fr':
+          slug = 'meilleur-service-iptv-france';
+          break;
+        default:
+          slug = 'best-iptv-service-usa';
+      }
+
       const { data, error } = await supabase
         .from('pseo_variations')
         .select('*')
@@ -35,75 +50,43 @@ export const SEOContent = () => {
     }
   });
 
+  const defaultTitle = "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide";
+  const defaultDescription = "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 24K+ channels. Subscribe now!";
+
   return (
     <>
       <Helmet>
-        <html lang={pseoData?.locale || "en"} />
-        <title>{pseoData?.title || "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide"}</title>
+        <html lang={locale} />
+        <title>{pseoData?.title || defaultTitle}</title>
         {isPreviewDomain ? (
           <meta name="robots" content="noindex, nofollow" />
         ) : (
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         )}
-        <meta name="description" content={pseoData?.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40K+ channels and 54K+ VOD content. Subscribe now!"} />
-        <meta name="keywords" content={pseoData?.keywords.join(', ') || "buy IPTV, IPTV service, best IPTV service, IPTV subscription, premium IPTV, HD IPTV service, streaming TV channels, live TV streaming, USA IPTV service, affordable IPTV subscription"} />
+        <meta name="description" content={pseoData?.description || defaultDescription} />
+        <meta name="keywords" content={pseoData?.keywords.join(', ')} />
         <link rel="canonical" href={`https://www.iptvservice.site${currentPath}`} />
+        
+        {/* Alternate language links */}
+        <link rel="alternate" hrefLang="en" href="https://www.iptvservice.site/en" />
+        <link rel="alternate" hrefLang="es" href="https://www.iptvservice.site/es" />
+        <link rel="alternate" hrefLang="de" href="https://www.iptvservice.site/de" />
+        <link rel="alternate" hrefLang="fr" href="https://www.iptvservice.site/fr" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.iptvservice.site" />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content={pseoData?.page_type || "website"} />
-        <meta property="og:title" content={pseoData?.title || "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide"} />
-        <meta property="og:description" content={pseoData?.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40K+ channels and 54K+ VOD content. Subscribe now!"} />
+        <meta property="og:title" content={pseoData?.title || defaultTitle} />
+        <meta property="og:description" content={pseoData?.description || defaultDescription} />
         <meta property="og:image" content="https://www.iptvservice.site/iptv-subscription.png" />
         <meta property="og:url" content={`https://www.iptvservice.site${currentPath}`} />
         <meta property="og:site_name" content="Premium IPTV Service Provider" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={pseoData?.title || "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide"} />
-        <meta name="twitter:description" content={pseoData?.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40K+ channels and 54K+ VOD content. Subscribe now!"} />
+        <meta name="twitter:title" content={pseoData?.title || defaultTitle} />
+        <meta name="twitter:description" content={pseoData?.description || defaultDescription} />
         <meta name="twitter:image" content="https://www.iptvservice.site/iptv-subscription.png" />
-
-        {/* Schema.org structured data */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "Premium IPTV Service Provider",
-            "url": "https://www.iptvservice.site",
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": "https://www.iptvservice.site/search?q={search_term_string}",
-              "query-input": "required name=search_term_string"
-            }
-          })}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Product",
-            "name": "Premium IPTV Subscription",
-            "description": "Access to 40,000+ live channels and 54,000+ VOD content with HD and 4K quality",
-            "brand": {
-              "@type": "Brand",
-              "name": "Best IPTV Service Provider"
-            },
-            "offers": {
-              "@type": "AggregateOffer",
-              "priceCurrency": "USD",
-              "lowPrice": "14.99",
-              "highPrice": "59.99",
-              "offerCount": "4",
-              "availability": "https://schema.org/InStock"
-            },
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "4.8",
-              "reviewCount": "7520",
-              "bestRating": "5",
-              "worstRating": "1"
-            }
-          })}
-        </script>
       </Helmet>
 
       <div className="bg-dark-gray py-24">
@@ -115,7 +98,7 @@ export const SEOContent = () => {
                 className="text-5xl font-bold mb-10 text-white bg-gradient-to-r from-neon to-white bg-clip-text text-transparent"
                 itemProp="headline"
               >
-                Buy IPTV Subscription
+                {pseoData?.h1 || "Buy IPTV Subscription"}
               </h1>
               
               <meta itemProp="datePublished" content={new Date().toISOString().split('T')[0]} />
@@ -124,16 +107,10 @@ export const SEOContent = () => {
             
             <section>
               <h2 className="text-3xl font-semibold mb-8 text-neon">
-                Revolutionize Your Viewing Experience with IPTV
+                {pseoData?.content?.main_content || "Revolutionize Your Viewing Experience with IPTV"}
               </h2>
               
               <div itemProp="articleBody">
-                <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-                  Buy IPTV Subscription from the world's #1 provider and explore a world of entertainment. 
-                  Our IPTV service delivers 4K live streaming, global channels, popular shows, live sports, 
-                  movies, and documentaries — all in one package.
-                </p>
-
                 <IPTVDefinition />
                 <IPTVBenefits />
                 <IPTVExplanation />

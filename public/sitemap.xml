@@ -21,19 +21,61 @@
     </image:image>
   </url>
 
-  <!-- Contact Page -->
+  <!-- English Version -->
   <url>
-    <loc>https://www.iptvservice.site/contact</loc>
+    <loc>https://www.iptvservice.site/en</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Spanish Version -->
+  <url>
+    <loc>https://www.iptvservice.site/es</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- German Version -->
+  <url>
+    <loc>https://www.iptvservice.site/de</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- French Version -->
+  <url>
+    <loc>https://www.iptvservice.site/fr</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Contact Pages -->
+  <url>
+    <loc>https://www.iptvservice.site/en/contact</loc>
     <lastmod>2024-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- FAQ Page -->
   <url>
-    <loc>https://www.iptvservice.site/faq</loc>
+    <loc>https://www.iptvservice.site/es/contact</loc>
     <lastmod>2024-03-19</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.iptvservice.site/de/contact</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.iptvservice.site/fr/contact</loc>
+    <lastmod>2024-03-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
