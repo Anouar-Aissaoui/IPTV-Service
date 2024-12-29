@@ -34,29 +34,29 @@ const LanguageWrapper = ({ language }: { language: string }) => {
   );
 };
 
-const AppContent = () => {
+const AppRoutes = () => {
   return (
-    <BrowserRouter>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <Routes>
-          <Route path="/" element={<Navigate to="/en" replace />} />
-          <Route path="/en/*" element={<LanguageWrapper language="en" />} />
-          <Route path="/es/*" element={<LanguageWrapper language="es" />} />
-          <Route path="/de/*" element={<LanguageWrapper language="de" />} />
-          <Route path="/fr/*" element={<LanguageWrapper language="fr" />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </TooltipProvider>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Navigate to="/en" replace />} />
+      <Route path="/en/*" element={<LanguageWrapper language="en" />} />
+      <Route path="/es/*" element={<LanguageWrapper language="es" />} />
+      <Route path="/de/*" element={<LanguageWrapper language="de" />} />
+      <Route path="/fr/*" element={<LanguageWrapper language="fr" />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 };
 
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <AppContent />
+      <BrowserRouter>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <AppRoutes />
+        </TooltipProvider>
+      </BrowserRouter>
     </QueryClientProvider>
   );
 };
