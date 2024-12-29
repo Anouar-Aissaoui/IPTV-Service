@@ -18,7 +18,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const LanguageWrapper = ({ language }: { language: string }) => {
+const LanguageRoutes = ({ language }: { language: string }) => {
   const { i18n } = useTranslation();
   
   React.useEffect(() => {
@@ -38,10 +38,10 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/en" replace />} />
-      <Route path="/en/*" element={<LanguageWrapper language="en" />} />
-      <Route path="/es/*" element={<LanguageWrapper language="es" />} />
-      <Route path="/de/*" element={<LanguageWrapper language="de" />} />
-      <Route path="/fr/*" element={<LanguageWrapper language="fr" />} />
+      <Route path="/en/*" element={<LanguageRoutes language="en" />} />
+      <Route path="/es/*" element={<LanguageRoutes language="es" />} />
+      <Route path="/de/*" element={<LanguageRoutes language="de" />} />
+      <Route path="/fr/*" element={<LanguageRoutes language="fr" />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
@@ -52,9 +52,11 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <AppRoutes />
+          <React.Fragment>
+            <Toaster />
+            <Sonner />
+            <AppRoutes />
+          </React.Fragment>
         </TooltipProvider>
       </BrowserRouter>
     </QueryClientProvider>
