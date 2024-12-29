@@ -19,29 +19,6 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = () => {
-  const { i18n } = useTranslation();
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <BrowserRouter>
-          <Toaster />
-          <Sonner />
-          <Routes>
-            <Route path="/" element={<Navigate to="/en" replace />} />
-            <Route path="/en/*" element={<LanguageWrapper language="en" />} />
-            <Route path="/es/*" element={<LanguageWrapper language="es" />} />
-            <Route path="/de/*" element={<LanguageWrapper language="de" />} />
-            <Route path="/fr/*" element={<LanguageWrapper language="fr" />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  );
-};
-
 const LanguageWrapper = ({ language }: { language: string }) => {
   const { i18n } = useTranslation();
   
@@ -55,6 +32,29 @@ const LanguageWrapper = ({ language }: { language: string }) => {
       <Route path="/contact" element={<Contact />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
+  );
+};
+
+const App = () => {
+  return (
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <Routes>
+              <Route path="/" element={<Navigate to="/en" replace />} />
+              <Route path="/en/*" element={<LanguageWrapper language="en" />} />
+              <Route path="/es/*" element={<LanguageWrapper language="es" />} />
+              <Route path="/de/*" element={<LanguageWrapper language="de" />} />
+              <Route path="/fr/*" element={<LanguageWrapper language="fr" />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </TooltipProvider>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </React.StrictMode>
   );
 };
 
