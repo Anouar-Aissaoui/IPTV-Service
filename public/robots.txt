@@ -3,12 +3,32 @@ Allow: /
 Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
+Disallow: /*?*
+Disallow: /*.json$
+Disallow: /*utm_*
+Disallow: /*fbclid*
+
+# Block AI crawlers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
 
 # Optimize crawling rate
-Crawl-delay: 10
+Crawl-delay: 5
+
+# Clean parameters
+Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content&fbclid&gclid&_ga&_gl / 
 
 # Specify sitemap location
 Sitemap: https://www.iptvservice.site/sitemap.xml
-
-# Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content
-# Allow efficient crawling by removing tracking parameters
