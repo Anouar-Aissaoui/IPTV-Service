@@ -248,6 +248,117 @@ export type Database = {
           },
         ]
       }
+      seo_bulk_pages: {
+        Row: {
+          alternate_urls: Json | null
+          breadcrumbs: Json | null
+          canonical_url: string | null
+          content: Json
+          created_at: string
+          description: string
+          external_links: Json | null
+          faq_schema: Json | null
+          h1: string
+          header_tags: Json | null
+          id: string
+          image_alt_texts: Json | null
+          indexing_status: string | null
+          internal_links: Json | null
+          is_indexed: boolean
+          keyword_density: Json | null
+          keywords: string[]
+          last_indexed: string | null
+          locale: string | null
+          meta_tags: Json
+          page_type: string | null
+          priority: number
+          schema_org: Json | null
+          semantic_markup: string | null
+          slug: string
+          social_tags: Json | null
+          structured_data: Json
+          target_audience: string[] | null
+          target_features: string[] | null
+          target_location: string | null
+          target_service_type: string | null
+          title: string
+          updated_at: string
+          word_count: number | null
+        }
+        Insert: {
+          alternate_urls?: Json | null
+          breadcrumbs?: Json | null
+          canonical_url?: string | null
+          content?: Json
+          created_at?: string
+          description: string
+          external_links?: Json | null
+          faq_schema?: Json | null
+          h1: string
+          header_tags?: Json | null
+          id?: string
+          image_alt_texts?: Json | null
+          indexing_status?: string | null
+          internal_links?: Json | null
+          is_indexed?: boolean
+          keyword_density?: Json | null
+          keywords?: string[]
+          last_indexed?: string | null
+          locale?: string | null
+          meta_tags?: Json
+          page_type?: string | null
+          priority?: number
+          schema_org?: Json | null
+          semantic_markup?: string | null
+          slug: string
+          social_tags?: Json | null
+          structured_data?: Json
+          target_audience?: string[] | null
+          target_features?: string[] | null
+          target_location?: string | null
+          target_service_type?: string | null
+          title: string
+          updated_at?: string
+          word_count?: number | null
+        }
+        Update: {
+          alternate_urls?: Json | null
+          breadcrumbs?: Json | null
+          canonical_url?: string | null
+          content?: Json
+          created_at?: string
+          description?: string
+          external_links?: Json | null
+          faq_schema?: Json | null
+          h1?: string
+          header_tags?: Json | null
+          id?: string
+          image_alt_texts?: Json | null
+          indexing_status?: string | null
+          internal_links?: Json | null
+          is_indexed?: boolean
+          keyword_density?: Json | null
+          keywords?: string[]
+          last_indexed?: string | null
+          locale?: string | null
+          meta_tags?: Json
+          page_type?: string | null
+          priority?: number
+          schema_org?: Json | null
+          semantic_markup?: string | null
+          slug?: string
+          social_tags?: Json | null
+          structured_data?: Json
+          target_audience?: string[] | null
+          target_features?: string[] | null
+          target_location?: string | null
+          target_service_type?: string | null
+          title?: string
+          updated_at?: string
+          word_count?: number | null
+        }
+        Relationships: []
+      }
       seo_metrics: {
         Row: {
           canonical_url: string
