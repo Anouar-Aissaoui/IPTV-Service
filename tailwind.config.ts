@@ -79,5 +79,25 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("daisyui")
+  ],
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          "primary": "#F97316",
+          "secondary": "#000000",
+          "accent": "#F97316",
+          "neutral": "#000000",
+          "base-100": "#000000",
+          "info": "#0ea5e9",
+          "success": "#22c55e",
+          "warning": "#f59e0b",
+          "error": "#ef4444",
+        },
+      },
+    ],
+  },
 } satisfies Config;
