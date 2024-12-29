@@ -1,10 +1,10 @@
 {
   "meta": {
     "title": "Mejor Proveedor de IPTV | Compre IPTV en España y Todo el Mundo",
-    "description": "¿Busca comprar IPTV? Elija el mejor proveedor de IPTV que ofrece servicios asequibles en España y todo el mundo con más de 40K canales. ¡Suscríbase ahora!"
+    "description": "¿Busca comprar IPTV? Elija el mejor proveedor de IPTV que ofrece servicios asequibles en España y todo el mundo con más de 24K canales. ¡Suscríbase ahora!"
   },
   "hero": {
-    "title": "El Mejor Servicio IPTV a un Precio Asequible",
+    "title": "Mejor Servicio IPTV a un Precio Asequible",
     "subtitle": "Experimente imágenes impresionantes en 4K en cualquier dispositivo, en cualquier lugar, en cualquier momento.",
     "description": "Descubra una extensa biblioteca con más de 40,000 canales y más de 54,000 opciones VOD.",
     "cta": {
@@ -17,45 +17,5 @@
     "channels": "Canales",
     "sports": "Canales Deportivos",
     "vod": "Películas y Series"
-  },
-  "pricing": {
-    "title": "Elija su Plan IPTV",
-    "subtitle": "Obtenga los mejores planes de suscripción IPTV con funciones premium, calidad HD y una extensa biblioteca de contenido.",
-    "plans": {
-      "1month": "1 Mes",
-      "3months": "3 Meses",
-      "6months": "6 Meses",
-      "12months": "12 Meses",
-      "popular": "Más Popular",
-      "features": {
-        "channels": "7000+ Canales en Vivo",
-        "movies": "40000+ Películas VOD",
-        "shows": "1500+ Series de TV",
-        "quality": "Calidad HD y SD",
-        "support": "Soporte 24/7",
-        "connections": "3 Conexiones",
-        "ppv": "Eventos PPV",
-        "premium": "Soporte Premium"
-      },
-      "cta": "Comenzar"
-    }
-  },
-  "contact": {
-    "title": "Contáctenos",
-    "subtitle": "Estamos aquí para ayudar",
-    "form": {
-      "name": "Nombre",
-      "email": "Correo Electrónico",
-      "subject": "Asunto",
-      "message": "Mensaje",
-      "submit": "Enviar Mensaje"
-    },
-    "success": "¡Mensaje enviado con éxito!",
-    "error": "Error al enviar el mensaje. Por favor, inténtelo de nuevo."
-  },
-  "notFound": {
-    "title": "Página No Encontrada",
-    "description": "Lo sentimos, la página que busca no existe.",
-    "button": "Volver al Inicio"
   }
 }
