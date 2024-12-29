@@ -53,9 +53,19 @@ export const SEOContent = () => {
   const defaultTitle = "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide";
   const defaultDescription = "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 24K+ channels. Subscribe now!";
   
-  // Construct the canonical URL based on the current path
+  // Construct the canonical URL based on the current path and locale
   const baseUrl = 'https://www.iptvservice.site';
-  const canonicalUrl = `${baseUrl}${currentPath.endsWith('/') ? currentPath.slice(0, -1) : currentPath}`;
+  let canonicalUrl = `${baseUrl}${currentPath}`;
+  
+  // Remove trailing slash if present, except for the root path
+  if (canonicalUrl.length > baseUrl.length + 1 && canonicalUrl.endsWith('/')) {
+    canonicalUrl = canonicalUrl.slice(0, -1);
+  }
+
+  // For the root path, redirect to the default locale
+  if (currentPath === '/') {
+    canonicalUrl = `${baseUrl}/en`;
+  }
 
   return (
     <>
@@ -76,7 +86,7 @@ export const SEOContent = () => {
         <link rel="alternate" hrefLang="es" href={`${baseUrl}/es`} />
         <link rel="alternate" hrefLang="de" href={`${baseUrl}/de`} />
         <link rel="alternate" hrefLang="fr" href={`${baseUrl}/fr`} />
-        <link rel="alternate" hrefLang="x-default" href={baseUrl} />
+        <link rel="alternate" hrefLang="x-default" href={`${baseUrl}/en`} />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content={pseoData?.page_type || "website"} />
