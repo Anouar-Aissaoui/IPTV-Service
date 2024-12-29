@@ -50,15 +50,13 @@ const AppRoutes = () => {
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <TooltipProvider>
-          <React.Fragment>
-            <Toaster />
-            <Sonner />
-            <AppRoutes />
-          </React.Fragment>
-        </TooltipProvider>
-      </BrowserRouter>
+      <TooltipProvider>
+        <BrowserRouter>
+          <Toaster />
+          <Sonner />
+          <AppRoutes />
+        </BrowserRouter>
+      </TooltipProvider>
     </QueryClientProvider>
   );
 };
