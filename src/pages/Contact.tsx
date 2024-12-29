@@ -19,11 +19,11 @@ const Contact = () => {
         <title>{t('contact.title')} | {t('meta.title')}</title>
         <meta name="description" content={t('contact.description')} />
         <html lang={i18n.language} />
-        <link rel="alternate" hreflang="en" href="https://www.iptvservice.site/en/contact" />
-        <link rel="alternate" hreflang="es" href="https://www.iptvservice.site/es/contact" />
-        <link rel="alternate" hreflang="de" href="https://www.iptvservice.site/de/contact" />
-        <link rel="alternate" hreflang="fr" href="https://www.iptvservice.site/fr/contact" />
-        <link rel="alternate" hreflang="x-default" href="https://www.iptvservice.site/contact" />
+        <link rel="alternate" hrefLang="en" href="https://www.iptvservice.site/en/contact" />
+        <link rel="alternate" hrefLang="es" href="https://www.iptvservice.site/es/contact" />
+        <link rel="alternate" hrefLang="de" href="https://www.iptvservice.site/de/contact" />
+        <link rel="alternate" hrefLang="fr" href="https://www.iptvservice.site/fr/contact" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.iptvservice.site/contact" />
       </Helmet>
       <div className="container mx-auto px-4 py-8">
         <Menubar className="mb-8 bg-dark border-[#F97316] text-white">
