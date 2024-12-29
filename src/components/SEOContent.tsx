@@ -52,6 +52,10 @@ export const SEOContent = () => {
 
   const defaultTitle = "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide";
   const defaultDescription = "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 24K+ channels. Subscribe now!";
+  
+  // Construct the canonical URL based on the current path
+  const baseUrl = 'https://www.iptvservice.site';
+  const canonicalUrl = `${baseUrl}${currentPath.endsWith('/') ? currentPath.slice(0, -1) : currentPath}`;
 
   return (
     <>
@@ -64,29 +68,29 @@ export const SEOContent = () => {
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         )}
         <meta name="description" content={pseoData?.description || defaultDescription} />
-        <meta name="keywords" content={pseoData?.keywords.join(', ')} />
-        <link rel="canonical" href={`https://www.iptvservice.site${currentPath}`} />
+        <meta name="keywords" content={pseoData?.keywords?.join(', ')} />
+        <link rel="canonical" href={canonicalUrl} />
         
         {/* Alternate language links */}
-        <link rel="alternate" hrefLang="en" href="https://www.iptvservice.site/en" />
-        <link rel="alternate" hrefLang="es" href="https://www.iptvservice.site/es" />
-        <link rel="alternate" hrefLang="de" href="https://www.iptvservice.site/de" />
-        <link rel="alternate" hrefLang="fr" href="https://www.iptvservice.site/fr" />
-        <link rel="alternate" hrefLang="x-default" href="https://www.iptvservice.site" />
+        <link rel="alternate" hrefLang="en" href={`${baseUrl}/en`} />
+        <link rel="alternate" hrefLang="es" href={`${baseUrl}/es`} />
+        <link rel="alternate" hrefLang="de" href={`${baseUrl}/de`} />
+        <link rel="alternate" hrefLang="fr" href={`${baseUrl}/fr`} />
+        <link rel="alternate" hrefLang="x-default" href={baseUrl} />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content={pseoData?.page_type || "website"} />
         <meta property="og:title" content={pseoData?.title || defaultTitle} />
         <meta property="og:description" content={pseoData?.description || defaultDescription} />
-        <meta property="og:image" content="https://www.iptvservice.site/iptv-subscription.png" />
-        <meta property="og:url" content={`https://www.iptvservice.site${currentPath}`} />
+        <meta property="og:image" content={`${baseUrl}/iptv-subscription.png`} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:site_name" content="Premium IPTV Service Provider" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pseoData?.title || defaultTitle} />
         <meta name="twitter:description" content={pseoData?.description || defaultDescription} />
-        <meta name="twitter:image" content="https://www.iptvservice.site/iptv-subscription.png" />
+        <meta name="twitter:image" content={`${baseUrl}/iptv-subscription.png`} />
       </Helmet>
 
       <div className="bg-dark-gray py-24">
