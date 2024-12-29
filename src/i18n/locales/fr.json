@@ -5,17 +5,17 @@
   },
   "hero": {
     "title": "Meilleur Service IPTV à un Prix Abordable",
-    "subtitle": "Profitez d'images 4K époustouflantes sur n'importe quel appareil, n'importe où, n'importe quand.",
+    "subtitle": "Profitez d'images époustouflantes en 4K sur n'importe quel appareil, n'importe où, n'importe quand.",
     "description": "Découvrez une vaste bibliothèque avec plus de 40 000 chaînes et plus de 54 000 options VOD.",
     "cta": {
       "trial": "Commencer l'Essai Gratuit",
-      "contact": "Contact sur WhatsApp"
+      "contact": "Contact WhatsApp"
     }
   },
   "stats": {
     "customers": "Clients Satisfaits",
     "channels": "Chaînes",
-    "sports": "Chaînes Sport",
+    "sports": "Chaînes Sportives",
     "vod": "Films et Séries"
   },
   "notFound": {
