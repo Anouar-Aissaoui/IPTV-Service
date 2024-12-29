@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet";
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { BlurImage } from './ui/blur-image';
 import { Breadcrumbs } from './seo/Breadcrumbs';
 import { ServiceFeatures } from './seo/ServiceFeatures';
 import { IPTVDefinition } from './seo/IPTVDefinition';
@@ -54,32 +53,19 @@ export const SEOContent = () => {
   const defaultTitle = "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide";
   const defaultDescription = "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 24K+ channels. Subscribe now!";
   
+  // Construct the canonical URL based on the current path and locale
   const baseUrl = 'https://www.iptvservice.site';
   let canonicalUrl = `${baseUrl}${currentPath}`;
   
+  // Remove trailing slash if present, except for the root path
   if (canonicalUrl.length > baseUrl.length + 1 && canonicalUrl.endsWith('/')) {
     canonicalUrl = canonicalUrl.slice(0, -1);
   }
 
+  // For the root path, redirect to the default locale
   if (currentPath === '/') {
     canonicalUrl = `${baseUrl}/en`;
   }
-
-  // SEO-optimized image data
-  const seoImages = [
-    {
-      src: "/iptv-subscription.png",
-      alt: pseoData?.keywords?.[0] || "Best IPTV Service Provider",
-      width: 1200,
-      height: 630
-    },
-    {
-      src: "/devices.png",
-      alt: "IPTV Compatible Devices - Smart TV, Android, iOS, MAG",
-      width: 800,
-      height: 400
-    }
-  ];
 
   return (
     <>
@@ -128,23 +114,6 @@ export const SEOContent = () => {
               >
                 {pseoData?.h1 || "Buy IPTV Subscription"}
               </h1>
-              
-              <div className="grid gap-8 md:grid-cols-2 mb-10">
-                {seoImages.map((image, index) => (
-                  <figure key={index} className="relative aspect-video rounded-lg overflow-hidden">
-                    <BlurImage
-                      src={image.src}
-                      alt={image.alt}
-                      width={image.width}
-                      height={image.height}
-                      className="w-full h-full object-cover"
-                      loading={index === 0 ? "eager" : "lazy"}
-                      fetchPriority={index === 0 ? "high" : "low"}
-                    />
-                    <figcaption className="sr-only">{image.alt}</figcaption>
-                  </figure>
-                ))}
-              </div>
               
               <meta itemProp="datePublished" content={new Date().toISOString().split('T')[0]} />
               <meta itemProp="dateModified" content={new Date().toISOString().split('T')[0]} />
