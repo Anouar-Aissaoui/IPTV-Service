@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export const Contact = () => {
+  const location = useLocation();
+  const locale = location.pathname.split('/')[1] || 'en';
+  
   return (
     <div className="bg-dark py-20">
       <div className="container mx-auto px-4 text-center">
@@ -13,7 +16,7 @@ export const Contact = () => {
           If you're having any questions or need help, don't hesitate to contact
           our team. We're here to help 24/7.
         </p>
-        <Link to="/contact">
+        <Link to={`/${locale}/contact`}>
           <Button className="bg-neon text-dark hover:bg-neon/90 text-lg px-8 py-6">
             <MessageCircle className="mr-2" /> Contact Support
           </Button>
