@@ -1,3 +1,5 @@
+import { Json } from '../shared';
+
 export interface PSEOVariationsTable {
   Row: {
     id: string;

@@ -1,3 +1,5 @@
+import { Json } from '../shared';
+
 export interface CacheTable {
   Row: {
     id: string;

@@ -1,10 +1,15 @@
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[]
+import { Json } from './shared';
+import { BuyerInfoTable } from './tables/buyer-info';
+import { CacheTable } from './tables/cache';
+import { ContactMessagesTable } from './tables/contact-messages';
+import { ImagesTable } from './tables/images';
+import { PerformanceMetricsTable } from './tables/performance-metrics';
+import { PSEOVariationsTable } from './tables/pseo-variations';
+import { SEOBulkPagesTable } from './tables/seo-bulk-pages';
+import { SEOMetricsTable } from './tables/seo-metrics';
+import { SEOPerformanceTable } from './tables/seo-performance';
+import { SEOTemplatesTable } from './tables/seo-templates';
+import { SEOUrlParamsTable } from './tables/seo-url-params';
 
 export interface Database {
   public: {
