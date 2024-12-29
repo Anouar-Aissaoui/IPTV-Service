@@ -18,6 +18,11 @@ const Index = () => {
         <title>{t('meta.title')}</title>
         <meta name="description" content={t('meta.description')} />
         <html lang={i18n.language} />
+        <link rel="alternate" hreflang="en" href="https://www.iptvservice.site/en" />
+        <link rel="alternate" hreflang="es" href="https://www.iptvservice.site/es" />
+        <link rel="alternate" hreflang="de" href="https://www.iptvservice.site/de" />
+        <link rel="alternate" hreflang="fr" href="https://www.iptvservice.site/fr" />
+        <link rel="alternate" hreflang="x-default" href="https://www.iptvservice.site" />
       </Helmet>
       <Hero />
       <BrandCarousel />

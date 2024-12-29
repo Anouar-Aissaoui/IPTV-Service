@@ -17,5 +17,14 @@
     "channels": "Kanäle",
     "sports": "Sportkanäle",
     "vod": "Filme und Serien"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Entschuldigung, wir konnten die gesuchte Seite nicht finden.",
+    "button": "Zurück zur Startseite"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "description": "Haben Sie Fragen? Wir sind rund um die Uhr für Sie da."
   }
 }
