@@ -7,10 +7,18 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet";
 
 const Contact = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen bg-dark text-white">
+      <Helmet>
+        <title>{t('pages.contact.title')}</title>
+        <meta name="description" content={t('pages.contact.description')} />
+      </Helmet>
       <div className="container mx-auto px-4 py-8">
         <Menubar className="mb-8 bg-dark border-[#F97316] text-white">
           <MenubarMenu>

@@ -10,14 +10,13 @@ import { SEOContent } from "@/components/SEOContent";
 import { Helmet } from "react-helmet";
 
 const Index = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-dark text-white">
       <Helmet>
-        <title>{t('meta.title')}</title>
-        <meta name="description" content={t('meta.description')} />
-        <html lang={i18n.language} />
+        <title>{t('pages.home.title')}</title>
+        <meta name="description" content={t('pages.home.description')} />
       </Helmet>
       <Hero />
       <BrandCarousel />
