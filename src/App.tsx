@@ -9,11 +9,10 @@ import Index from "./pages/Index";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
-// Create a client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
+      staleTime: 5 * 60 * 1000,
       retry: 1,
     },
   },
@@ -37,24 +36,22 @@ const LanguageWrapper = ({ language }: { language: string }) => {
 
 const App = () => {
   return (
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <Routes>
-              <Route path="/" element={<Navigate to="/en" replace />} />
-              <Route path="/en/*" element={<LanguageWrapper language="en" />} />
-              <Route path="/es/*" element={<LanguageWrapper language="es" />} />
-              <Route path="/de/*" element={<LanguageWrapper language="de" />} />
-              <Route path="/fr/*" element={<LanguageWrapper language="fr" />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </TooltipProvider>
-        </BrowserRouter>
-      </QueryClientProvider>
-    </React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <Routes>
+            <Route path="/" element={<Navigate to="/en" replace />} />
+            <Route path="/en/*" element={<LanguageWrapper language="en" />} />
+            <Route path="/es/*" element={<LanguageWrapper language="es" />} />
+            <Route path="/de/*" element={<LanguageWrapper language="de" />} />
+            <Route path="/fr/*" element={<LanguageWrapper language="fr" />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </TooltipProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 };
 
