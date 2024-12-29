@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from "react-helmet";
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -22,7 +22,7 @@ export const SEOContent = () => {
       const slug = currentPath.slice(1) || 'best-iptv-service-usa';
       const { data, error } = await supabase
         .from('pseo_variations')
-        .select('*, content, meta_tags, social_tags, schema_org')
+        .select('*')
         .eq('slug', slug)
         .single();
       
@@ -35,9 +35,6 @@ export const SEOContent = () => {
     }
   });
 
-  const targetFeatures = pseoData?.target_features || [];
-  const targetAudience = pseoData?.target_audience || [];
-
   return (
     <>
       <Helmet>
@@ -48,41 +45,48 @@ export const SEOContent = () => {
         ) : (
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         )}
-        <meta name="description" content={pseoData?.description} />
-        <meta name="keywords" content={pseoData?.keywords?.join(', ')} />
+        <meta name="description" content={pseoData?.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40K+ channels and 54K+ VOD content. Subscribe now!"} />
+        <meta name="keywords" content={pseoData?.keywords.join(', ') || "buy IPTV, IPTV service, best IPTV service, IPTV subscription, premium IPTV, HD IPTV service, streaming TV channels, live TV streaming, USA IPTV service, affordable IPTV subscription"} />
         <link rel="canonical" href={`https://www.iptvservice.site${currentPath}`} />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content={pseoData?.page_type || "website"} />
-        <meta property="og:title" content={pseoData?.title} />
-        <meta property="og:description" content={pseoData?.description} />
+        <meta property="og:title" content={pseoData?.title || "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide"} />
+        <meta property="og:description" content={pseoData?.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40K+ channels and 54K+ VOD content. Subscribe now!"} />
         <meta property="og:image" content="https://www.iptvservice.site/iptv-subscription.png" />
         <meta property="og:url" content={`https://www.iptvservice.site${currentPath}`} />
         <meta property="og:site_name" content="Premium IPTV Service Provider" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={pseoData?.title} />
-        <meta name="twitter:description" content={pseoData?.description} />
+        <meta name="twitter:title" content={pseoData?.title || "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide"} />
+        <meta name="twitter:description" content={pseoData?.description || "Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 40K+ channels and 54K+ VOD content. Subscribe now!"} />
         <meta name="twitter:image" content="https://www.iptvservice.site/iptv-subscription.png" />
-
-        {/* Location and Service Type */}
-        {pseoData?.target_location && (
-          <meta name="geo.placename" content={pseoData.target_location} />
-        )}
-        
-        {/* Dynamic meta tags from database */}
-        {pseoData?.meta_tags && Object.entries(pseoData.meta_tags).map(([key, value]) => (
-          <meta key={key} property={key} content={String(value)} />
-        ))}
 
         {/* Schema.org structured data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": pseoData?.page_type || "Product",
-            "name": pseoData?.title,
-            "description": pseoData?.description,
+            "@type": "WebSite",
+            "name": "Premium IPTV Service Provider",
+            "url": "https://www.iptvservice.site",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://www.iptvservice.site/search?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "Premium IPTV Subscription",
+            "description": "Access to 40,000+ live channels and 54,000+ VOD content with HD and 4K quality",
+            "brand": {
+              "@type": "Brand",
+              "name": "Best IPTV Service Provider"
+            },
             "offers": {
               "@type": "AggregateOffer",
               "priceCurrency": "USD",
@@ -91,7 +95,13 @@ export const SEOContent = () => {
               "offerCount": "4",
               "availability": "https://schema.org/InStock"
             },
-            ...(pseoData?.schema_org || {})
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.8",
+              "reviewCount": "7520",
+              "bestRating": "5",
+              "worstRating": "1"
+            }
           })}
         </script>
       </Helmet>
@@ -105,7 +115,7 @@ export const SEOContent = () => {
                 className="text-5xl font-bold mb-10 text-white bg-gradient-to-r from-neon to-white bg-clip-text text-transparent"
                 itemProp="headline"
               >
-                {pseoData?.h1 || "Buy IPTV Subscription"}
+                Buy IPTV Subscription
               </h1>
               
               <meta itemProp="datePublished" content={new Date().toISOString().split('T')[0]} />
@@ -114,38 +124,15 @@ export const SEOContent = () => {
             
             <section>
               <h2 className="text-3xl font-semibold mb-8 text-neon">
-                {pseoData?.content?.main_content ? 
-                  "Premium IPTV Service for " + pseoData.target_location :
-                  "Revolutionize Your Viewing Experience with IPTV"}
+                Revolutionize Your Viewing Experience with IPTV
               </h2>
               
               <div itemProp="articleBody">
                 <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-                  {pseoData?.content?.main_content || 
-                    "Buy IPTV Subscription from the world's #1 provider and explore a world of entertainment. Our IPTV service delivers 4K live streaming, global channels, popular shows, live sports, movies, and documentaries — all in one package."}
+                  Buy IPTV Subscription from the world's #1 provider and explore a world of entertainment. 
+                  Our IPTV service delivers 4K live streaming, global channels, popular shows, live sports, 
+                  movies, and documentaries — all in one package.
                 </p>
-
-                {targetFeatures.length > 0 && (
-                  <div className="mb-8">
-                    <h3 className="text-2xl font-semibold mb-4 text-white">Key Features for {pseoData?.target_location}</h3>
-                    <ul className="list-disc pl-5 space-y-2 text-gray-300">
-                      {targetFeatures.map((feature, index) => (
-                        <li key={index}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {targetAudience.length > 0 && (
-                  <div className="mb-8">
-                    <h3 className="text-2xl font-semibold mb-4 text-white">Perfect For</h3>
-                    <ul className="list-disc pl-5 space-y-2 text-gray-300">
-                      {targetAudience.map((audience, index) => (
-                        <li key={index}>{audience}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
 
                 <IPTVDefinition />
                 <IPTVBenefits />
