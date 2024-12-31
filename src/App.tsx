@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index";
-import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -28,7 +27,6 @@ const LanguageRoutes = ({ language }: { language: string }) => {
   return (
     <Routes>
       <Route path="/" element={<Index />} />
-      <Route path="/en/contact" element={<Contact />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
