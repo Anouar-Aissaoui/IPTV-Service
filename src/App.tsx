@@ -28,7 +28,7 @@ const LanguageRoutes = ({ language }: { language: string }) => {
   return (
     <Routes>
       <Route path="/" element={<Index />} />
-      <Route path="/contact" element={<Contact />} />
+      <Route path="/en/contact" element={<Contact />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
