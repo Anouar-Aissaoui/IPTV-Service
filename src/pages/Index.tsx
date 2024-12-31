@@ -4,7 +4,6 @@ import { Pricing } from "@/components/Pricing";
 import Content from "@/components/Content";
 import { LiveSports } from "@/components/LiveSports";
 import { FAQ } from "@/components/FAQ";
-import { Contact } from "@/components/Contact";
 import { BrandCarousel } from "@/components/BrandCarousel";
 import { SEOContent } from "@/components/SEOContent";
 import { Helmet } from "react-helmet";
@@ -30,7 +29,6 @@ const Index = () => {
       <Content />
       <LiveSports />
       <FAQ />
-      <Contact />
       <SEOContent />
     </div>
   );
