@@ -6,45 +6,76 @@
   :root {
     --background: 0 0% 0%;
     --foreground: 0 0% 100%;
-
     --card: 0 0% 0%;
     --card-foreground: 0 0% 100%;
-
     --popover: 0 0% 0%;
     --popover-foreground: 0 0% 100%;
-
     --primary: 24 95% 53%;
     --primary-foreground: 0 0% 100%;
-
     --secondary: 0 0% 0%;
     --secondary-foreground: 0 0% 100%;
-
     --muted: 0 0% 0%;
     --muted-foreground: 0 0% 100%;
-
     --accent: 0 0% 0%;
     --accent-foreground: 0 0% 100%;
-
     --destructive: 0 0% 0%;
     --destructive-foreground: 0 0% 100%;
-
     --border: 24 95% 53%;
     --input: 0 0% 0%;
     --ring: 24 95% 53%;
-
     --radius: 0.75rem;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border font-grotesk;
   }
   body {
     @apply bg-background text-foreground;
+  }
+  h1 {
+    @apply text-brutal-4xl font-black tracking-tight;
+  }
+  h2 {
+    @apply text-brutal-3xl font-extrabold tracking-tight;
+  }
+  h3 {
+    @apply text-brutal-2xl font-bold tracking-tight;
+  }
+  p {
+    @apply text-brutal-base;
+  }
+  button {
+    @apply text-brutal-base font-bold tracking-wide;
   }
 }
 
 .bg-gradient-radial {
   background-image: radial-gradient(circle at center, var(--tw-gradient-stops));
+}
+
+/* Neo Brutalism Specific Styles */
+.brutal-shadow {
+  @apply shadow-[4px_4px_0px_0px_rgba(0,0,0,1)];
+}
+
+.brutal-border {
+  @apply border-4 border-black;
+}
+
+.brutal-hover {
+  @apply transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1;
+}
+
+.brutal-text {
+  @apply font-black tracking-tight;
+}
+
+.brutal-rotate {
+  @apply transform -rotate-2;
+}
+
+.brutal-rotate-reverse {
+  @apply transform rotate-2;
 }

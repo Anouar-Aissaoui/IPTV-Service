@@ -21,6 +21,15 @@ export default {
       fontFamily: {
         grotesk: ['Space Grotesk', 'sans-serif'],
       },
+      fontSize: {
+        'brutal-sm': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '0.05em', fontWeight: '700' }],
+        'brutal-base': ['1rem', { lineHeight: '1.5rem', letterSpacing: '0.05em', fontWeight: '700' }],
+        'brutal-lg': ['1.125rem', { lineHeight: '1.75rem', letterSpacing: '0.05em', fontWeight: '700' }],
+        'brutal-xl': ['1.25rem', { lineHeight: '1.75rem', letterSpacing: '0.05em', fontWeight: '800' }],
+        'brutal-2xl': ['1.5rem', { lineHeight: '2rem', letterSpacing: '0.05em', fontWeight: '800' }],
+        'brutal-3xl': ['1.875rem', { lineHeight: '2.25rem', letterSpacing: '0.05em', fontWeight: '900' }],
+        'brutal-4xl': ['2.25rem', { lineHeight: '2.5rem', letterSpacing: '0.05em', fontWeight: '900' }],
+      },
       colors: {
         primary: "#F97316",
         neon: "#F97316",
