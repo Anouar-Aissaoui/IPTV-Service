@@ -40,18 +40,6 @@ const Hero: React.FC = () => {
             <p className="text-base md:text-lg lg:text-xl leading-relaxed text-gray-300 transform rotate-1">
               {t('hero.subtitle')} {t('hero.description')}
             </p>
-            
-            <div className="relative w-full max-w-[280px] mx-auto lg:mx-0 animate-float transform -rotate-2">
-              <div className="absolute -inset-1 bg-[#F97316]/20 rounded-none blur-sm"></div>
-              <BlurImage 
-                src="/devices.png"
-                alt="Supported Devices"
-                className="relative w-full h-auto hover:scale-105 transition-transform duration-300 border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]"
-                sizes="(max-width: 640px) 280px, (max-width: 1024px) 240px, 280px"
-                width={280}
-                height={160}
-              />
-            </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
