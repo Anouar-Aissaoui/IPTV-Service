@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "title": "Mejor Proveedor de IPTV | Compre IPTV en España y Todo el Mundo",
+    "description": "¿Busca comprar IPTV? Elija el mejor proveedor de IPTV que ofrece servicios asequibles en España y todo el mundo con más de 24K canales. ¡Suscríbase ahora!"
+  },
+  "hero": {
+    "title": "Mejor Servicio IPTV a un Precio Asequible",
+    "subtitle": "Experimente imágenes impresionantes en 4K en cualquier dispositivo, en cualquier lugar, en cualquier momento.",
+    "description": "Descubra una extensa biblioteca con más de 40,000 canales y más de 54,000 opciones VOD.",
+    "cta": {
+      "trial": "Comenzar Prueba Gratuita",
+      "contact": "Contactar por WhatsApp"
+    }
+  },
+  "stats": {
+    "customers": "Clientes Satisfechos",
+    "channels": "Canales",
+    "sports": "Canales Deportivos",
+    "vod": "Películas y Series"
+  },
+  "notFound": {
+    "title": "Página No Encontrada",
+    "description": "Lo sentimos, no pudimos encontrar la página que estás buscando.",
+    "button": "Volver al Inicio"
+  },
+  "contact": {
+    "title": "Contacto",
+    "description": "¿Tiene preguntas? Estamos aquí para ayudar 24/7."
+  }
+}
