@@ -31,37 +31,37 @@ export default {
         'brutal-4xl': ['2.25rem', { lineHeight: '2.5rem', letterSpacing: '0.05em', fontWeight: '900' }],
       },
       colors: {
-        primary: "#FF3D00", // Vibrant orange-red for high CTR
-        neon: "#FF3D00",
+        primary: "#F97316",
+        neon: "#F97316",
         dark: "#000000",
-        "dark-gray": "#1A1A1A",
-        border: "#FF3D00",
+        "dark-gray": "#000000",
+        border: "#F97316",
         input: "#000000",
-        ring: "#FF3D00",
+        ring: "#F97316",
         background: "#000000",
         foreground: "#FFFFFF",
         secondary: {
-          DEFAULT: "#1A1A1A",
+          DEFAULT: "#000000",
           foreground: "#FFFFFF",
         },
         destructive: {
-          DEFAULT: "#FF3D00",
+          DEFAULT: "#000000",
           foreground: "#FFFFFF",
         },
         muted: {
-          DEFAULT: "#1A1A1A",
+          DEFAULT: "#000000",
           foreground: "#FFFFFF",
         },
         accent: {
-          DEFAULT: "#FFD600", // Bright yellow for accents
-          foreground: "#000000",
+          DEFAULT: "#000000",
+          foreground: "#FFFFFF",
         },
         popover: {
           DEFAULT: "#000000",
           foreground: "#FFFFFF",
         },
         card: {
-          DEFAULT: "#1A1A1A",
+          DEFAULT: "#000000",
           foreground: "#FFFFFF",
         },
       },
@@ -99,15 +99,15 @@ export default {
     themes: [
       {
         mytheme: {
-          "primary": "#FF3D00",
-          "secondary": "#1A1A1A",
-          "accent": "#FFD600",
+          "primary": "#F97316",
+          "secondary": "#000000",
+          "accent": "#F97316",
           "neutral": "#000000",
           "base-100": "#000000",
-          "info": "#00B4D8",
-          "success": "#00F5A0",
-          "warning": "#FFD600",
-          "error": "#FF3D00",
+          "info": "#0ea5e9",
+          "success": "#22c55e",
+          "warning": "#f59e0b",
+          "error": "#ef4444",
         },
       },
     ],
