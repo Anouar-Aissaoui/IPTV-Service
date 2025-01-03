@@ -39,7 +39,7 @@ const sports = [
 
 const SportCard = memo(({ sport }: SportProps) => {
   return (
-    <div className="relative group overflow-hidden rounded-lg aspect-[2/3] border border-neon/20 hover:border-neon/40 transition-colors duration-300">
+    <div className="relative group overflow-hidden border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)] transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200">
       <BlurImage
         src={sport.image}
         alt={sport.title}
@@ -49,9 +49,9 @@ const SportCard = memo(({ sport }: SportProps) => {
         fetchPriority="low"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-        <h3 className="text-white text-xl font-bold mb-2">{sport.title}</h3>
-        <p className="text-white/80 text-sm mb-4">{sport.description}</p>
-        <button className="bg-neon text-white px-4 py-2 rounded-md hover:bg-neon/80 transition-colors duration-300">
+        <h3 className="text-white text-xl font-bold mb-2 transform -rotate-2">{sport.title}</h3>
+        <p className="text-white/80 text-sm mb-4 transform rotate-1">{sport.description}</p>
+        <button className="bg-neon text-white px-4 py-2 border-2 border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:-translate-y-1 transition-transform duration-200">
           Watch Live
         </button>
       </div>
@@ -65,7 +65,7 @@ export const LiveSports = () => {
   return (
     <div className="bg-dark py-20">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 transform -rotate-2">
           Live <span className="text-neon">Sports</span>
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
