@@ -18,9 +18,6 @@ export default {
       },
     },
     extend: {
-      fontFamily: {
-        grotesk: ['Space Grotesk', 'sans-serif'],
-      },
       colors: {
         primary: "#F97316",
         neon: "#F97316",

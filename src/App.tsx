@@ -1,67 +1,37 @@
-import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
+// Create a client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000,
+      staleTime: 5 * 60 * 1000, // 5 minutes
       retry: 1,
     },
   },
 });
 
-const LanguageRoutes = ({ language }: { language: string }) => {
-  const { i18n } = useTranslation();
-  
-  React.useEffect(() => {
-    i18n.changeLanguage(language);
-  }, [language, i18n]);
-
-  return (
-    <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  );
-};
-
-const AppRoutes = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/en" replace />} />
-      <Route path="/en/*" element={<LanguageRoutes language="en" />} />
-      <Route path="/es/*" element={<LanguageRoutes language="es" />} />
-      <Route path="/de/*" element={<LanguageRoutes language="de" />} />
-      <Route path="/fr/*" element={<LanguageRoutes language="fr" />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  );
-};
-
 const App = () => {
   return (
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
         <BrowserRouter>
-          <TooltipProvider>
-            <div className="min-h-screen bg-background">
-              <div className="app-container relative">
-                <Toaster />
-                <Sonner />
-                <AppRoutes />
-              </div>
-            </div>
-          </TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </BrowserRouter>
-      </QueryClientProvider>
-    </React.StrictMode>
+      </TooltipProvider>
+    </QueryClientProvider>
   );
 };
 
