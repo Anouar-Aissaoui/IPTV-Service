@@ -35,14 +35,14 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
   ];
 
   return (
-    <nav className="container mx-auto px-4 py-6 relative z-50">
+    <nav className="container mx-auto px-4 py-4 md:py-6 relative z-50">
       <div className="flex items-center justify-between">
-        <div className="text-2xl font-black text-white transform -rotate-2 hover:rotate-0 transition-all duration-300">
+        <div className="text-xl sm:text-2xl font-black text-white transform -rotate-2 hover:rotate-0 transition-all duration-300">
           <a 
             href="https://www.iptvservice.site/" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="hover:text-[#F97316] transition-all duration-300 ease-in-out flex items-center gap-2 brutal-border brutal-shadow px-4 py-2 bg-black hover:-translate-y-1 hover:translate-x-1"
+            className="hover:text-[#F97316] transition-all duration-300 ease-in-out flex items-center gap-2 brutal-border brutal-shadow px-3 py-1 sm:px-4 sm:py-2 bg-black hover:-translate-y-1 hover:translate-x-1"
           >
             IPTV Service
           </a>
@@ -51,8 +51,9 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
         <button 
           className="md:hidden text-[#F97316] hover:text-white transition-colors p-2 hover:bg-[#F97316] brutal-border brutal-shadow"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
         >
-          <Menu className="h-6 w-6" />
+          <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
         </button>
 
         <NavItems 
