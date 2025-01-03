@@ -12,7 +12,7 @@ const Index = () => {
   const { t, i18n } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-dark text-white">
+    <div className="min-h-screen bg-dark text-white font-grotesk">
       <Helmet>
         <title>{t('meta.title')}</title>
         <meta name="description" content={t('meta.description')} />
