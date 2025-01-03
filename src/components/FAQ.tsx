@@ -32,33 +32,33 @@ export const FAQ = () => {
   return (
     <div id="faq-section" className="bg-dark py-20">
       <div className="container mx-auto px-4 max-w-3xl">
-        <h2 className="text-3xl md:text-4xl font-black text-center mb-12 brutal-text transform -rotate-2">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           Frequently Asked <span className="text-neon">Questions</span>
         </h2>
         <div itemScope itemType="https://schema.org/FAQPage">
-          <Accordion type="single" collapsible className="space-y-6">
+          <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="bg-dark brutal-border brutal-shadow brutal-hover px-6 transform hover:-rotate-1"
+                className="bg-dark border border-neon/20 rounded-lg px-6 hover:border-neon/40 transition-colors duration-300"
                 itemScope
                 itemProp="mainEntity"
                 itemType="https://schema.org/Question"
               >
                 <AccordionTrigger 
-                  className="text-left text-white hover:text-neon brutal-text"
+                  className="text-left text-white hover:text-neon"
                   itemProp="name"
                 >
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent 
-                  className="text-gray-400 brutal-text"
+                  className="text-gray-400"
                   itemScope
                   itemType="https://schema.org/Answer"
                   itemProp="acceptedAnswer"
                 >
-                  <div itemProp="text" className="transform rotate-1">
+                  <div itemProp="text">
                     {faq.answer}
                   </div>
                 </AccordionContent>

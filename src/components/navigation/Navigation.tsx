@@ -37,19 +37,19 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
   return (
     <nav className="container mx-auto px-4 py-6 relative z-50">
       <div className="flex items-center justify-between">
-        <div className="text-2xl font-black text-white brutal-text transform -rotate-1">
+        <div className="text-2xl font-bold text-white">
           <a 
             href="https://www.iptvservice.site/" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="hover:text-neon transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-2"
+            className="hover:text-[#F97316] transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-2"
           >
             IPTV Service
           </a>
         </div>
         
         <button 
-          className="md:hidden text-neon hover:text-neon/80 transition-colors p-2 hover:bg-white/10 rounded-lg brutal-border brutal-shadow brutal-hover"
+          className="md:hidden text-[#F97316] hover:text-[#F97316]/80 transition-colors p-2 hover:bg-white/10 rounded-lg"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           <Menu className="h-6 w-6" />
