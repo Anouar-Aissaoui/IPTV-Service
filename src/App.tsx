@@ -69,10 +69,10 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <React.StrictMode>
+    <React.StrictMode>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
             <TooltipProvider>
               <div className="min-h-screen bg-background">
                 <div className="app-container relative">
@@ -82,10 +82,10 @@ const App = () => {
                 </div>
               </div>
             </TooltipProvider>
-          </React.StrictMode>
-        </BrowserRouter>
-      </QueryClientProvider>
-    </ThemeProvider>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </React.StrictMode>
   );
 };
 
