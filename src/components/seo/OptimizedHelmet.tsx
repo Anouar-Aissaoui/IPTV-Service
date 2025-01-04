@@ -11,12 +11,11 @@ interface HelmetProps {
   keywords?: string[];
   children?: React.ReactNode;
   noindex?: boolean;
-  structuredData?: Record<string, any>;
 }
 
 const OptimizedHelmet: React.FC<HelmetProps> = memo(({
-  title = "Best IPTV Service Provider | Premium IPTV Subscription",
-  description = "Get access to premium IPTV service with 40,000+ channels and VOD content. High-quality streaming, 24/7 support, and competitive pricing.",
+  title = "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide",
+  description = "Premium IPTV subscription service with worldwide coverage",
   canonicalUrl,
   imageUrl = "/iptv-subscription.png",
   locale = "en",
@@ -24,7 +23,6 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
   keywords = [],
   children,
   noindex = false,
-  structuredData,
 }) => {
   const baseUrl = 'https://www.iptvservice.site';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
@@ -74,13 +72,6 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       <meta name="apple-mobile-web-app-title" content="IPTV Service" />
-      
-      {/* Structured Data */}
-      {structuredData && (
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-      )}
       
       {/* Allow additional meta tags to be injected */}
       {children}
