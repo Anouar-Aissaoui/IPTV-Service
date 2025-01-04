@@ -16,25 +16,12 @@ export const SEOContent = () => {
   const location = useLocation();
   const isPreviewDomain = window.location.hostname.includes('preview--clone-landing-tech.lovable.app');
   const currentPath = location?.pathname || '/';
-  const locale = currentPath.split('/')[1] || 'en';
+  const locale = 'en'; // Default to English only
   
   const { data: pseoData, isError } = useQuery({
     queryKey: ['pseo', locale],
     queryFn: async () => {
-      let slug;
-      switch(locale) {
-        case 'es':
-          slug = 'mejor-servicio-iptv-espana';
-          break;
-        case 'de':
-          slug = 'bester-iptv-dienst-deutschland';
-          break;
-        case 'fr':
-          slug = 'meilleur-service-iptv-france';
-          break;
-        default:
-          slug = 'best-iptv-service-usa';
-      }
+      const slug = 'best-iptv-service-usa';
 
       const { data, error } = await supabase
         .from('pseo_variations')
@@ -54,7 +41,7 @@ export const SEOContent = () => {
     retry: 2
   });
 
-  // Construct the canonical URL based on the current path and locale
+  // Construct the canonical URL based on the current path
   const baseUrl = 'https://www.iptvservice.site';
   let canonicalUrl = `${currentPath}`;
   
@@ -87,9 +74,6 @@ export const SEOContent = () => {
       >
         {/* Alternate language links */}
         <link rel="alternate" hrefLang="en" href={`${baseUrl}/en`} />
-        <link rel="alternate" hrefLang="es" href={`${baseUrl}/es`} />
-        <link rel="alternate" hrefLang="de" href={`${baseUrl}/de`} />
-        <link rel="alternate" hrefLang="fr" href={`${baseUrl}/fr`} />
         <link rel="alternate" hrefLang="x-default" href={`${baseUrl}/en`} />
       </OptimizedHelmet>
 
