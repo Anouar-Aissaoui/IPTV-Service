@@ -48,7 +48,6 @@ const LiveChannels = () => {
   return (
     <section className="bg-dark py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 relative brutal-container">
-        {/* Neo-brutalist title with dramatic tilt and border */}
         <div className="mb-12 transform -rotate-2">
           <h2 className="text-3xl md:text-4xl font-black text-center brutal-text inline-block bg-neon text-dark px-6 py-3 brutal-border brutal-shadow">
             Live <span className="text-white bg-dark px-2">Channels</span>
@@ -95,10 +94,6 @@ const LiveChannels = () => {
           ))}
         </div>
       </div>
-      
-      {/* Neo-brutalist decorative elements */}
-      <div className="absolute top-10 right-10 w-20 h-20 bg-neon brutal-border transform rotate-12 hidden lg:block" />
-      <div className="absolute bottom-10 left-10 w-16 h-16 bg-dark brutal-border brutal-shadow transform -rotate-12 hidden lg:block" />
     </section>
   );
 };
