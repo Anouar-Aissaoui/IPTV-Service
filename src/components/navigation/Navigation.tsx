@@ -21,11 +21,6 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
 
   const navItems = [
     { 
-      name: "Home", 
-      path: "/",
-      action: handleHomeClick
-    },
-    { 
       name: "Pricing", 
       path: "/pricing",
       action: () => {
