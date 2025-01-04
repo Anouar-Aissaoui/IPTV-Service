@@ -32,3 +32,40 @@ export const generateDynamicMetaTags = (pageData: SEOPageData) => {
     }
   };
 };
+
+export const trackSEOMetrics = async (pageData: SEOPageData) => {
+  try {
+    const { data, error } = await supabase
+      .from('seo_performance_metrics')
+      .upsert([
+        {
+          page_path: window.location.pathname,
+          page_title: pageData.title,
+          meta_description: pageData.description,
+          canonical_url: `https://www.iptvservice.site${window.location.pathname}`,
+          meta_robots: 'index,follow',
+          open_graph: {
+            title: pageData.title,
+            description: pageData.description,
+            image: pageData.imageUrl
+          },
+          twitter_card: {
+            title: pageData.title,
+            description: pageData.description,
+            image: pageData.imageUrl
+          }
+        }
+      ], {
+        onConflict: 'page_path'
+      });
+
+    if (error) {
+      console.error('Error tracking SEO metrics:', error);
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error tracking SEO metrics:', error);
+    return null;
+  }
+};

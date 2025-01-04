@@ -54,6 +54,39 @@ export type Database = {
         }
         Relationships: []
       }
+      seo_keywords: {
+        Row: {
+          created_at: string | null
+          difficulty_score: number | null
+          id: string
+          keyword: string
+          page_path: string
+          position: number | null
+          search_volume: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          difficulty_score?: number | null
+          id?: string
+          keyword: string
+          page_path: string
+          position?: number | null
+          search_volume?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          difficulty_score?: number | null
+          id?: string
+          keyword?: string
+          page_path?: string
+          position?: number | null
+          search_volume?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       seo_metrics: {
         Row: {
           canonical_url: string
@@ -123,6 +156,57 @@ export type Database = {
           updated_at?: string | null
           url?: string
           visits?: number | null
+        }
+        Relationships: []
+      }
+      seo_performance_metrics: {
+        Row: {
+          canonical_url: string | null
+          core_web_vitals: Json | null
+          created_at: string | null
+          id: string
+          last_crawled: string | null
+          meta_description: string
+          meta_robots: string | null
+          open_graph: Json | null
+          page_path: string
+          page_speed_score: number | null
+          page_title: string
+          structured_data: Json | null
+          twitter_card: Json | null
+          updated_at: string | null
+        }
+        Insert: {
+          canonical_url?: string | null
+          core_web_vitals?: Json | null
+          created_at?: string | null
+          id?: string
+          last_crawled?: string | null
+          meta_description: string
+          meta_robots?: string | null
+          open_graph?: Json | null
+          page_path: string
+          page_speed_score?: number | null
+          page_title: string
+          structured_data?: Json | null
+          twitter_card?: Json | null
+          updated_at?: string | null
+        }
+        Update: {
+          canonical_url?: string | null
+          core_web_vitals?: Json | null
+          created_at?: string | null
+          id?: string
+          last_crawled?: string | null
+          meta_description?: string
+          meta_robots?: string | null
+          open_graph?: Json | null
+          page_path?: string
+          page_speed_score?: number | null
+          page_title?: string
+          structured_data?: Json | null
+          twitter_card?: Json | null
+          updated_at?: string | null
         }
         Relationships: []
       }

@@ -6,7 +6,7 @@ import { LiveSports } from "@/components/LiveSports";
 import { FAQ } from "@/components/FAQ";
 import { BrandCarousel } from "@/components/BrandCarousel";
 import LiveChannels from "@/components/LiveChannels";
-import { Helmet } from "react-helmet";
+import { SEOOptimizer } from "@/components/seo/SEOOptimizer";
 
 const Index = () => {
   const { t, i18n } = useTranslation();
@@ -14,42 +14,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-dark text-white font-grotesk">
-      <Helmet>
-        <title>{t('meta.title')}</title>
-        <meta name="description" content={t('meta.description')} />
-        <html lang={currentLanguage} />
-        <link rel="alternate" hrefLang="en" href="https://www.iptvservice.site/en" />
-        <link rel="alternate" hrefLang="es" href="https://www.iptvservice.site/es" />
-        <link rel="alternate" hrefLang="de" href="https://www.iptvservice.site/de" />
-        <link rel="alternate" hrefLang="fr" href="https://www.iptvservice.site/fr" />
-        <link rel="alternate" hrefLang="x-default" href="https://www.iptvservice.site" />
-        
-        {/* Preload Critical Resources */}
-        <link rel="preload" as="image" href="/iptv-subscription.png" />
-        <link rel="preload" as="font" href="/fonts/grotesk.woff2" type="font/woff2" crossOrigin="anonymous" />
-        
-        {/* Resource Hints */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* SEO Meta Tags */}
-        <meta name="author" content="IPTV Service" />
-        <meta name="referrer" content="no-referrer-when-downgrade" />
-        <meta name="google" content="notranslate" />
-        
-        {/* OpenGraph Tags */}
-        <meta property="og:title" content={t('meta.title')} />
-        <meta property="og:description" content={t('meta.description')} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://www.iptvservice.site/${currentLanguage}`} />
-        <meta property="og:image" content="/iptv-subscription.png" />
-        
-        {/* Twitter Card Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={t('meta.title')} />
-        <meta name="twitter:description" content={t('meta.description')} />
-        <meta name="twitter:image" content="/iptv-subscription.png" />
-      </Helmet>
+      <SEOOptimizer 
+        title={t('meta.title')}
+        description={t('meta.description')}
+        canonicalUrl={`https://www.iptvservice.site/${currentLanguage}`}
+        imageUrl="/iptv-subscription.png"
+      />
       <Hero />
       <BrandCarousel />
       <Pricing />
