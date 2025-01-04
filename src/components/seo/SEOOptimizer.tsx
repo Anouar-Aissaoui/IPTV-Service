@@ -23,7 +23,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const location = useLocation();
   const currentPath = location.pathname;
 
-  // Fetch SEO metrics with proper caching
   const { data: seoMetrics } = useQuery({
     queryKey: ['seo-metrics', currentPath],
     queryFn: async () => {
@@ -84,11 +83,15 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
 
     const cleanupPromise = trackPageView();
     return () => {
-      void cleanupPromise.then(cleanup => {
-        if (cleanup) {
-          cleanup();
-        }
-      });
+      cleanupPromise
+        .then(cleanup => {
+          if (cleanup) {
+            cleanup();
+          }
+        })
+        .catch(error => {
+          console.error('Error in cleanup:', error);
+        });
     };
   }, [currentPath]);
 
