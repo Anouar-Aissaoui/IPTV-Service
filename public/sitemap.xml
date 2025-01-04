@@ -9,9 +9,9 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- Homepage (English - Default) -->
+  <!-- Homepage -->
   <url>
-    <loc>https://www.iptvservice.site/en</loc>
+    <loc>https://www.iptvservice.site/</loc>
     <lastmod>2024-03-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -21,17 +21,14 @@
       <image:caption>Premium IPTV Subscription Service</image:caption>
     </image:image>
     <mobile:mobile/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.iptvservice.site/en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.iptvservice.site/en"/>
   </url>
 
-  <!-- Contact Pages -->
+  <!-- Other Pages -->
   <url>
-    <loc>https://www.iptvservice.site/en/contact</loc>
+    <loc>https://www.iptvservice.site/premium-iptv-service</loc>
     <lastmod>2024-03-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <mobile:mobile/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.iptvservice.site/en/contact"/>
   </url>
 </urlset>

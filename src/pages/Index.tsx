@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import Hero from "@/components/Hero";
 import { Pricing } from "@/components/Pricing";
 import Content from "@/components/Content";
@@ -10,15 +9,12 @@ import { SEOOptimizer } from "@/components/seo/SEOOptimizer";
 import { SEOContent } from "@/components/SEOContent";
 
 const Index = () => {
-  const { t, i18n } = useTranslation();
-  const currentLanguage = i18n.language;
-
   return (
     <div className="min-h-screen bg-dark text-white font-grotesk">
       <SEOOptimizer 
-        title={t('meta.title')}
-        description={t('meta.description')}
-        canonicalUrl={`https://www.iptvservice.site/${currentLanguage}`}
+        title="Best IPTV Service Provider | Premium IPTV Subscription"
+        description="Get access to premium IPTV service with 40,000+ channels and VOD content. High-quality streaming, 24/7 support, and competitive pricing."
+        canonicalUrl="https://www.iptvservice.site"
         imageUrl="/iptv-subscription.png"
         type="website"
       />
