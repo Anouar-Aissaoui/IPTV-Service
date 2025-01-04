@@ -74,16 +74,18 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
         
         return () => {
           const timeOnPage = (performance.now() - startTime) / 1000;
-          const updatePromise = supabase
-            .from('seo_performance')
-            .update({ avg_time_on_page: timeOnPage })
-            .eq('url', canonicalPath);
-            
-          updatePromise.then(() => {
-            console.log('Page timing updated');
-          }).catch(err => {
-            console.error('Error updating page timing:', err);
-          });
+          const updateMetrics = async () => {
+            try {
+              await supabase
+                .from('seo_performance')
+                .update({ avg_time_on_page: timeOnPage })
+                .eq('url', canonicalPath);
+              console.log('Page timing updated');
+            } catch (err) {
+              console.error('Error updating page timing:', err);
+            }
+          };
+          void updateMetrics();
         };
       } catch (error) {
         console.error('Error in trackPageView:', error);
