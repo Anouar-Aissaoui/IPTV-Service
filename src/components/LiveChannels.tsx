@@ -5,42 +5,42 @@ const channels = [
   {
     title: "ESPNU",
     image: "https://www.popcornmovies.to/uploads/poster/APkbKRIvMh.webp",
-    link: "https://www.popcornmovies.to/live-broadcast/espnu",
+    link: "https://wa.me/message/R5IYJF3GG635D1",
   },
   {
     title: "ESPN",
     image: "https://www.popcornmovies.to/uploads/poster/mO23pg6gzk.webp",
-    link: "https://www.popcornmovies.to/live-broadcast/espn",
+    link: "https://wa.me/message/R5IYJF3GG635D1",
   },
   {
     title: "NBA TV",
     image: "https://www.popcornmovies.to/uploads/poster/iHhVGaE80u.webp",
-    link: "https://www.popcornmovies.to/live-broadcast/nba-tv",
+    link: "https://wa.me/message/R5IYJF3GG635D1",
   },
   {
     title: "NFL Network",
     image: "https://www.popcornmovies.to/uploads/poster/A8wOWJX0My.webp",
-    link: "https://www.popcornmovies.to/live-broadcast/nfl-network",
+    link: "https://wa.me/message/R5IYJF3GG635D1",
   },
   {
     title: "HBO 2 East",
     image: "https://www.popcornmovies.to/uploads/poster/6vf1aSr7gt.webp",
-    link: "https://www.popcornmovies.to/live-broadcast/hbo-2-east",
+    link: "https://wa.me/message/R5IYJF3GG635D1",
   },
   {
     title: "HBO East",
     image: "https://www.popcornmovies.to/uploads/poster/G67HiKK1Nf.webp",
-    link: "https://www.popcornmovies.to/live-broadcast/hbo-east",
+    link: "https://wa.me/message/R5IYJF3GG635D1",
   },
   {
     title: "Fox Sports 1",
     image: "https://www.popcornmovies.to/uploads/poster/AyLTRoIo55.webp",
-    link: "https://www.popcornmovies.to/live-broadcast/fox-sports-1",
+    link: "https://wa.me/message/R5IYJF3GG635D1",
   },
   {
     title: "National Geographic",
     image: "https://www.popcornmovies.to/uploads/poster/mHrOgAZU75.webp",
-    link: "https://www.popcornmovies.to/live-broadcast/national-geographic",
+    link: "https://wa.me/message/R5IYJF3GG635D1",
   },
 ];
 
