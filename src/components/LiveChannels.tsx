@@ -4,43 +4,43 @@ import { Play } from "lucide-react";
 const channels = [
   {
     title: "ESPNU",
-    image: "/channels/espnu.webp",
-    link: "#",
+    image: "https://www.popcornmovies.to/uploads/poster/APkbKRIvMh.webp",
+    link: "https://www.popcornmovies.to/live-broadcast/espnu",
   },
   {
     title: "ESPN",
-    image: "/channels/espn.webp",
-    link: "#",
+    image: "https://www.popcornmovies.to/uploads/poster/mO23pg6gzk.webp",
+    link: "https://www.popcornmovies.to/live-broadcast/espn",
   },
   {
     title: "NBA TV",
-    image: "/channels/nba-tv.webp",
-    link: "#",
+    image: "https://www.popcornmovies.to/uploads/poster/iHhVGaE80u.webp",
+    link: "https://www.popcornmovies.to/live-broadcast/nba-tv",
   },
   {
     title: "NFL Network",
-    image: "/channels/nfl-network.webp",
-    link: "#",
+    image: "https://www.popcornmovies.to/uploads/poster/A8wOWJX0My.webp",
+    link: "https://www.popcornmovies.to/live-broadcast/nfl-network",
   },
   {
     title: "HBO 2 East",
-    image: "/channels/hbo-2.webp",
-    link: "#",
+    image: "https://www.popcornmovies.to/uploads/poster/6vf1aSr7gt.webp",
+    link: "https://www.popcornmovies.to/live-broadcast/hbo-2-east",
   },
   {
     title: "HBO East",
-    image: "/channels/hbo.webp",
-    link: "#",
+    image: "https://www.popcornmovies.to/uploads/poster/G67HiKK1Nf.webp",
+    link: "https://www.popcornmovies.to/live-broadcast/hbo-east",
   },
   {
     title: "Fox Sports 1",
-    image: "/channels/fox-sports-1.webp",
-    link: "#",
+    image: "https://www.popcornmovies.to/uploads/poster/AyLTRoIo55.webp",
+    link: "https://www.popcornmovies.to/live-broadcast/fox-sports-1",
   },
   {
     title: "National Geographic",
-    image: "/channels/nat-geo.webp",
-    link: "#",
+    image: "https://www.popcornmovies.to/uploads/poster/mHrOgAZU75.webp",
+    link: "https://www.popcornmovies.to/live-broadcast/national-geographic",
   },
 ];
 
@@ -58,6 +58,7 @@ const LiveChannels = () => {
               key={channel.title}
               href={channel.link}
               className="relative block group"
+              data-abc="true"
             >
               <div className="aspect-square relative rounded-lg transition overflow-hidden cursor-pointer before:absolute before:-inset-px before:bg-gradient-to-b before:from-gray-950 before:to-gray-950/[.4] before:-m-px before:z-[1] before:opacity-0 group-hover:before:opacity-100">
                 <picture>
@@ -67,7 +68,7 @@ const LiveChannels = () => {
                     className="absolute h-full w-full object-cover rounded-md"
                   />
                   <img
-                    src={channel.image.replace('.webp', '.png')}
+                    src={channel.image.replace('.webp', '.jpg')}
                     alt={channel.title}
                     className="absolute h-full w-full object-cover rounded-md"
                     width={300}
@@ -75,12 +76,12 @@ const LiveChannels = () => {
                   />
                 </picture>
                 
-                <div className="hidden group-hover:flex absolute left-1/2 top-1/2 -translate-x-1/2 z-20 -translate-y-1/2 h-16 w-16 items-center justify-center cursor-pointer rounded-full bg-white/50 text-black transition">
-                  <Play className="h-8 w-8 translate-x-0.5" />
+                <div className="hidden group-hover:flex absolute left-1/2 top-1/2 -translate-x-1/2 z-20 -translate-y-1/2 h-16 w-16 items-center justify-center cursor-pointer rounded-full bg-white/50 text-white transition">
+                  <Play className="h-6 w-6 translate-x-0.5" />
                 </div>
               </div>
               
-              <div className="pt-3 text-center">
+              <div className="pt-3 transition text-center">
                 <h3 className="text-base tracking-tighter font-medium text-white line-clamp-1">
                   {channel.title}
                 </h3>
