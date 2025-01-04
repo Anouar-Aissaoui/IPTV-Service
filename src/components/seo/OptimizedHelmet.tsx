@@ -53,7 +53,7 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
       <meta property="og:description" content={description} />
       <meta property="og:image" content={fullImageUrl} />
       <meta property="og:locale" content={locale} />
-      <meta property="og:site_name" content="Premium IPTV Service Provider" />
+      <meta property="og:site_name" content="Best IPTV Service" />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />

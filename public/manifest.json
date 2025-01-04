@@ -1,7 +1,7 @@
 {
-  "name": "IPTV Service Provider",
+  "name": "Best IPTV Service",
   "short_name": "IPTV Service",
-  "description": "Premium IPTV subscription service with worldwide coverage",
+  "description": "Best IPTV subscription service with worldwide coverage",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
