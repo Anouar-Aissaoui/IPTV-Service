@@ -41,7 +41,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       return data as SEOMetrics;
     },
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
-    cacheTime: 10 * 60 * 1000 // Keep in cache for 10 minutes
+    gcTime: 10 * 60 * 1000 // Keep in cache for 10 minutes (formerly cacheTime)
   });
 
   const title = propTitle || seoMetrics?.title || 'Best IPTV Service Provider';
@@ -50,7 +50,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const imageUrl = propImageUrl || '/iptv-subscription.png';
 
   useEffect(() => {
-    const trackPageView = async () => {
+    const trackPageView = async (): Promise<(() => void) | undefined> => {
       try {
         const metric: SEOPerformanceMetric = {
           url: currentPath,
@@ -69,7 +69,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
         const startTime = performance.now();
         return () => {
           const timeOnPage = (performance.now() - startTime) / 1000; // Convert to seconds
-          supabase
+          void supabase
             .from('seo_performance')
             .update({ avg_time_on_page: timeOnPage })
             .eq('url', currentPath)
@@ -78,14 +78,17 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
         };
       } catch (error) {
         console.error('Error tracking page view:', error);
+        return undefined;
       }
     };
 
-    const cleanup = trackPageView();
+    const cleanupPromise = trackPageView();
     return () => {
-      if (cleanup && typeof cleanup === 'function') {
-        cleanup();
-      }
+      void cleanupPromise.then(cleanup => {
+        if (cleanup) {
+          cleanup();
+        }
+      });
     };
   }, [currentPath]);
 
