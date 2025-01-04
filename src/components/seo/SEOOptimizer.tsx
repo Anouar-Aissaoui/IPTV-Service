@@ -63,7 +63,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
           .eq('url', currentPath)
           .maybeSingle();
 
-        if (fetchError) {
+        if (fetchError && fetchError.code !== 'PGRST116') {
           console.error('Error fetching performance data:', fetchError);
           return;
         }
@@ -99,7 +99,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
           }
         }
 
-        return () => {
+        const cleanup = () => {
           const timeOnPage = (performance.now() - startTime) / 1000;
           supabase
             .from('seo_performance')
@@ -112,6 +112,8 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
               console.error('Error updating page timing:', err);
             });
         };
+
+        return cleanup;
       } catch (error) {
         console.error('Error tracking page view:', error);
         return undefined;
@@ -120,15 +122,13 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
 
     const cleanupPromise = trackPageView();
     return () => {
-      Promise.resolve(cleanupPromise)
-        .then(cleanup => {
+      if (cleanupPromise) {
+        cleanupPromise.then(cleanup => {
           if (cleanup) {
             cleanup();
           }
-        })
-        .catch(error => {
-          console.error('Error in cleanup:', error);
         });
+      }
     };
   }, [currentPath]);
 
