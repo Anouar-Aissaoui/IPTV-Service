@@ -1,7 +1,7 @@
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import { NavItems } from "./NavItems";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface NavigationProps {
   onScrollToSection: (sectionId: string) => void;
@@ -10,11 +10,15 @@ interface NavigationProps {
 export const Navigation = ({ onScrollToSection }: NavigationProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentLanguage = location.pathname.split('/')[1] || 'en';
 
   const handleHomeClick = () => {
-    if (window.location.pathname !== '/en') {
-      navigate('/en');
+    const baseUrl = 'https://www.iptvservice.site';
+    if (window.location.hostname === 'www.iptvservice.site') {
+      window.location.href = `${baseUrl}/${currentLanguage}`;
     } else {
+      navigate(`/${currentLanguage}`);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -43,7 +47,7 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
       <div className="flex items-center justify-between">
         <div className="text-xl sm:text-2xl font-black text-white transform -rotate-2 hover:rotate-0 transition-all duration-300">
           <a 
-            href="/en"
+            href={`/${currentLanguage}`}
             onClick={(e) => {
               e.preventDefault();
               handleHomeClick();

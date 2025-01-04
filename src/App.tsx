@@ -33,9 +33,21 @@ const LanguageRoutes = ({ language }: { language: string }) => {
 };
 
 const AppRoutes = () => {
+  const { i18n } = useTranslation();
+  const supportedLanguages = ['en', 'es', 'de', 'fr'];
+  
+  // Get browser language
+  const getBrowserLanguage = () => {
+    const browserLang = navigator.language.split('-')[0];
+    return supportedLanguages.includes(browserLang) ? browserLang : 'en';
+  };
+
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/en" replace />} />
+      <Route 
+        path="/" 
+        element={<Navigate to={`/${getBrowserLanguage()}`} replace />} 
+      />
       <Route path="/en/*" element={<LanguageRoutes language="en" />} />
       <Route path="/es/*" element={<LanguageRoutes language="es" />} />
       <Route path="/de/*" element={<LanguageRoutes language="de" />} />
