@@ -25,12 +25,6 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
     { 
       name: "FAQ", 
       action: () => onScrollToSection('faq-section') 
-    },
-    { 
-      name: "Contact Us", 
-      action: () => null, 
-      isLink: true, 
-      to: "/contact" 
     }
   ];
 
