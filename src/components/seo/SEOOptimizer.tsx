@@ -148,3 +148,4 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       </script>
     </Helmet>
   );
+};
