@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ThemeProvider } from 'next-themes';
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -59,17 +60,19 @@ const AppRoutes = () => {
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <div className="min-h-screen bg-background">
-          <div className="app-container relative">
-            <TooltipProvider>
-              <AppRoutes />
-            </TooltipProvider>
-            <Toaster />
-            <Sonner />
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <BrowserRouter>
+          <div className="min-h-screen bg-background">
+            <div className="app-container relative">
+              <TooltipProvider>
+                <AppRoutes />
+              </TooltipProvider>
+              <Toaster />
+              <Sonner />
+            </div>
           </div>
-        </div>
-      </BrowserRouter>
+        </BrowserRouter>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 };
