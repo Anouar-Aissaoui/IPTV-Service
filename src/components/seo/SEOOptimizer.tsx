@@ -48,11 +48,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
     gcTime: 10 * 60 * 1000
   });
 
-  const title = propTitle || seoMetrics?.title || 'Best IPTV Service Provider';
-  const description = propDescription || seoMetrics?.description || 'Premium IPTV subscription service with 40,000+ channels worldwide';
-  const canonicalUrl = propCanonicalUrl || seoMetrics?.canonical_url || `https://www.iptvservice.site${currentPath}`;
-  const imageUrl = propImageUrl || '/iptv-subscription.png';
-
   useEffect(() => {
     const trackPageView = async () => {
       try {
@@ -104,9 +99,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
             .eq('url', currentPath)
             .then(() => {
               console.log('Page timing updated');
-            })
-            .then(() => {
-              // Return void to match the expected cleanup type
               return;
             });
         };
@@ -129,6 +121,11 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       }
     };
   }, [currentPath]);
+
+  const title = propTitle || seoMetrics?.title || 'Best IPTV Service Provider';
+  const description = propDescription || seoMetrics?.description || 'Premium IPTV subscription service with 40,000+ channels worldwide';
+  const canonicalUrl = propCanonicalUrl || seoMetrics?.canonical_url || `https://www.iptvservice.site${currentPath}`;
+  const imageUrl = propImageUrl || '/iptv-subscription.png';
 
   return (
     <Helmet>
