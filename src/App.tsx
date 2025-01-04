@@ -70,21 +70,23 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="min-h-screen bg-background">
-            <div className="app-container relative">
-              <TooltipProvider>
-                <AppRoutes />
-              </TooltipProvider>
-              <Toaster />
-              <Sonner />
-            </div>
-          </div>
-        </ThemeProvider>
-      </BrowserRouter>
-    </QueryClientProvider>
+    <React.StrictMode>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <TooltipProvider>
+              <div className="min-h-screen bg-background">
+                <div className="app-container relative">
+                  <AppRoutes />
+                  <Toaster />
+                  <Sonner />
+                </div>
+              </div>
+            </TooltipProvider>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </React.StrictMode>
   );
 };
 
