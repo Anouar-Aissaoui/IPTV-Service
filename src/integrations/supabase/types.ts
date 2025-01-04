@@ -9,7 +9,51 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      pseo_variations: {
+        Row: {
+          alternate_urls: Json | null
+          content: Json | null
+          created_at: string
+          description: string
+          h1: string
+          id: string
+          keywords: string[] | null
+          locale: string | null
+          page_type: string | null
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          alternate_urls?: Json | null
+          content?: Json | null
+          created_at?: string
+          description: string
+          h1: string
+          id?: string
+          keywords?: string[] | null
+          locale?: string | null
+          page_type?: string | null
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          alternate_urls?: Json | null
+          content?: Json | null
+          created_at?: string
+          description?: string
+          h1?: string
+          id?: string
+          keywords?: string[] | null
+          locale?: string | null
+          page_type?: string | null
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       orioledb_index: {

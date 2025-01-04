@@ -37,18 +37,13 @@ export const SEOContent = () => {
           slug = 'best-iptv-service-usa';
       }
 
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from('pseo_variations')
         .select('*')
         .eq('slug', slug)
         .single();
       
-      if (error) {
-        console.error('Error fetching pSEO data:', error);
-        return null;
-      }
-      
-      return data;
+      return data as PSEOVariation;
     }
   });
 
@@ -73,14 +68,14 @@ export const SEOContent = () => {
     <>
       <Helmet>
         <html lang={locale} />
-        <title>{pseoData?.title || defaultTitle}</title>
+        <title>{pseoData?.title ?? defaultTitle}</title>
         {isPreviewDomain ? (
           <meta name="robots" content="noindex, nofollow" />
         ) : (
           <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         )}
-        <meta name="description" content={pseoData?.description || defaultDescription} />
-        <meta name="keywords" content={pseoData?.keywords?.join(', ')} />
+        <meta name="description" content={pseoData?.description ?? defaultDescription} />
+        <meta name="keywords" content={pseoData?.keywords?.join(', ') ?? ''} />
         <link rel="canonical" href={canonicalUrl} />
         
         {/* Alternate language links */}
@@ -91,17 +86,17 @@ export const SEOContent = () => {
         <link rel="alternate" hrefLang="x-default" href={`${baseUrl}/en`} />
         
         {/* Open Graph / Facebook */}
-        <meta property="og:type" content={pseoData?.page_type || "website"} />
-        <meta property="og:title" content={pseoData?.title || defaultTitle} />
-        <meta property="og:description" content={pseoData?.description || defaultDescription} />
+        <meta property="og:type" content={pseoData?.page_type ?? "website"} />
+        <meta property="og:title" content={pseoData?.title ?? defaultTitle} />
+        <meta property="og:description" content={pseoData?.description ?? defaultDescription} />
         <meta property="og:image" content={`${baseUrl}/iptv-subscription.png`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:site_name" content="Premium IPTV Service Provider" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={pseoData?.title || defaultTitle} />
-        <meta name="twitter:description" content={pseoData?.description || defaultDescription} />
+        <meta name="twitter:title" content={pseoData?.title ?? defaultTitle} />
+        <meta name="twitter:description" content={pseoData?.description ?? defaultDescription} />
         <meta name="twitter:image" content={`${baseUrl}/iptv-subscription.png`} />
       </Helmet>
 
@@ -114,7 +109,7 @@ export const SEOContent = () => {
                 className="text-5xl font-bold mb-10 text-white bg-gradient-to-r from-neon to-white bg-clip-text text-transparent"
                 itemProp="headline"
               >
-                {pseoData?.h1 || "Buy IPTV Subscription"}
+                {pseoData?.h1 ?? "Buy IPTV Subscription"}
               </h1>
               
               <meta itemProp="datePublished" content={new Date().toISOString().split('T')[0]} />
@@ -123,7 +118,7 @@ export const SEOContent = () => {
             
             <section>
               <h2 className="text-3xl font-semibold mb-8 text-neon">
-                {pseoData?.content?.main_content || "Revolutionize Your Viewing Experience with IPTV"}
+                {pseoData?.content?.main_content ?? "Revolutionize Your Viewing Experience with IPTV"}
               </h2>
               
               <div itemProp="articleBody">
