@@ -26,18 +26,23 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const { data: seoMetrics } = useQuery({
     queryKey: ['seo-metrics', currentPath],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('seo_metrics')
-        .select('*')
-        .eq('route', currentPath)
-        .single();
+      try {
+        const { data, error } = await supabase
+          .from('seo_metrics')
+          .select('*')
+          .eq('route', currentPath)
+          .maybeSingle(); // Use maybeSingle() instead of single()
 
-      if (error) {
-        console.error('Error fetching SEO metrics:', error);
+        if (error) {
+          console.error('Error fetching SEO metrics:', error);
+          return null;
+        }
+
+        return data as SEOMetrics | null;
+      } catch (error) {
+        console.error('Error in SEO metrics query:', error);
         return null;
       }
-
-      return data as SEOMetrics;
     },
     staleTime: 5 * 60 * 1000,
     gcTime: 10 * 60 * 1000
@@ -58,11 +63,28 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
           avg_time_on_page: 0
         };
 
-        await supabase
+        // First, try to get existing record
+        const { data: existingData } = await supabase
           .from('seo_performance')
-          .upsert(metric, {
-            onConflict: 'url'
-          });
+          .select('*')
+          .eq('url', currentPath)
+          .single();
+
+        if (existingData) {
+          // If record exists, update it
+          await supabase
+            .from('seo_performance')
+            .update({
+              visits: (existingData.visits || 0) + 1,
+              updated_at: new Date().toISOString()
+            })
+            .eq('url', currentPath);
+        } else {
+          // If no record exists, insert new one
+          await supabase
+            .from('seo_performance')
+            .insert([metric]);
+        }
 
         const startTime = performance.now();
         return () => {
