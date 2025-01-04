@@ -5,6 +5,7 @@ import Content from "@/components/Content";
 import { LiveSports } from "@/components/LiveSports";
 import { FAQ } from "@/components/FAQ";
 import { BrandCarousel } from "@/components/BrandCarousel";
+import LiveChannels from "@/components/LiveChannels";
 import { Helmet } from "react-helmet";
 
 const Index = () => {
@@ -26,6 +27,7 @@ const Index = () => {
       <BrandCarousel />
       <Pricing />
       <Content />
+      <LiveChannels />
       <LiveSports />
       <FAQ />
     </div>
