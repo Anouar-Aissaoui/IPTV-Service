@@ -12,7 +12,9 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
   const navItems = [
     { 
       name: "Home", 
-      action: () => window.scrollTo({ top: 0, behavior: 'smooth' }) 
+      action: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
+      isLink: true,
+      to: "https://www.iptvservice.site/"
     },
     { 
       name: "Pricing", 
