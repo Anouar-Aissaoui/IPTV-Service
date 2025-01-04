@@ -23,7 +23,6 @@
     --border: 24 95% 53%;
     --input: 0 0% 0%;
     --ring: 24 95% 53%;
-    --radius: 0.75rem;
   }
 }
 
@@ -78,4 +77,45 @@
 
 .brutal-rotate-reverse {
   @apply transform rotate-2;
+}
+
+/* Responsive Container */
+.container {
+  @apply px-4 mx-auto max-w-7xl;
+  @apply sm:px-6 lg:px-8;
+}
+
+/* Responsive Typography */
+@responsive {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Mobile-first padding utilities */
+.section-padding {
+  @apply py-8 md:py-12 lg:py-16;
+}
+
+/* Responsive Grid */
+.responsive-grid {
+  @apply grid grid-cols-1 gap-4;
+  @apply sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
+}
+
+/* Mobile Navigation Animation */
+.mobile-menu-enter {
+  @apply transform -translate-y-full opacity-0;
+}
+
+.mobile-menu-enter-active {
+  @apply transform translate-y-0 opacity-100 transition-all duration-300;
+}
+
+.mobile-menu-exit {
+  @apply transform translate-y-0 opacity-100;
+}
+
+.mobile-menu-exit-active {
+  @apply transform -translate-y-full opacity-0 transition-all duration-300;
 }
