@@ -1,6 +1,7 @@
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import { NavItems } from "./NavItems";
+import { useNavigate } from "react-router-dom";
 
 interface NavigationProps {
   onScrollToSection: (sectionId: string) => void;
@@ -8,13 +9,20 @@ interface NavigationProps {
 
 export const Navigation = ({ onScrollToSection }: NavigationProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleHomeClick = () => {
+    if (window.location.pathname !== '/en') {
+      navigate('/en');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const navItems = [
     { 
       name: "Home", 
-      action: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
-      isLink: true,
-      to: "https://www.iptvservice.site/"
+      action: handleHomeClick
     },
     { 
       name: "Pricing", 
@@ -35,9 +43,11 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
       <div className="flex items-center justify-between">
         <div className="text-xl sm:text-2xl font-black text-white transform -rotate-2 hover:rotate-0 transition-all duration-300">
           <a 
-            href="https://www.iptvservice.site/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+            href="/en"
+            onClick={(e) => {
+              e.preventDefault();
+              handleHomeClick();
+            }}
             className="hover:text-[#F97316] transition-all duration-300 ease-in-out flex items-center gap-2 brutal-border brutal-shadow px-3 py-1 sm:px-4 sm:py-2 bg-black hover:-translate-y-1 hover:translate-x-1"
           >
             IPTV Service
