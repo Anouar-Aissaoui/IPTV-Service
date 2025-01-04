@@ -9,7 +9,9 @@ import { IPTVDefinition } from './seo/IPTVDefinition';
 import { IPTVBenefits } from './seo/IPTVBenefits';
 import { IPTVExplanation } from './seo/IPTVExplanation';
 import { IPTVFAQs } from './seo/IPTVFAQs';
-import type { PSEOVariation } from '@/types/seo';
+import type { Database } from '@/types/database';
+
+type PSEOVariation = Database['public']['Tables']['pseo_variations']['Row'];
 
 export const SEOContent = () => {
   const location = useLocation();
@@ -46,7 +48,7 @@ export const SEOContent = () => {
         return null;
       }
       
-      return data as PSEOVariation;
+      return data;
     }
   });
 
