@@ -64,21 +64,17 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
           avg_time_on_page: 0
         };
 
-        const { error } = await supabase
+        await supabase
           .from('seo_performance')
           .upsert([metric], {
             onConflict: 'url'
           });
 
-        if (error) {
-          console.error('Error tracking page view:', error);
-        }
-
         const startTime = performance.now();
         
         return () => {
           const timeOnPage = (performance.now() - startTime) / 1000;
-          supabase
+          void supabase
             .from('seo_performance')
             .update({ avg_time_on_page: timeOnPage })
             .eq('url', canonicalPath)
@@ -91,14 +87,13 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
         };
       } catch (error) {
         console.error('Error in trackPageView:', error);
+        return () => {};
       }
     };
 
     const cleanup = trackPageView();
     return () => {
-      if (cleanup) {
-        cleanup();
-      }
+      cleanup.then(cleanupFn => cleanupFn());
     };
   }, [canonicalPath]);
 
@@ -113,8 +108,8 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       <link rel="canonical" href={canonicalUrl} />
       
       {/* Alternate Language URLs */}
-      <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
-      <link rel="alternate" hreflang="en" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="en" href={canonicalUrl} />
       
       {/* Robots Control */}
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
