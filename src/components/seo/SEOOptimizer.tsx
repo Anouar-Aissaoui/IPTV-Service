@@ -31,7 +31,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
           .from('seo_metrics')
           .select('*')
           .eq('route', currentPath)
-          .maybeSingle(); // Use maybeSingle() instead of single()
+          .maybeSingle();
 
         if (error) {
           console.error('Error fetching SEO metrics:', error);
@@ -56,45 +56,55 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   useEffect(() => {
     const trackPageView = async () => {
       try {
-        const metric: SEOPerformanceMetric = {
-          url: currentPath,
-          visits: 1,
-          bounce_rate: 0,
-          avg_time_on_page: 0
-        };
-
         // First, try to get existing record
-        const { data: existingData } = await supabase
+        const { data: existingData, error: fetchError } = await supabase
           .from('seo_performance')
           .select('*')
           .eq('url', currentPath)
-          .single();
+          .maybeSingle();
+
+        if (fetchError) {
+          console.error('Error fetching performance data:', fetchError);
+          return;
+        }
+
+        const startTime = performance.now();
 
         if (existingData) {
           // If record exists, update it
-          await supabase
+          const { error: updateError } = await supabase
             .from('seo_performance')
             .update({
               visits: (existingData.visits || 0) + 1,
               updated_at: new Date().toISOString()
             })
             .eq('url', currentPath);
+
+          if (updateError) {
+            console.error('Error updating performance data:', updateError);
+          }
         } else {
           // If no record exists, insert new one
-          await supabase
+          const { error: insertError } = await supabase
             .from('seo_performance')
-            .insert([metric]);
+            .insert([{
+              url: currentPath,
+              visits: 1,
+              bounce_rate: 0,
+              avg_time_on_page: 0
+            }]);
+
+          if (insertError) {
+            console.error('Error inserting performance data:', insertError);
+          }
         }
 
-        const startTime = performance.now();
         return () => {
           const timeOnPage = (performance.now() - startTime) / 1000;
-          const updatePromise = supabase
+          supabase
             .from('seo_performance')
             .update({ avg_time_on_page: timeOnPage })
-            .eq('url', currentPath);
-            
-          return Promise.resolve(updatePromise)
+            .eq('url', currentPath)
             .then(() => {
               console.log('Page timing updated');
             })
