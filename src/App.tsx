@@ -75,17 +75,17 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <BrowserRouter>
-          <div className="min-h-screen bg-background">
-            <div className="app-container relative">
-              <TooltipProvider>
+        <TooltipProvider>
+          <BrowserRouter>
+            <div className="min-h-screen bg-background">
+              <div className="app-container relative">
                 <AppRoutes />
                 <Toaster />
                 <Sonner />
-              </TooltipProvider>
+              </div>
             </div>
-          </div>
-        </BrowserRouter>
+          </BrowserRouter>
+        </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );
