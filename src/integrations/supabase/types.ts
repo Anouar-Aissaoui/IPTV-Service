@@ -9,499 +9,272 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      buyer_info: {
-        Row: {
-          created_at: string | null
-          email: string
-          full_name: string
-          id: string
-          message: string | null
-          phone: string | null
-          selected_plan: string
-        }
-        Insert: {
-          created_at?: string | null
-          email: string
-          full_name: string
-          id?: string
-          message?: string | null
-          phone?: string | null
-          selected_plan: string
-        }
-        Update: {
-          created_at?: string | null
-          email?: string
-          full_name?: string
-          id?: string
-          message?: string | null
-          phone?: string | null
-          selected_plan?: string
-        }
-        Relationships: []
-      }
-      cache: {
-        Row: {
-          created_at: string
-          expires_at: string
-          id: string
-          key: string
-          last_accessed: string
-          value: Json
-        }
-        Insert: {
-          created_at?: string
-          expires_at: string
-          id?: string
-          key: string
-          last_accessed?: string
-          value: Json
-        }
-        Update: {
-          created_at?: string
-          expires_at?: string
-          id?: string
-          key?: string
-          last_accessed?: string
-          value?: Json
-        }
-        Relationships: []
-      }
-      contact_messages: {
-        Row: {
-          created_at: string
-          email: string
-          id: string
-          message: string
-          name: string
-          status: string | null
-          subject: string
-        }
-        Insert: {
-          created_at?: string
-          email: string
-          id?: string
-          message: string
-          name: string
-          status?: string | null
-          subject: string
-        }
-        Update: {
-          created_at?: string
-          email?: string
-          id?: string
-          message?: string
-          name?: string
-          status?: string | null
-          subject?: string
-        }
-        Relationships: []
-      }
-      images: {
-        Row: {
-          content_type: string
-          created_at: string | null
-          file_name: string
-          file_path: string
-          id: string
-          size: number
-        }
-        Insert: {
-          content_type: string
-          created_at?: string | null
-          file_name: string
-          file_path: string
-          id?: string
-          size: number
-        }
-        Update: {
-          content_type?: string
-          created_at?: string | null
-          file_name?: string
-          file_path?: string
-          id?: string
-          size?: number
-        }
-        Relationships: []
-      }
-      performance_metrics: {
-        Row: {
-          cls: number
-          created_at: string
-          fcp: number
-          id: string
-          lcp: number
-          load_time: number
-          route: string
-          ttfb: number
-        }
-        Insert: {
-          cls: number
-          created_at?: string
-          fcp: number
-          id?: string
-          lcp: number
-          load_time: number
-          route: string
-          ttfb: number
-        }
-        Update: {
-          cls?: number
-          created_at?: string
-          fcp?: number
-          id?: string
-          lcp?: number
-          load_time?: number
-          route?: string
-          ttfb?: number
-        }
-        Relationships: []
-      }
-      pseo_variations: {
-        Row: {
-          alternate_urls: Json | null
-          content: Json
-          created_at: string
-          description: string
-          h1: string
-          id: string
-          indexing_status: string | null
-          is_indexed: boolean
-          keywords: string[]
-          last_indexed: string | null
-          locale: string | null
-          meta_tags: Json
-          page_type: string | null
-          priority: number
-          schema_org: Json | null
-          slug: string
-          social_tags: Json | null
-          structured_data: Json
-          target_audience: string[] | null
-          target_features: string[] | null
-          target_location: string | null
-          target_service_type: string | null
-          template_id: string | null
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          alternate_urls?: Json | null
-          content?: Json
-          created_at?: string
-          description: string
-          h1: string
-          id?: string
-          indexing_status?: string | null
-          is_indexed?: boolean
-          keywords?: string[]
-          last_indexed?: string | null
-          locale?: string | null
-          meta_tags?: Json
-          page_type?: string | null
-          priority?: number
-          schema_org?: Json | null
-          slug: string
-          social_tags?: Json | null
-          structured_data?: Json
-          target_audience?: string[] | null
-          target_features?: string[] | null
-          target_location?: string | null
-          target_service_type?: string | null
-          template_id?: string | null
-          title: string
-          updated_at?: string
-        }
-        Update: {
-          alternate_urls?: Json | null
-          content?: Json
-          created_at?: string
-          description?: string
-          h1?: string
-          id?: string
-          indexing_status?: string | null
-          is_indexed?: boolean
-          keywords?: string[]
-          last_indexed?: string | null
-          locale?: string | null
-          meta_tags?: Json
-          page_type?: string | null
-          priority?: number
-          schema_org?: Json | null
-          slug?: string
-          social_tags?: Json | null
-          structured_data?: Json
-          target_audience?: string[] | null
-          target_features?: string[] | null
-          target_location?: string | null
-          target_service_type?: string | null
-          template_id?: string | null
-          title?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "pseo_variations_template_id_fkey"
-            columns: ["template_id"]
-            isOneToOne: false
-            referencedRelation: "seo_templates"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      seo_bulk_pages: {
-        Row: {
-          alternate_urls: Json | null
-          breadcrumbs: Json | null
-          canonical_url: string | null
-          content: Json
-          created_at: string
-          description: string
-          external_links: Json | null
-          faq_schema: Json | null
-          h1: string
-          header_tags: Json | null
-          id: string
-          image_alt_texts: Json | null
-          indexing_status: string | null
-          internal_links: Json | null
-          is_indexed: boolean
-          keyword_density: Json | null
-          keywords: string[]
-          last_indexed: string | null
-          locale: string | null
-          meta_tags: Json
-          page_type: string | null
-          priority: number
-          schema_org: Json | null
-          semantic_markup: string | null
-          slug: string
-          social_tags: Json | null
-          structured_data: Json
-          target_audience: string[] | null
-          target_features: string[] | null
-          target_location: string | null
-          target_service_type: string | null
-          title: string
-          updated_at: string
-          word_count: number | null
-        }
-        Insert: {
-          alternate_urls?: Json | null
-          breadcrumbs?: Json | null
-          canonical_url?: string | null
-          content?: Json
-          created_at?: string
-          description: string
-          external_links?: Json | null
-          faq_schema?: Json | null
-          h1: string
-          header_tags?: Json | null
-          id?: string
-          image_alt_texts?: Json | null
-          indexing_status?: string | null
-          internal_links?: Json | null
-          is_indexed?: boolean
-          keyword_density?: Json | null
-          keywords?: string[]
-          last_indexed?: string | null
-          locale?: string | null
-          meta_tags?: Json
-          page_type?: string | null
-          priority?: number
-          schema_org?: Json | null
-          semantic_markup?: string | null
-          slug: string
-          social_tags?: Json | null
-          structured_data?: Json
-          target_audience?: string[] | null
-          target_features?: string[] | null
-          target_location?: string | null
-          target_service_type?: string | null
-          title: string
-          updated_at?: string
-          word_count?: number | null
-        }
-        Update: {
-          alternate_urls?: Json | null
-          breadcrumbs?: Json | null
-          canonical_url?: string | null
-          content?: Json
-          created_at?: string
-          description?: string
-          external_links?: Json | null
-          faq_schema?: Json | null
-          h1?: string
-          header_tags?: Json | null
-          id?: string
-          image_alt_texts?: Json | null
-          indexing_status?: string | null
-          internal_links?: Json | null
-          is_indexed?: boolean
-          keyword_density?: Json | null
-          keywords?: string[]
-          last_indexed?: string | null
-          locale?: string | null
-          meta_tags?: Json
-          page_type?: string | null
-          priority?: number
-          schema_org?: Json | null
-          semantic_markup?: string | null
-          slug?: string
-          social_tags?: Json | null
-          structured_data?: Json
-          target_audience?: string[] | null
-          target_features?: string[] | null
-          target_location?: string | null
-          target_service_type?: string | null
-          title?: string
-          updated_at?: string
-          word_count?: number | null
-        }
-        Relationships: []
-      }
-      seo_metrics: {
-        Row: {
-          canonical_url: string
-          crawl_status: string | null
-          created_at: string
-          description: string
-          id: string
-          last_crawled: string | null
-          meta_tags: Json
-          route: string
-          structured_data: Json
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          canonical_url: string
-          crawl_status?: string | null
-          created_at?: string
-          description: string
-          id?: string
-          last_crawled?: string | null
-          meta_tags?: Json
-          route: string
-          structured_data?: Json
-          title: string
-          updated_at?: string
-        }
-        Update: {
-          canonical_url?: string
-          crawl_status?: string | null
-          created_at?: string
-          description?: string
-          id?: string
-          last_crawled?: string | null
-          meta_tags?: Json
-          route?: string
-          structured_data?: Json
-          title?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      seo_performance: {
-        Row: {
-          avg_time_on_page: number | null
-          bounce_rate: number | null
-          created_at: string | null
-          id: string
-          updated_at: string | null
-          url: string
-          visits: number | null
-        }
-        Insert: {
-          avg_time_on_page?: number | null
-          bounce_rate?: number | null
-          created_at?: string | null
-          id?: string
-          updated_at?: string | null
-          url: string
-          visits?: number | null
-        }
-        Update: {
-          avg_time_on_page?: number | null
-          bounce_rate?: number | null
-          created_at?: string | null
-          id?: string
-          updated_at?: string | null
-          url?: string
-          visits?: number | null
-        }
-        Relationships: []
-      }
-      seo_templates: {
-        Row: {
-          content_template: Json
-          created_at: string | null
-          description_template: string
-          id: string
-          keywords: string[]
-          route: string
-          title_template: string
-          updated_at: string | null
-        }
-        Insert: {
-          content_template: Json
-          created_at?: string | null
-          description_template: string
-          id?: string
-          keywords?: string[]
-          route: string
-          title_template: string
-          updated_at?: string | null
-        }
-        Update: {
-          content_template?: Json
-          created_at?: string | null
-          description_template?: string
-          id?: string
-          keywords?: string[]
-          route?: string
-          title_template?: string
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
-      seo_url_params: {
-        Row: {
-          created_at: string | null
-          id: string
-          param_key: string
-          param_values: string[]
-          template_id: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          id?: string
-          param_key: string
-          param_values: string[]
-          template_id?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          id?: string
-          param_key?: string
-          param_values?: string[]
-          template_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "seo_url_params_template_id_fkey"
-            columns: ["template_id"]
-            isOneToOne: false
-            referencedRelation: "seo_templates"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
+      [_ in never]: never
     }
     Views: {
-      [_ in never]: never
+      orioledb_index: {
+        Row: {
+          datoid: unknown | null
+          description: string | null
+          index_relnode: unknown | null
+          index_reloid: unknown | null
+          index_type: string | null
+          name: string | null
+          table_relnode: unknown | null
+          table_reloid: unknown | null
+        }
+        Relationships: []
+      }
+      orioledb_index_descr: {
+        Row: {
+          datoid: unknown | null
+          refcnt: unknown | null
+          relnode: unknown | null
+          reloid: unknown | null
+        }
+        Relationships: []
+      }
+      orioledb_table: {
+        Row: {
+          datoid: unknown | null
+          description: string | null
+          relnode: unknown | null
+          reloid: unknown | null
+        }
+        Relationships: []
+      }
+      orioledb_table_descr: {
+        Row: {
+          datoid: unknown | null
+          refcnt: unknown | null
+          relnode: unknown | null
+          reloid: unknown | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      orioledb_commit_hash: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
+      orioledb_compression_max_level: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
+      orioledb_evict_pages: {
+        Args: {
+          relid: unknown
+          maxlevel: number
+        }
+        Returns: undefined
+      }
+      orioledb_get_evicted_trees: {
+        Args: Record<PropertyKey, never>
+        Returns: Record<string, unknown>[]
+      }
+      orioledb_get_index_descrs: {
+        Args: Record<PropertyKey, never>
+        Returns: Record<string, unknown>[]
+      }
+      orioledb_get_table_descrs: {
+        Args: Record<PropertyKey, never>
+        Returns: Record<string, unknown>[]
+      }
+      orioledb_has_retained_undo: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      orioledb_idx_structure: {
+        Args: {
+          relid: unknown
+          tree_name: string
+          options?: string
+          depth?: number
+        }
+        Returns: string
+      }
+      orioledb_index_description: {
+        Args: {
+          datoid: unknown
+          relid: unknown
+          relnode: unknown
+          index_type: string
+        }
+        Returns: Record<string, unknown>
+      }
+      orioledb_index_oids: {
+        Args: Record<PropertyKey, never>
+        Returns: Record<string, unknown>[]
+      }
+      orioledb_index_rows: {
+        Args: {
+          relid: unknown
+        }
+        Returns: Record<string, unknown>
+      }
+      orioledb_page_stats: {
+        Args: Record<PropertyKey, never>
+        Returns: Record<string, unknown>[]
+      }
+      orioledb_parallel_debug_start: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      orioledb_parallel_debug_stop: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      orioledb_recovery_synchronized: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      orioledb_relation_size: {
+        Args: {
+          relid: unknown
+        }
+        Returns: number
+      }
+      orioledb_sys_tree_check: {
+        Args: {
+          num: number
+          force_map_check?: boolean
+        }
+        Returns: boolean
+      }
+      orioledb_sys_tree_rows: {
+        Args: {
+          num: number
+        }
+        Returns: Json[]
+      }
+      orioledb_sys_tree_structure: {
+        Args: {
+          num: number
+          options?: string
+          depth?: number
+        }
+        Returns: string
+      }
+      orioledb_table_description:
+        | {
+            Args: {
+              datoid: unknown
+              relid: unknown
+              relnode: unknown
+            }
+            Returns: string
+          }
+        | {
+            Args: {
+              relid: unknown
+            }
+            Returns: string
+          }
+      orioledb_table_oids: {
+        Args: Record<PropertyKey, never>
+        Returns: Record<string, unknown>[]
+      }
+      orioledb_table_pages: {
+        Args: {
+          relid: unknown
+        }
+        Returns: Record<string, unknown>[]
+      }
+      orioledb_tableam_handler: {
+        Args: {
+          "": unknown
+        }
+        Returns: unknown
+      }
+      orioledb_tbl_are_indices_equal: {
+        Args: {
+          idx_oid1: unknown
+          idx_oid2: unknown
+        }
+        Returns: boolean
+      }
+      orioledb_tbl_bin_structure: {
+        Args: {
+          relid: unknown
+          print_bytes?: boolean
+          depth?: number
+        }
+        Returns: string
+      }
+      orioledb_tbl_check: {
+        Args: {
+          relid: unknown
+          force_map_check?: boolean
+        }
+        Returns: boolean
+      }
+      orioledb_tbl_compression_check: {
+        Args: {
+          level: number
+          relid: unknown
+          ranges?: number[]
+        }
+        Returns: string
+      }
+      orioledb_tbl_indices: {
+        Args: {
+          relid: unknown
+        }
+        Returns: string
+      }
+      orioledb_tbl_structure: {
+        Args: {
+          relid: unknown
+          options?: string
+          depth?: number
+        }
+        Returns: string
+      }
+      orioledb_ucm_check: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      orioledb_version: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
+      orioledb_write_pages: {
+        Args: {
+          relid: unknown
+        }
+        Returns: undefined
+      }
+      pg_stopevent_reset: {
+        Args: {
+          eventname: string
+        }
+        Returns: boolean
+      }
+      pg_stopevent_set: {
+        Args: {
+          eventname: string
+          condition: unknown
+        }
+        Returns: undefined
+      }
+      pg_stopevents: {
+        Args: Record<PropertyKey, never>
+        Returns: Record<string, unknown>[]
+      }
+      s3_get: {
+        Args: {
+          objectname: string
+        }
+        Returns: string
+      }
+      s3_put: {
+        Args: {
+          objectname: string
+          filename: string
+        }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
