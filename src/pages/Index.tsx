@@ -11,6 +11,7 @@ import { IPTVBenefits } from "@/components/seo/IPTVBenefits";
 import { IPTVFAQs } from "@/components/seo/IPTVFAQs";
 import { IPTVExplanation } from "@/components/seo/IPTVExplanation";
 import { seoKeywords } from "@/components/seo/Keywords";
+import { BottomContent } from "@/components/BottomContent";
 
 const Index = () => {
   return (
@@ -34,6 +35,7 @@ const Index = () => {
       <IPTVBenefits />
       <FAQ />
       <IPTVFAQs />
+      <BottomContent />
     </div>
   );
 };
