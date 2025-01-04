@@ -24,6 +24,15 @@ Disallow: /
 User-agent: anthropic-ai
 Disallow: /
 
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: Omgili
+Disallow: /
+
 # Optimize crawling rate
 Crawl-delay: 5
 
