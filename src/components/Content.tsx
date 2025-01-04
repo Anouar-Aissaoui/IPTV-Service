@@ -79,10 +79,6 @@ const Content: React.FC = () => {
           ))}
         </div>
       </div>
-
-      {/* Neo-brutalist decorative elements */}
-      <div className="absolute top-10 right-10 w-20 h-20 bg-neon brutal-border transform rotate-12 hidden lg:block" />
-      <div className="absolute bottom-10 left-10 w-16 h-16 bg-dark brutal-border brutal-shadow transform -rotate-12 hidden lg:block" />
     </div>
   );
 };
