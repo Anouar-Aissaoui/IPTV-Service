@@ -56,7 +56,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   useEffect(() => {
     const trackPageView = async () => {
       try {
-        // First, try to get existing record
         const { data: existingData, error: fetchError } = await supabase
           .from('seo_performance')
           .select('*')
@@ -71,7 +70,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
         const startTime = performance.now();
 
         if (existingData) {
-          // If record exists, update it
           const { error: updateError } = await supabase
             .from('seo_performance')
             .update({
@@ -84,7 +82,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
             console.error('Error updating performance data:', updateError);
           }
         } else {
-          // If no record exists, insert new one
           const { error: insertError } = await supabase
             .from('seo_performance')
             .insert([{
@@ -101,15 +98,16 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
 
         const cleanup = () => {
           const timeOnPage = (performance.now() - startTime) / 1000;
-          supabase
+          return supabase
             .from('seo_performance')
             .update({ avg_time_on_page: timeOnPage })
             .eq('url', currentPath)
             .then(() => {
               console.log('Page timing updated');
             })
-            .catch(err => {
-              console.error('Error updating page timing:', err);
+            .then(() => {
+              // Return void to match the expected cleanup type
+              return;
             });
         };
 
