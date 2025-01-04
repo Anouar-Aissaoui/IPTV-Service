@@ -56,8 +56,8 @@ const Content: React.FC = () => {
     <div className="bg-dark py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 relative">
         <div className="mb-12 transform -rotate-2">
-          <h2 className="text-3xl md:text-4xl font-black text-center brutal-text inline-block bg-neon text-dark px-6 py-3 brutal-border brutal-shadow">
-            Movies & <span className="text-white bg-dark px-2">TV Shows</span>
+          <h2 className="text-3xl md:text-4xl font-black text-center brutal-text inline-block bg-gradient-to-r from-neon via-white to-neon bg-clip-text text-transparent px-6 py-3 brutal-border brutal-shadow hover:scale-105 transition-transform duration-300">
+            Movies <span className="text-white bg-dark px-2 brutal-rotate">&</span> <span className="bg-gradient-to-r from-white to-neon bg-clip-text">TV Shows</span>
           </h2>
         </div>
 
