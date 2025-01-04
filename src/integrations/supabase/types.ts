@@ -54,6 +54,143 @@ export type Database = {
         }
         Relationships: []
       }
+      seo_metrics: {
+        Row: {
+          canonical_url: string
+          crawl_status: string | null
+          created_at: string | null
+          description: string
+          id: string
+          last_crawled: string | null
+          meta_tags: Json | null
+          route: string
+          structured_data: Json | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          canonical_url: string
+          crawl_status?: string | null
+          created_at?: string | null
+          description: string
+          id?: string
+          last_crawled?: string | null
+          meta_tags?: Json | null
+          route: string
+          structured_data?: Json | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          canonical_url?: string
+          crawl_status?: string | null
+          created_at?: string | null
+          description?: string
+          id?: string
+          last_crawled?: string | null
+          meta_tags?: Json | null
+          route?: string
+          structured_data?: Json | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      seo_performance: {
+        Row: {
+          avg_time_on_page: number | null
+          bounce_rate: number | null
+          created_at: string | null
+          id: string
+          updated_at: string | null
+          url: string
+          visits: number | null
+        }
+        Insert: {
+          avg_time_on_page?: number | null
+          bounce_rate?: number | null
+          created_at?: string | null
+          id?: string
+          updated_at?: string | null
+          url: string
+          visits?: number | null
+        }
+        Update: {
+          avg_time_on_page?: number | null
+          bounce_rate?: number | null
+          created_at?: string | null
+          id?: string
+          updated_at?: string | null
+          url?: string
+          visits?: number | null
+        }
+        Relationships: []
+      }
+      seo_templates: {
+        Row: {
+          content_template: Json | null
+          created_at: string | null
+          description_template: string
+          id: string
+          keywords: string[] | null
+          route: string
+          title_template: string
+          updated_at: string | null
+        }
+        Insert: {
+          content_template?: Json | null
+          created_at?: string | null
+          description_template: string
+          id?: string
+          keywords?: string[] | null
+          route: string
+          title_template: string
+          updated_at?: string | null
+        }
+        Update: {
+          content_template?: Json | null
+          created_at?: string | null
+          description_template?: string
+          id?: string
+          keywords?: string[] | null
+          route?: string
+          title_template?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      seo_url_params: {
+        Row: {
+          created_at: string | null
+          id: string
+          param_key: string
+          param_values: string[]
+          template_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          param_key: string
+          param_values: string[]
+          template_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          param_key?: string
+          param_values?: string[]
+          template_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "seo_url_params_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "seo_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       orioledb_index: {
