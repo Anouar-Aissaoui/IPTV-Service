@@ -1,8 +1,35 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!api|_next/static|_next/image|favicon.ico).*)",
       "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/en",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en/(.*)",
+      "destination": "/$1",
+      "permanent": true
+    },
+    {
+      "source": "/es/(.*)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/de/(.*)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/(.*)",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "headers": [
