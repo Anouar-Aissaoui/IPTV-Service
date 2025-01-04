@@ -60,12 +60,8 @@
   @apply shadow-[4px_4px_0px_0px_rgba(0,0,0,1)];
 }
 
-.brutal-shadow-orange {
-  @apply shadow-[4px_4px_0px_0px_rgba(249,115,22,1)];
-}
-
 .brutal-border {
-  @apply border-4;
+  @apply border-4 border-black;
 }
 
 .brutal-hover {
