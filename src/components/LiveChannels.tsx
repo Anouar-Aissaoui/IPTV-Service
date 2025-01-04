@@ -57,26 +57,31 @@ const LiveChannels = () => {
             <a
               key={channel.title}
               href={channel.link}
-              className="relative block group brutal-hover"
+              className="relative block group"
             >
-              <div className="aspect-square relative rounded-none overflow-hidden cursor-pointer brutal-border brutal-shadow bg-white">
-                <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="aspect-square relative rounded-lg transition overflow-hidden cursor-pointer before:absolute before:-inset-px before:bg-gradient-to-b before:from-gray-950 before:to-gray-950/[.4] before:-m-px before:z-[1] before:opacity-0 group-hover:before:opacity-100">
+                <picture>
+                  <source
+                    srcSet={channel.image}
+                    type="image/webp"
+                    className="absolute h-full w-full object-cover rounded-md"
+                  />
+                  <img
+                    src={channel.image.replace('.webp', '.png')}
+                    alt={channel.title}
+                    className="absolute h-full w-full object-cover rounded-md"
+                    width={300}
+                    height={450}
+                  />
+                </picture>
                 
-                <img
-                  src={channel.image}
-                  alt={channel.title}
-                  className="absolute h-full w-full object-cover"
-                  width={300}
-                  height={450}
-                />
-                
-                <div className="hidden group-hover:flex absolute left-1/2 top-1/2 -translate-x-1/2 z-20 -translate-y-1/2 h-16 w-16 items-center justify-center cursor-pointer rounded-full bg-white/80 text-black transition-all duration-300 brutal-border">
+                <div className="hidden group-hover:flex absolute left-1/2 top-1/2 -translate-x-1/2 z-20 -translate-y-1/2 h-16 w-16 items-center justify-center cursor-pointer rounded-full bg-white/50 text-black transition">
                   <Play className="h-8 w-8 translate-x-0.5" />
                 </div>
               </div>
               
               <div className="pt-3 text-center">
-                <h3 className="text-base tracking-tight font-bold text-white brutal-text transform -rotate-1">
+                <h3 className="text-base tracking-tighter font-medium text-white line-clamp-1">
                   {channel.title}
                 </h3>
               </div>
