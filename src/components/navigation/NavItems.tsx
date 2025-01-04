@@ -24,7 +24,7 @@ export const NavItems = ({ items, isMobile, onItemClick }: NavItemsProps) => {
 
   if (isMobile) {
     return (
-      <div className="md:hidden absolute top-full left-0 right-0 mt-2 mx-4 bg-black brutal-border brutal-shadow backdrop-blur-sm rounded-none p-4 space-y-2 animate-in slide-in-from-top duration-300">
+      <div className="md:hidden fixed top-[4rem] left-0 right-0 mt-2 mx-4 bg-black brutal-border brutal-shadow backdrop-blur-sm rounded-none p-4 space-y-2 animate-in slide-in-from-top duration-300 z-50">
         {items.map((item) => (
           <button
             key={item.name}

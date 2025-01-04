@@ -32,7 +32,7 @@
     @apply border-border font-grotesk;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
   }
   h1 {
     @apply text-brutal-4xl font-black tracking-tight;
@@ -57,11 +57,11 @@
 
 /* Neo Brutalism Specific Styles */
 .brutal-shadow {
-  @apply shadow-[4px_4px_0px_0px_rgba(0,0,0,1)];
+  @apply shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)];
 }
 
 .brutal-border {
-  @apply border-4 border-black;
+  @apply border-2 sm:border-3 md:border-4 border-black;
 }
 
 .brutal-hover {
@@ -78,4 +78,71 @@
 
 .brutal-rotate-reverse {
   @apply transform rotate-2;
+}
+
+/* Responsive Container */
+.container {
+  @apply px-4 mx-auto max-w-7xl;
+}
+
+/* Responsive Typography */
+@screen sm {
+  h1 {
+    @apply text-4xl;
+  }
+  h2 {
+    @apply text-3xl;
+  }
+  h3 {
+    @apply text-2xl;
+  }
+  p {
+    @apply text-base;
+  }
+}
+
+@screen md {
+  h1 {
+    @apply text-5xl;
+  }
+  h2 {
+    @apply text-4xl;
+  }
+  h3 {
+    @apply text-3xl;
+  }
+  p {
+    @apply text-lg;
+  }
+}
+
+@screen lg {
+  h1 {
+    @apply text-6xl;
+  }
+  h2 {
+    @apply text-5xl;
+  }
+  h3 {
+    @apply text-4xl;
+  }
+  p {
+    @apply text-xl;
+  }
+}
+
+/* Mobile Menu Animation */
+.slide-in-from-top {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

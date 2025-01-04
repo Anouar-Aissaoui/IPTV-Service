@@ -24,16 +24,16 @@ const Hero: React.FC = () => {
 
       <div className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
-          <div className="lg:w-1/2 space-y-4 md:space-y-6">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight transform -rotate-1">
+          <div className="lg:w-1/2 space-y-4 md:space-y-6 text-center lg:text-left">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight tracking-tight transform -rotate-1">
               {t('hero.title')}
             </h2>
             
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-gray-300 transform rotate-1">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-gray-300 transform rotate-1 max-w-xl mx-auto lg:mx-0">
               {t('hero.subtitle')} {t('hero.description')}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button 
                 onClick={handleWhatsAppClick}
                 className="w-full sm:w-auto bg-[#F97316] text-white hover:bg-[#F97316]/90 text-sm md:text-base px-4 md:px-6 py-3 md:py-4 font-bold transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200 border-4 border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-none"
