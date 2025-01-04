@@ -9,7 +9,6 @@ import { ThemeProvider } from 'next-themes';
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
-// Move queryClient initialization outside of component
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -70,10 +69,10 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <React.StrictMode>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <QueryClientProvider client={queryClient}>
-          <BrowserRouter>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <React.StrictMode>
             <TooltipProvider>
               <div className="min-h-screen bg-background">
                 <div className="app-container relative">
@@ -83,10 +82,10 @@ const App = () => {
                 </div>
               </div>
             </TooltipProvider>
-          </BrowserRouter>
-        </QueryClientProvider>
-      </ThemeProvider>
-    </React.StrictMode>
+          </React.StrictMode>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 };
 
