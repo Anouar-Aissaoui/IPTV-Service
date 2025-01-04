@@ -6,7 +6,7 @@ interface SportProps {
   sport: {
     title: string;
     image: string;
-    description: string;
+    translationKey: string;
   };
 }
 
