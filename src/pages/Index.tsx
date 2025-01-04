@@ -36,6 +36,19 @@ const Index = () => {
         <meta name="author" content="IPTV Service" />
         <meta name="referrer" content="no-referrer-when-downgrade" />
         <meta name="google" content="notranslate" />
+        
+        {/* OpenGraph Tags */}
+        <meta property="og:title" content={t('meta.title')} />
+        <meta property="og:description" content={t('meta.description')} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://www.iptvservice.site/${currentLanguage}`} />
+        <meta property="og:image" content="/iptv-subscription.png" />
+        
+        {/* Twitter Card Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={t('meta.title')} />
+        <meta name="twitter:description" content={t('meta.description')} />
+        <meta name="twitter:image" content="/iptv-subscription.png" />
       </Helmet>
       <Hero />
       <BrandCarousel />
