@@ -9,6 +9,7 @@ import { IPTVBenefits } from './seo/IPTVBenefits';
 import { IPTVExplanation } from './seo/IPTVExplanation';
 import { IPTVFAQs } from './seo/IPTVFAQs';
 import OptimizedHelmet from './seo/OptimizedHelmet';
+import { toast } from 'sonner';
 import type { PSEOVariation } from '@/types/seo';
 
 export const SEOContent = () => {
@@ -17,7 +18,7 @@ export const SEOContent = () => {
   const currentPath = location?.pathname || '/';
   const locale = currentPath.split('/')[1] || 'en';
   
-  const { data: pseoData } = useQuery({
+  const { data: pseoData, isError } = useQuery({
     queryKey: ['pseo', locale],
     queryFn: async () => {
       let slug;
@@ -35,14 +36,22 @@ export const SEOContent = () => {
           slug = 'best-iptv-service-usa';
       }
 
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from('pseo_variations')
         .select('*')
         .eq('slug', slug)
         .single();
       
+      if (error) {
+        console.error('Error fetching PSEO data:', error);
+        toast.error('Failed to load page content');
+        return null;
+      }
+      
       return data as PSEOVariation;
-    }
+    },
+    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+    retry: 2
   });
 
   // Construct the canonical URL based on the current path and locale
@@ -57,6 +66,12 @@ export const SEOContent = () => {
   // For the root path, redirect to the default locale
   if (currentPath === '/') {
     canonicalUrl = '/en';
+  }
+
+  // Handle error state
+  if (isError) {
+    console.error('Error loading SEO content');
+    return null;
   }
 
   return (
