@@ -10,27 +10,29 @@ import { IPTVDefinition } from "@/components/seo/IPTVDefinition";
 import { IPTVBenefits } from "@/components/seo/IPTVBenefits";
 import { IPTVFAQs } from "@/components/seo/IPTVFAQs";
 import { IPTVExplanation } from "@/components/seo/IPTVExplanation";
+import { seoKeywords } from "@/components/seo/Keywords";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-dark text-white font-grotesk">
       <SEOOptimizer 
-        title="Best IPTV Service Provider | Premium IPTV Subscription"
-        description="Get access to premium IPTV service with 40,000+ channels and VOD content. High-quality streaming, 24/7 support, and competitive pricing."
+        title="Best IPTV Service Provider | Buy Premium IPTV Subscription USA"
+        description="Get access to premium IPTV service with 40,000+ HD channels and VOD content. Best IPTV provider offering affordable streaming TV channels, 24/7 support, and competitive pricing."
         canonicalUrl="https://www.iptvservice.site"
         imageUrl="/iptv-subscription.png"
         type="website"
+        keywords={seoKeywords}
       />
       <Hero />
       <BrandCarousel />
       <IPTVDefinition />
+      <IPTVExplanation />
       <Pricing />
       <Content />
       <LiveChannels />
       <LiveSports />
       <IPTVBenefits />
       <FAQ />
-      <IPTVExplanation />
       <IPTVFAQs />
     </div>
   );

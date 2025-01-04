@@ -6,13 +6,15 @@ export const IPTVDefinition = () => {
       <div className="container mx-auto">
         <h2 className="text-2xl font-bold mb-4 text-white">What is IPTV?</h2>
         <p className="text-gray-300 mb-4">
-          IPTV (Internet Protocol Television) is a service that delivers television content over Internet Protocol (IP) networks. 
-          Unlike traditional TV services, IPTV offers a more flexible and interactive viewing experience with access to live channels, 
-          video-on-demand content, and streaming services through your internet connection.
+          IPTV (Internet Protocol Television) is a modern service that delivers television content over Internet Protocol (IP) networks. 
+          Unlike traditional TV services, our premium IPTV service offers a more flexible and interactive viewing experience with 
+          access to live channels, video-on-demand content, and streaming services through your internet connection.
         </p>
         <p className="text-gray-300">
-          Our premium IPTV service provides access to over 40,000 channels worldwide, including sports, entertainment, news, 
-          and educational content, all in high-definition quality with reliable streaming performance.
+          When you buy IPTV from us, you get access to the best IPTV service with over 40,000 channels worldwide, including 
+          sports, entertainment, news, and educational content. Our HD IPTV service ensures high-quality streaming performance 
+          with crystal-clear picture quality. As a leading USA IPTV service provider, we offer affordable IPTV subscription 
+          plans that cater to all your entertainment needs.
         </p>
       </div>
     </section>

@@ -20,3 +20,5 @@ export const seoKeywords = [
   'reliable IPTV service',
   'quality IPTV provider'
 ];
+
+export const getKeywordsString = () => seoKeywords.join(', ');
