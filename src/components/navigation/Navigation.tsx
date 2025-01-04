@@ -11,41 +11,47 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const currentLanguage = location.pathname.split('/')[1] || 'en';
 
   const handleHomeClick = () => {
-    const baseUrl = 'https://www.iptvservice.site';
-    if (window.location.hostname === 'www.iptvservice.site') {
-      window.location.href = `${baseUrl}/${currentLanguage}/premium-iptv-service`;
-    } else {
-      navigate(`/${currentLanguage}/premium-iptv-service`);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (location.pathname !== '/') {
+      navigate('/');
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const navItems = [
     { 
       name: "Home", 
+      path: "/",
       action: handleHomeClick
     },
     { 
       name: "Pricing", 
+      path: "/pricing",
       action: () => {
-        navigate(`/${currentLanguage}/pricing`);
+        if (location.pathname !== '/pricing') {
+          navigate('/pricing');
+        }
         onScrollToSection('pricing-section');
       }
     },
     { 
       name: "Channel List", 
+      path: "/channels",
       action: () => {
-        navigate(`/${currentLanguage}/channels`);
+        if (location.pathname !== '/channels') {
+          navigate('/channels');
+        }
         onScrollToSection('channel-list');
       }
     },
     { 
       name: "FAQ", 
+      path: "/faq",
       action: () => {
-        navigate(`/${currentLanguage}/faq`);
+        if (location.pathname !== '/faq') {
+          navigate('/faq');
+        }
         onScrollToSection('faq-section');
       }
     }
@@ -56,7 +62,7 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
       <div className="flex items-center justify-between">
         <div className="text-xl sm:text-2xl font-black text-white transform -rotate-2 hover:rotate-0 transition-all duration-300">
           <a 
-            href={`/${currentLanguage}/premium-iptv-service`}
+            href="/"
             onClick={(e) => {
               e.preventDefault();
               handleHomeClick();

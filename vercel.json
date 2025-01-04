@@ -7,6 +7,16 @@
   ],
   "redirects": [
     {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/en",
       "destination": "/",
       "permanent": true
@@ -14,21 +24,6 @@
     {
       "source": "/en/(.*)",
       "destination": "/$1",
-      "permanent": true
-    },
-    {
-      "source": "/es/(.*)",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/de/(.*)",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/fr/(.*)",
-      "destination": "/",
       "permanent": true
     }
   ],
