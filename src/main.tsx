@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { ThemeProvider } from 'next-themes'
 import App from './App.tsx'
 import './index.css'
 import './i18n/i18n'
@@ -11,6 +12,8 @@ const root = createRoot(rootElement);
 
 root.render(
   <StrictMode>
-    <App />
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <App />
+    </ThemeProvider>
   </StrictMode>
 );

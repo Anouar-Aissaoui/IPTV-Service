@@ -36,7 +36,6 @@ const AppRoutes = () => {
   const { i18n } = useTranslation();
   const supportedLanguages = ['en', 'es', 'de', 'fr'];
   
-  // Get browser language
   const getBrowserLanguage = () => {
     const browserLang = navigator.language.split('-')[0];
     return supportedLanguages.includes(browserLang) ? browserLang : 'en';
@@ -61,15 +60,15 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <div className="min-h-screen bg-background">
-          <div className="app-container relative">
-            <Toaster />
-            <Sonner />
-            <TooltipProvider>
+        <TooltipProvider>
+          <div className="min-h-screen bg-background">
+            <div className="app-container relative">
               <AppRoutes />
-            </TooltipProvider>
+              <Toaster />
+              <Sonner />
+            </div>
           </div>
-        </div>
+        </TooltipProvider>
       </BrowserRouter>
     </QueryClientProvider>
   );
