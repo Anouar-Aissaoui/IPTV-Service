@@ -16,9 +16,9 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
   const handleHomeClick = () => {
     const baseUrl = 'https://www.iptvservice.site';
     if (window.location.hostname === 'www.iptvservice.site') {
-      window.location.href = `${baseUrl}/${currentLanguage}`;
+      window.location.href = `${baseUrl}/${currentLanguage}/premium-iptv-service`;
     } else {
-      navigate(`/${currentLanguage}`);
+      navigate(`/${currentLanguage}/premium-iptv-service`);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -30,15 +30,24 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
     },
     { 
       name: "Pricing", 
-      action: () => onScrollToSection('pricing-section') 
+      action: () => {
+        navigate(`/${currentLanguage}/pricing`);
+        onScrollToSection('pricing-section');
+      }
     },
     { 
       name: "Channel List", 
-      action: () => onScrollToSection('channel-list') 
+      action: () => {
+        navigate(`/${currentLanguage}/channels`);
+        onScrollToSection('channel-list');
+      }
     },
     { 
       name: "FAQ", 
-      action: () => onScrollToSection('faq-section') 
+      action: () => {
+        navigate(`/${currentLanguage}/faq`);
+        onScrollToSection('faq-section');
+      }
     }
   ];
 
@@ -47,7 +56,7 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
       <div className="flex items-center justify-between">
         <div className="text-xl sm:text-2xl font-black text-white transform -rotate-2 hover:rotate-0 transition-all duration-300">
           <a 
-            href={`/${currentLanguage}`}
+            href={`/${currentLanguage}/premium-iptv-service`}
             onClick={(e) => {
               e.preventDefault();
               handleHomeClick();

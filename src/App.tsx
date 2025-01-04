@@ -30,6 +30,10 @@ const LanguageRoutes = ({ language }: { language: string }) => {
   return (
     <Routes>
       <Route path="/" element={<Index />} />
+      <Route path="/premium-iptv-service" element={<Index />} />
+      <Route path="/channels" element={<Index />} />
+      <Route path="/pricing" element={<Index />} />
+      <Route path="/faq" element={<Index />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
