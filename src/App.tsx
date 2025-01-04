@@ -74,19 +74,19 @@ const AppRoutes = () => {
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <TooltipProvider>
-            <div className="min-h-screen bg-background">
-              <div className="app-container relative">
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <BrowserRouter>
+          <div className="min-h-screen bg-background">
+            <div className="app-container relative">
+              <TooltipProvider>
                 <AppRoutes />
                 <Toaster />
                 <Sonner />
-              </div>
+              </TooltipProvider>
             </div>
-          </TooltipProvider>
-        </ThemeProvider>
-      </BrowserRouter>
+          </div>
+        </BrowserRouter>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 };
