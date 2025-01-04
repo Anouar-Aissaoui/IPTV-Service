@@ -20,6 +20,7 @@ const Index = () => {
         description={t('meta.description')}
         canonicalUrl={`https://www.iptvservice.site/${currentLanguage}`}
         imageUrl="/iptv-subscription.png"
+        type="website"
       />
       <Hero />
       <BrandCarousel />

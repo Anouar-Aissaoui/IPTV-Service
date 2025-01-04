@@ -23,6 +23,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const location = useLocation();
   const currentPath = location.pathname;
 
+  // Fetch SEO metrics with proper caching
   const { data: seoMetrics } = useQuery({
     queryKey: ['seo-metrics', currentPath],
     queryFn: async () => {
@@ -38,7 +39,9 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       }
 
       return data as SEOMetrics;
-    }
+    },
+    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+    cacheTime: 10 * 60 * 1000 // Keep in cache for 10 minutes
   });
 
   const title = propTitle || seoMetrics?.title || 'Best IPTV Service Provider';
@@ -51,7 +54,9 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       try {
         const metric: SEOPerformanceMetric = {
           url: currentPath,
-          visits: 1
+          visits: 1,
+          bounce_rate: 0,
+          avg_time_on_page: 0
         };
 
         await supabase
@@ -59,23 +64,45 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
           .upsert(metric, {
             onConflict: 'url'
           });
+
+        // Track page view timing
+        const startTime = performance.now();
+        return () => {
+          const timeOnPage = (performance.now() - startTime) / 1000; // Convert to seconds
+          supabase
+            .from('seo_performance')
+            .update({ avg_time_on_page: timeOnPage })
+            .eq('url', currentPath)
+            .then(() => console.log('Page timing updated'))
+            .catch(err => console.error('Error updating page timing:', err));
+        };
       } catch (error) {
         console.error('Error tracking page view:', error);
       }
     };
 
-    trackPageView();
+    const cleanup = trackPageView();
+    return () => {
+      if (cleanup && typeof cleanup === 'function') {
+        cleanup();
+      }
+    };
   }, [currentPath]);
 
   return (
     <Helmet>
-      {/* Basic Meta Tags */}
+      {/* Basic Meta Tags with dynamic content */}
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonicalUrl} />
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
-      {/* Open Graph Tags */}
+      {/* Preload critical resources */}
+      <link rel="preload" href="/iptv-subscription.png" as="image" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+      {/* Open Graph Tags for social sharing */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content={type} />
@@ -95,10 +122,25 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-      {/* Preconnect to Important Origins */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link rel="preconnect" href="https://cdn.gpteng.co" crossOrigin="anonymous" />
+      {/* Schema.org structured data */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": title,
+          "description": description,
+          "url": canonicalUrl,
+          "image": `https://www.iptvservice.site${imageUrl}`,
+          "publisher": {
+            "@type": "Organization",
+            "name": "IPTV Service",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.iptvservice.site/favicon.png"
+            }
+          }
+        })}
+      </script>
     </Helmet>
   );
 };
