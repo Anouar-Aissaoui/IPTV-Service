@@ -1,0 +1,20 @@
+{
+  "name": "IPTV Service Provider",
+  "short_name": "IPTV Service",
+  "description": "Premium IPTV subscription service with worldwide coverage",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#F97316",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "orientation": "any",
+  "categories": ["entertainment", "streaming"],
+  "lang": "en",
+  "dir": "ltr"
+}

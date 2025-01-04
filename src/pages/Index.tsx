@@ -22,6 +22,19 @@ const Index = () => {
         <link rel="alternate" hrefLang="de" href="https://www.iptvservice.site/de" />
         <link rel="alternate" hrefLang="fr" href="https://www.iptvservice.site/fr" />
         <link rel="alternate" hrefLang="x-default" href="https://www.iptvservice.site" />
+        
+        {/* Preload Critical Resources */}
+        <link rel="preload" as="image" href="/iptv-subscription.png" />
+        <link rel="preload" as="font" href="/fonts/grotesk.woff2" type="font/woff2" crossOrigin="anonymous" />
+        
+        {/* Resource Hints */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* SEO Meta Tags */}
+        <meta name="author" content="IPTV Service" />
+        <meta name="referrer" content="no-referrer-when-downgrade" />
+        <meta name="google" content="notranslate" />
       </Helmet>
       <Hero />
       <BrandCarousel />

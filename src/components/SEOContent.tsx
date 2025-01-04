@@ -96,6 +96,24 @@ export const SEOContent = () => {
         <meta name="twitter:title" content={pseoData?.title ?? defaultTitle} />
         <meta name="twitter:description" content={pseoData?.description ?? defaultDescription} />
         <meta name="twitter:image" content={`${baseUrl}/iptv-subscription.png`} />
+
+        {/* Additional SEO Meta Tags */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="theme-color" content="#F97316" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        
+        {/* Performance & Security Headers */}
+        <meta http-equiv="X-DNS-Prefetch-Control" content="on" />
+        <link rel="dns-prefetch" href={baseUrl} />
+        <link rel="preconnect" href={baseUrl} />
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        
+        {/* PWA Tags */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="application-name" content="IPTV Service" />
+        <meta name="apple-mobile-web-app-title" content="IPTV Service" />
       </Helmet>
 
       <div className="bg-dark-gray py-24">
