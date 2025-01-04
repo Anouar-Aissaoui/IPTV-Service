@@ -74,7 +74,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
         
         return () => {
           const timeOnPage = (performance.now() - startTime) / 1000;
-          void supabase
+          supabase
             .from('seo_performance')
             .update({ avg_time_on_page: timeOnPage })
             .eq('url', canonicalPath)
@@ -93,7 +93,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
 
     const cleanup = trackPageView();
     return () => {
-      cleanup.then(cleanupFn => cleanupFn());
+      void cleanup.then(cleanupFn => cleanupFn());
     };
   }, [canonicalPath]);
 
