@@ -17,5 +17,65 @@
     "channels": "Chaînes",
     "sports": "Chaînes Sportives",
     "vod": "Films et Séries"
+  },
+  "pricing": {
+    "title": "Choisissez Votre Plan IPTV",
+    "subtitle": "Obtenez les meilleurs forfaits d'abonnement IPTV avec des fonctionnalités premium, une qualité HD et une vaste bibliothèque de contenu.",
+    "features": {
+      "channels": "Chaînes en Direct",
+      "movies": "Films VOD",
+      "shows": "Séries TV",
+      "quality": "Qualité HD & SD",
+      "support": "Support 24/7",
+      "connections": "Connexions",
+      "ppv": "Événements PPV",
+      "premium": "Support Premium"
+    },
+    "cta": "Commencer",
+    "month": "mois",
+    "popular": "Plus Populaire",
+    "why_choose": "Pourquoi Choisir Notre Service IPTV ?",
+    "why_description": "Profitez de la meilleure qualité de streaming avec notre service d'abonnement IPTV premium. Nous offrons une large sélection de chaînes, des flux fiables et un support client dédié pour garantir la meilleure expérience de visionnage."
+  },
+  "content": {
+    "title": "Films & Séries TV",
+    "watch_now": "Regarder Maintenant"
+  },
+  "live_channels": {
+    "title": "Chaînes en Direct",
+    "subtitle": "Regardez vos chaînes préférées en direct"
+  },
+  "live_sports": {
+    "title": "Sports en Direct",
+    "subtitle": "Ne manquez aucun match important",
+    "watch_live": "Regarder en Direct",
+    "sports": {
+      "nba": "Regardez les matchs NBA en direct",
+      "premier_league": "Le meilleur du football anglais",
+      "champions_league": "La compétition d'élite européenne",
+      "bundesliga": "Le football allemand à son meilleur",
+      "la_liga": "La première division espagnole"
+    }
+  },
+  "faq": {
+    "title": "Questions Fréquentes",
+    "questions": {
+      "devices": {
+        "question": "Quels types d'appareils sont pris en charge ?",
+        "answer": "Notre service prend en charge une large gamme d'appareils, y compris les Smart TV, smartphones, tablettes et ordinateurs. Vous pouvez regarder sur n'importe quel appareil avec une connexion Internet."
+      },
+      "simultaneous": {
+        "question": "Sur combien d'appareils puis-je regarder simultanément ?",
+        "answer": "Selon votre forfait d'abonnement, vous pouvez regarder sur 1 à 4 appareils simultanément. Consultez nos forfaits pour plus de détails."
+      },
+      "guarantee": {
+        "question": "Offrez-vous une garantie de remboursement ?",
+        "answer": "Oui, nous offrons une garantie de remboursement de 30 jours si vous n'êtes pas satisfait de notre service."
+      },
+      "payment": {
+        "question": "Quels modes de paiement acceptez-vous ?",
+        "answer": "Nous acceptons toutes les principales cartes de crédit, PayPal et les paiements en cryptomonnaie."
+      }
+    }
   }
 }
