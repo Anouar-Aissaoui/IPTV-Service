@@ -26,84 +26,60 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const { data: seoMetrics } = useQuery({
     queryKey: ['seo-metrics', currentPath],
     queryFn: async () => {
-      try {
-        const { data, error } = await supabase
-          .from('seo_metrics')
-          .select('*')
-          .eq('route', currentPath)
-          .maybeSingle();
+      const { data, error } = await supabase
+        .from('seo_metrics')
+        .select('*')
+        .eq('route', currentPath)
+        .single();
 
-        if (error) {
-          console.error('Error fetching SEO metrics:', error);
-          return null;
-        }
-
-        return data as SEOMetrics | null;
-      } catch (error) {
-        console.error('Error in SEO metrics query:', error);
+      if (error) {
+        console.error('Error fetching SEO metrics:', error);
         return null;
       }
+
+      return data as SEOMetrics;
     },
     staleTime: 5 * 60 * 1000,
     gcTime: 10 * 60 * 1000
   });
 
+  const title = propTitle || seoMetrics?.title || 'Best IPTV Service Provider';
+  const description = propDescription || seoMetrics?.description || 'Premium IPTV subscription service with 40,000+ channels worldwide';
+  const canonicalUrl = propCanonicalUrl || seoMetrics?.canonical_url || `https://www.iptvservice.site${currentPath}`;
+  const imageUrl = propImageUrl || '/iptv-subscription.png';
+
   useEffect(() => {
     const trackPageView = async () => {
       try {
-        const { data: existingData, error: fetchError } = await supabase
-          .from('seo_performance')
-          .select('*')
-          .eq('url', currentPath)
-          .maybeSingle();
-
-        if (fetchError && fetchError.code !== 'PGRST116') {
-          console.error('Error fetching performance data:', fetchError);
-          return;
-        }
-
-        const startTime = performance.now();
-
-        if (existingData) {
-          const { error: updateError } = await supabase
-            .from('seo_performance')
-            .update({
-              visits: (existingData.visits || 0) + 1,
-              updated_at: new Date().toISOString()
-            })
-            .eq('url', currentPath);
-
-          if (updateError) {
-            console.error('Error updating performance data:', updateError);
-          }
-        } else {
-          const { error: insertError } = await supabase
-            .from('seo_performance')
-            .insert([{
-              url: currentPath,
-              visits: 1,
-              bounce_rate: 0,
-              avg_time_on_page: 0
-            }]);
-
-          if (insertError) {
-            console.error('Error inserting performance data:', insertError);
-          }
-        }
-
-        const cleanup = () => {
-          const timeOnPage = (performance.now() - startTime) / 1000;
-          return supabase
-            .from('seo_performance')
-            .update({ avg_time_on_page: timeOnPage })
-            .eq('url', currentPath)
-            .then(() => {
-              console.log('Page timing updated');
-              return;
-            });
+        const metric: SEOPerformanceMetric = {
+          url: currentPath,
+          visits: 1,
+          bounce_rate: 0,
+          avg_time_on_page: 0
         };
 
-        return cleanup;
+        await supabase
+          .from('seo_performance')
+          .upsert(metric, {
+            onConflict: 'url'
+          });
+
+        const startTime = performance.now();
+        return () => {
+          const timeOnPage = (performance.now() - startTime) / 1000;
+          const updatePromise = supabase
+            .from('seo_performance')
+            .update({ avg_time_on_page: timeOnPage })
+            .eq('url', currentPath);
+            
+          return Promise.resolve(updatePromise)
+            .then(() => {
+              console.log('Page timing updated');
+            })
+            .catch(err => {
+              console.error('Error updating page timing:', err);
+            });
+        };
       } catch (error) {
         console.error('Error tracking page view:', error);
         return undefined;
@@ -112,20 +88,17 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
 
     const cleanupPromise = trackPageView();
     return () => {
-      if (cleanupPromise) {
-        cleanupPromise.then(cleanup => {
+      Promise.resolve(cleanupPromise)
+        .then(cleanup => {
           if (cleanup) {
             cleanup();
           }
+        })
+        .catch(error => {
+          console.error('Error in cleanup:', error);
         });
-      }
     };
   }, [currentPath]);
-
-  const title = propTitle || seoMetrics?.title || 'Best IPTV Service Provider';
-  const description = propDescription || seoMetrics?.description || 'Premium IPTV subscription service with 40,000+ channels worldwide';
-  const canonicalUrl = propCanonicalUrl || seoMetrics?.canonical_url || `https://www.iptvservice.site${currentPath}`;
-  const imageUrl = propImageUrl || '/iptv-subscription.png';
 
   return (
     <Helmet>
