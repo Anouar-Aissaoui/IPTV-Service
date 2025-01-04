@@ -11,6 +11,7 @@ interface SEOOptimizerProps {
   canonicalUrl?: string;
   imageUrl?: string;
   type?: string;
+  keywords?: string[];
 }
 
 export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
@@ -18,7 +19,8 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   description: propDescription,
   canonicalUrl: propCanonicalUrl,
   imageUrl: propImageUrl,
-  type = 'website'
+  type = 'website',
+  keywords = []
 }) => {
   const location = useLocation();
   const currentPath = location.pathname;
@@ -105,6 +107,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
+      {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
       
       {/* Canonical URL */}
       <link rel="canonical" href={canonicalUrl} />
