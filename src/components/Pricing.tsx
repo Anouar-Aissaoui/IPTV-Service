@@ -2,7 +2,6 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { Helmet } from "react-helmet";
-import { BuyerInfoDialog } from "./BuyerInfoDialog";
 
 const keywords = [
   'buy IPTV',
@@ -72,12 +71,8 @@ const plans = [
 ];
 
 export const Pricing: React.FC = () => {
-  const [selectedPlan, setSelectedPlan] = React.useState("");
-  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
-
-  const handleGetStarted = (planName: string) => {
-    setSelectedPlan(planName);
-    setIsDialogOpen(true);
+  const handleGetStarted = () => {
+    window.open('https://wa.me/message/R5IYJF3GG635D1', '_blank');
   };
 
   return (
@@ -134,7 +129,7 @@ export const Pricing: React.FC = () => {
                       ? "bg-neon text-dark hover:bg-neon/90 border-4 border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
                       : "bg-dark border-4 border-neon text-neon hover:bg-neon hover:text-dark shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]"
                   }`}
-                  onClick={() => handleGetStarted(plan.name)}
+                  onClick={handleGetStarted}
                 >
                   Get Started
                 </Button>
@@ -151,12 +146,6 @@ export const Pricing: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <BuyerInfoDialog
-        isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-        selectedPlan={selectedPlan}
-      />
     </>
   );
 };
