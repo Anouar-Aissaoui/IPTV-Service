@@ -2,21 +2,13 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { BlurImage } from "./ui/blur-image";
-import { BuyerInfoDialog } from "./BuyerInfoDialog";
 import { Navigation } from "./navigation/Navigation";
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
-  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
-  const [selectedPlan, setSelectedPlan] = React.useState("");
   
   const handleWhatsAppClick = () => {
     window.open('https://wa.me/message/R5IYJF3GG635D1', '_blank');
-  };
-
-  const handleTrialClick = () => {
-    setSelectedPlan("Free Trial");
-    setIsDialogOpen(true);
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -43,7 +35,7 @@ const Hero: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
-                onClick={handleTrialClick}
+                onClick={handleWhatsAppClick}
                 className="w-full sm:w-auto bg-[#F97316] text-white hover:bg-[#F97316]/90 text-sm md:text-base px-4 md:px-6 py-3 md:py-4 font-bold transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200 border-4 border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-none"
               >
                 {t('hero.cta.trial')}
@@ -98,12 +90,6 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.15)_0%,transparent_70%)]"></div>
       </div>
-
-      <BuyerInfoDialog 
-        isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-        selectedPlan={selectedPlan}
-      />
     </div>
   );
 };
