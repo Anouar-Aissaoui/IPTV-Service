@@ -77,10 +77,6 @@ export const LiveSports = () => {
           ))}
         </div>
       </div>
-      
-      {/* Neo-brutalist decorative elements */}
-      <div className="absolute top-10 right-10 w-20 h-20 bg-neon border-4 border-dark transform rotate-12 hidden lg:block" />
-      <div className="absolute bottom-10 left-10 w-16 h-16 bg-dark border-4 border-white shadow-[4px_4px_0px_0px_rgba(249,115,22,1)] transform -rotate-12 hidden lg:block" />
     </div>
   );
 };
