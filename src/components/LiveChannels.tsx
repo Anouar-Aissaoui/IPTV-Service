@@ -49,7 +49,7 @@ const LiveChannels = () => {
     <section className="bg-dark py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 relative brutal-container">
         <div className="mb-12 transform -rotate-2">
-          <h2 className="text-3xl md:text-4xl font-black text-center brutal-text inline-block bg-neon text-dark px-6 py-3 brutal-border brutal-shadow">
+          <h2 className="text-3xl md:text-4xl font-black text-center brutal-text inline-block bg-[#F97316] text-dark px-6 py-3 border-4 border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             Live <span className="text-white bg-dark px-2">Channels</span>
           </h2>
         </div>
@@ -62,7 +62,7 @@ const LiveChannels = () => {
               className="relative block group transform transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1"
               data-abc="true"
             >
-              <div className="aspect-square relative rounded-none transition overflow-hidden cursor-pointer brutal-border brutal-shadow">
+              <div className="aspect-square relative rounded-none transition overflow-hidden cursor-pointer border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]">
                 <picture>
                   <source
                     srcSet={channel.image}
@@ -78,7 +78,7 @@ const LiveChannels = () => {
                   />
                 </picture>
                 
-                <div className="hidden group-hover:flex absolute left-1/2 top-1/2 -translate-x-1/2 z-20 -translate-y-1/2 h-16 w-16 items-center justify-center cursor-pointer bg-neon brutal-border">
+                <div className="hidden group-hover:flex absolute left-1/2 top-1/2 -translate-x-1/2 z-20 -translate-y-1/2 h-16 w-16 items-center justify-center cursor-pointer bg-[#F97316] border-4 border-white">
                   <Play className="h-6 w-6 translate-x-0.5 text-dark" />
                 </div>
                 
