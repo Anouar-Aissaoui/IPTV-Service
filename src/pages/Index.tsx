@@ -10,13 +10,14 @@ import { Helmet } from "react-helmet";
 
 const Index = () => {
   const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.language;
 
   return (
     <div className="min-h-screen bg-dark text-white font-grotesk">
       <Helmet>
         <title>{t('meta.title')}</title>
         <meta name="description" content={t('meta.description')} />
-        <html lang={i18n.language} />
+        <html lang={currentLanguage} />
         <link rel="alternate" hrefLang="en" href="https://www.iptvservice.site/en" />
         <link rel="alternate" hrefLang="es" href="https://www.iptvservice.site/es" />
         <link rel="alternate" hrefLang="de" href="https://www.iptvservice.site/de" />
