@@ -39,7 +39,7 @@ const sports = [
 
 const SportCard = memo(({ sport }: SportProps) => {
   return (
-    <div className="relative group overflow-hidden brutal-border brutal-shadow transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200">
+    <div className="relative group overflow-hidden border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)] transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200">
       <BlurImage
         src={sport.image}
         alt={sport.title}
@@ -48,14 +48,10 @@ const SportCard = memo(({ sport }: SportProps) => {
         decoding="async"
         fetchPriority="low"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-dark/20 to-dark/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-        <h3 className="text-brutal-base font-black tracking-tight text-white bg-dark inline-block px-2 transform -rotate-2 mb-2">
-          {sport.title}
-        </h3>
-        <p className="text-white/80 text-sm mb-4 transform rotate-1 bg-dark/80 p-2">
-          {sport.description}
-        </p>
-        <button className="bg-neon text-dark px-4 py-2 brutal-border brutal-shadow hover:translate-x-1 hover:-translate-y-1 transition-transform duration-200 font-black tracking-tight">
+      <div className="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+        <h3 className="text-white font-bold transform -rotate-2">{sport.title}</h3>
+        <p className="text-white/80 text-sm mb-4 transform rotate-1">{sport.description}</p>
+        <button className="bg-neon text-dark px-4 py-2 border-4 border-dark shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:-translate-y-1 transition-transform duration-200 font-black tracking-tight">
           Watch Live
         </button>
       </div>
@@ -70,7 +66,7 @@ export const LiveSports = () => {
     <div className="bg-dark py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 relative">
         <div className="mb-12 transform -rotate-2">
-          <h2 className="text-3xl md:text-4xl font-black text-center brutal-text inline-block bg-neon text-dark px-6 py-3 brutal-border brutal-shadow">
+          <h2 className="text-3xl md:text-4xl font-black text-center brutal-text inline-block bg-neon text-dark px-6 py-3 border-4 border-dark shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             Live <span className="text-white bg-dark px-2">Sports</span>
           </h2>
         </div>
@@ -83,8 +79,8 @@ export const LiveSports = () => {
       </div>
       
       {/* Neo-brutalist decorative elements */}
-      <div className="absolute top-10 right-10 w-20 h-20 bg-neon brutal-border transform rotate-12 hidden lg:block" />
-      <div className="absolute bottom-10 left-10 w-16 h-16 bg-dark brutal-border brutal-shadow transform -rotate-12 hidden lg:block" />
+      <div className="absolute top-10 right-10 w-20 h-20 bg-neon border-4 border-dark transform rotate-12 hidden lg:block" />
+      <div className="absolute bottom-10 left-10 w-16 h-16 bg-dark border-4 border-white shadow-[4px_4px_0px_0px_rgba(249,115,22,1)] transform -rotate-12 hidden lg:block" />
     </div>
   );
 };
