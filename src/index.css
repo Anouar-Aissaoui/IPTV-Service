@@ -57,11 +57,11 @@
 
 /* Neo Brutalism Specific Styles */
 .brutal-shadow {
-  @apply shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)];
+  @apply shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)];
 }
 
 .brutal-border {
-  @apply border-2 sm:border-3 md:border-4 border-black;
+  @apply border-2 md:border-4 border-black;
 }
 
 .brutal-hover {

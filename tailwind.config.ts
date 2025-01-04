@@ -30,6 +30,9 @@ export default {
         'brutal-3xl': ['1.875rem', { lineHeight: '2.25rem', letterSpacing: '0.05em', fontWeight: '900' }],
         'brutal-4xl': ['2.25rem', { lineHeight: '2.5rem', letterSpacing: '0.05em', fontWeight: '900' }],
       },
+      borderWidth: {
+        '3': '3px',
+      },
       colors: {
         primary: "#F97316",
         neon: "#F97316",
