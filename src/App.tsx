@@ -60,15 +60,15 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <TooltipProvider>
-          <div className="min-h-screen bg-background">
-            <div className="app-container relative">
+        <div className="min-h-screen bg-background">
+          <div className="app-container relative">
+            <TooltipProvider>
               <AppRoutes />
-              <Toaster />
-              <Sonner />
-            </div>
+            </TooltipProvider>
+            <Toaster />
+            <Sonner />
           </div>
-        </TooltipProvider>
+        </div>
       </BrowserRouter>
     </QueryClientProvider>
   );
