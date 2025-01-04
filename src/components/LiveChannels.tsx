@@ -46,43 +46,48 @@ const channels = [
 
 const LiveChannels = () => {
   return (
-    <section className="bg-dark py-20">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 brutal-text">
-          Live <span className="text-neon">Channels</span>
-        </h2>
+    <section className="bg-dark py-20 relative overflow-hidden">
+      <div className="container mx-auto px-4 relative brutal-container">
+        {/* Neo-brutalist title with dramatic tilt and border */}
+        <div className="mb-12 transform -rotate-2">
+          <h2 className="text-3xl md:text-4xl font-black text-center brutal-text inline-block bg-neon text-dark px-6 py-3 brutal-border brutal-shadow">
+            Live <span className="text-white bg-dark px-2">Channels</span>
+          </h2>
+        </div>
         
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 2xl:grid-cols-8 gap-4 md:gap-6">
           {channels.map((channel) => (
             <a
               key={channel.title}
               href={channel.link}
-              className="relative block group"
+              className="relative block group transform transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1"
               data-abc="true"
             >
-              <div className="aspect-square relative rounded-lg transition overflow-hidden cursor-pointer before:absolute before:-inset-px before:bg-gradient-to-b before:from-gray-950 before:to-gray-950/[.4] before:-m-px before:z-[1] before:opacity-0 group-hover:before:opacity-100">
+              <div className="aspect-square relative rounded-none transition overflow-hidden cursor-pointer brutal-border brutal-shadow">
                 <picture>
                   <source
                     srcSet={channel.image}
                     type="image/webp"
-                    className="absolute h-full w-full object-cover rounded-md"
+                    className="absolute h-full w-full object-cover"
                   />
                   <img
                     src={channel.image.replace('.webp', '.jpg')}
                     alt={channel.title}
-                    className="absolute h-full w-full object-cover rounded-md"
+                    className="absolute h-full w-full object-cover"
                     width={300}
                     height={450}
                   />
                 </picture>
                 
-                <div className="hidden group-hover:flex absolute left-1/2 top-1/2 -translate-x-1/2 z-20 -translate-y-1/2 h-16 w-16 items-center justify-center cursor-pointer rounded-full bg-white/50 text-white transition">
-                  <Play className="h-6 w-6 translate-x-0.5" />
+                <div className="hidden group-hover:flex absolute left-1/2 top-1/2 -translate-x-1/2 z-20 -translate-y-1/2 h-16 w-16 items-center justify-center cursor-pointer bg-neon brutal-border">
+                  <Play className="h-6 w-6 translate-x-0.5 text-dark" />
                 </div>
+                
+                <div className="absolute inset-0 bg-gradient-to-b from-dark/20 to-dark/80 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               
               <div className="pt-3 transition text-center">
-                <h3 className="text-base tracking-tighter font-medium text-white line-clamp-1">
+                <h3 className="text-brutal-base font-black tracking-tight text-white bg-dark inline-block px-2 transform rotate-1">
                   {channel.title}
                 </h3>
               </div>
@@ -90,6 +95,10 @@ const LiveChannels = () => {
           ))}
         </div>
       </div>
+      
+      {/* Neo-brutalist decorative elements */}
+      <div className="absolute top-10 right-10 w-20 h-20 bg-neon brutal-border transform rotate-12 hidden lg:block" />
+      <div className="absolute bottom-10 left-10 w-16 h-16 bg-dark brutal-border brutal-shadow transform -rotate-12 hidden lg:block" />
     </section>
   );
 };
