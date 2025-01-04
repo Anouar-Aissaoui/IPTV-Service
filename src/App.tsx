@@ -22,7 +22,9 @@ const LanguageRoutes = ({ language }: { language: string }) => {
   const { i18n } = useTranslation();
   
   React.useEffect(() => {
-    i18n.changeLanguage(language);
+    if (i18n.language !== language) {
+      i18n.changeLanguage(language);
+    }
   }, [language, i18n]);
 
   return (
@@ -38,6 +40,11 @@ const AppRoutes = () => {
   const supportedLanguages = ['en', 'es', 'de', 'fr'];
   
   const getBrowserLanguage = () => {
+    const storedLang = localStorage.getItem('i18nextLng');
+    if (storedLang && supportedLanguages.includes(storedLang)) {
+      return storedLang;
+    }
+    
     const browserLang = navigator.language.split('-')[0];
     return supportedLanguages.includes(browserLang) ? browserLang : 'en';
   };
@@ -48,10 +55,13 @@ const AppRoutes = () => {
         path="/" 
         element={<Navigate to={`/${getBrowserLanguage()}`} replace />} 
       />
-      <Route path="/en/*" element={<LanguageRoutes language="en" />} />
-      <Route path="/es/*" element={<LanguageRoutes language="es" />} />
-      <Route path="/de/*" element={<LanguageRoutes language="de" />} />
-      <Route path="/fr/*" element={<LanguageRoutes language="fr" />} />
+      {supportedLanguages.map(lang => (
+        <Route 
+          key={lang}
+          path={`/${lang}/*`} 
+          element={<LanguageRoutes language={lang} />} 
+        />
+      ))}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
@@ -60,8 +70,8 @@ const AppRoutes = () => {
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <BrowserRouter>
+      <BrowserRouter>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="min-h-screen bg-background">
             <div className="app-container relative">
               <TooltipProvider>
@@ -71,8 +81,8 @@ const App = () => {
               <Sonner />
             </div>
           </div>
-        </BrowserRouter>
-      </ThemeProvider>
+        </ThemeProvider>
+      </BrowserRouter>
     </QueryClientProvider>
   );
 };
