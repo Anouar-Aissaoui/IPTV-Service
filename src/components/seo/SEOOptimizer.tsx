@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import type { SEOMetrics } from '@/types/tables/seo-metrics';
+import type { SEOMetrics, SEOPerformanceMetric } from '@/types/tables/seo-metrics';
 
 interface SEOOptimizerProps {
   title?: string;
@@ -47,19 +47,17 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const imageUrl = propImageUrl || '/iptv-subscription.png';
 
   useEffect(() => {
-    // Track page view for SEO analytics
     const trackPageView = async () => {
       try {
+        const metric: SEOPerformanceMetric = {
+          url: currentPath,
+          visits: 1
+        };
+
         await supabase
           .from('seo_performance')
-          .upsert([
-            {
-              url: currentPath,
-              visits: 1
-            }
-          ], {
-            onConflict: 'url',
-            count: 'visits'
+          .upsert(metric, {
+            onConflict: 'url'
           });
       } catch (error) {
         console.error('Error tracking page view:', error);

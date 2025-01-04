@@ -7,6 +7,7 @@ import { FAQ } from "@/components/FAQ";
 import { BrandCarousel } from "@/components/BrandCarousel";
 import LiveChannels from "@/components/LiveChannels";
 import { SEOOptimizer } from "@/components/seo/SEOOptimizer";
+import { SEOContent } from "@/components/SEOContent";
 
 const Index = () => {
   const { t, i18n } = useTranslation();
@@ -27,6 +28,7 @@ const Index = () => {
       <LiveChannels />
       <LiveSports />
       <FAQ />
+      <SEOContent />
     </div>
   );
 };
