@@ -1,5 +1,5 @@
-import React from 'react';
-import { Tv, Smartphone, Monitor, Video, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Tv, Smartphone, Monitor, Video, ArrowRight, Menu, Grid, List } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import OptimizedHelmet from '@/components/seo/OptimizedHelmet';
 
@@ -48,6 +48,8 @@ const tutorials: TutorialCard[] = [
 ];
 
 const Tutorials = () => {
+  const [viewType, setViewType] = useState<'grid' | 'list'>('grid');
+
   return (
     <div className="min-h-screen bg-background">
       <OptimizedHelmet 
@@ -57,18 +59,46 @@ const Tutorials = () => {
       />
       
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-brutal-4xl text-center mb-12">
-          IPTV Setup Tutorials
-        </h1>
+        <div className="flex items-center justify-between mb-12">
+          <h1 className="text-brutal-4xl">
+            IPTV Setup Tutorials
+          </h1>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setViewType('grid')}
+              className={`p-2 brutal-border brutal-shadow transition-all duration-200 ${
+                viewType === 'grid' ? 'bg-primary text-white' : 'hover:bg-primary/10'
+              }`}
+              aria-label="Grid view"
+            >
+              <Grid className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => setViewType('list')}
+              className={`p-2 brutal-border brutal-shadow transition-all duration-200 ${
+                viewType === 'list' ? 'bg-primary text-white' : 'hover:bg-primary/10'
+              }`}
+              aria-label="List view"
+            >
+              <List className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className={`${
+          viewType === 'grid' 
+            ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' 
+            : 'space-y-4'
+        }`}>
           {tutorials.map((tutorial, index) => (
             <Link
               key={index}
               to={tutorial.url}
-              className="group p-6 bg-black brutal-border brutal-shadow hover:translate-x-1 hover:-translate-y-1 transition-transform duration-200"
+              className={`group bg-black brutal-border brutal-shadow hover:translate-x-1 hover:-translate-y-1 transition-transform duration-200 ${
+                viewType === 'grid' ? 'p-6' : 'p-4'
+              }`}
             >
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-center gap-4">
                 <div className="text-primary">
                   {tutorial.icon}
                 </div>
