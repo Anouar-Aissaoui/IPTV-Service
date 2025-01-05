@@ -32,8 +32,38 @@
       "permanent": true
     },
     {
-      "source": "/tutorials/:path*",
-      "destination": "/iptv-setup-tutorials/:path*",
+      "source": "/tutorials/smart-tv",
+      "destination": "/iptv-setup-tutorials/how-to-setup-iptv-on-smart-tv",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/mobile",
+      "destination": "/iptv-setup-tutorials/how-to-setup-iptv-on-mobile-devices",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/mag",
+      "destination": "/iptv-setup-tutorials/how-to-setup-iptv-on-mag-box",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/formuler",
+      "destination": "/iptv-setup-tutorials/how-to-setup-iptv-on-formuler-z8",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/fire-tv",
+      "destination": "/iptv-setup-tutorials/how-to-setup-iptv-on-fire-tv-stick",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/enigma",
+      "destination": "/iptv-setup-tutorials/how-to-setup-iptv-on-enigma2",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/vlc-windows",
+      "destination": "/iptv-setup-tutorials/how-to-setup-iptv-on-vlc-windows",
       "permanent": true
     }
   ],

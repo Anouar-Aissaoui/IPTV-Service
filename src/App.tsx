@@ -34,25 +34,25 @@ const AppRoutes = () => {
       <Route path="/pricing" element={<Index />} />
       <Route path="/faq" element={<Index />} />
       
-      {/* New IPTV Setup Tutorials routes */}
+      {/* New IPTV Setup Tutorials routes with descriptive URLs */}
       <Route path="/iptv-setup-tutorials" element={<Tutorials />} />
-      <Route path="/iptv-setup-tutorials/smart-tv" element={<SmartTvSetup />} />
-      <Route path="/iptv-setup-tutorials/mobile" element={<MobileSetup />} />
-      <Route path="/iptv-setup-tutorials/mag" element={<MagSetup />} />
-      <Route path="/iptv-setup-tutorials/formuler" element={<FormulerSetup />} />
-      <Route path="/iptv-setup-tutorials/fire-tv" element={<FireTvSetup />} />
-      <Route path="/iptv-setup-tutorials/enigma" element={<Enigma2Setup />} />
-      <Route path="/iptv-setup-tutorials/vlc-windows" element={<VlcWindowsSetup />} />
+      <Route path="/iptv-setup-tutorials/how-to-setup-iptv-on-smart-tv" element={<SmartTvSetup />} />
+      <Route path="/iptv-setup-tutorials/how-to-setup-iptv-on-mobile-devices" element={<MobileSetup />} />
+      <Route path="/iptv-setup-tutorials/how-to-setup-iptv-on-mag-box" element={<MagSetup />} />
+      <Route path="/iptv-setup-tutorials/how-to-setup-iptv-on-formuler-z8" element={<FormulerSetup />} />
+      <Route path="/iptv-setup-tutorials/how-to-setup-iptv-on-fire-tv-stick" element={<FireTvSetup />} />
+      <Route path="/iptv-setup-tutorials/how-to-setup-iptv-on-enigma2" element={<Enigma2Setup />} />
+      <Route path="/iptv-setup-tutorials/how-to-setup-iptv-on-vlc-windows" element={<VlcWindowsSetup />} />
 
       {/* Redirects from old tutorial URLs */}
       <Route path="/tutorials" element={<Navigate to="/iptv-setup-tutorials" replace />} />
-      <Route path="/tutorials/smart-tv" element={<Navigate to="/iptv-setup-tutorials/smart-tv" replace />} />
-      <Route path="/tutorials/mobile" element={<Navigate to="/iptv-setup-tutorials/mobile" replace />} />
-      <Route path="/tutorials/mag" element={<Navigate to="/iptv-setup-tutorials/mag" replace />} />
-      <Route path="/tutorials/formuler" element={<Navigate to="/iptv-setup-tutorials/formuler" replace />} />
-      <Route path="/tutorials/fire-tv" element={<Navigate to="/iptv-setup-tutorials/fire-tv" replace />} />
-      <Route path="/tutorials/enigma" element={<Navigate to="/iptv-setup-tutorials/enigma" replace />} />
-      <Route path="/tutorials/vlc-windows" element={<Navigate to="/iptv-setup-tutorials/vlc-windows" replace />} />
+      <Route path="/tutorials/smart-tv" element={<Navigate to="/iptv-setup-tutorials/how-to-setup-iptv-on-smart-tv" replace />} />
+      <Route path="/tutorials/mobile" element={<Navigate to="/iptv-setup-tutorials/how-to-setup-iptv-on-mobile-devices" replace />} />
+      <Route path="/tutorials/mag" element={<Navigate to="/iptv-setup-tutorials/how-to-setup-iptv-on-mag-box" replace />} />
+      <Route path="/tutorials/formuler" element={<Navigate to="/iptv-setup-tutorials/how-to-setup-iptv-on-formuler-z8" replace />} />
+      <Route path="/tutorials/fire-tv" element={<Navigate to="/iptv-setup-tutorials/how-to-setup-iptv-on-fire-tv-stick" replace />} />
+      <Route path="/tutorials/enigma" element={<Navigate to="/iptv-setup-tutorials/how-to-setup-iptv-on-enigma2" replace />} />
+      <Route path="/tutorials/vlc-windows" element={<Navigate to="/iptv-setup-tutorials/how-to-setup-iptv-on-vlc-windows" replace />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>
