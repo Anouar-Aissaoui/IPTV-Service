@@ -12,67 +12,99 @@ import { BlurImage } from "./ui/blur-image";
 const brands = [
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item05-150x46-1-2.webp",
-    alt: "brand_item05"
+    alt: "brand_item05",
+    width: 150,
+    height: 46
   },
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item06-150x46-1-2.webp",
-    alt: "brand_item06"
+    alt: "brand_item06",
+    width: 150,
+    height: 46
   },
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item08-150x46-1-2.webp",
-    alt: "brand_item08"
+    alt: "brand_item08",
+    width: 150,
+    height: 46
   },
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item09-150x46-1-2.webp",
-    alt: "brand_item09"
+    alt: "brand_item09",
+    width: 150,
+    height: 46
   },
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item10-150x46-1-2.webp",
-    alt: "brand_item10"
+    alt: "brand_item10",
+    width: 150,
+    height: 46
   },
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item11-2.webp",
-    alt: "brand_item11"
+    alt: "brand_item11",
+    width: 150,
+    height: 46
   },
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item12-2.webp",
-    alt: "brand_item12"
+    alt: "brand_item12",
+    width: 150,
+    height: 46
   },
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item13-150x46-1-2.webp",
-    alt: "brand_item13"
+    alt: "brand_item13",
+    width: 150,
+    height: 46
   },
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item14-150x46-1-2.webp",
-    alt: "brand_item14"
+    alt: "brand_item14",
+    width: 150,
+    height: 46
   },
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item15-150x46-1-2.webp",
-    alt: "brand_item15"
+    alt: "brand_item15",
+    width: 150,
+    height: 46
   },
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item16-150x46-1-2.webp",
-    alt: "brand_item16"
+    alt: "brand_item16",
+    width: 150,
+    height: 46
   },
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item17-150x46-1-2.webp",
-    alt: "brand_item17"
+    alt: "brand_item17",
+    width: 150,
+    height: 46
   },
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item18-150x46-1-2.webp",
-    alt: "brand_item18"
+    alt: "brand_item18",
+    width: 150,
+    height: 46
   },
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item21-150x46-1-2.webp",
-    alt: "brand_item21"
+    alt: "brand_item21",
+    width: 150,
+    height: 46
   },
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/brand_item22-150x46-1-2.webp",
-    alt: "brand_item22"
+    alt: "brand_item22",
+    width: 150,
+    height: 46
   },
   {
     src: "https://www.iptvthemes.shop/shadowstream/wp-content/uploads/2023/12/FOX-150x58.webp",
-    alt: "FOX"
+    alt: "FOX",
+    width: 150,
+    height: 58
   }
 ] as const;
 
@@ -82,7 +114,11 @@ const CarouselBrandItem = React.memo(({ brand }: { brand: typeof brands[number] 
       <BlurImage
         src={brand.src}
         alt={brand.alt}
+        width={brand.width}
+        height={brand.height}
         className="object-contain w-full h-full opacity-50 hover:opacity-100 transition-opacity duration-300 scale-75 hover:scale-90"
+        loading="lazy"
+        decoding="async"
       />
     </figure>
   </div>

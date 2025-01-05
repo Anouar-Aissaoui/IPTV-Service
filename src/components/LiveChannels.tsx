@@ -6,49 +6,65 @@ const channels = [
     title: "ESPNU",
     image: "https://www.popcornmovies.to/uploads/poster/APkbKRIvMh.webp",
     link: "https://wa.me/message/R5IYJF3GG635D1",
-    description: "Watch live college sports and events on ESPNU"
+    description: "Watch live college sports and events on ESPNU",
+    width: 300,
+    height: 450
   },
   {
     title: "ESPN",
     image: "https://www.popcornmovies.to/uploads/poster/mO23pg6gzk.webp",
     link: "https://wa.me/message/R5IYJF3GG635D1",
-    description: "The worldwide leader in sports broadcasting"
+    description: "The worldwide leader in sports broadcasting",
+    width: 300,
+    height: 450
   },
   {
     title: "NBA TV",
     image: "https://www.popcornmovies.to/uploads/poster/iHhVGaE80u.webp",
     link: "https://wa.me/message/R5IYJF3GG635D1",
-    description: "24/7 basketball coverage and live NBA games"
+    description: "24/7 basketball coverage and live NBA games",
+    width: 300,
+    height: 450
   },
   {
     title: "NFL Network",
     image: "https://www.popcornmovies.to/uploads/poster/A8wOWJX0My.webp",
     link: "https://wa.me/message/R5IYJF3GG635D1",
-    description: "Complete NFL coverage and exclusive content"
+    description: "Complete NFL coverage and exclusive content",
+    width: 300,
+    height: 450
   },
   {
     title: "HBO 2 East",
     image: "https://www.popcornmovies.to/uploads/poster/6vf1aSr7gt.webp",
     link: "https://wa.me/message/R5IYJF3GG635D1",
-    description: "Premium entertainment and exclusive HBO content"
+    description: "Premium entertainment and exclusive HBO content",
+    width: 300,
+    height: 450
   },
   {
     title: "HBO East",
     image: "https://www.popcornmovies.to/uploads/poster/G67HiKK1Nf.webp",
     link: "https://wa.me/message/R5IYJF3GG635D1",
-    description: "Original HBO series, movies, and specials"
+    description: "Original HBO series, movies, and specials",
+    width: 300,
+    height: 450
   },
   {
     title: "Fox Sports 1",
     image: "https://www.popcornmovies.to/uploads/poster/AyLTRoIo55.webp",
     link: "https://wa.me/message/R5IYJF3GG635D1",
-    description: "Live sports coverage and analysis on FS1"
+    description: "Live sports coverage and analysis on FS1",
+    width: 300,
+    height: 450
   },
   {
     title: "National Geographic",
     image: "https://www.popcornmovies.to/uploads/poster/mHrOgAZU75.webp",
     link: "https://wa.me/message/R5IYJF3GG635D1",
-    description: "World-class documentaries and educational content"
+    description: "World-class documentaries and educational content",
+    width: 300,
+    height: 450
   },
 ];
 
@@ -82,9 +98,10 @@ const LiveChannels = () => {
                     src={channel.image.replace('.webp', '.jpg')}
                     alt={`${channel.title} - ${channel.description}`}
                     className="absolute h-full w-full object-cover"
-                    width={300}
-                    height={450}
+                    width={channel.width}
+                    height={channel.height}
                     loading="lazy"
+                    decoding="async"
                   />
                 </picture>
                 

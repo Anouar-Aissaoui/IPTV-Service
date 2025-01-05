@@ -59,9 +59,10 @@ const Hero: React.FC = () => {
                 src="/iptv-subscription.png"
                 alt="Premium IPTV Service - High quality streaming with 40,000+ channels and VOD content"
                 className="relative border-4 border-white shadow-[12px_12px_0px_0px_rgba(249,115,22,1)] w-full h-auto object-cover"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 480px"
                 width={480}
                 height={320}
+                priority={true}
+                fetchPriority="high"
               />
             </div>
           </div>
