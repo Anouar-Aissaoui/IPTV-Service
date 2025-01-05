@@ -12,7 +12,8 @@ interface SEOOptimizerProps {
   imageUrl?: string;
   type?: string;
   keywords?: string[];
-  children?: React.ReactNode;  // Added this line to support children
+  children?: React.ReactNode;
+  noindex?: boolean;
 }
 
 export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
@@ -22,7 +23,8 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   imageUrl: propImageUrl,
   type = 'website',
   keywords = [],
-  children  // Added this to the destructuring
+  children,
+  noindex = false
 }) => {
   const location = useLocation();
   const currentPath = location.pathname;
@@ -111,6 +113,9 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       <meta name="description" content={description} />
       {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
       
+      {/* Robots Control */}
+      <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
+      
       {/* Canonical URL */}
       <link rel="canonical" href={canonicalUrl} />
       
@@ -118,9 +123,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
       <link rel="alternate" hrefLang="en" href={canonicalUrl} />
       
-      {/* Robots Control */}
-      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-
       {/* Open Graph Tags */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={canonicalUrl} />
