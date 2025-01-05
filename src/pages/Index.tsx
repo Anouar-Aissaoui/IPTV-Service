@@ -44,30 +44,6 @@ const Index = () => {
       
       <Hero />
       <BrandCarousel />
-      
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">Quick Links</h2>
-            <div className="space-y-2">
-              <Link to="/tutorials" className="block text-neon hover:underline">Setup Guides</Link>
-              <Link to="/channels" className="block text-neon hover:underline">Channel List</Link>
-              <Link to="/pricing" className="block text-neon hover:underline">Subscription Plans</Link>
-              <Link to="/faq" className="block text-neon hover:underline">FAQ</Link>
-            </div>
-          </div>
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">Popular Tutorials</h2>
-            <div className="space-y-2">
-              <Link to="/tutorials/smart-tv" className="block text-neon hover:underline">Smart TV Setup</Link>
-              <Link to="/tutorials/fire-tv" className="block text-neon hover:underline">Fire TV Setup</Link>
-              <Link to="/tutorials/mobile" className="block text-neon hover:underline">Mobile Setup</Link>
-              <Link to="/tutorials/vlc-windows" className="block text-neon hover:underline">VLC Setup</Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <IPTVDefinition />
       <IPTVExplanation />
       <Pricing />
@@ -76,6 +52,30 @@ const Index = () => {
       <LiveSports />
       <IPTVBenefits />
       <FAQ />
+
+      {/* Quick Links Section - Now positioned after FAQ */}
+      <div className="container mx-auto px-4 py-16 bg-black/50">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold text-neon">Quick Links</h2>
+            <div className="space-y-2">
+              <Link to="/tutorials" className="block text-white hover:text-neon transition-colors">Setup Guides</Link>
+              <Link to="/channels" className="block text-white hover:text-neon transition-colors">Channel List</Link>
+              <Link to="/pricing" className="block text-white hover:text-neon transition-colors">Subscription Plans</Link>
+              <Link to="/faq" className="block text-white hover:text-neon transition-colors">FAQ</Link>
+            </div>
+          </div>
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold text-neon">Popular Tutorials</h2>
+            <div className="space-y-2">
+              <Link to="/tutorials/smart-tv" className="block text-white hover:text-neon transition-colors">Smart TV Setup</Link>
+              <Link to="/tutorials/fire-tv" className="block text-white hover:text-neon transition-colors">Fire TV Setup</Link>
+              <Link to="/tutorials/mobile" className="block text-white hover:text-neon transition-colors">Mobile Setup</Link>
+              <Link to="/tutorials/vlc-windows" className="block text-white hover:text-neon transition-colors">VLC Setup</Link>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Footer Section */}
       <footer className="bg-black border-t border-neon mt-16">
