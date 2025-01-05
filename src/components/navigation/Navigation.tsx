@@ -45,6 +45,13 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
         onScrollToSection('channel-list');
       }
     },
+    {
+      name: "Tutorials",
+      path: "/tutorials",
+      action: () => {
+        navigate('/tutorials');
+      }
+    },
     { 
       name: "FAQ", 
       path: "/faq",
