@@ -13,37 +13,37 @@ const tutorials: TutorialCard[] = [
   {
     title: "How to setup IPTV on Smart TV",
     icon: <Tv className="w-8 h-8" />,
-    url: "/tutorials/smart-tv"
+    url: "/tutorials/how-to-setup-iptv-on-smart-tv"
   },
   {
     title: "How to setup IPTV on Android/iOS",
     icon: <Smartphone className="w-8 h-8" />,
-    url: "/tutorials/mobile"
+    url: "/tutorials/how-to-setup-iptv-on-mobile-devices"
   },
   {
     title: "How to setup IPTV on MAG",
     icon: <Monitor className="w-8 h-8" />,
-    url: "/tutorials/mag"
+    url: "/tutorials/how-to-setup-iptv-on-mag-box"
   },
   {
     title: "How to setup IPTV on Formuler Z8",
     icon: <Monitor className="w-8 h-8" />,
-    url: "/tutorials/formuler"
+    url: "/tutorials/how-to-setup-iptv-on-formuler-z8"
   },
   {
     title: "How to setup IPTV on Fire TV Stick",
     icon: <Video className="w-8 h-8" />,
-    url: "/tutorials/fire-tv"
+    url: "/tutorials/how-to-setup-iptv-on-fire-tv-stick"
   },
   {
     title: "How to setup IPTV on Enigma2/Vu+",
     icon: <Monitor className="w-8 h-8" />,
-    url: "/tutorials/enigma"
+    url: "/tutorials/how-to-setup-iptv-on-enigma2"
   },
   {
     title: "How to setup IPTV on VLC/Windows",
     icon: <Monitor className="w-8 h-8" />,
-    url: "/tutorials/vlc-windows"
+    url: "/tutorials/how-to-setup-iptv-on-vlc-windows"
   }
 ];
 
