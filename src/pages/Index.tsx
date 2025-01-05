@@ -13,13 +13,23 @@ import { seoKeywords } from "@/components/seo/Keywords";
 import { getStructuredData } from "@/components/seo/StructuredData";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { Link } from "react-router-dom";
+import { ContentWrapper } from "@/components/layout/ContentWrapper";
 
 const Index = () => {
   const pageTitle = "Best IPTV Service Provider 2024 | Premium IPTV Subscription USA";
   const pageDescription = "Experience premium IPTV service with 40,000+ live channels, 54,000+ VOD content, and 4K quality streaming. Best IPTV provider offering affordable packages with 24/7 support. Try now!";
   
+  const pageData = {
+    title: pageTitle,
+    description: pageDescription,
+    datePublished: "2024-01-01",
+    dateModified: new Date().toISOString(),
+    author: "IPTV Service",
+    image: "https://www.iptvservice.site/iptv-subscription.png"
+  };
+
   return (
-    <div className="min-h-screen bg-dark text-white font-grotesk">
+    <ContentWrapper as="main" className="min-h-screen bg-dark text-white font-grotesk">
       <SEOOptimizer 
         title={pageTitle}
         description={pageDescription}
@@ -36,24 +46,50 @@ const Index = () => {
         noindex={false}
       >
         <script type="application/ld+json">
-          {JSON.stringify(getStructuredData())}
+          {JSON.stringify(getStructuredData('article', pageData))}
         </script>
       </SEOOptimizer>
 
       <Breadcrumbs />
       
-      <Hero />
-      <BrandCarousel />
-      <IPTVDefinition />
-      <IPTVExplanation />
-      <Pricing />
-      <Content />
-      <LiveChannels />
-      <LiveSports />
-      <IPTVBenefits />
-      <FAQ />
+      <ContentWrapper as="section" ariaLabel="Hero Section">
+        <Hero />
+      </ContentWrapper>
 
-      {/* Quick Links Section - Now positioned after FAQ */}
+      <ContentWrapper as="section" ariaLabel="Brand Showcase">
+        <BrandCarousel />
+      </ContentWrapper>
+
+      <ContentWrapper as="article" ariaLabel="IPTV Information">
+        <IPTVDefinition />
+        <IPTVExplanation />
+      </ContentWrapper>
+
+      <ContentWrapper as="section" ariaLabel="Pricing Plans">
+        <Pricing />
+      </ContentWrapper>
+
+      <ContentWrapper as="section" ariaLabel="Content Showcase">
+        <Content />
+      </ContentWrapper>
+
+      <ContentWrapper as="section" ariaLabel="Live Channels">
+        <LiveChannels />
+      </ContentWrapper>
+
+      <ContentWrapper as="section" ariaLabel="Live Sports">
+        <LiveSports />
+      </ContentWrapper>
+
+      <ContentWrapper as="section" ariaLabel="IPTV Benefits">
+        <IPTVBenefits />
+      </ContentWrapper>
+
+      <ContentWrapper as="section" ariaLabel="Frequently Asked Questions">
+        <FAQ />
+      </ContentWrapper>
+
+      {/* Quick Links Section */}
       <div className="container mx-auto px-4 py-12 my-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           <div className="brutal-border brutal-shadow bg-black p-6 transform hover:-rotate-1 transition-transform">
@@ -147,7 +183,7 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
+    </ContentWrapper>
   );
 };
 
