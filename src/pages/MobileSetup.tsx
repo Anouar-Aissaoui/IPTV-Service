@@ -1,162 +1,102 @@
-import React from 'react';
-import { Navigation } from "@/components/navigation/Navigation";
-import { Smartphone, Download, Settings, Play, Check, ArrowLeft } from "lucide-react";
-import OptimizedHelmet from '@/components/seo/OptimizedHelmet';
+import * as React from "react";
+import { Helmet } from "react-helmet";
+import { Button } from "@/components/ui/button";
+import { BlurImage } from "@/components/ui/blur-image";
 
 const MobileSetup = () => {
-  const handleScrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleWhatsAppClick = () => {
+    window.open('https://wa.me/message/R5IYJF3GG635D1', '_blank');
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black to-gray-900">
-      <OptimizedHelmet 
-        title="How to Setup IPTV on Android & iOS | Complete Guide"
-        description="Step-by-step guide to setup IPTV on your Android or iOS device. Easy instructions for mobile streaming."
-        keywords={["IPTV Android setup", "IPTV iOS setup", "mobile IPTV guide", "IPTV app installation"]}
-      />
-      
-      <Navigation onScrollToSection={handleScrollToSection} />
+    <div className="min-h-screen bg-dark">
+      <Helmet>
+        <title>Mobile IPTV Setup Guide - Easy Installation Steps for Android & iOS</title>
+        <meta name="description" content="Learn how to set up IPTV on your mobile device with our step-by-step guide. Compatible with Android and iOS. Get started now!" />
+      </Helmet>
 
-      <main className="container mx-auto px-4 py-24">
-        <div className="max-w-4xl mx-auto">
-          {/* Hero Section */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center justify-center p-4 brutal-border brutal-shadow bg-black/50 backdrop-blur-sm mb-8">
-              <Smartphone className="w-8 h-8 text-primary" />
-            </div>
-            <h1 className="text-brutal-4xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-white mb-6">
-              How to Setup IPTV on Android & iOS
-            </h1>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Follow our simple guide to start streaming thousands of channels on your mobile device
-            </p>
-          </div>
+      <div className="container mx-auto px-4 py-12">
+        <div className="mb-12 transform -rotate-2">
+          <h1 className="text-3xl md:text-4xl font-black text-center brutal-text inline-block bg-[#F97316] text-dark px-6 py-3 border-4 border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            Mobile IPTV Setup Guide
+          </h1>
+        </div>
 
-          <div className="space-y-8">
-            {/* Android Setup */}
-            <section className="brutal-border brutal-shadow bg-black/50 backdrop-blur-sm p-8">
-              <h2 className="text-brutal-2xl text-primary mb-6 flex items-center gap-2">
-                <span className="p-2 brutal-border brutal-shadow bg-black/50">
-                  <Download className="w-6 h-6 text-primary" />
-                </span>
-                Android Setup Guide
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-12">
+          <div className="space-y-6">
+            <div className="bg-dark border-4 border-[#F97316] p-6 transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200 shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]">
+              <h2 className="text-2xl font-bold text-white mb-4 transform -rotate-1">
+                Easy Installation Steps
               </h2>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 brutal-border brutal-shadow bg-black/50">
-                    <Download className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-brutal-lg text-white mb-2">1. Download the IPTV Player</h3>
-                    <p className="text-gray-400">
-                      Download and install your preferred IPTV player from the Google Play Store. We recommend using TiviMate or IPTV Smarters Pro.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="p-3 brutal-border brutal-shadow bg-black/50">
-                    <Settings className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-brutal-lg text-white mb-2">2. Configure the App</h3>
-                    <p className="text-gray-400">
-                      Open the app and select "Add Playlist" or "Add New Subscription". Enter your M3U URL or Xtream Codes login credentials provided in your subscription details.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="p-3 brutal-border brutal-shadow bg-black/50">
-                    <Play className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-brutal-lg text-white mb-2">3. Start Watching</h3>
-                    <p className="text-gray-400">
-                      Once configured, you'll have access to all channels. Browse through categories and enjoy your favorite content.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* iOS Setup */}
-            <section className="brutal-border brutal-shadow bg-black/50 backdrop-blur-sm p-8">
-              <h2 className="text-brutal-2xl text-primary mb-6 flex items-center gap-2">
-                <span className="p-2 brutal-border brutal-shadow bg-black/50">
-                  <Smartphone className="w-6 h-6 text-primary" />
-                </span>
-                iOS Setup Guide
-              </h2>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 brutal-border brutal-shadow bg-black/50">
-                    <Download className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-brutal-lg text-white mb-2">1. Get an IPTV Player</h3>
-                    <p className="text-gray-400">
-                      Download IPTV Smarters Pro or GSE IPTV from the App Store. These apps are optimized for iOS devices.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="p-3 brutal-border brutal-shadow bg-black/50">
-                    <Settings className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-brutal-lg text-white mb-2">2. Add Your Subscription</h3>
-                    <p className="text-gray-400">
-                      Launch the app and look for "Add New Playlist" or "+" button. Enter your subscription URL or credentials when prompted.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="p-3 brutal-border brutal-shadow bg-black/50">
-                    <Check className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-brutal-lg text-white mb-2">3. Enjoy Your Content</h3>
-                    <p className="text-gray-400">
-                      Your channels will load automatically. Use the built-in player controls to navigate and watch your favorite shows.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Pro Tips Section */}
-            <section className="brutal-border brutal-shadow bg-black/50 backdrop-blur-sm p-8">
-              <h2 className="text-brutal-2xl text-primary mb-6 flex items-center gap-2">
-                <span className="p-2 brutal-border brutal-shadow bg-black/50">
-                  <Check className="w-6 h-6 text-primary" />
-                </span>
-                Pro Tips
-              </h2>
-              <ul className="space-y-4 text-gray-400">
-                <li className="flex items-center gap-2">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span>Ensure you have a stable internet connection for the best streaming experience</span>
+              <ul className="space-y-4 text-gray-300">
+                <li className="flex items-start gap-3">
+                  <span className="text-[#F97316] font-bold">1.</span>
+                  Download IPTV Player from App Store/Play Store
                 </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span>Keep your IPTV app updated to the latest version</span>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#F97316] font-bold">2.</span>
+                  Open the app and click "Add Playlist"
                 </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span>Use WiFi when possible to avoid excessive mobile data usage</span>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#F97316] font-bold">3.</span>
+                  Enter your M3U URL and credentials
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#F97316] font-bold">4.</span>
+                  Click Save and enjoy your content
                 </li>
               </ul>
-            </section>
+            </div>
+
+            <Button
+              onClick={handleWhatsAppClick}
+              className="w-full bg-[#F97316] text-white hover:bg-[#F97316]/90 font-bold transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200 border-4 border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
+            >
+              Get Your IPTV Subscription
+            </Button>
+          </div>
+
+          <div className="relative transform hover:scale-105 transition-duration-300 rotate-2">
+            <div className="absolute -inset-1 bg-[#F97316]/30 rounded-none blur"></div>
+            <BlurImage
+              src="/devices.png"
+              alt="Mobile IPTV Setup Guide - Easy Installation Steps for Android & iOS"
+              width={600}
+              height={400}
+              className="relative border-4 border-white shadow-[12px_12px_0px_0px_rgba(249,115,22,1)]"
+            />
           </div>
         </div>
-      </main>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            {
+              title: "Compatible Devices",
+              content: "Works on both Android and iOS devices, including tablets and smartphones."
+            },
+            {
+              title: "Easy Setup",
+              content: "Simple installation process that takes less than 5 minutes to complete."
+            },
+            {
+              title: "24/7 Support",
+              content: "Get help anytime with our dedicated customer support team."
+            }
+          ].map((feature) => (
+            <div
+              key={feature.title}
+              className="bg-dark border-4 border-[#F97316] p-6 transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200 shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]"
+            >
+              <h3 className="text-xl font-bold text-white mb-3 transform -rotate-1">
+                {feature.title}
+              </h3>
+              <p className="text-gray-300 transform rotate-1">
+                {feature.content}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
