@@ -22,9 +22,9 @@ const Hero: React.FC = () => {
     <div className="relative bg-dark">
       <Navigation onScrollToSection={scrollToSection} />
 
-      <div className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
-          <div className="lg:w-1/2 space-y-4 md:space-y-6 text-center lg:text-left">
+      <div className="container mx-auto px-4 py-6 md:py-12 lg:py-16">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8 lg:gap-12">
+          <div className="w-full lg:w-1/2 space-y-4 md:space-y-6 text-center lg:text-left">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight tracking-tight transform -rotate-1">
               {t('hero.title')}
             </h1>
@@ -52,7 +52,7 @@ const Hero: React.FC = () => {
             </div>
           </div>
           
-          <div className="lg:w-1/2 w-full max-w-[480px] mx-auto">
+          <div className="w-full lg:w-1/2 max-w-[480px] mx-auto">
             <div className="relative transform hover:scale-105 transition-duration-300 rotate-2">
               <div className="absolute -inset-1 bg-[#F97316]/30 rounded-none blur"></div>
               <BlurImage
@@ -62,7 +62,6 @@ const Hero: React.FC = () => {
                 width={480}
                 height={320}
                 priority={true}
-                fetchPriority="high"
               />
             </div>
           </div>

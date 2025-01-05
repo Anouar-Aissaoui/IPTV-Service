@@ -32,22 +32,22 @@
     @apply border-border font-grotesk;
   }
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-background text-foreground overflow-x-hidden min-h-screen;
   }
   h1 {
-    @apply text-brutal-4xl font-black tracking-tight;
+    @apply text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight;
   }
   h2 {
-    @apply text-brutal-3xl font-extrabold tracking-tight;
+    @apply text-xl md:text-3xl lg:text-4xl font-extrabold tracking-tight;
   }
   h3 {
-    @apply text-brutal-2xl font-bold tracking-tight;
+    @apply text-lg md:text-2xl lg:text-3xl font-bold tracking-tight;
   }
   p {
-    @apply text-brutal-base;
+    @apply text-sm md:text-base lg:text-lg;
   }
   button {
-    @apply text-brutal-base font-bold tracking-wide;
+    @apply text-sm md:text-base font-bold tracking-wide;
   }
 }
 
@@ -57,7 +57,7 @@
 
 /* Neo Brutalism Specific Styles */
 .brutal-shadow {
-  @apply shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)];
+  @apply shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)];
 }
 
 .brutal-border {
@@ -85,52 +85,6 @@
   @apply px-4 mx-auto max-w-7xl;
 }
 
-/* Responsive Typography */
-@screen sm {
-  h1 {
-    @apply text-4xl;
-  }
-  h2 {
-    @apply text-3xl;
-  }
-  h3 {
-    @apply text-2xl;
-  }
-  p {
-    @apply text-base;
-  }
-}
-
-@screen md {
-  h1 {
-    @apply text-5xl;
-  }
-  h2 {
-    @apply text-4xl;
-  }
-  h3 {
-    @apply text-3xl;
-  }
-  p {
-    @apply text-lg;
-  }
-}
-
-@screen lg {
-  h1 {
-    @apply text-6xl;
-  }
-  h2 {
-    @apply text-5xl;
-  }
-  h3 {
-    @apply text-4xl;
-  }
-  p {
-    @apply text-xl;
-  }
-}
-
 /* Mobile Menu Animation */
 .slide-in-from-top {
   animation: slideDown 0.3s ease-out;
@@ -145,4 +99,38 @@
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+  .brutal-hover {
+    @apply transition-none transform-none;
+  }
+  
+  .group:active .group-hover\:opacity-100 {
+    @apply opacity-100;
+  }
+  
+  .group:active .group-hover\:scale-110 {
+    @apply scale-110;
+  }
+}
+
+/* Prevent text size adjustments on orientation changes */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Improve tap targets on mobile */
+button, 
+a {
+  @apply min-h-[44px] min-w-[44px];
+}
+
+/* Improve form elements on mobile */
+input,
+select,
+textarea {
+  @apply text-base;
+  font-size: 16px !important;
 }

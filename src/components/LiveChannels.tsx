@@ -70,15 +70,15 @@ const channels = [
 
 const LiveChannels = () => {
   return (
-    <section className="bg-dark py-20 relative overflow-hidden">
+    <section className="bg-dark py-12 md:py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 relative brutal-container">
-        <div className="mb-12 transform -rotate-2">
-          <h2 className="text-3xl md:text-4xl font-black text-center brutal-text inline-block bg-[#F97316] text-dark px-6 py-3 border-4 border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+        <div className="mb-8 md:mb-12 transform -rotate-2">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-center brutal-text inline-block bg-[#F97316] text-dark px-4 md:px-6 py-2 md:py-3 border-4 border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             Live <span className="text-white bg-dark px-2">Channels</span>
           </h2>
         </div>
         
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 2xl:grid-cols-8 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-3 md:gap-6">
           {channels.map((channel) => (
             <a
               key={channel.title}
@@ -87,7 +87,7 @@ const LiveChannels = () => {
               data-abc="true"
               aria-label={`Watch ${channel.title} - ${channel.description}`}
             >
-              <div className="aspect-square relative rounded-none transition overflow-hidden cursor-pointer border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]">
+              <div className="aspect-square relative rounded-none transition overflow-hidden cursor-pointer border-2 md:border-4 border-white shadow-[4px_4px_0px_0px_rgba(249,115,22,1)] md:shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]">
                 <picture>
                   <source
                     srcSet={channel.image}
@@ -105,15 +105,15 @@ const LiveChannels = () => {
                   />
                 </picture>
                 
-                <div className="hidden group-hover:flex absolute left-1/2 top-1/2 -translate-x-1/2 z-20 -translate-y-1/2 h-16 w-16 items-center justify-center cursor-pointer bg-[#F97316] border-4 border-white">
-                  <Play className="h-6 w-6 translate-x-0.5 text-dark" aria-hidden="true" />
+                <div className="hidden group-hover:flex absolute left-1/2 top-1/2 -translate-x-1/2 z-20 -translate-y-1/2 h-12 w-12 md:h-16 md:w-16 items-center justify-center cursor-pointer bg-[#F97316] border-2 md:border-4 border-white">
+                  <Play className="h-4 w-4 md:h-6 md:w-6 translate-x-0.5 text-dark" aria-hidden="true" />
                 </div>
                 
                 <div className="absolute inset-0 bg-gradient-to-b from-dark/20 to-dark/80 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               
-              <div className="pt-3 transition text-center">
-                <h3 className="text-brutal-base font-black tracking-tight text-white bg-dark inline-block px-2 transform rotate-1">
+              <div className="pt-2 md:pt-3 transition text-center">
+                <h3 className="text-sm md:text-brutal-base font-black tracking-tight text-white bg-dark inline-block px-2 transform rotate-1">
                   {channel.title}
                 </h3>
               </div>
