@@ -114,11 +114,11 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
       <meta name="apple-mobile-web-app-title" content="IPTV Service" />
       
       {/* Language Alternates */}
-      <link rel="alternate" href={`${baseUrl}`} hreflang="x-default" />
-      <link rel="alternate" href={`${baseUrl}`} hreflang="en" />
-      <link rel="alternate" href={`${baseUrl}/es`} hreflang="es" />
-      <link rel="alternate" href={`${baseUrl}/fr`} hreflang="fr" />
-      <link rel="alternate" href={`${baseUrl}/de`} hreflang="de" />
+      <link rel="alternate" href={`${baseUrl}`} hrefLang="x-default" />
+      <link rel="alternate" href={`${baseUrl}`} hrefLang="en" />
+      <link rel="alternate" href={`${baseUrl}/es`} hrefLang="es" />
+      <link rel="alternate" href={`${baseUrl}/fr`} hrefLang="fr" />
+      <link rel="alternate" href={`${baseUrl}/de`} hrefLang="de" />
       
       {/* Allow additional meta tags to be injected */}
       {children}
