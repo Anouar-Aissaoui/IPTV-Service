@@ -8,7 +8,6 @@ import LiveChannels from "@/components/LiveChannels";
 import { SEOOptimizer } from "@/components/seo/SEOOptimizer";
 import { IPTVDefinition } from "@/components/seo/IPTVDefinition";
 import { IPTVBenefits } from "@/components/seo/IPTVBenefits";
-import { IPTVExplanation } from "@/components/seo/IPTVExplanation";
 import { seoKeywords } from "@/components/seo/Keywords";
 
 const Index = () => {
@@ -25,13 +24,14 @@ const Index = () => {
       <Hero />
       <BrandCarousel />
       <IPTVDefinition />
-      <IPTVExplanation />
-      <Pricing />
-      <Content />
-      <LiveChannels />
-      <LiveSports />
-      <IPTVBenefits />
-      <FAQ />
+      <div className="space-y-16">
+        <Pricing />
+        <Content />
+        <LiveChannels />
+        <LiveSports />
+        <IPTVBenefits />
+        <FAQ />
+      </div>
     </div>
   );
 };
