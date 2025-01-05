@@ -10,18 +10,33 @@ import { IPTVDefinition } from "@/components/seo/IPTVDefinition";
 import { IPTVBenefits } from "@/components/seo/IPTVBenefits";
 import { IPTVExplanation } from "@/components/seo/IPTVExplanation";
 import { seoKeywords } from "@/components/seo/Keywords";
+import { getStructuredData } from "@/components/seo/StructuredData";
 
 const Index = () => {
+  const pageTitle = "Best IPTV Service Provider 2024 | Premium IPTV Subscription USA";
+  const pageDescription = "Experience premium IPTV service with 40,000+ live channels, 54,000+ VOD content, and 4K quality streaming. Best IPTV provider offering affordable packages with 24/7 support. Try now!";
+  
   return (
     <div className="min-h-screen bg-dark text-white font-grotesk">
       <SEOOptimizer 
-        title="Best IPTV Service Provider | Buy Premium IPTV Subscription USA"
-        description="Get access to premium IPTV service with 40,000+ HD channels and VOD content. Best IPTV provider offering affordable streaming TV channels, 24/7 support, and competitive pricing."
+        title={pageTitle}
+        description={pageDescription}
         canonicalUrl="https://www.iptvservice.site"
         imageUrl="/iptv-subscription.png"
         type="website"
-        keywords={seoKeywords}
-      />
+        keywords={[
+          ...seoKeywords,
+          '4K IPTV streaming',
+          'premium IPTV channels',
+          'IPTV subscription 2024',
+          'best IPTV provider USA'
+        ]}
+        noindex={false}
+      >
+        <script type="application/ld+json">
+          {JSON.stringify(getStructuredData())}
+        </script>
+      </SEOOptimizer>
       <Hero />
       <BrandCarousel />
       <IPTVDefinition />
