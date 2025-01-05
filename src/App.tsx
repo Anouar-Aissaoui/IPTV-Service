@@ -28,18 +28,19 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Index />} />
-      <Route path="/premium-iptv-service" element={<Index />} />
-      <Route path="/channels" element={<Index />} />
-      <Route path="/pricing" element={<Index />} />
-      <Route path="/faq" element={<Index />} />
-      <Route path="/tutorials" element={<Tutorials />} />
-      <Route path="/tutorials/smart-tv" element={<SmartTvSetup />} />
-      <Route path="/tutorials/mobile" element={<MobileSetup />} />
-      <Route path="/tutorials/mag" element={<MagSetup />} />
-      <Route path="/tutorials/formuler" element={<FormulerSetup />} />
-      <Route path="/tutorials/fire-tv" element={<FireTvSetup />} />
-      <Route path="/tutorials/enigma" element={<Enigma2Setup />} />
-      <Route path="/tutorials/vlc-windows" element={<VlcWindowsSetup />} />
+      <Route path="/best-premium-iptv-service" element={<Index />} />
+      <Route path="/buy-iptv-subscription" element={<Index />} />
+      <Route path="/iptv-channels-list" element={<Index />} />
+      <Route path="/iptv-pricing-plans" element={<Index />} />
+      <Route path="/iptv-service-faq" element={<Index />} />
+      <Route path="/iptv-setup-tutorials" element={<Tutorials />} />
+      <Route path="/setup-guides/smart-tv-iptv-installation" element={<SmartTvSetup />} />
+      <Route path="/setup-guides/mobile-iptv-app-setup" element={<MobileSetup />} />
+      <Route path="/setup-guides/mag-box-iptv-configuration" element={<MagSetup />} />
+      <Route path="/setup-guides/formuler-z8-iptv-setup" element={<FormulerSetup />} />
+      <Route path="/setup-guides/fire-tv-stick-iptv-guide" element={<FireTvSetup />} />
+      <Route path="/setup-guides/enigma2-vu-plus-iptv-setup" element={<Enigma2Setup />} />
+      <Route path="/setup-guides/vlc-windows-iptv-player-guide" element={<VlcWindowsSetup />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
