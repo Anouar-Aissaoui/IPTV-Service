@@ -1,100 +1,92 @@
-import * as React from "react";
-import { Helmet } from "react-helmet";
-import { Button } from "@/components/ui/button";
-import { BlurImage } from "@/components/ui/blur-image";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ArrowLeft, Smartphone, Download, Settings, Play } from 'lucide-react';
+import OptimizedHelmet from '@/components/seo/OptimizedHelmet';
 
 const MobileSetup = () => {
-  const handleWhatsAppClick = () => {
-    window.open('https://wa.me/message/R5IYJF3GG635D1', '_blank');
-  };
+  const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-dark">
-      <Helmet>
-        <title>Mobile IPTV Setup Guide - Easy Installation Steps for Android & iOS</title>
-        <meta name="description" content="Learn how to set up IPTV on your mobile device with our step-by-step guide. Compatible with Android and iOS. Get started now!" />
-      </Helmet>
+    <div className="min-h-screen bg-gradient-to-b from-black to-gray-900">
+      <OptimizedHelmet 
+        title="How to Setup IPTV on Mobile Devices - Step by Step Guide"
+        description="Learn how to install and configure IPTV on your mobile device with our detailed setup guide. Easy-to-follow instructions for Android and iOS."
+        keywords={["Mobile IPTV setup", "Android IPTV", "iOS IPTV", "IPTV mobile installation", "IPTV player mobile"]}
+      />
+      
+      {/* Navigation Menu */}
+      <div className="sticky top-0 z-40 w-full bg-black/95 backdrop-blur-sm border-b-2 border-[#F97316] mb-8">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <button
+              onClick={() => navigate('/tutorials')}
+              className="flex items-center gap-2 text-white hover:text-[#F97316] transition-all duration-300 text-sm md:text-base font-black brutal-border px-3 py-1 md:px-4 md:py-2 hover:bg-[#F97316] hover:text-white transform hover:-translate-y-1 hover:translate-x-1 brutal-shadow"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to Tutorials
+            </button>
+          </div>
+        </div>
+      </div>
 
       <div className="container mx-auto px-4 py-12">
-        <div className="mb-12 transform -rotate-2">
-          <h1 className="text-3xl md:text-4xl font-black text-center brutal-text inline-block bg-[#F97316] text-dark px-6 py-3 border-4 border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            Mobile IPTV Setup Guide
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-brutal-4xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-white mb-8">
+            How to Setup IPTV on Mobile Devices
           </h1>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-12">
-          <div className="space-y-6">
-            <div className="bg-dark border-4 border-[#F97316] p-6 transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200 shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]">
-              <h2 className="text-2xl font-bold text-white mb-4 transform -rotate-1">
-                Easy Installation Steps
-              </h2>
-              <ul className="space-y-4 text-gray-300">
-                <li className="flex items-start gap-3">
-                  <span className="text-[#F97316] font-bold">1.</span>
-                  Download IPTV Player from App Store/Play Store
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-[#F97316] font-bold">2.</span>
-                  Open the app and click "Add Playlist"
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-[#F97316] font-bold">3.</span>
-                  Enter your M3U URL and credentials
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-[#F97316] font-bold">4.</span>
-                  Click Save and enjoy your content
-                </li>
+          <div className="space-y-12">
+            {/* Step 1 */}
+            <div className="flex gap-8 items-start">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#F97316] flex items-center justify-center brutal-border brutal-shadow">
+                <Download className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h2 className="text-brutal-2xl text-white mb-2">1. Install IPTV Player</h2>
+                <p className="text-gray-400">
+                  Visit the App Store (iOS) or Google Play Store (Android) and search for "IPTV Player". We recommend using GSE IPTV, IPTV Smarters, or Perfect Player. Download and install your preferred player.
+                </p>
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="flex gap-8 items-start">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#F97316] flex items-center justify-center brutal-border brutal-shadow">
+                <Settings className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h2 className="text-brutal-2xl text-white mb-2">2. Configure the App</h2>
+                <p className="text-gray-400">
+                  Open your installed IPTV player app. Navigate to settings or playlist section. Enter your M3U URL or upload your playlist file. If you have Xtream Codes login details, enter those in the appropriate fields.
+                </p>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="flex gap-8 items-start">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#F97316] flex items-center justify-center brutal-border brutal-shadow">
+                <Play className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h2 className="text-brutal-2xl text-white mb-2">3. Start Watching</h2>
+                <p className="text-gray-400">
+                  Once configured, your channels will load automatically. Browse through categories and channels using the app's interface. For the best experience, ensure you have a stable internet connection via WiFi or mobile data.
+                </p>
+              </div>
+            </div>
+
+            {/* Troubleshooting */}
+            <div className="mt-12 p-6 bg-black/50 brutal-border brutal-shadow">
+              <h2 className="text-brutal-xl text-white mb-4">Troubleshooting Tips</h2>
+              <ul className="list-disc list-inside space-y-2 text-gray-400">
+                <li>Ensure your app is updated to the latest version</li>
+                <li>Clear app cache and data if experiencing playback issues</li>
+                <li>Use WiFi connection for better streaming quality</li>
+                <li>If channels don't load, verify your subscription status and M3U URL</li>
+                <li>Restart the app if experiencing persistent issues</li>
               </ul>
             </div>
-
-            <Button
-              onClick={handleWhatsAppClick}
-              className="w-full bg-[#F97316] text-white hover:bg-[#F97316]/90 font-bold transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200 border-4 border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
-            >
-              Get Your IPTV Subscription
-            </Button>
           </div>
-
-          <div className="relative transform hover:scale-105 transition-duration-300 rotate-2">
-            <div className="absolute -inset-1 bg-[#F97316]/30 rounded-none blur"></div>
-            <BlurImage
-              src="/devices.png"
-              alt="Mobile IPTV Setup Guide - Easy Installation Steps for Android & iOS"
-              width={600}
-              height={400}
-              className="relative border-4 border-white shadow-[12px_12px_0px_0px_rgba(249,115,22,1)]"
-            />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            {
-              title: "Compatible Devices",
-              content: "Works on both Android and iOS devices, including tablets and smartphones."
-            },
-            {
-              title: "Easy Setup",
-              content: "Simple installation process that takes less than 5 minutes to complete."
-            },
-            {
-              title: "24/7 Support",
-              content: "Get help anytime with our dedicated customer support team."
-            }
-          ].map((feature) => (
-            <div
-              key={feature.title}
-              className="bg-dark border-4 border-[#F97316] p-6 transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200 shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]"
-            >
-              <h3 className="text-xl font-bold text-white mb-3 transform -rotate-1">
-                {feature.title}
-              </h3>
-              <p className="text-gray-300 transform rotate-1">
-                {feature.content}
-              </p>
-            </div>
-          ))}
         </div>
       </div>
     </div>
