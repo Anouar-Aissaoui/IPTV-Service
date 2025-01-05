@@ -7,6 +7,7 @@ import { ThemeProvider } from 'next-themes';
 import Index from "./pages/Index";
 import Tutorials from "./pages/Tutorials";
 import SmartTvSetup from "./pages/SmartTvSetup";
+import MobileSetup from "./pages/MobileSetup";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -28,6 +29,7 @@ const AppRoutes = () => {
       <Route path="/faq" element={<Index />} />
       <Route path="/tutorials" element={<Tutorials />} />
       <Route path="/tutorials/smart-tv" element={<SmartTvSetup />} />
+      <Route path="/tutorials/mobile" element={<MobileSetup />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
