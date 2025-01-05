@@ -11,6 +11,8 @@ import { IPTVBenefits } from "@/components/seo/IPTVBenefits";
 import { IPTVExplanation } from "@/components/seo/IPTVExplanation";
 import { seoKeywords } from "@/components/seo/Keywords";
 import { getStructuredData } from "@/components/seo/StructuredData";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const pageTitle = "Best IPTV Service Provider 2024 | Premium IPTV Subscription USA";
@@ -37,8 +39,35 @@ const Index = () => {
           {JSON.stringify(getStructuredData())}
         </script>
       </SEOOptimizer>
+
+      <Breadcrumbs />
+      
       <Hero />
       <BrandCarousel />
+      
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">Quick Links</h2>
+            <div className="space-y-2">
+              <Link to="/tutorials" className="block text-neon hover:underline">Setup Guides</Link>
+              <Link to="/channels" className="block text-neon hover:underline">Channel List</Link>
+              <Link to="/pricing" className="block text-neon hover:underline">Subscription Plans</Link>
+              <Link to="/faq" className="block text-neon hover:underline">FAQ</Link>
+            </div>
+          </div>
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">Popular Tutorials</h2>
+            <div className="space-y-2">
+              <Link to="/tutorials/smart-tv" className="block text-neon hover:underline">Smart TV Setup</Link>
+              <Link to="/tutorials/fire-tv" className="block text-neon hover:underline">Fire TV Setup</Link>
+              <Link to="/tutorials/mobile" className="block text-neon hover:underline">Mobile Setup</Link>
+              <Link to="/tutorials/vlc-windows" className="block text-neon hover:underline">VLC Setup</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <IPTVDefinition />
       <IPTVExplanation />
       <Pricing />
