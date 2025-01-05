@@ -23,12 +23,12 @@ export const BlurImage = React.forwardRef<HTMLImageElement, BlurImageProps>(
         }
       );
 
-      if (ref && 'current' in ref && ref.current && !priority) {
+      if (ref && typeof ref === 'object' && ref.current) {
         observer.observe(ref.current);
       }
 
       return () => {
-        if (ref && 'current' in ref && ref.current && !priority) {
+        if (ref && typeof ref === 'object' && ref.current) {
           observer.unobserve(ref.current);
         }
       };
@@ -41,7 +41,6 @@ export const BlurImage = React.forwardRef<HTMLImageElement, BlurImageProps>(
           src={src}
           alt={alt}
           loading={priority ? "eager" : "lazy"}
-          fetchPriority={priority ? "high" : "auto"}
           decoding="async"
           className={cn(
             "duration-700 ease-in-out",
