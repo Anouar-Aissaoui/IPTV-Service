@@ -184,8 +184,41 @@ export const getStructuredData = () => ({
             "@type": "Answer",
             "text": "Yes, we offer a 30-day money-back guarantee if you're not satisfied with our service. We want you to be completely confident in your subscription and the quality of our streaming service."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "What payment methods do you accept?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We accept various payment methods including major credit cards, PayPal, and cryptocurrency for your convenience and security."
+          }
         }
       ]
+    },
+    {
+      "@type": "Service",
+      "name": "IPTV Streaming Service",
+      "serviceType": "Streaming Service",
+      "provider": {
+        "@id": "https://www.iptvservice.site/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Worldwide"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "IPTV Subscription Plans",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Premium IPTV Subscription"
+            }
+          }
+        ]
+      }
     }
   ]
 });
