@@ -9,6 +9,7 @@ import Tutorials from "./pages/Tutorials";
 import SmartTvSetup from "./pages/SmartTvSetup";
 import MobileSetup from "./pages/MobileSetup";
 import MagSetup from "./pages/MagSetup";
+import FormulerSetup from "./pages/FormulerSetup";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -32,6 +33,7 @@ const AppRoutes = () => {
       <Route path="/tutorials/smart-tv" element={<SmartTvSetup />} />
       <Route path="/tutorials/mobile" element={<MobileSetup />} />
       <Route path="/tutorials/mag" element={<MagSetup />} />
+      <Route path="/tutorials/formuler" element={<FormulerSetup />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
