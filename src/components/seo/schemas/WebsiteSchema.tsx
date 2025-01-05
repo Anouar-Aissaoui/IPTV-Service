@@ -11,5 +11,8 @@ export const getWebsiteSchema = () => ({
     "target": "https://www.iptvservice.site/search?q={search_term_string}",
     "query-input": "required name=search_term_string"
   },
-  "inLanguage": "en-US"
+  "inLanguage": "en-US",
+  "breadcrumb": {
+    "@id": "https://www.iptvservice.site/#breadcrumb"
+  }
 });

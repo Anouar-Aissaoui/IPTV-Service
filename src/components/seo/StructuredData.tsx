@@ -5,6 +5,7 @@ import { getFAQSchema } from './schemas/FAQSchema';
 import { getServiceSchema } from './schemas/ServiceSchema';
 import { getArticleSchema } from './schemas/ArticleSchema';
 import { getTutorialSchema } from './schemas/TutorialSchema';
+import { getBreadcrumbSchema } from './schemas/BreadcrumbSchema';
 
 export const getStructuredData = (pageType?: string, pageData?: any) => {
   const baseSchemas = [
@@ -21,6 +22,11 @@ export const getStructuredData = (pageType?: string, pageData?: any) => {
 
   if (pageType === 'tutorial' && pageData) {
     baseSchemas.push(getTutorialSchema(pageData));
+  }
+
+  // Add breadcrumbs schema if we have breadcrumb data
+  if (pageData?.breadcrumbs) {
+    baseSchemas.push(getBreadcrumbSchema(pageData.breadcrumbs));
   }
 
   return {
