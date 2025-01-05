@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Tv, Smartphone, Monitor, Video, ArrowRight, Grid, List } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import OptimizedHelmet from '@/components/seo/OptimizedHelmet';
 
 interface TutorialCard {
@@ -49,6 +49,11 @@ const tutorials: TutorialCard[] = [
 
 const Tutorials = () => {
   const [viewType, setViewType] = useState<'grid' | 'list'>('grid');
+  const navigate = useNavigate();
+
+  const handleNavigation = (section: string) => {
+    navigate(`/${section}`);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900">
@@ -58,6 +63,29 @@ const Tutorials = () => {
         keywords={["IPTV setup", "IPTV tutorial", "Smart TV setup", "Android IPTV", "iOS IPTV", "MAG setup", "Formuler Z8", "Fire TV Stick IPTV", "Enigma2 IPTV", "VLC IPTV"]}
       />
       
+      {/* Navigation Menu */}
+      <div className="sticky top-0 z-40 w-full bg-black/95 backdrop-blur-sm border-b-2 border-[#F97316] mb-8">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-center space-x-4 md:space-x-8">
+            {[
+              { title: 'Home', path: '' },
+              { title: 'Pricing', path: 'pricing' },
+              { title: 'Channel List', path: 'channels' },
+              { title: 'Tutorials', path: 'tutorials' },
+              { title: 'FAQ', path: 'faq' }
+            ].map((item) => (
+              <button
+                key={item.title}
+                onClick={() => handleNavigation(item.path)}
+                className="text-white hover:text-[#F97316] transition-all duration-300 text-sm md:text-base font-black brutal-border px-2 py-1 md:px-4 md:py-2 hover:bg-[#F97316] hover:text-white transform hover:-translate-y-1 hover:translate-x-1 brutal-shadow"
+              >
+                {item.title}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div className="container mx-auto px-4 py-24">
         <div className="relative z-10 mb-16">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent blur-3xl -z-10" />
