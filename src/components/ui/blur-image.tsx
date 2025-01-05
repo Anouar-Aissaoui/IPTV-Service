@@ -23,13 +23,14 @@ export const BlurImage = React.forwardRef<HTMLImageElement, BlurImageProps>(
         }
       );
 
-      if (ref && typeof ref === 'object' && ref.current) {
-        observer.observe(ref.current);
+      const imageRef = ref && typeof ref === 'object' ? ref.current : null;
+      if (imageRef && !priority) {
+        observer.observe(imageRef);
       }
 
       return () => {
-        if (ref && typeof ref === 'object' && ref.current) {
-          observer.unobserve(ref.current);
+        if (imageRef && !priority) {
+          observer.unobserve(imageRef);
         }
       };
     }, [ref, priority]);

@@ -10,6 +10,7 @@ export const getTutorialSchema = (tutorial: TutorialData) => ({
   "name": tutorial.title,
   "description": tutorial.description,
   "image": ["https://www.iptvservice.site/iptv-subscription.png"],
+  "url": "https://www.iptvservice.site/tutorials",
   "step": tutorial.steps.map(step => ({
     "@type": "HowToStep",
     "position": step.step,
@@ -27,7 +28,8 @@ export const getTutorialSchema = (tutorial: TutorialData) => ({
       "@type": "ImageObject",
       "url": "https://www.iptvservice.site/iptv-subscription.png",
       "width": 480,
-      "height": 320
+      "height": 320,
+      "caption": "IPTV Service Logo"
     }
   }
 });
