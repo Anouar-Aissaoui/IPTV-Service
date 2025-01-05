@@ -12,6 +12,7 @@ interface SEOOptimizerProps {
   imageUrl?: string;
   type?: string;
   keywords?: string[];
+  children?: React.ReactNode;  // Added this line to support children
 }
 
 export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
@@ -20,7 +21,8 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   canonicalUrl: propCanonicalUrl,
   imageUrl: propImageUrl,
   type = 'website',
-  keywords = []
+  keywords = [],
+  children  // Added this to the destructuring
 }) => {
   const location = useLocation();
   const currentPath = location.pathname;
@@ -158,6 +160,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
           }
         })}
       </script>
+      {children}
     </Helmet>
   );
 };
