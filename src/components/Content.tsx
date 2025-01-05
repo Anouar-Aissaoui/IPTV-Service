@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { BlurImage } from "./ui/blur-image";
 
 const movies = [
   {
@@ -35,12 +34,18 @@ const movies = [
   },
 ];
 
-const MovieCard = React.lazy(() => import("./MovieCard"));
+const MovieCard = React.lazy(() => 
+  import("./MovieCard").then(module => ({
+    default: module.default
+  }))
+);
 
 const Content: React.FC = () => {
   const { toast } = useToast();
+  const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
+    setMounted(true);
     performance.mark('content-component-rendered');
     
     return () => {
@@ -51,6 +56,8 @@ const Content: React.FC = () => {
   const handleMovieClick = React.useCallback((movieTitle: string) => {
     console.log(`Movie clicked: ${movieTitle}`);
   }, []);
+
+  if (!mounted) return null;
 
   return (
     <div className="bg-dark py-20 relative overflow-hidden">

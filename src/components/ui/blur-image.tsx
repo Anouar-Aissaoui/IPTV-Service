@@ -11,6 +11,29 @@ interface BlurImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 export const BlurImage = React.forwardRef<HTMLImageElement, BlurImageProps>(
   ({ src, alt, className, priority, ...props }, ref) => {
     const [isLoading, setIsLoading] = React.useState(true);
+    const [isInView, setIsInView] = React.useState(false);
+    
+    React.useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          setIsInView(entry.isIntersecting);
+        },
+        {
+          rootMargin: '50px',
+        }
+      );
+
+      const imgElement = ref?.current;
+      if (imgElement && !priority) {
+        observer.observe(imgElement);
+      }
+
+      return () => {
+        if (imgElement && !priority) {
+          observer.unobserve(imgElement);
+        }
+      };
+    }, [ref, priority]);
 
     return (
       <div className={cn("overflow-hidden relative", className)}>
@@ -19,9 +42,12 @@ export const BlurImage = React.forwardRef<HTMLImageElement, BlurImageProps>(
           src={src}
           alt={alt}
           loading={priority ? "eager" : "lazy"}
+          fetchpriority={priority ? "high" : "auto"}
+          decoding="async"
           className={cn(
             "duration-700 ease-in-out",
-            isLoading ? "scale-110 blur-2xl" : "scale-100 blur-0"
+            isLoading ? "scale-110 blur-2xl" : "scale-100 blur-0",
+            !isInView && !priority ? "opacity-0" : "opacity-100"
           )}
           onLoad={() => setIsLoading(false)}
           {...props}
