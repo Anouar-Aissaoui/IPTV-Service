@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigation } from "@/components/navigation/Navigation";
-import { Smartphone, Download, Settings, Play, Check } from "lucide-react";
+import { Smartphone, Download, Settings, Play, Check, ArrowLeft } from "lucide-react";
 import OptimizedHelmet from '@/components/seo/OptimizedHelmet';
 
 const MobileSetup = () => {
@@ -23,7 +23,11 @@ const MobileSetup = () => {
 
       <main className="container mx-auto px-4 py-24">
         <div className="max-w-4xl mx-auto">
+          {/* Hero Section */}
           <div className="text-center mb-16">
+            <div className="inline-flex items-center justify-center p-4 brutal-border brutal-shadow bg-black/50 backdrop-blur-sm mb-8">
+              <Smartphone className="w-8 h-8 text-primary" />
+            </div>
             <h1 className="text-brutal-4xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-white mb-6">
               How to Setup IPTV on Android & iOS
             </h1>
@@ -32,10 +36,15 @@ const MobileSetup = () => {
             </p>
           </div>
 
-          <div className="space-y-12">
+          <div className="space-y-8">
             {/* Android Setup */}
             <section className="brutal-border brutal-shadow bg-black/50 backdrop-blur-sm p-8">
-              <h2 className="text-brutal-2xl text-primary mb-6">Android Setup Guide</h2>
+              <h2 className="text-brutal-2xl text-primary mb-6 flex items-center gap-2">
+                <span className="p-2 brutal-border brutal-shadow bg-black/50">
+                  <Download className="w-6 h-6 text-primary" />
+                </span>
+                Android Setup Guide
+              </h2>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="p-3 brutal-border brutal-shadow bg-black/50">
@@ -77,7 +86,12 @@ const MobileSetup = () => {
 
             {/* iOS Setup */}
             <section className="brutal-border brutal-shadow bg-black/50 backdrop-blur-sm p-8">
-              <h2 className="text-brutal-2xl text-primary mb-6">iOS Setup Guide</h2>
+              <h2 className="text-brutal-2xl text-primary mb-6 flex items-center gap-2">
+                <span className="p-2 brutal-border brutal-shadow bg-black/50">
+                  <Smartphone className="w-6 h-6 text-primary" />
+                </span>
+                iOS Setup Guide
+              </h2>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="p-3 brutal-border brutal-shadow bg-black/50">
@@ -117,9 +131,14 @@ const MobileSetup = () => {
               </div>
             </section>
 
-            {/* Tips Section */}
+            {/* Pro Tips Section */}
             <section className="brutal-border brutal-shadow bg-black/50 backdrop-blur-sm p-8">
-              <h2 className="text-brutal-2xl text-primary mb-6">Pro Tips</h2>
+              <h2 className="text-brutal-2xl text-primary mb-6 flex items-center gap-2">
+                <span className="p-2 brutal-border brutal-shadow bg-black/50">
+                  <Check className="w-6 h-6 text-primary" />
+                </span>
+                Pro Tips
+              </h2>
               <ul className="space-y-4 text-gray-400">
                 <li className="flex items-center gap-2">
                   <Check className="w-5 h-5 text-primary flex-shrink-0" />
