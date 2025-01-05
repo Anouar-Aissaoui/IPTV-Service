@@ -54,24 +54,40 @@ const Index = () => {
       <FAQ />
 
       {/* Quick Links Section - Now positioned after FAQ */}
-      <div className="container mx-auto px-4 py-16 bg-black/50">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-neon">Quick Links</h2>
-            <div className="space-y-2">
-              <Link to="/tutorials" className="block text-white hover:text-neon transition-colors">Setup Guides</Link>
-              <Link to="/channels" className="block text-white hover:text-neon transition-colors">Channel List</Link>
-              <Link to="/pricing" className="block text-white hover:text-neon transition-colors">Subscription Plans</Link>
-              <Link to="/faq" className="block text-white hover:text-neon transition-colors">FAQ</Link>
+      <div className="container mx-auto px-4 py-12 my-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="brutal-border brutal-shadow bg-black p-6 transform hover:-rotate-1 transition-transform">
+            <h2 className="text-xl font-black text-neon brutal-text mb-6 transform -rotate-2">Quick Links</h2>
+            <div className="space-y-3">
+              <Link to="/tutorials" className="block text-white hover:text-neon transition-all duration-300 brutal-hover font-bold text-sm">
+                → Setup Guides
+              </Link>
+              <Link to="/channels" className="block text-white hover:text-neon transition-all duration-300 brutal-hover font-bold text-sm">
+                → Channel List
+              </Link>
+              <Link to="/pricing" className="block text-white hover:text-neon transition-all duration-300 brutal-hover font-bold text-sm">
+                → Subscription Plans
+              </Link>
+              <Link to="/faq" className="block text-white hover:text-neon transition-all duration-300 brutal-hover font-bold text-sm">
+                → FAQ
+              </Link>
             </div>
           </div>
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-neon">Popular Tutorials</h2>
-            <div className="space-y-2">
-              <Link to="/tutorials/smart-tv" className="block text-white hover:text-neon transition-colors">Smart TV Setup</Link>
-              <Link to="/tutorials/fire-tv" className="block text-white hover:text-neon transition-colors">Fire TV Setup</Link>
-              <Link to="/tutorials/mobile" className="block text-white hover:text-neon transition-colors">Mobile Setup</Link>
-              <Link to="/tutorials/vlc-windows" className="block text-white hover:text-neon transition-colors">VLC Setup</Link>
+          <div className="brutal-border brutal-shadow bg-black p-6 transform hover:rotate-1 transition-transform">
+            <h2 className="text-xl font-black text-neon brutal-text mb-6 transform rotate-2">Popular Tutorials</h2>
+            <div className="space-y-3">
+              <Link to="/tutorials/smart-tv" className="block text-white hover:text-neon transition-all duration-300 brutal-hover font-bold text-sm">
+                → Smart TV Setup
+              </Link>
+              <Link to="/tutorials/fire-tv" className="block text-white hover:text-neon transition-all duration-300 brutal-hover font-bold text-sm">
+                → Fire TV Setup
+              </Link>
+              <Link to="/tutorials/mobile" className="block text-white hover:text-neon transition-all duration-300 brutal-hover font-bold text-sm">
+                → Mobile Setup
+              </Link>
+              <Link to="/tutorials/vlc-windows" className="block text-white hover:text-neon transition-all duration-300 brutal-hover font-bold text-sm">
+                → VLC Setup
+              </Link>
             </div>
           </div>
         </div>
