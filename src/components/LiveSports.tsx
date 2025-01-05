@@ -42,7 +42,7 @@ const SportCard = memo(({ sport }: SportProps) => {
     <div className="relative group overflow-hidden border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)] transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200">
       <BlurImage
         src={sport.image}
-        alt={sport.title}
+        alt={`${sport.title} - ${sport.description}`}
         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
         loading="lazy"
         decoding="async"
@@ -51,7 +51,10 @@ const SportCard = memo(({ sport }: SportProps) => {
       <div className="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
         <h3 className="text-white font-bold transform -rotate-2">{sport.title}</h3>
         <p className="text-white/80 text-sm mb-4 transform rotate-1">{sport.description}</p>
-        <button className="bg-neon text-dark px-4 py-2 border-4 border-dark shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:-translate-y-1 transition-transform duration-200 font-black tracking-tight">
+        <button 
+          className="bg-neon text-dark px-4 py-2 border-4 border-dark shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:-translate-y-1 transition-transform duration-200 font-black tracking-tight"
+          aria-label={`Watch ${sport.title} live - ${sport.description}`}
+        >
           Watch Live
         </button>
       </div>
