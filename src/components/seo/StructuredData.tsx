@@ -6,8 +6,16 @@ import { getServiceSchema } from './schemas/ServiceSchema';
 import { getArticleSchema } from './schemas/ArticleSchema';
 import { getTutorialSchema } from './schemas/TutorialSchema';
 
+type SchemaType = ReturnType<typeof getOrganizationSchema> | 
+                  ReturnType<typeof getWebsiteSchema> | 
+                  ReturnType<typeof getProductSchema> | 
+                  ReturnType<typeof getFAQSchema> | 
+                  ReturnType<typeof getServiceSchema> | 
+                  ReturnType<typeof getArticleSchema> | 
+                  ReturnType<typeof getTutorialSchema>;
+
 export const getStructuredData = (pageType?: string, pageData?: any) => {
-  const baseSchemas = [
+  const baseSchemas: SchemaType[] = [
     getOrganizationSchema(),
     getWebsiteSchema(),
     getProductSchema(),
