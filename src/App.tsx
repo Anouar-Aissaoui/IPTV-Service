@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from 'next-themes';
 import Index from "./pages/Index";
 import Tutorials from "./pages/Tutorials";
+import SmartTvSetup from "./pages/SmartTvSetup";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -26,6 +27,7 @@ const AppRoutes = () => {
       <Route path="/pricing" element={<Index />} />
       <Route path="/faq" element={<Index />} />
       <Route path="/tutorials" element={<Tutorials />} />
+      <Route path="/tutorials/smart-tv" element={<SmartTvSetup />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
