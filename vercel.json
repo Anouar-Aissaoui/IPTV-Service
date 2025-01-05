@@ -25,6 +25,16 @@
       "source": "/en/(.*)",
       "destination": "/$1",
       "permanent": true
+    },
+    {
+      "source": "/tutorials",
+      "destination": "/iptv-setup-tutorials",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/:path*",
+      "destination": "/iptv-setup-tutorials/:path*",
+      "permanent": true
     }
   ],
   "headers": [
