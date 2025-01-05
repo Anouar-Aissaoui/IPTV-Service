@@ -81,11 +81,11 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
 
     // Add alternate language URLs
     Object.entries(alternateUrls).forEach(([lang, url]) => {
-      tags.push(<link key={`alternate-${lang}`} rel="alternate" href={url} hreflang={lang} />);
+      tags.push(<link key={`alternate-${lang}`} rel="alternate" href={url} hrefLang={lang} />);
     });
 
     // Add x-default
-    tags.push(<link key="alternate-default" rel="alternate" href={baseUrl} hreflang="x-default" />);
+    tags.push(<link key="alternate-default" rel="alternate" href={baseUrl} hrefLang="x-default" />);
 
     // Add Open Graph locales
     tags.push(<meta key="og-locale" property="og:locale" content={defaultLocales[locale as keyof typeof defaultLocales] || 'en_US'} />);
