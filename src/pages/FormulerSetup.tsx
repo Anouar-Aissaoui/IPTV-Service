@@ -57,7 +57,7 @@ const FormulerSetup = () => {
                 <div>
                   <h2 className="text-brutal-2xl text-white mb-2">2. Configure Network Settings</h2>
                   <p className="text-gray-400">
-                    Go to Settings > Network Settings and configure your internet connection. We recommend using a wired connection for the best streaming experience.
+                    Go to Settings {'->'} Network Settings and configure your internet connection. We recommend using a wired connection for the best streaming experience.
                   </p>
                 </div>
               </div>
