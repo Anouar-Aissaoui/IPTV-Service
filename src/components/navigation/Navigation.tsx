@@ -47,9 +47,9 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
     },
     {
       name: "Tutorials",
-      path: "/tutorials",
+      path: "/iptv-setup-tutorials",
       action: () => {
-        navigate('/tutorials');
+        navigate('/iptv-setup-tutorials');
       }
     },
     { 
