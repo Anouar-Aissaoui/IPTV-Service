@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from 'next-themes';
 import Index from "./pages/Index";
+import Channels from "./pages/Channels";
 import Tutorials from "./pages/Tutorials";
 import SmartTvSetup from "./pages/SmartTvSetup";
 import MobileSetup from "./pages/MobileSetup";
@@ -29,7 +30,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/premium-iptv-service" element={<Index />} />
-      <Route path="/channels" element={<Index />} />
+      <Route path="/channels" element={<Channels />} />
       <Route path="/pricing" element={<Index />} />
       <Route path="/faq" element={<Index />} />
       <Route path="/tutorials" element={<Tutorials />} />
