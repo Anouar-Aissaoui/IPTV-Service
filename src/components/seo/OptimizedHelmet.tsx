@@ -12,6 +12,7 @@ interface HelmetProps {
   children?: React.ReactNode;
   noindex?: boolean;
   pageType?: 'home' | 'product' | 'tutorial' | 'pricing' | 'channels' | 'faq';
+  alternateUrls?: Record<string, string>;
 }
 
 const OptimizedHelmet: React.FC<HelmetProps> = memo(({
@@ -24,7 +25,8 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
   keywords = [],
   children,
   noindex = false,
-  pageType = 'home'
+  pageType = 'home',
+  alternateUrls = {}
 }) => {
   const baseUrl = 'https://www.iptvservice.site';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
@@ -67,16 +69,49 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
     }
   };
 
+  // Get language-specific meta tags
+  const getLanguageMetaTags = () => {
+    const tags = [];
+    const defaultLocales = {
+      en: 'en_US',
+      es: 'es_ES',
+      fr: 'fr_FR',
+      de: 'de_DE'
+    };
+
+    // Add alternate language URLs
+    Object.entries(alternateUrls).forEach(([lang, url]) => {
+      tags.push(<link key={`alternate-${lang}`} rel="alternate" href={url} hreflang={lang} />);
+    });
+
+    // Add x-default
+    tags.push(<link key="alternate-default" rel="alternate" href={baseUrl} hreflang="x-default" />);
+
+    // Add Open Graph locales
+    tags.push(<meta key="og-locale" property="og:locale" content={defaultLocales[locale as keyof typeof defaultLocales] || 'en_US'} />);
+    Object.keys(defaultLocales).forEach(lang => {
+      if (lang !== locale) {
+        tags.push(<meta key={`og-locale-${lang}`} property="og:locale:alternate" content={defaultLocales[lang as keyof typeof defaultLocales]} />);
+      }
+    });
+
+    return tags;
+  };
+
   return (
     <Helmet>
-      {/* Enhanced Primary Meta Tags */}
+      <html lang={locale} />
       <title>{getPageTitle()}</title>
       <meta name="title" content={getPageTitle()} />
       <meta name="description" content={getMetaDescription()} />
       {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
       <meta name="author" content="IPTV Service" />
-      <meta name="copyright" content={`© ${currentYear} IPTV Service`} />
+      <meta name="copyright" content={`© ${new Date().getFullYear()} IPTV Service`} />
       <meta name="generator" content="IPTV Service Platform" />
+      
+      {/* Language and Region Meta Tags */}
+      <meta httpEquiv="content-language" content={locale} />
+      {getLanguageMetaTags()}
       
       {/* Enhanced Robots Control */}
       {noindex ? (
@@ -91,9 +126,6 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
       
       {/* Enhanced Canonical & Mobile Tags */}
       <link rel="canonical" href={fullCanonicalUrl} />
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-      <meta name="format-detection" content="telephone=no" />
-      <meta name="theme-color" content="#F97316" />
       
       {/* Enhanced Open Graph Tags */}
       <meta property="og:type" content={type} />
@@ -103,7 +135,6 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
       <meta property="og:image" content={fullImageUrl} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:locale" content={locale} />
       <meta property="og:site_name" content="Best IPTV Service" />
       <meta property="og:updated_time" content={new Date().toISOString()} />
       
@@ -113,25 +144,7 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
       <meta name="twitter:title" content={getPageTitle()} />
       <meta name="twitter:description" content={getMetaDescription()} />
       <meta name="twitter:image" content={fullImageUrl} />
-      <meta name="twitter:creator" content="@iptvsubscription" />
-      <meta name="twitter:site" content="@iptvsubscription" />
-      <meta name="twitter:label1" content="Written by" />
-      <meta name="twitter:data1" content="IPTV Service Team" />
       
-      {/* Enhanced Mobile & PWA Tags */}
-      <meta name="apple-mobile-web-app-capable" content="yes" />
-      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-      <meta name="apple-mobile-web-app-title" content="IPTV Service" />
-      <link rel="apple-touch-icon" href="/favicon.png" />
-      
-      {/* Enhanced Language Alternates */}
-      <link rel="alternate" href={`${baseUrl}`} hrefLang="x-default" />
-      <link rel="alternate" href={`${baseUrl}`} hrefLang="en" />
-      <link rel="alternate" href={`${baseUrl}/es`} hrefLang="es" />
-      <link rel="alternate" href={`${baseUrl}/fr`} hrefLang="fr" />
-      <link rel="alternate" href={`${baseUrl}/de`} hrefLang="de" />
-      
-      {/* Allow additional meta tags to be injected */}
       {children}
     </Helmet>
   );
