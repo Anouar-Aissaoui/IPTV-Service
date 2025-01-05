@@ -35,6 +35,7 @@ export const OptimizedImage = ({
         className={className}
         loading={priority ? "eager" : "lazy"}
         decoding={priority ? "sync" : "async"}
+        fetchPriority={priority ? "high" : "auto"}
       />
     </picture>
   );

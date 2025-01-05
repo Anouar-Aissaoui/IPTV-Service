@@ -66,5 +66,7 @@ export default defineConfig(({ mode }) => ({
         drop_debugger: true,
       },
     },
+    cssCodeSplit: true,
+    cssMinify: true,
   },
 }));
