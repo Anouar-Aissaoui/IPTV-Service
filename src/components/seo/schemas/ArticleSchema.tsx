@@ -45,8 +45,12 @@ export const getArticleSchema = (article: {
     "offers": [
       {
         "@type": "Offer",
+        "name": "Article Access",
         "price": "10",
-        "priceCurrency": "USD"
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
+        "itemCondition": "https://schema.org/NewCondition"
       }
     ]
   }
