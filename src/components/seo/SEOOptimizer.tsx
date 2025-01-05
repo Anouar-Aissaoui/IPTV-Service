@@ -30,8 +30,12 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const currentPath = location.pathname;
   const baseUrl = 'https://www.iptvservice.site';
 
-  // Normalize the current URL by removing trailing slashes and query parameters
-  const normalizedPath = currentPath.replace(/\/+$/, '');
+  // Normalize the current URL by removing trailing slashes, query parameters, and hash fragments
+  const normalizedPath = currentPath
+    .replace(/\/+$/, '') // Remove trailing slashes
+    .split('?')[0] // Remove query parameters
+    .split('#')[0]; // Remove hash fragments
+  
   const canonicalPath = normalizedPath === '' ? '/' : normalizedPath;
   
   const { data: seoMetrics } = useQuery({
@@ -60,6 +64,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const imageUrl = propImageUrl || '/iptv-subscription.png';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
 
+  // Track page views and performance metrics
   useEffect(() => {
     const trackPageView = async () => {
       try {
@@ -116,7 +121,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       {/* Robots Control */}
       <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
       
-      {/* Canonical URL */}
+      {/* Enhanced Canonical URL Implementation */}
       <link rel="canonical" href={canonicalUrl} />
       
       {/* Alternate Language URLs */}
