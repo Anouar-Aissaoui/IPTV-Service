@@ -1,3 +1,4 @@
+# Global rules
 User-agent: *
 Allow: /
 Disallow: /api/
@@ -33,11 +34,39 @@ Disallow: /
 User-agent: Omgili
 Disallow: /
 
+# Block archive.org bot
+User-agent: archive.org_bot
+Disallow: /
+
+# Block CommonCrawl
+User-agent: CCBot
+Disallow: /
+
 # Optimize crawling rate
-Crawl-delay: 5
+Crawl-delay: 1
 
 # Clean parameters
 Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content&fbclid&gclid&_ga&_gl / 
 
+# Allow specific bots with higher priority
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
 # Specify sitemap location
 Sitemap: https://www.iptvservice.site/sitemap.xml
+
+# Host directive for preferred domain version
+Host: https://www.iptvservice.site
