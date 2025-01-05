@@ -1,22 +1,18 @@
-interface ArticleData {
+export const getArticleSchema = (article: {
   title: string;
   description: string;
   image: string;
   datePublished: string;
   dateModified: string;
   author: string;
-}
-
-export const getArticleSchema = (article: ArticleData) => ({
+}) => ({
   "@type": "Article",
-  "@id": "https://www.iptvservice.site/article",
-  "name": article.title,
+  "@context": "https://schema.org",
   "headline": article.title,
   "description": article.description,
-  "image": [article.image],
+  "image": article.image,
   "datePublished": article.datePublished,
   "dateModified": article.dateModified,
-  "url": "https://www.iptvservice.site",
   "author": {
     "@type": "Person",
     "name": article.author
@@ -26,14 +22,7 @@ export const getArticleSchema = (article: ArticleData) => ({
     "name": "Best IPTV Service Provider",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://www.iptvservice.site/iptv-subscription.png",
-      "width": 480,
-      "height": 320,
-      "caption": "IPTV Service Logo"
+      "url": "https://www.iptvservice.site/iptv-subscription.png"
     }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.iptvservice.site"
   }
 });
