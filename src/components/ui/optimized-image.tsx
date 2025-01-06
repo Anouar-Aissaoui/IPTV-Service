@@ -10,7 +10,7 @@ interface OptimizedImageProps {
   priority?: boolean;
 }
 
-export const OptimizedImage = ({
+export const OptimizedImage = React.memo(({
   src,
   alt,
   width,
@@ -18,15 +18,28 @@ export const OptimizedImage = ({
   className,
   priority = false,
 }: OptimizedImageProps) => {
-  // Generate WebP source if the original is not already WebP
-  const webpSrc = src.endsWith('.webp') ? src : `${src.split('.').slice(0, -1).join('.')}.webp`;
+  // Generate WebP and AVIF sources
+  const baseUrl = src.split('.').slice(0, -1).join('.');
+  const extension = src.split('.').pop();
+  
+  // Only generate alternative formats if not already WebP or AVIF
+  const webpSrc = src.endsWith('.webp') ? src : `${baseUrl}.webp`;
+  const avifSrc = src.endsWith('.avif') ? src : `${baseUrl}.avif`;
   
   return (
     <picture>
-      <source
-        srcSet={webpSrc}
-        type="image/webp"
-      />
+      {!src.endsWith('.avif') && (
+        <source
+          srcSet={avifSrc}
+          type="image/avif"
+        />
+      )}
+      {!src.endsWith('.webp') && (
+        <source
+          srcSet={webpSrc}
+          type="image/webp"
+        />
+      )}
       <BlurImage
         src={src}
         alt={alt}
@@ -39,4 +52,6 @@ export const OptimizedImage = ({
       />
     </picture>
   );
-};
+});
+
+OptimizedImage.displayName = 'OptimizedImage';
