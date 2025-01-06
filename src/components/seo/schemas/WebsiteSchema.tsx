@@ -43,5 +43,13 @@ export const getWebsiteSchema = () => ({
   ],
   "breadcrumb": {
     "@id": "https://www.iptvservice.site/#breadcrumb"
-  }
+  },
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.iptvservice.site"
+    }
+  ]
 });
