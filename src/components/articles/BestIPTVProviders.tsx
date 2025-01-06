@@ -19,6 +19,15 @@ const BestIPTVProviders: React.FC = () => {
         <h1 className="text-4xl font-bold mb-6">Best IPTV Service Providers Subscriptions</h1>
         
         <div className="space-y-6">
+          {/* Featured Image */}
+          <div className="my-8">
+            <img 
+              src="/best-IPTV-providers.png"
+              alt="Best IPTV Service Providers Comparison"
+              className="w-full rounded-lg shadow-lg"
+            />
+          </div>
+
           {/* Introduction */}
           <section>
             <p className="lead">
@@ -89,8 +98,6 @@ const BestIPTVProviders: React.FC = () => {
                 </div>
               </div>
             </div>
-
-            {/* Continue with other providers... */}
           </section>
 
           {/* FAQ Section */}
@@ -99,7 +106,7 @@ const BestIPTVProviders: React.FC = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-xl font-bold mb-2">What is the best IPTV service for sports content?</h3>
-                <p>Beast IPTV is highly recommended for sports lovers due to its wide selection of sports channels and reliable streaming quality.</p>
+                <p>IPTVService.site is highly recommended for sports lovers due to its wide selection of sports channels and reliable streaming quality.</p>
               </div>
               
               <div>
