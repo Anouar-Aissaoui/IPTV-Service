@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { initializeSEOMetrics } from '@/utils/seoMetricsUtils';
+import { SchemaManager, generateWebPageSchema } from './SchemaManager';
 import type { SEOMetrics } from '@/types/tables/seo-metrics';
 
 interface SEOOptimizerProps {
@@ -14,6 +15,10 @@ interface SEOOptimizerProps {
   keywords?: string[];
   children?: React.ReactNode;
   noindex?: boolean;
+  schema?: {
+    type: 'WebPage' | 'Article' | 'Product' | 'Organization' | 'BreadcrumbList' | 'FAQPage';
+    data: Record<string, any>;
+  };
 }
 
 export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
@@ -24,7 +29,8 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   type = 'website',
   keywords = [],
   children,
-  noindex = false
+  noindex = false,
+  schema
 }) => {
   const location = useLocation();
   const currentPath = location.pathname;
@@ -35,12 +41,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
     if (propCanonicalUrl) {
       return propCanonicalUrl.startsWith('http') ? propCanonicalUrl : `${baseUrl}${propCanonicalUrl}`;
     }
-    // For root path, return base URL without trailing slash
-    if (currentPath === '/') {
-      return baseUrl;
-    }
-    // For other paths, combine base URL with current path and ensure no trailing slash
-    return `${baseUrl}${currentPath}`.replace(/\/$/, '');
+    return currentPath === '/' ? baseUrl : `${baseUrl}${currentPath}`.replace(/\/$/, '');
   };
 
   const getPageSpecificDescription = (path: string) => {
@@ -92,6 +93,10 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
     }
   });
 
+  // Generate default schema if none provided
+  const defaultSchema = generateWebPageSchema(title, description);
+  const finalSchema = schema || defaultSchema;
+
   return (
     <Helmet>
       <title>{title}</title>
@@ -126,24 +131,8 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       <meta name="theme-color" content="#F97316" />
       
       {/* Schema.org Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          url: canonicalUrl,
-          name: title,
-          description,
-          image: fullImageUrl,
-          publisher: {
-            "@type": "Organization",
-            "name": "IPTV Service",
-            "logo": {
-              "@type": "ImageObject",
-              "url": `${baseUrl}/favicon.png`
-            }
-          }
-        })}
-      </script>
+      <SchemaManager type={finalSchema.type} data={finalSchema.data} />
+      
       {children}
     </Helmet>
   );

@@ -7,7 +7,7 @@ import { BrandCarousel } from "@/components/BrandCarousel";
 import LiveChannels from "@/components/LiveChannels";
 import { SEOOptimizer } from "@/components/seo/SEOOptimizer";
 import { seoKeywords } from "@/components/seo/Keywords";
-import { getStructuredData } from "@/components/seo/StructuredData";
+import { generateProductSchema } from "@/components/seo/SchemaManager";
 import { IPTVDefinition } from "@/components/seo/IPTVDefinition";
 import { IPTVBenefits } from "@/components/seo/IPTVBenefits";
 import { IPTVExplanation } from "@/components/seo/IPTVExplanation";
@@ -16,7 +16,6 @@ import { Link } from "react-router-dom";
 import { ContentWrapper } from "@/components/layout/ContentWrapper";
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from "@/integrations/supabase/client";
-import type { Database } from "@/integrations/supabase/types";
 
 const Index = () => {
   // Fetch IPTV-specific keywords from Supabase
@@ -25,8 +24,7 @@ const Index = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('iptv_seo_keywords')
-        .select('keyword')
-        .returns<Pick<Database['public']['Tables']['iptv_seo_keywords']['Row'], 'keyword'>[]>();
+        .select('keyword');
       
       if (error) throw error;
       return data.map(k => k.keyword);
@@ -36,16 +34,14 @@ const Index = () => {
   const currentYear = new Date().getFullYear();
   const pageTitle = `Best IPTV Service Provider ${currentYear} | Premium IPTV Subscription USA & Worldwide`;
   const pageDescription = `Experience the ultimate IPTV service with 40,000+ live channels, 54,000+ VOD content, and 4K quality streaming. Top-rated IPTV provider offering affordable packages with 24/7 support. Try the best IPTV subscription service now!`;
-  
-  const pageData = {
-    title: pageTitle,
-    description: pageDescription,
-    datePublished: `${currentYear}-01-01`,
-    dateModified: new Date().toISOString(),
-    author: "IPTV Service",
-    image: "https://www.iptvservice.site/iptv-subscription.png",
-    keywords: iptvKeywords || []
-  };
+
+  // Generate product schema for IPTV service
+  const productSchema = generateProductSchema(
+    'Premium IPTV Subscription',
+    pageDescription,
+    { min: 14.99, max: 99.99 },
+    { value: 4.8, count: 1250 }
+  );
 
   return (
     <ContentWrapper as="main" className="min-h-screen bg-dark text-white font-grotesk">
@@ -63,57 +59,45 @@ const Index = () => {
           `IPTV subscription ${currentYear}`,
           'best IPTV provider USA'
         ]}
-        noindex={false}
-      >
-        <script type="application/ld+json">
-          {JSON.stringify(getStructuredData('article', pageData))}
-        </script>
-      </SEOOptimizer>
+        schema={productSchema}
+      />
 
       <Breadcrumbs />
       
-      {/* Hero Section */}
+      {/* Main Content Sections */}
       <ContentWrapper as="section" ariaLabel="Hero Section">
         <Hero />
       </ContentWrapper>
 
-      {/* Brand Showcase */}
       <ContentWrapper as="section" ariaLabel="Brand Showcase">
         <BrandCarousel />
       </ContentWrapper>
 
-      {/* IPTV Information */}
       <ContentWrapper as="article" ariaLabel="IPTV Information">
         <IPTVDefinition />
         <IPTVExplanation />
       </ContentWrapper>
 
-      {/* Pricing Plans */}
       <ContentWrapper as="section" ariaLabel="Pricing Plans">
         <Pricing />
       </ContentWrapper>
 
-      {/* Content Showcase */}
       <ContentWrapper as="section" ariaLabel="Content Showcase">
         <Content />
       </ContentWrapper>
 
-      {/* Live Channels */}
       <ContentWrapper as="section" ariaLabel="Live Channels">
         <LiveChannels />
       </ContentWrapper>
 
-      {/* Live Sports */}
       <ContentWrapper as="section" ariaLabel="Live Sports">
         <LiveSports />
       </ContentWrapper>
 
-      {/* IPTV Benefits */}
       <ContentWrapper as="section" ariaLabel="IPTV Benefits">
         <IPTVBenefits />
       </ContentWrapper>
 
-      {/* FAQ Section */}
       <ContentWrapper as="section" ariaLabel="Frequently Asked Questions">
         <FAQ />
       </ContentWrapper>
