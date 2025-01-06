@@ -19,7 +19,7 @@ export const PricingSEO: React.FC = () => {
 
   return (
     <OptimizedHelmet
-      title="Premium IPTV Subscription Plans 2024 | Best IPTV Service Packages"
+      title="IPTV Subscription Plans 2025 | Best IPTV Service Packages"
       description="Choose from our affordable IPTV subscription plans starting at $14.99. Access 40,000+ live channels, premium sports, movies & shows in HD/4K quality. 24/7 support included."
       canonicalUrl="/iptv-subscription-plans"
       keywords={pricingKeywords}
