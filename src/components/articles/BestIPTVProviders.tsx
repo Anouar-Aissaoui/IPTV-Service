@@ -11,33 +11,41 @@ import { CTASection } from './sections/CTASection';
 
 const BestIPTVProviders: React.FC = () => {
   const seoKeywords = [
-    'iptv',
-    'best iptv',
-    'iptv subscription',
-    'iptv services',
-    'iptv service',
-    'best iptv service',
-    'iptv providers',
-    'iptv subscribe',
-    'iptv provider',
-    'best for iptv',
-    'iptv usa',
-    'service iptv',
-    'top rated iptv',
-    'itpv online',
-    'best iptv services',
-    'bestiptv'
+    'iptv 2025',
+    'best iptv 2025',
+    'iptv subscription 2025',
+    'premium iptv service',
+    'iptv providers 2025',
+    '4K iptv streaming',
+    'reliable iptv service',
+    'iptv usa 2025',
+    'hd iptv service',
+    'top rated iptv 2025',
+    'best iptv providers 2025',
+    'iptv reviews 2025',
+    'streaming service comparison',
+    'live tv streaming 2025',
+    'sports iptv service'
   ];
+
+  const pageData = {
+    title: "Best IPTV Service Providers Guide 2025 | Top Streaming Solutions",
+    description: "Comprehensive guide to the most reliable IPTV providers in 2025. Compare features, pricing, and find the perfect 4K streaming solution with 40,000+ channels. Updated for 2025 with latest reviews and comparisons.",
+    datePublished: "2025-01-01",
+    dateModified: new Date().toISOString(),
+    author: "IPTV Service",
+    image: "/best-IPTV-providers.png"
+  };
 
   return (
     <ContentWrapper as="article" className="prose prose-invert max-w-none">
       <SEOOptimizer
-        title="Best IPTV Service Providers Subscriptions 2025 | Complete Guide"
-        description="Comprehensive guide to the top IPTV service providers in 2025. Compare features, pricing, and find the perfect streaming solution for your needs. Discover reliable IPTV services with 40,000+ channels."
+        title={pageData.title}
+        description={pageData.description}
         canonicalUrl="/best-iptv-service-providers-subscriptions"
         type="article"
         keywords={seoKeywords}
-        imageUrl="/best-IPTV-providers.png"
+        imageUrl={pageData.image}
       />
       
       <Breadcrumbs />
