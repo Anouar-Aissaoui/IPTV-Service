@@ -69,23 +69,29 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   useEffect(() => {
     const trackPageView = async () => {
       try {
-        // First check if a record exists
-        const { data: existingRecord } = await supabase
+        // Get all records for this URL
+        const { data: records, error: fetchError } = await supabase
           .from('seo_performance')
           .select('*')
-          .eq('url', currentPath)
-          .maybeSingle();
+          .eq('url', currentPath);
 
-        if (existingRecord) {
-          // Update existing record
+        if (fetchError) {
+          console.error('Error fetching SEO records:', fetchError);
+          return () => {};
+        }
+
+        if (records && records.length > 0) {
+          // Update the first record found for this URL
+          const record = records[0];
           await supabase
             .from('seo_performance')
             .update({
-              visits: (existingRecord.visits || 0) + 1
+              visits: (record.visits || 0) + 1,
+              updated_at: new Date().toISOString()
             })
-            .eq('url', currentPath);
+            .eq('id', record.id);
         } else {
-          // Insert new record
+          // Create new record
           await supabase
             .from('seo_performance')
             .insert([{
@@ -102,11 +108,22 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
           const timeOnPage = (performance.now() - startTime) / 1000;
           const updateMetrics = async () => {
             try {
-              await supabase
+              // Get the record again to update time
+              const { data: records } = await supabase
                 .from('seo_performance')
-                .update({ avg_time_on_page: timeOnPage })
+                .select('*')
                 .eq('url', currentPath);
-              console.log('Page timing updated');
+
+              if (records && records.length > 0) {
+                await supabase
+                  .from('seo_performance')
+                  .update({ 
+                    avg_time_on_page: timeOnPage,
+                    updated_at: new Date().toISOString()
+                  })
+                  .eq('id', records[0].id);
+                console.log('Page timing updated');
+              }
             } catch (err) {
               console.error('Error updating page timing:', err);
             }
