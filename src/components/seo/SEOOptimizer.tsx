@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
-import type { SEOMetrics, SEOPerformanceMetric } from '@/types/tables/seo-metrics';
+import type { SEOMetrics } from '@/types/tables/seo-metrics';
 
 interface SEOOptimizerProps {
   title?: string;
@@ -29,7 +29,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const currentPath = location.pathname;
   const baseUrl = 'https://www.iptvservice.site';
 
-  // Generate canonical URL based on current path
   const getCanonicalUrl = () => {
     if (propCanonicalUrl) {
       return propCanonicalUrl.startsWith('http') ? propCanonicalUrl : `${baseUrl}${propCanonicalUrl}`;
@@ -68,27 +67,36 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   useEffect(() => {
     const trackPageView = async () => {
       try {
-        // First try to get existing record with error handling
+        // First, try to get existing record
         const { data: existingData, error: selectError } = await supabase
           .from('seo_performance')
           .select('*')
-          .eq('url', currentPath);
+          .eq('url', currentPath)
+          .limit(1);
 
-        // If we got data back and it's an array with at least one item
+        if (selectError) {
+          console.error('Error fetching performance data:', selectError);
+          return;
+        }
+
+        const startTime = performance.now();
+
         if (existingData && existingData.length > 0) {
-          const currentRecord = existingData[0];
-          await supabase
+          // Update existing record
+          const { error: updateError } = await supabase
             .from('seo_performance')
             .update({
-              visits: (currentRecord.visits || 0) + 1,
-              bounce_rate: currentRecord.bounce_rate || 0,
-              avg_time_on_page: currentRecord.avg_time_on_page || 0,
+              visits: (existingData[0].visits || 0) + 1,
               updated_at: new Date().toISOString()
             })
-            .eq('id', currentRecord.id);
+            .eq('id', existingData[0].id);
+
+          if (updateError) {
+            console.error('Error updating performance data:', updateError);
+          }
         } else {
-          // Insert new record with minimal required fields
-          await supabase
+          // Insert new record
+          const { error: insertError } = await supabase
             .from('seo_performance')
             .insert([{
               url: currentPath,
@@ -98,27 +106,28 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
               created_at: new Date().toISOString(),
               updated_at: new Date().toISOString()
             }]);
+
+          if (insertError) {
+            console.error('Error inserting performance data:', insertError);
+          }
         }
 
-        const startTime = performance.now();
-        
+        // Cleanup function to update time on page
         return () => {
           const timeOnPage = (performance.now() - startTime) / 1000;
           const updateMetrics = async () => {
-            try {
-              // Only update if we found the record
-              if (existingData && existingData.length > 0) {
-                await supabase
-                  .from('seo_performance')
-                  .update({ 
-                    avg_time_on_page: timeOnPage,
-                    updated_at: new Date().toISOString()
-                  })
-                  .eq('id', existingData[0].id);
+            if (existingData && existingData.length > 0) {
+              const { error: timeUpdateError } = await supabase
+                .from('seo_performance')
+                .update({
+                  avg_time_on_page: timeOnPage,
+                  updated_at: new Date().toISOString()
+                })
+                .eq('id', existingData[0].id);
+
+              if (timeUpdateError) {
+                console.error('Error updating time on page:', timeUpdateError);
               }
-              console.log('Page timing updated');
-            } catch (err) {
-              console.error('Error updating page timing:', err);
             }
           };
           void updateMetrics();
@@ -191,6 +200,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       {children}
     </Helmet>
   );
-};
+});
 
 export default SEOOptimizer;
