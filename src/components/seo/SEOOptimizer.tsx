@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
+import { initializeSEOMetrics } from '@/utils/seoMetricsUtils';
 import type { SEOMetrics } from '@/types/tables/seo-metrics';
 
 interface SEOOptimizerProps {
@@ -70,39 +70,25 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   useQuery({
     queryKey: ['seoMetrics', currentPath],
     queryFn: async () => {
-      const metric: SEOMetrics = {
-        id: crypto.randomUUID(),
-        route: currentPath,
+      await initializeSEOMetrics(
+        currentPath,
         title,
         description,
-        canonical_url: canonicalUrl,
-        meta_tags: {
+        canonicalUrl,
+        {
           keywords: keywords.join(', '),
           'og:type': type,
           'og:url': canonicalUrl,
           'twitter:url': canonicalUrl
         },
-        structured_data: {
+        {
           '@context': 'https://schema.org',
           '@type': 'WebPage',
           url: canonicalUrl,
           name: title,
           description
-        },
-        crawl_status: 'pending',
-        last_crawled: null,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
-      };
-
-      const { error } = await supabase
-        .from('seo_metrics')
-        .upsert([metric], {
-          onConflict: 'route'
-        });
-
-      if (error) throw error;
-      return metric;
+        }
+      );
     }
   });
 
