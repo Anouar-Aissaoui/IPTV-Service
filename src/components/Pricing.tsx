@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
-import { Helmet } from "react-helmet";
+import PricingSEO from "./seo/PricingSEO";
 
 const keywords = [
   'buy IPTV',
@@ -77,22 +77,16 @@ export const Pricing: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide</title>
-        <meta name="description" content="Looking to Buy IPTV? Choose the best IPTV provider offering affordable services in USA, UK & Worldwide with 24K+ channels. Subscribe now!" />
-        <meta name="keywords" content={keywords.join(', ')} />
-        <link rel="canonical" href="https://www.iptvservice.site/pricing" />
-      </Helmet>
-
+      <PricingSEO />
       <div id="pricing-section" className="bg-dark py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 transform -rotate-2">
-            Choose Your <span className="text-neon">IPTV Plan</span>
-          </h2>
+          <h1 className="text-3xl md:text-4xl font-bold text-center mb-6 transform -rotate-2">
+            Premium <span className="text-neon">IPTV Subscription Plans</span>
+          </h1>
           
           <p className="text-gray-300 text-center mb-12 max-w-2xl mx-auto transform rotate-1">
-            Get the best <a href="https://www.iptvservice.site/" className="text-neon hover:underline" rel="dofollow">IPTV subscription</a> plans 
-            with premium features, HD quality, and extensive content library.
+            Choose from our affordable <a href="/iptv-subscription-plans" className="text-neon hover:underline" rel="dofollow">IPTV subscription plans</a> with 
+            premium features, HD quality, and extensive content library.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -138,9 +132,9 @@ export const Pricing: React.FC = () => {
           </div>
 
           <div className="mt-16 text-center">
-            <h3 className="text-2xl font-bold mb-4 text-white transform -rotate-2">Why Choose Our IPTV Service?</h3>
+            <h2 className="text-2xl font-bold mb-4 text-white transform -rotate-2">Why Choose Our IPTV Service?</h2>
             <p className="text-gray-300 max-w-3xl mx-auto transform rotate-1">
-              Experience the best streaming quality with our premium <a href="https://www.iptvservice.site/" className="text-neon hover:underline" rel="dofollow">IPTV subscription</a> service. 
+              Experience the best streaming quality with our premium <a href="/iptv-subscription-plans" className="text-neon hover:underline" rel="dofollow">IPTV subscription plans</a>. 
               We offer extensive channel selection, reliable streams, and dedicated customer support to ensure the best viewing experience.
             </p>
           </div>

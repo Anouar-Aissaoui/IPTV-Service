@@ -1,6 +1,7 @@
 # Global rules
 User-agent: *
 Allow: /
+Allow: /iptv-subscription-plans
 Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
