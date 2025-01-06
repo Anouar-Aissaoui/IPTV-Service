@@ -30,37 +30,27 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const currentPath = location.pathname;
   const baseUrl = 'https://www.iptvservice.site';
 
-  // Normalize the current URL by removing trailing slashes, query parameters, and hash fragments
-  const normalizedPath = currentPath
-    .replace(/\/+$/, '') // Remove trailing slashes
-    .split('?')[0] // Remove query parameters
-    .split('#')[0]; // Remove hash fragments
-  
-  const canonicalPath = normalizedPath === '' ? '/' : normalizedPath;
-  
-  const { data: seoMetrics } = useQuery({
-    queryKey: ['seo-metrics', canonicalPath],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('seo_metrics')
-        .select('*')
-        .eq('route', canonicalPath)
-        .maybeSingle();
+  // Get page-specific meta description based on route
+  const getPageSpecificDescription = (path: string) => {
+    switch (path) {
+      case '/':
+        return "Experience premium IPTV with 40,000+ channels, 4K quality streaming, and comprehensive content library. Best IPTV provider for entertainment, sports, and movies.";
+      case '/pricing':
+        return "Affordable IPTV subscription plans starting from $14.99. Choose from monthly, quarterly, or yearly packages with premium features and 24/7 support.";
+      case '/channels':
+        return "Browse our extensive channel list featuring 40,000+ live channels, premium sports, movies, and international content. HD & 4K quality guaranteed.";
+      case '/tutorials':
+        return "Easy-to-follow IPTV setup guides for all devices. Step-by-step instructions for Smart TV, FireStick, Android, iOS, and more.";
+      case '/support':
+        return "24/7 IPTV customer support, technical assistance, and troubleshooting. Get instant help with your streaming service needs.";
+      default:
+        return propDescription || "Premium IPTV subscription service with 40,000+ channels worldwide. High-quality streaming, extensive content library, and reliable service.";
+    }
+  };
 
-      if (error) {
-        console.error('Error fetching SEO metrics:', error);
-        return null;
-      }
-
-      return data as SEOMetrics;
-    },
-    staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000
-  });
-
-  const title = propTitle || seoMetrics?.title || 'Best IPTV Service Provider';
-  const description = propDescription || seoMetrics?.description || 'Premium IPTV subscription service with 40,000+ channels worldwide';
-  const canonicalUrl = propCanonicalUrl || seoMetrics?.canonical_url || `${baseUrl}${canonicalPath}`;
+  const description = getPageSpecificDescription(currentPath);
+  const title = propTitle || 'Best IPTV Service Provider';
+  const canonicalUrl = propCanonicalUrl || `${baseUrl}${currentPath}`;
   const imageUrl = propImageUrl || '/iptv-subscription.png';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
 
@@ -69,7 +59,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
     const trackPageView = async () => {
       try {
         const metric: SEOPerformanceMetric = {
-          url: canonicalPath,
+          url: currentPath,
           visits: 1,
           bounce_rate: 0,
           avg_time_on_page: 0
@@ -90,7 +80,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
               await supabase
                 .from('seo_performance')
                 .update({ avg_time_on_page: timeOnPage })
-                .eq('url', canonicalPath);
+                .eq('url', currentPath);
               console.log('Page timing updated');
             } catch (err) {
               console.error('Error updating page timing:', err);
@@ -108,7 +98,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
     return () => {
       void cleanup.then(cleanupFn => cleanupFn());
     };
-  }, [canonicalPath]);
+  }, [currentPath]);
 
   return (
     <Helmet>
@@ -118,15 +108,11 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       <meta name="description" content={description} />
       {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
       
-      {/* Robots Control */}
+      {/* Enhanced Robots Control */}
       <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
       
       {/* Enhanced Canonical URL Implementation */}
       <link rel="canonical" href={canonicalUrl} />
-      
-      {/* Alternate Language URLs */}
-      <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
-      <link rel="alternate" hrefLang="en" href={canonicalUrl} />
       
       {/* Open Graph Tags */}
       <meta property="og:type" content={type} />
