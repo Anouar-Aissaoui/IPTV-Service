@@ -22,6 +22,15 @@
     <mobile:mobile/>
   </url>
 
+  <!-- Article -->
+  <url>
+    <loc>https://www.iptvservice.site/best-iptv-service-providers-subscriptions</loc>
+    <lastmod>2024-03-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <mobile:mobile/>
+  </url>
+
   <!-- Main Pages -->
   <url>
     <loc>https://www.iptvservice.site/pricing</loc>
