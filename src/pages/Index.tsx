@@ -14,18 +14,36 @@ import { getStructuredData } from "@/components/seo/StructuredData";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { Link } from "react-router-dom";
 import { ContentWrapper } from "@/components/layout/ContentWrapper";
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
-  const pageTitle = "Best IPTV Service Provider 2024 | Premium IPTV Subscription USA";
-  const pageDescription = "Experience premium IPTV service with 40,000+ live channels, 54,000+ VOD content, and 4K quality streaming. Best IPTV provider offering affordable packages with 24/7 support. Try now!";
+  // Fetch IPTV-specific keywords from Supabase
+  const { data: iptvKeywords } = useQuery({
+    queryKey: ['iptvKeywords'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('iptv_seo_keywords')
+        .select('keyword')
+        .order('relevance_score', { ascending: false });
+      
+      if (error) throw error;
+      return data.map(k => k.keyword);
+    }
+  });
+
+  const currentYear = new Date().getFullYear();
+  const pageTitle = `Best IPTV Service Provider ${currentYear} | Premium IPTV Subscription USA & Worldwide`;
+  const pageDescription = `Experience the ultimate IPTV service with 40,000+ live channels, 54,000+ VOD content, and 4K quality streaming. Top-rated IPTV provider offering affordable packages with 24/7 support. Try the best IPTV subscription service now!`;
   
   const pageData = {
     title: pageTitle,
     description: pageDescription,
-    datePublished: "2024-01-01",
+    datePublished: `${currentYear}-01-01`,
     dateModified: new Date().toISOString(),
     author: "IPTV Service",
-    image: "https://www.iptvservice.site/iptv-subscription.png"
+    image: "https://www.iptvservice.site/iptv-subscription.png",
+    keywords: iptvKeywords || []
   };
 
   return (
@@ -37,10 +55,11 @@ const Index = () => {
         imageUrl="/iptv-subscription.png"
         type="website"
         keywords={[
+          ...(iptvKeywords || []),
           ...seoKeywords,
           '4K IPTV streaming',
           'premium IPTV channels',
-          'IPTV subscription 2024',
+          `IPTV subscription ${currentYear}`,
           'best IPTV provider USA'
         ]}
         noindex={false}
@@ -52,39 +71,48 @@ const Index = () => {
 
       <Breadcrumbs />
       
+      {/* Hero Section */}
       <ContentWrapper as="section" ariaLabel="Hero Section">
         <Hero />
       </ContentWrapper>
 
+      {/* Brand Showcase */}
       <ContentWrapper as="section" ariaLabel="Brand Showcase">
         <BrandCarousel />
       </ContentWrapper>
 
+      {/* IPTV Information */}
       <ContentWrapper as="article" ariaLabel="IPTV Information">
         <IPTVDefinition />
         <IPTVExplanation />
       </ContentWrapper>
 
+      {/* Pricing Plans */}
       <ContentWrapper as="section" ariaLabel="Pricing Plans">
         <Pricing />
       </ContentWrapper>
 
+      {/* Content Showcase */}
       <ContentWrapper as="section" ariaLabel="Content Showcase">
         <Content />
       </ContentWrapper>
 
+      {/* Live Channels */}
       <ContentWrapper as="section" ariaLabel="Live Channels">
         <LiveChannels />
       </ContentWrapper>
 
+      {/* Live Sports */}
       <ContentWrapper as="section" ariaLabel="Live Sports">
         <LiveSports />
       </ContentWrapper>
 
+      {/* IPTV Benefits */}
       <ContentWrapper as="section" ariaLabel="IPTV Benefits">
         <IPTVBenefits />
       </ContentWrapper>
 
+      {/* FAQ Section */}
       <ContentWrapper as="section" ariaLabel="Frequently Asked Questions">
         <FAQ />
       </ContentWrapper>
