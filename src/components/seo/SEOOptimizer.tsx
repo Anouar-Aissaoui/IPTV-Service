@@ -33,12 +33,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
     if (propCanonicalUrl) {
       return propCanonicalUrl.startsWith('http') ? propCanonicalUrl : `${baseUrl}${propCanonicalUrl}`;
     }
-    // For root path, return base URL without trailing slash
-    if (currentPath === '/') {
-      return baseUrl;
-    }
-    // For other paths, combine base URL with current path
-    return `${baseUrl}${currentPath}`;
+    return currentPath === '/' ? baseUrl : `${baseUrl}${currentPath}`;
   };
 
   const getPageSpecificDescription = (path: string) => {
@@ -67,7 +62,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   useEffect(() => {
     const trackPageView = async () => {
       try {
-        // First, try to get existing record
         const { data: existingData, error: selectError } = await supabase
           .from('seo_performance')
           .select('*')
@@ -82,7 +76,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
         const startTime = performance.now();
 
         if (existingData && existingData.length > 0) {
-          // Update existing record
           const { error: updateError } = await supabase
             .from('seo_performance')
             .update({
@@ -95,7 +88,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
             console.error('Error updating performance data:', updateError);
           }
         } else {
-          // Insert new record
           const { error: insertError } = await supabase
             .from('seo_performance')
             .insert([{
@@ -112,7 +104,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
           }
         }
 
-        // Cleanup function to update time on page
         return () => {
           const timeOnPage = (performance.now() - startTime) / 1000;
           const updateMetrics = async () => {
@@ -200,6 +191,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       {children}
     </Helmet>
   );
-});
+};
 
 export default SEOOptimizer;
