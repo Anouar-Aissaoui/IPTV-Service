@@ -1,6 +1,7 @@
 # Global rules
 User-agent: *
 Allow: /
+Allow: /support
 Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
