@@ -14,6 +14,7 @@ import FormulerSetup from "./pages/FormulerSetup";
 import FireTvSetup from "./pages/FireTvSetup";
 import Enigma2Setup from "./pages/Enigma2Setup";
 import VlcWindowsSetup from "./pages/VlcWindowsSetup";
+import Support from "./pages/Support";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -33,8 +34,9 @@ const AppRoutes = () => {
       <Route path="/channels" element={<Channels />} />
       <Route path="/pricing" element={<Index />} />
       <Route path="/faq" element={<Index />} />
+      <Route path="/support" element={<Support />} />
       
-      {/* New IPTV Setup Tutorials routes with descriptive URLs */}
+      {/* IPTV Setup Tutorials routes */}
       <Route path="/iptv-setup-tutorials" element={<Tutorials />} />
       <Route path="/iptv-setup-tutorials/how-to-setup-iptv-on-smart-tv" element={<SmartTvSetup />} />
       <Route path="/iptv-setup-tutorials/how-to-setup-iptv-on-mobile-devices" element={<MobileSetup />} />
