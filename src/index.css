@@ -26,10 +26,7 @@
     --ring: 24 95% 53%;
     --radius: 0.75rem;
   }
-}
 
-/* Critical Base Styles */
-@layer base {
   * {
     @apply border-border font-grotesk;
     -webkit-tap-highlight-color: transparent;
@@ -58,6 +55,19 @@
   p {
     @apply text-base md:text-lg;
     line-height: 1.6;
+  }
+}
+
+/* Mobile Optimization Styles */
+@layer utilities {
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+
+  .safe-area-inset {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
 }
 
