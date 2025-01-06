@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import type { SEOMetrics, SEOPerformanceMetric } from '@/types/tables/seo-metrics';
+import type { SEOMetrics } from '@/types/tables/seo-metrics';
 
 interface SEOOptimizerProps {
   title?: string;
@@ -39,8 +39,8 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
     if (currentPath === '/') {
       return baseUrl;
     }
-    // For other paths, combine base URL with current path
-    return `${baseUrl}${currentPath}`;
+    // For other paths, combine base URL with current path and ensure no trailing slash
+    return `${baseUrl}${currentPath}`.replace(/\/$/, '');
   };
 
   const getPageSpecificDescription = (path: string) => {
@@ -66,68 +66,59 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const imageUrl = propImageUrl || '/iptv-subscription.png';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
 
-  useEffect(() => {
-    const trackPageView = async () => {
-      try {
-        const metric: SEOPerformanceMetric = {
-          url: currentPath,
-          visits: 1,
-          bounce_rate: 0,
-          avg_time_on_page: 0
-        };
+  // Track page views and metrics
+  useQuery({
+    queryKey: ['seoMetrics', currentPath],
+    queryFn: async () => {
+      const metric: SEOMetrics = {
+        id: crypto.randomUUID(),
+        route: currentPath,
+        title,
+        description,
+        canonical_url: canonicalUrl,
+        meta_tags: {
+          keywords: keywords.join(', '),
+          'og:type': type,
+          'og:url': canonicalUrl,
+          'twitter:url': canonicalUrl
+        },
+        structured_data: {
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          url: canonicalUrl,
+          name: title,
+          description
+        }
+      };
 
-        await supabase
-          .from('seo_performance')
-          .upsert([metric], {
-            onConflict: 'url'
-          });
+      const { error } = await supabase
+        .from('seo_metrics')
+        .upsert([metric], {
+          onConflict: 'route'
+        });
 
-        const startTime = performance.now();
-        
-        return () => {
-          const timeOnPage = (performance.now() - startTime) / 1000;
-          const updateMetrics = async () => {
-            try {
-              await supabase
-                .from('seo_performance')
-                .update({ avg_time_on_page: timeOnPage })
-                .eq('url', currentPath);
-              console.log('Page timing updated');
-            } catch (err) {
-              console.error('Error updating page timing:', err);
-            }
-          };
-          void updateMetrics();
-        };
-      } catch (error) {
-        console.error('Error in trackPageView:', error);
-        return () => {};
-      }
-    };
-
-    const cleanup = trackPageView();
-    return () => {
-      void cleanup.then(cleanupFn => cleanupFn());
-    };
-  }, [currentPath]);
+      if (error) throw error;
+      return metric;
+    }
+  });
 
   return (
     <Helmet>
-      {/* Primary Meta Tags */}
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
       {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
       
+      {/* Enhanced URL and Canonical Tags */}
+      <link rel="canonical" href={canonicalUrl} />
+      <meta property="og:url" content={canonicalUrl} />
+      <meta name="twitter:url" content={canonicalUrl} />
+      
       {/* Enhanced Robots Control */}
       <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
       
-      {/* Enhanced Canonical URL Implementation */}
-      <link rel="canonical" href={canonicalUrl} />
-      
       {/* Open Graph Tags */}
       <meta property="og:type" content={type} />
-      <meta property="og:url" content={canonicalUrl} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={fullImageUrl} />
@@ -135,7 +126,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
 
       {/* Twitter Card Tags */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={canonicalUrl} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={fullImageUrl} />
@@ -150,11 +140,11 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "url": canonicalUrl,
-          "name": title,
-          "description": description,
-          "image": fullImageUrl,
-          "publisher": {
+          url: canonicalUrl,
+          name: title,
+          description,
+          image: fullImageUrl,
+          publisher: {
             "@type": "Organization",
             "name": "IPTV Service",
             "logo": {

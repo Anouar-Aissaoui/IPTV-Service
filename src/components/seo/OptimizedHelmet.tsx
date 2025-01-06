@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { Helmet } from 'react-helmet';
+import { useLocation } from 'react-router-dom';
 
 interface HelmetProps {
   title?: string;
@@ -28,9 +29,25 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
   pageType = 'home',
   alternateUrls = {}
 }) => {
+  const location = useLocation();
   const baseUrl = 'https://www.iptvservice.site';
+  const currentPath = location.pathname;
+  
+  // Generate canonical URL
+  const getCanonicalUrl = () => {
+    if (canonicalUrl) {
+      return canonicalUrl.startsWith('http') ? canonicalUrl : `${baseUrl}${canonicalUrl}`;
+    }
+    // For root path, return base URL without trailing slash
+    if (currentPath === '/') {
+      return baseUrl;
+    }
+    // For other paths, combine base URL with current path
+    return `${baseUrl}${currentPath}`;
+  };
+
+  const fullCanonicalUrl = getCanonicalUrl();
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
-  const fullCanonicalUrl = canonicalUrl ? (canonicalUrl.startsWith('http') ? canonicalUrl : `${baseUrl}${canonicalUrl}`) : baseUrl;
   const currentYear = new Date().getFullYear();
 
   // Enhanced meta descriptions for different page types
@@ -105,12 +122,13 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
       <meta name="title" content={getPageTitle()} />
       <meta name="description" content={getMetaDescription()} />
       {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
-      <meta name="author" content="IPTV Service" />
-      <meta name="copyright" content={`© ${new Date().getFullYear()} IPTV Service`} />
-      <meta name="generator" content="IPTV Service Platform" />
+      
+      {/* Enhanced URL and Canonical Tags */}
+      <link rel="canonical" href={fullCanonicalUrl} />
+      <meta property="og:url" content={fullCanonicalUrl} />
+      <meta name="twitter:url" content={fullCanonicalUrl} />
       
       {/* Language and Region Meta Tags */}
-      <meta httpEquiv="content-language" content={locale} />
       {getLanguageMetaTags()}
       
       {/* Enhanced Robots Control */}
@@ -124,12 +142,8 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
         </>
       )}
       
-      {/* Enhanced Canonical & Mobile Tags */}
-      <link rel="canonical" href={fullCanonicalUrl} />
-      
       {/* Enhanced Open Graph Tags */}
       <meta property="og:type" content={type} />
-      <meta property="og:url" content={fullCanonicalUrl} />
       <meta property="og:title" content={getPageTitle()} />
       <meta property="og:description" content={getMetaDescription()} />
       <meta property="og:image" content={fullImageUrl} />
@@ -140,7 +154,6 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
       
       {/* Enhanced Twitter Tags */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={fullCanonicalUrl} />
       <meta name="twitter:title" content={getPageTitle()} />
       <meta name="twitter:description" content={getMetaDescription()} />
       <meta name="twitter:image" content={fullImageUrl} />
