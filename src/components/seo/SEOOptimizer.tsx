@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import type { SEOMetrics, SEOPerformanceMetric } from '@/types/tables/seo-metrics';
 
@@ -69,32 +68,35 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   useEffect(() => {
     const trackPageView = async () => {
       try {
-        // First try to get existing record
-        const { data: existingData } = await supabase
+        // First try to get existing record with error handling
+        const { data: existingData, error: selectError } = await supabase
           .from('seo_performance')
           .select('*')
-          .eq('url', currentPath)
-          .single();
+          .eq('url', currentPath);
 
-        if (existingData) {
-          // Update existing record
+        // If we got data back and it's an array with at least one item
+        if (existingData && existingData.length > 0) {
+          const currentRecord = existingData[0];
           await supabase
             .from('seo_performance')
             .update({
-              visits: (existingData.visits || 0) + 1,
-              bounce_rate: existingData.bounce_rate || 0,
-              avg_time_on_page: existingData.avg_time_on_page || 0
+              visits: (currentRecord.visits || 0) + 1,
+              bounce_rate: currentRecord.bounce_rate || 0,
+              avg_time_on_page: currentRecord.avg_time_on_page || 0,
+              updated_at: new Date().toISOString()
             })
-            .eq('url', currentPath);
+            .eq('id', currentRecord.id);
         } else {
-          // Insert new record
+          // Insert new record with minimal required fields
           await supabase
             .from('seo_performance')
             .insert([{
               url: currentPath,
               visits: 1,
               bounce_rate: 0,
-              avg_time_on_page: 0
+              avg_time_on_page: 0,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString()
             }]);
         }
 
@@ -104,10 +106,16 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
           const timeOnPage = (performance.now() - startTime) / 1000;
           const updateMetrics = async () => {
             try {
-              await supabase
-                .from('seo_performance')
-                .update({ avg_time_on_page: timeOnPage })
-                .eq('url', currentPath);
+              // Only update if we found the record
+              if (existingData && existingData.length > 0) {
+                await supabase
+                  .from('seo_performance')
+                  .update({ 
+                    avg_time_on_page: timeOnPage,
+                    updated_at: new Date().toISOString()
+                  })
+                  .eq('id', existingData[0].id);
+              }
               console.log('Page timing updated');
             } catch (err) {
               console.error('Error updating page timing:', err);
