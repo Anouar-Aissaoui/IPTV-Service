@@ -44,11 +44,11 @@ const BestIPTVProviders: React.FC = () => {
         <section className="mb-12">
           <h2 className="text-3xl font-bold mb-6">Top IPTV Service Provider Subscriptions (2025 Updated)</h2>
           
-          {/* GUEKHDIPTV */}
+          {/* IPTVService */}
           <div className="mb-8 p-6 bg-black/20 rounded-lg border border-gray-800">
-            <h3 className="text-2xl font-bold mb-4">1. GUEKHDIPTV – Popular Choice in Europe and North America</h3>
+            <h3 className="text-2xl font-bold mb-4">1. IPTVService – Popular Choice in Europe and North America</h3>
             <p className="mb-4">
-              If you are looking for a fast, secure, and entertainment-packed IPTV platform, your search may end with GUEKHDIPTV. It is the best IPTV service available on the market, offering premium channels, including over 110,000 live TV channels, along with features such as Catch Up and EPG.
+              If you are looking for a fast, secure, and entertainment-packed IPTV platform, your search may end with IPTVService. It is the best IPTV service available on the market, offering premium channels, including over 110,000 live TV channels, along with features such as Catch Up and EPG.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
