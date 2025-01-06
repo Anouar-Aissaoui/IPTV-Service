@@ -32,6 +32,7 @@ const BestIPTVProviders: React.FC = () => {
         canonicalUrl="/best-iptv-service-providers-subscriptions"
         type="article"
         keywords={seoKeywords}
+        imageUrl="/best-IPTV-providers.png"
       />
       
       <Breadcrumbs />
