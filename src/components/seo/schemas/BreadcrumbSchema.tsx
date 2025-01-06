@@ -7,6 +7,25 @@ export const getBreadcrumbSchema = (breadcrumbs: Array<{name: string, item: stri
   "publisher": {
     "@id": "https://www.iptvservice.site/#organization"
   },
+  "potentialAction": [
+    {
+      "@type": "ReadAction",
+      "target": ["https://www.iptvservice.site"]
+    }
+  ],
+  "copyrightYear": new Date().getFullYear(),
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "sameAs": [
+    "https://facebook.com/iptvservice",
+    "https://twitter.com/iptvservice"
+  ],
+  "breadcrumb": {
+    "@id": "https://www.iptvservice.site/#breadcrumb"
+  },
   "itemListElement": breadcrumbs.map((crumb, index) => ({
     "@type": "ListItem",
     "position": index + 1,

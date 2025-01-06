@@ -11,9 +11,27 @@ export const getArticleSchema = (article: {
   "@type": "Article",
   "@id": `https://www.iptvservice.site/article/${article.title.toLowerCase().replace(/\s+/g, '-')}`,
   "name": article.title,
-  "headline": article.title,
-  "description": article.description,
   "url": "https://www.iptvservice.site",
+  "description": article.description,
+  "publisher": {
+    "@id": "https://www.iptvservice.site/#organization"
+  },
+  "potentialAction": [
+    {
+      "@type": "ReadAction",
+      "target": [`https://www.iptvservice.site/article/${article.title.toLowerCase().replace(/\s+/g, '-')}`]
+    }
+  ],
+  "copyrightYear": new Date().getFullYear(),
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "sameAs": [
+    "https://facebook.com/iptvservice",
+    "https://twitter.com/iptvservice"
+  ],
   "image": {
     "@type": "ImageObject",
     "url": article.image,
@@ -27,14 +45,7 @@ export const getArticleSchema = (article: {
     "name": article.author,
     "@id": `https://www.iptvservice.site/author/${article.author.toLowerCase().replace(/\s+/g, '-')}`
   },
-  "publisher": {
-    "@type": "Organization",
-    "@id": "https://www.iptvservice.site/#organization"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.iptvservice.site"
-  },
+  "headline": article.title,
   "keywords": article.keywords?.join(", "),
   "wordCount": article.wordCount,
   "articleBody": article.description,

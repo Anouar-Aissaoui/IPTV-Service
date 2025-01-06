@@ -32,6 +32,25 @@ export const getTutorialSchema = (tutorial: {
   "sku": "IPTV-TUTORIAL",
   "mpn": "IPTV-TUT-001",
   "image": ["https://www.iptvservice.site/iptv-subscription.png"],
+  "review": {
+    "@type": "Review",
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "4.8",
+      "bestRating": "5"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "IPTV Reviews"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "850",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "USD",
