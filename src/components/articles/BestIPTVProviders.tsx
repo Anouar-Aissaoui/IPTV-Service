@@ -3,7 +3,6 @@ import { SEOOptimizer } from '../seo/SEOOptimizer';
 import { ContentWrapper } from '../layout/ContentWrapper';
 import { Breadcrumbs } from '../seo/Breadcrumbs';
 import { OptimizedImage } from '../ui/optimized-image';
-import { getStructuredData } from '../seo/StructuredData';
 
 const BestIPTVProviders: React.FC = () => {
   const seoKeywords = [
@@ -25,21 +24,6 @@ const BestIPTVProviders: React.FC = () => {
     'bestiptv'
   ];
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Best IPTV Service Providers Subscriptions 2025 | Complete Guide",
-    "description": "Comprehensive guide to the top IPTV service providers in 2025. Compare features, pricing, and find the perfect streaming solution for your needs.",
-    "image": "https://www.iptvservice.site/best-IPTV-providers.png",
-    "datePublished": "2024-03-21",
-    "dateModified": new Date().toISOString(),
-    "author": {
-      "@type": "Organization",
-      "name": "IPTVService.site",
-      "url": "https://www.iptvservice.site"
-    }
-  };
-
   return (
     <ContentWrapper as="article" className="prose prose-invert max-w-none">
       <SEOOptimizer
@@ -48,7 +32,6 @@ const BestIPTVProviders: React.FC = () => {
         canonicalUrl="/best-iptv-service-providers-subscriptions"
         type="article"
         keywords={seoKeywords}
-        structuredData={structuredData}
       />
       
       <Breadcrumbs />
