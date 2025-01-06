@@ -88,7 +88,11 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
           url: canonicalUrl,
           name: title,
           description
-        }
+        },
+        crawl_status: 'pending',
+        last_crawled: null,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
       };
 
       const { error } = await supabase
