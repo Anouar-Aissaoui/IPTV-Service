@@ -14,6 +14,7 @@ import { getStructuredData } from "@/components/seo/StructuredData";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { Link } from "react-router-dom";
 import { ContentWrapper } from "@/components/layout/ContentWrapper";
+import { ProgrammaticSEO } from "@/components/seo/ProgrammaticSEO";
 
 const Index = () => {
   const pageTitle = "Best IPTV Service Provider 2024 | Premium IPTV Subscription USA";
@@ -36,13 +37,7 @@ const Index = () => {
         canonicalUrl="https://www.iptvservice.site"
         imageUrl="/iptv-subscription.png"
         type="website"
-        keywords={[
-          ...seoKeywords,
-          '4K IPTV streaming',
-          'premium IPTV channels',
-          'IPTV subscription 2024',
-          'best IPTV provider USA'
-        ]}
+        keywords={seoKeywords}
         noindex={false}
       >
         <script type="application/ld+json">
@@ -83,6 +78,10 @@ const Index = () => {
 
       <ContentWrapper as="section" ariaLabel="IPTV Benefits">
         <IPTVBenefits />
+      </ContentWrapper>
+
+      <ContentWrapper as="section" ariaLabel="Programmatic SEO Content">
+        <ProgrammaticSEO />
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="Frequently Asked Questions">
