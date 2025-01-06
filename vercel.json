@@ -9,116 +9,77 @@
     {
       "source": "/home",
       "destination": "/",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     },
     {
       "source": "/index",
       "destination": "/",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     },
     {
       "source": "/en",
       "destination": "/",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     },
     {
       "source": "/en/(.*)",
       "destination": "/$1",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     },
     {
       "source": "/tutorials",
       "destination": "/iptv-setup-tutorials",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     },
     {
       "source": "/tutorials/smart-tv",
       "destination": "/iptv-setup-tutorials/how-to-setup-iptv-on-smart-tv",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     },
     {
       "source": "/tutorials/mobile",
       "destination": "/iptv-setup-tutorials/how-to-setup-iptv-on-mobile-devices",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     },
     {
       "source": "/tutorials/mag",
       "destination": "/iptv-setup-tutorials/how-to-setup-iptv-on-mag-box",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     },
     {
       "source": "/tutorials/formuler",
       "destination": "/iptv-setup-tutorials/how-to-setup-iptv-on-formuler-z8",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     },
     {
       "source": "/tutorials/fire-tv",
       "destination": "/iptv-setup-tutorials/how-to-setup-iptv-on-fire-tv-stick",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     },
     {
       "source": "/tutorials/enigma",
       "destination": "/iptv-setup-tutorials/how-to-setup-iptv-on-enigma2",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     },
     {
       "source": "/tutorials/vlc-windows",
       "destination": "/iptv-setup-tutorials/how-to-setup-iptv-on-vlc-windows",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     },
     {
       "source": "/premium-iptv-service",
       "destination": "/",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     },
     {
       "source": "/pricing",
-      "destination": "/iptv-subscription-plans",
-      "permanent": true,
-      "statusCode": 301
+      "destination": "/#pricing",
+      "permanent": true
     },
     {
       "source": "/faq",
       "destination": "/#faq",
-      "permanent": true,
-      "statusCode": 301
-    },
-    {
-      "source": "/old-tutorials/:path*",
-      "destination": "/iptv-setup-tutorials/:path*",
-      "permanent": true,
-      "statusCode": 301
-    },
-    {
-      "source": "/blog/:path*",
-      "destination": "/iptv-setup-tutorials/:path*",
-      "permanent": true,
-      "statusCode": 301
-    },
-    {
-      "source": "/support",
-      "destination": "/#faq",
-      "permanent": true,
-      "statusCode": 301
-    },
-    {
-      "source": "/contact",
-      "destination": "/#contact",
-      "permanent": true,
-      "statusCode": 301
+      "permanent": true
     }
   ],
   "headers": [

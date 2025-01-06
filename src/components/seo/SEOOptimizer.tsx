@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
+import type { SEOMetrics, SEOPerformanceMetric } from '@/types/tables/seo-metrics';
 
 interface SEOOptimizerProps {
   title?: string;
@@ -29,11 +30,17 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const currentPath = location.pathname;
   const baseUrl = 'https://www.iptvservice.site';
 
+  // Generate canonical URL based on current path
   const getCanonicalUrl = () => {
     if (propCanonicalUrl) {
       return propCanonicalUrl.startsWith('http') ? propCanonicalUrl : `${baseUrl}${propCanonicalUrl}`;
     }
-    return currentPath === '/' ? baseUrl : `${baseUrl}${currentPath}`;
+    // For root path, return base URL without trailing slash
+    if (currentPath === '/') {
+      return baseUrl;
+    }
+    // For other paths, combine base URL with current path
+    return `${baseUrl}${currentPath}`;
   };
 
   const getPageSpecificDescription = (path: string) => {
@@ -59,33 +66,66 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const imageUrl = propImageUrl || '/iptv-subscription.png';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "url": canonicalUrl,
-    "name": title,
-    "description": description,
-    "image": fullImageUrl,
-    "publisher": {
-      "@type": "Organization",
-      "name": "IPTV Service",
-      "logo": {
-        "@type": "ImageObject",
-        "url": `${baseUrl}/favicon.png`
+  useEffect(() => {
+    const trackPageView = async () => {
+      try {
+        const metric: SEOPerformanceMetric = {
+          url: currentPath,
+          visits: 1,
+          bounce_rate: 0,
+          avg_time_on_page: 0
+        };
+
+        await supabase
+          .from('seo_performance')
+          .upsert([metric], {
+            onConflict: 'url'
+          });
+
+        const startTime = performance.now();
+        
+        return () => {
+          const timeOnPage = (performance.now() - startTime) / 1000;
+          const updateMetrics = async () => {
+            try {
+              await supabase
+                .from('seo_performance')
+                .update({ avg_time_on_page: timeOnPage })
+                .eq('url', currentPath);
+              console.log('Page timing updated');
+            } catch (err) {
+              console.error('Error updating page timing:', err);
+            }
+          };
+          void updateMetrics();
+        };
+      } catch (error) {
+        console.error('Error in trackPageView:', error);
+        return () => {};
       }
-    }
-  };
+    };
+
+    const cleanup = trackPageView();
+    return () => {
+      void cleanup.then(cleanupFn => cleanupFn());
+    };
+  }, [currentPath]);
 
   return (
     <Helmet>
+      {/* Primary Meta Tags */}
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
       {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
       
+      {/* Enhanced Robots Control */}
       <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
+      
+      {/* Enhanced Canonical URL Implementation */}
       <link rel="canonical" href={canonicalUrl} />
       
+      {/* Open Graph Tags */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:title" content={title} />
@@ -93,18 +133,36 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       <meta property="og:image" content={fullImageUrl} />
       <meta property="og:site_name" content="IPTV Service" />
 
+      {/* Twitter Card Tags */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={canonicalUrl} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={fullImageUrl} />
 
+      {/* Additional Meta Tags */}
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="theme-color" content="#F97316" />
       
+      {/* Schema.org Structured Data */}
       <script type="application/ld+json">
-        {JSON.stringify(structuredData)}
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "url": canonicalUrl,
+          "name": title,
+          "description": description,
+          "image": fullImageUrl,
+          "publisher": {
+            "@type": "Organization",
+            "name": "IPTV Service",
+            "logo": {
+              "@type": "ImageObject",
+              "url": `${baseUrl}/favicon.png`
+            }
+          }
+        })}
       </script>
       {children}
     </Helmet>

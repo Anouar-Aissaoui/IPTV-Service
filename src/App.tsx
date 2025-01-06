@@ -1,4 +1,4 @@
-import React from "react";
+import React, { StrictMode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -31,8 +31,7 @@ const AppRoutes = () => {
       <Route path="/" element={<Index />} />
       <Route path="/premium-iptv-service" element={<Index />} />
       <Route path="/channels" element={<Channels />} />
-      <Route path="/iptv-subscription-plans" element={<Index />} />
-      <Route path="/pricing" element={<Navigate to="/iptv-subscription-plans" replace />} />
+      <Route path="/pricing" element={<Index />} />
       <Route path="/faq" element={<Index />} />
       
       {/* New IPTV Setup Tutorials routes with descriptive URLs */}
@@ -62,21 +61,21 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <StrictMode>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="min-h-screen bg-background">
-            <div className="app-container relative">
-              <AppRoutes />
-              <div className="toaster-container">
+          <BrowserRouter>
+            <div className="min-h-screen bg-background">
+              <div className="app-container relative">
+                <AppRoutes />
                 <Toaster />
                 <Sonner />
               </div>
             </div>
-          </div>
+          </BrowserRouter>
         </ThemeProvider>
       </QueryClientProvider>
-    </BrowserRouter>
+    </StrictMode>
   );
 };
 
