@@ -51,5 +51,15 @@ export const getArticleSchema = (article: {
   "keywords": article.keywords?.join(", "),
   "wordCount": article.wordCount,
   "articleBody": article.description,
-  "inLanguage": "en-US"
+  "inLanguage": "en-US",
+  "copyrightYear": new Date().getFullYear(),
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "sameAs": [
+    "https://facebook.com/iptvservice",
+    "https://twitter.com/iptvservice"
+  ]
 });

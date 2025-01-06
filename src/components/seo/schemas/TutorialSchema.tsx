@@ -61,6 +61,18 @@ export const getTutorialSchema = (tutorial: {
     "priceCurrency": "USD",
     "lowPrice": "10",
     "highPrice": "50",
-    "offerCount": "3"
+    "offerCount": "3",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Basic Tutorial Access",
+        "price": "10",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
+        "itemCondition": "https://schema.org/NewCondition",
+        "url": "https://www.iptvservice.site/tutorials"
+      }
+    ]
   }
 });

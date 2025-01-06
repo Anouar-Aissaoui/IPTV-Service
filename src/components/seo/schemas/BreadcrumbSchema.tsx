@@ -22,5 +22,16 @@ export const getBreadcrumbSchema = (breadcrumbs: Array<{name: string, item: stri
     "position": index + 1,
     "name": crumb.name,
     "item": `https://www.iptvservice.site${crumb.item}`
-  }))
+  })),
+  "inLanguage": "en-US",
+  "copyrightYear": new Date().getFullYear(),
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "sameAs": [
+    "https://facebook.com/iptvservice",
+    "https://twitter.com/iptvservice"
+  ]
 });
