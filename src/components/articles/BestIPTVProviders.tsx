@@ -2,6 +2,7 @@ import React from 'react';
 import { SEOOptimizer } from '../seo/SEOOptimizer';
 import { ContentWrapper } from '../layout/ContentWrapper';
 import { Breadcrumbs } from '../seo/Breadcrumbs';
+import { OptimizedImage } from '../ui/optimized-image';
 
 const BestIPTVProviders: React.FC = () => {
   return (
@@ -21,10 +22,11 @@ const BestIPTVProviders: React.FC = () => {
         <div className="space-y-6">
           {/* Featured Image */}
           <div className="my-8">
-            <img 
+            <OptimizedImage 
               src="/best-IPTV-providers.png"
               alt="Best IPTV Service Providers Comparison"
               className="w-full rounded-lg shadow-lg"
+              priority={true}
             />
           </div>
 
