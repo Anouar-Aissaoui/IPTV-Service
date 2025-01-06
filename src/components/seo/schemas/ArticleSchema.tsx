@@ -54,9 +54,11 @@ export const getArticleSchema = (article: {
   "inLanguage": "en-US",
   "copyrightYear": new Date().getFullYear(),
   "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "lowPrice": "0",
+    "highPrice": "0",
+    "offerCount": "1"
   },
   "sameAs": [
     "https://facebook.com/iptvservice",
