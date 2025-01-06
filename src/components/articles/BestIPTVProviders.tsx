@@ -34,7 +34,7 @@ const BestIPTVProviders: React.FC = () => {
             </p>
 
             <p>
-              In this guide, we've rounded up the 15 best IPTV service providers for 2025, highlighting their features, pricing, and unique offerings. Whether you're seeking reliable global channels, region-specific content, or services with premium sports packages, our top picks will help you find the perfect IPTV subscription for your entertainment needs.
+              In this guide, we've rounded up the best IPTV service providers for 2025, highlighting their features, pricing, and unique offerings. Whether you're seeking reliable global channels, region-specific content, or services with premium sports packages, our top picks will help you find the perfect IPTV subscription for your entertainment needs.
             </p>
           </section>
 
@@ -61,10 +61,10 @@ const BestIPTVProviders: React.FC = () => {
           <section>
             <h2 className="text-3xl font-bold mb-6">Top IPTV Service Provider Subscriptions (2025 Updated)</h2>
             
-            {/* GUEKHDIPTV */}
+            {/* IPTVService.site */}
             <div className="mb-12 p-6 bg-black/20 rounded-lg border border-gray-800">
               <p className="mb-4">
-                If you are looking for a fast, secure, and entertainment-packed IPTV platform, your search may end with GUEKHDIPTV. It is the best IPTV service available on the market, offering premium channels, including over 110,000 live TV channels, along with features such as Catch Up and EPG.
+                If you are looking for a fast, secure, and entertainment-packed IPTV platform, your search may end with IPTVService.site. It is the best IPTV service available on the market, offering premium channels, including over 110,000 live TV channels, along with features such as Catch Up and EPG.
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -95,8 +95,7 @@ const BestIPTVProviders: React.FC = () => {
 
           {/* FAQ Section */}
           <section className="mt-12">
-            <h2 className="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
-            
+            <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
             <div className="space-y-6">
               <div>
                 <h3 className="text-xl font-bold mb-2">What is the best IPTV service for sports content?</h3>
