@@ -30,7 +30,19 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const currentPath = location.pathname;
   const baseUrl = 'https://www.iptvservice.site';
 
-  // Get page-specific meta description based on route
+  // Generate canonical URL based on current path
+  const getCanonicalUrl = () => {
+    if (propCanonicalUrl) {
+      return propCanonicalUrl.startsWith('http') ? propCanonicalUrl : `${baseUrl}${propCanonicalUrl}`;
+    }
+    // For root path, return base URL without trailing slash
+    if (currentPath === '/') {
+      return baseUrl;
+    }
+    // For other paths, combine base URL with current path
+    return `${baseUrl}${currentPath}`;
+  };
+
   const getPageSpecificDescription = (path: string) => {
     switch (path) {
       case '/':
@@ -50,11 +62,10 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
 
   const description = getPageSpecificDescription(currentPath);
   const title = propTitle || 'Best IPTV Service Provider';
-  const canonicalUrl = propCanonicalUrl || `${baseUrl}${currentPath}`;
+  const canonicalUrl = getCanonicalUrl();
   const imageUrl = propImageUrl || '/iptv-subscription.png';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
 
-  // Track page views and performance metrics
   useEffect(() => {
     const trackPageView = async () => {
       try {
