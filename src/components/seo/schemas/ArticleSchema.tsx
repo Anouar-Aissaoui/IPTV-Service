@@ -18,19 +18,21 @@ export const getArticleSchema = (article: {
   },
   "potentialAction": [
     {
-      "@type": "ReadAction",
-      "target": [`https://www.iptvservice.site/article/${article.title.toLowerCase().replace(/\s+/g, '-')}`]
+      "@type": "SearchAction",
+      "target": "https://www.iptvservice.site/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
     }
   ],
-  "copyrightYear": new Date().getFullYear(),
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
+  "breadcrumb": {
+    "@id": "https://www.iptvservice.site/#breadcrumb"
   },
-  "sameAs": [
-    "https://facebook.com/iptvservice",
-    "https://twitter.com/iptvservice"
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Articles",
+      "item": "https://www.iptvservice.site/articles"
+    }
   ],
   "image": {
     "@type": "ImageObject",

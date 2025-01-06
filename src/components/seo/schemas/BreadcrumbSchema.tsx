@@ -9,19 +9,10 @@ export const getBreadcrumbSchema = (breadcrumbs: Array<{name: string, item: stri
   },
   "potentialAction": [
     {
-      "@type": "ReadAction",
-      "target": ["https://www.iptvservice.site"]
+      "@type": "SearchAction",
+      "target": "https://www.iptvservice.site/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
     }
-  ],
-  "copyrightYear": new Date().getFullYear(),
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "sameAs": [
-    "https://facebook.com/iptvservice",
-    "https://twitter.com/iptvservice"
   ],
   "breadcrumb": {
     "@id": "https://www.iptvservice.site/#breadcrumb"
@@ -31,9 +22,5 @@ export const getBreadcrumbSchema = (breadcrumbs: Array<{name: string, item: stri
     "position": index + 1,
     "name": crumb.name,
     "item": `https://www.iptvservice.site${crumb.item}`
-  })),
-  "inLanguage": "en-US",
-  "isPartOf": {
-    "@id": "https://www.iptvservice.site/#website"
-  }
+  }))
 });

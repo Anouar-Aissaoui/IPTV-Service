@@ -31,7 +31,12 @@ export const getTutorialSchema = (tutorial: {
   },
   "sku": "IPTV-TUTORIAL",
   "mpn": "IPTV-TUT-001",
-  "image": ["https://www.iptvservice.site/iptv-subscription.png"],
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://www.iptvservice.site/iptv-subscription.png",
+    "width": 1200,
+    "height": 630
+  },
   "review": {
     "@type": "Review",
     "reviewRating": {
@@ -56,23 +61,6 @@ export const getTutorialSchema = (tutorial: {
     "priceCurrency": "USD",
     "lowPrice": "10",
     "highPrice": "50",
-    "offerCount": "3",
-    "offers": [
-      {
-        "@type": "Offer",
-        "price": "10",
-        "priceCurrency": "USD"
-      }
-    ]
-  },
-  "sameAs": [
-    "https://www.iptvservice.site",
-    "https://www.iptvservice.site/tutorials"
-  ],
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "customer support",
-    "availableLanguage": ["English"],
-    "email": "support@iptvservice.site"
+    "offerCount": "3"
   }
 });
