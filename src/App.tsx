@@ -31,8 +31,7 @@ const AppRoutes = () => {
       <Route path="/" element={<Index />} />
       <Route path="/premium-iptv-service" element={<Index />} />
       <Route path="/channels" element={<Channels />} />
-      <Route path="/pricing" element={<Index />} />
-      <Route path="/faq" element={<Index />} />
+      <Route path="/iptv-subscription-plans" element={<Index />} />
       
       {/* New IPTV Setup Tutorials routes with descriptive URLs */}
       <Route path="/iptv-setup-tutorials" element={<Tutorials />} />
