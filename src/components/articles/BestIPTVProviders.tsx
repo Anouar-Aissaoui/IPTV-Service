@@ -8,7 +8,7 @@ const BestIPTVProviders: React.FC = () => {
     <ContentWrapper as="article" className="prose prose-invert max-w-none">
       <SEOOptimizer
         title="Best IPTV Service Providers Subscriptions 2025 | Complete Guide"
-        description="Comprehensive guide to the top 15 IPTV service providers in 2025. Compare features, pricing, and find the perfect streaming solution for your needs."
+        description="Comprehensive guide to the top IPTV service providers in 2025. Compare features, pricing, and find the perfect streaming solution for your needs."
         canonicalUrl="/best-iptv-service-providers-subscriptions"
         type="article"
       />
@@ -42,7 +42,7 @@ const BestIPTVProviders: React.FC = () => {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-6">Top 15 IPTV Service Provider Subscriptions (2025 Updated)</h2>
+          <h2 className="text-3xl font-bold mb-6">Top IPTV Service Provider Subscriptions (2025 Updated)</h2>
           
           {/* GUEKHDIPTV */}
           <div className="mb-8 p-6 bg-black/20 rounded-lg border border-gray-800">
