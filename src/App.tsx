@@ -68,8 +68,10 @@ const App = () => {
           <div className="min-h-screen bg-background">
             <div className="app-container relative">
               <AppRoutes />
-              <Toaster />
-              <Sonner />
+              <div className="toaster-container">
+                <Toaster />
+                <Sonner />
+              </div>
             </div>
           </div>
         </ThemeProvider>
