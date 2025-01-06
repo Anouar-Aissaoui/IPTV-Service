@@ -1,10 +1,10 @@
-import { Json } from './shared';
+import { Json } from '@/types/shared';
 import { IPTVSEOKeywordsTable } from '@/types/tables/iptv-seo-keywords';
 import { PSEOVariationsTable } from '@/types/tables/pseo-variations';
 import { SEOKeywordsTable } from '@/types/tables/seo-keywords';
 import { SEOMetricsTable } from '@/types/tables/seo-metrics';
 import { SEOPerformanceTable } from '@/types/tables/seo-performance';
-import { SEOPerformanceMetricsTable } from '@/types/tables/performance-metrics';
+import { SEOPerformanceMetricsTable } from '@/types/tables/seo-performance-metrics';
 import { SEOTemplatesTable } from '@/types/tables/seo-templates';
 import { SEOUrlParamsTable } from '@/types/tables/seo-url-params';
 

@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import { ContentWrapper } from "@/components/layout/ContentWrapper";
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from "@/integrations/supabase/client";
-import type { IPTVSEOKeywordsTable } from "@/types/tables/iptv-seo-keywords";
+import type { Database } from "@/integrations/supabase/types";
 
 const Index = () => {
   // Fetch IPTV-specific keywords from Supabase
@@ -26,8 +26,7 @@ const Index = () => {
       const { data, error } = await supabase
         .from('iptv_seo_keywords')
         .select('keyword')
-        .order('relevance_score', { ascending: false })
-        .returns<Pick<IPTVSEOKeywordsTable['Row'], 'keyword'>[]>();
+        .returns<Pick<Database['public']['Tables']['iptv_seo_keywords']['Row'], 'keyword'>[]>();
       
       if (error) throw error;
       return data.map(k => k.keyword);
