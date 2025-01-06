@@ -9,6 +9,42 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      error_404_logs: {
+        Row: {
+          hits: number | null
+          id: string
+          ip_address: string | null
+          redirect_url: string | null
+          referrer: string | null
+          resolved: boolean | null
+          timestamp: string | null
+          url: string
+          user_agent: string | null
+        }
+        Insert: {
+          hits?: number | null
+          id?: string
+          ip_address?: string | null
+          redirect_url?: string | null
+          referrer?: string | null
+          resolved?: boolean | null
+          timestamp?: string | null
+          url: string
+          user_agent?: string | null
+        }
+        Update: {
+          hits?: number | null
+          id?: string
+          ip_address?: string | null
+          redirect_url?: string | null
+          referrer?: string | null
+          resolved?: boolean | null
+          timestamp?: string | null
+          url?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       iptv_seo_keywords: {
         Row: {
           created_at: string
