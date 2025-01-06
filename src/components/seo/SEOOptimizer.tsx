@@ -3,7 +3,8 @@ import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { initializeSEOMetrics } from '@/utils/seoMetricsUtils';
-import type { SEOMetrics } from '@/types/tables/seo-metrics';
+import { SchemaManager, generateWebPageSchema, generateProductSchema } from './SchemaManager';
+import type { BaseSchema } from '@/types/schema';
 
 interface SEOOptimizerProps {
   title?: string;
@@ -14,6 +15,7 @@ interface SEOOptimizerProps {
   keywords?: string[];
   children?: React.ReactNode;
   noindex?: boolean;
+  schemas?: BaseSchema[];
 }
 
 export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
@@ -24,13 +26,13 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   type = 'website',
   keywords = [],
   children,
-  noindex = false
+  noindex = false,
+  schemas = []
 }) => {
   const location = useLocation();
   const currentPath = location.pathname;
   const baseUrl = 'https://www.iptvservice.site';
 
-  // Generate canonical URL based on current path
   const getCanonicalUrl = () => {
     if (propCanonicalUrl) {
       return propCanonicalUrl.startsWith('http') ? propCanonicalUrl : `${baseUrl}${propCanonicalUrl}`;
@@ -66,7 +68,19 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const imageUrl = propImageUrl || '/iptv-subscription.png';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
 
-  // Track page views and metrics
+  // Generate default schemas if none provided
+  const defaultSchemas: BaseSchema[] = [
+    generateWebPageSchema(title, description, canonicalUrl),
+    generateProductSchema(
+      'Premium IPTV Subscription',
+      'Access to 40,000+ live channels and 54,000+ VOD content with HD and 4K quality streaming.',
+      canonicalUrl,
+      { low: '14.99', high: '99.99' }
+    )
+  ];
+
+  const allSchemas = [...defaultSchemas, ...schemas];
+
   useQuery({
     queryKey: ['seoMetrics', currentPath],
     queryFn: async () => {
@@ -144,6 +158,8 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
           }
         })}
       </script>
+      
+      <SchemaManager schemas={allSchemas} />
       {children}
     </Helmet>
   );
