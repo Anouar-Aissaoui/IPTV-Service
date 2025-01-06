@@ -86,7 +86,7 @@
     },
     {
       "source": "/pricing",
-      "destination": "/#pricing",
+      "destination": "/iptv-subscription-plans",
       "permanent": true,
       "statusCode": 301
     },
