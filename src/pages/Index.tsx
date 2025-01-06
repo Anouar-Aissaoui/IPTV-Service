@@ -6,16 +6,17 @@ import { FAQ } from "@/components/FAQ";
 import { BrandCarousel } from "@/components/BrandCarousel";
 import LiveChannels from "@/components/LiveChannels";
 import { SEOOptimizer } from "@/components/seo/SEOOptimizer";
+import { seoKeywords } from "@/components/seo/Keywords";
+import { getStructuredData } from "@/components/seo/StructuredData";
 import { IPTVDefinition } from "@/components/seo/IPTVDefinition";
 import { IPTVBenefits } from "@/components/seo/IPTVBenefits";
 import { IPTVExplanation } from "@/components/seo/IPTVExplanation";
-import { seoKeywords } from "@/components/seo/Keywords";
-import { getStructuredData } from "@/components/seo/StructuredData";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { Link } from "react-router-dom";
 import { ContentWrapper } from "@/components/layout/ContentWrapper";
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from "@/integrations/supabase/client";
+import type { IPTVSEOKeywordsTable } from "@/types/tables/iptv-seo-keywords";
 
 const Index = () => {
   // Fetch IPTV-specific keywords from Supabase
@@ -25,7 +26,8 @@ const Index = () => {
       const { data, error } = await supabase
         .from('iptv_seo_keywords')
         .select('keyword')
-        .order('relevance_score', { ascending: false });
+        .order('relevance_score', { ascending: false })
+        .returns<Pick<IPTVSEOKeywordsTable['Row'], 'keyword'>[]>();
       
       if (error) throw error;
       return data.map(k => k.keyword);
