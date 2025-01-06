@@ -61,13 +61,6 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
         }
         onScrollToSection('faq-section');
       }
-    },
-    {
-      name: "Support",
-      path: "/support",
-      action: () => {
-        navigate('/support');
-      }
     }
   ];
 
