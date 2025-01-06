@@ -20,22 +20,36 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     
-    <!-- Language Detection Script -->
+    <!-- Enhanced Language Detection Script -->
     <script>
+      // Improved language detection
+      const detectUserLanguage = () => {
+        const path = window.location.pathname;
+        const browserLang = navigator.language.toLowerCase();
+        const supportedLanguages = ['en', 'es', 'fr', 'de'];
+        
+        // Check path first for explicit language selection
+        if (path.startsWith('/es')) return 'es';
+        if (path.startsWith('/fr')) return 'fr';
+        if (path.startsWith('/de')) return 'de';
+        
+        // Check browser language
+        const shortLang = browserLang.split('-')[0];
+        if (supportedLanguages.includes(shortLang)) {
+          return shortLang;
+        }
+        
+        return 'en'; // Default fallback
+      };
+
+      // Set html lang attribute and redirect if needed
+      const userLang = detectUserLanguage();
+      document.documentElement.lang = userLang;
+      
       // Add noindex meta tag for preview domains
       if (window.location.hostname.includes('preview--clone-landing-tech') || 
           window.location.hostname.includes('lovable.app')) {
         document.querySelector('meta[name="robots"]').content = 'noindex, nofollow';
-      }
-      
-      // Set html lang attribute based on path
-      const path = window.location.pathname;
-      if (path.startsWith('/es')) {
-        document.documentElement.lang = 'es';
-      } else if (path.startsWith('/fr')) {
-        document.documentElement.lang = 'fr';
-      } else if (path.startsWith('/de')) {
-        document.documentElement.lang = 'de';
       }
     </script>
     
@@ -43,11 +57,23 @@
     <link rel="alternate" href="https://www.iptvservice.site" hreflang="x-default" />
     <link rel="alternate" href="https://www.iptvservice.site" hreflang="en-US" />
     <link rel="alternate" href="https://www.iptvservice.site/en-gb" hreflang="en-GB" />
+    <link rel="alternate" href="https://www.iptvservice.site/en-ca" hreflang="en-CA" />
+    <link rel="alternate" href="https://www.iptvservice.site/en-au" hreflang="en-AU" />
     <link rel="alternate" href="https://www.iptvservice.site/es" hreflang="es" />
     <link rel="alternate" href="https://www.iptvservice.site/es-mx" hreflang="es-MX" />
+    <link rel="alternate" href="https://www.iptvservice.site/es-ar" hreflang="es-AR" />
     <link rel="alternate" href="https://www.iptvservice.site/fr" hreflang="fr-FR" />
     <link rel="alternate" href="https://www.iptvservice.site/fr-ca" hreflang="fr-CA" />
+    <link rel="alternate" href="https://www.iptvservice.site/fr-be" hreflang="fr-BE" />
     <link rel="alternate" href="https://www.iptvservice.site/de" hreflang="de-DE" />
+    <link rel="alternate" href="https://www.iptvservice.site/de-at" hreflang="de-AT" />
+    <link rel="alternate" href="https://www.iptvservice.site/de-ch" hreflang="de-CH" />
+    
+    <!-- Enhanced Regional Meta Tags -->
+    <meta name="geo.region" content="US" />
+    <meta name="geo.position" content="37.09024;-95.712891" />
+    <meta name="ICBM" content="37.09024, -95.712891" />
+    <meta name="geo.placename" content="United States" />
     
     <!-- Open Graph Tags -->
     <meta property="og:locale" content="en_US" />
