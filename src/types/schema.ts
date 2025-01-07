@@ -1,8 +1,9 @@
-export type SchemaType = 'WebPage' | 'Product' | 'FAQPage' | 'Article' | 'Organization' | 'BreadcrumbList' | 'Service';
+export type SchemaType = 'WebPage' | 'Product' | 'FAQPage' | 'Article' | 'Organization' | 'BreadcrumbList' | 'Service' | 'HowTo';
 
 export interface BaseSchema {
   '@context': string;
   '@type': SchemaType;
+  '@id'?: string;
   url: string;
 }
 
@@ -77,4 +78,28 @@ export interface BreadcrumbSchema extends BaseSchema {
     name: string;
     item: string;
   }>;
+}
+
+export interface ServiceSchema extends BaseSchema {
+  '@type': 'Service';
+  name: string;
+  serviceType: string;
+  provider: {
+    '@id': string;
+  };
+  areaServed: {
+    '@type': string;
+    name: string;
+  };
+  hasOfferCatalog: {
+    '@type': string;
+    name: string;
+    itemListElement: Array<{
+      '@type': string;
+      itemOffered: {
+        '@type': string;
+        name: string;
+      };
+    }>;
+  };
 }

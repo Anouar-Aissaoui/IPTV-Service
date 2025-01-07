@@ -33,7 +33,8 @@ const Index = () => {
     description: `Experience the ultimate IPTV service with 40,000+ live channels, 54,000+ VOD content, and 4K quality streaming. Top-rated IPTV provider offering affordable packages with 24/7 support. Try the best IPTV subscription service now!`,
     keywords: [...(iptvKeywords || []), ...seoKeywords],
     canonicalUrl: '/',
-    imageUrl: '/iptv-subscription.png'
+    imageUrl: '/iptv-subscription.png',
+    url: 'https://www.iptvservice.site'
   };
   
   const pageData = {
