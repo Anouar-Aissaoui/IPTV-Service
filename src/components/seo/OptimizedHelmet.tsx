@@ -1,5 +1,6 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import { trackSEOMetrics, updateSEOKeywords } from '@/utils/seoUtils';
 
 interface HelmetProps {
   title?: string;
@@ -48,78 +49,68 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
 
   const allKeywords = [...new Set([...defaultKeywords, ...keywords])];
 
-  // Page-specific meta descriptions
-  const getMetaDescription = () => {
-    switch (pageType) {
-      case 'product':
-        return `Premium IPTV subscription with 40,000+ channels, 54,000+ VOD content, and 4K quality streaming. Best IPTV service provider in ${new Date().getFullYear()}.`;
-      case 'pricing':
-        return 'Affordable IPTV subscription plans from trusted IPTV providers. Choose the best IPTV service package for your streaming needs.';
-      default:
-        return description;
+  useEffect(() => {
+    // Track SEO metrics
+    void trackSEOMetrics({
+      title,
+      description,
+      keywords: allKeywords,
+      imageUrl: fullImageUrl,
+      locale,
+      pageType
+    });
+
+    // Update keywords in database
+    void updateSEOKeywords(allKeywords);
+  }, [title, description, fullImageUrl, locale, pageType]);
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Premium IPTV Subscription",
+    "description": description,
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "lowPrice": "14.99",
+      "highPrice": "99.99",
+      "offerCount": "4"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "1250"
     }
   };
 
   return (
     <Helmet>
-      {/* Primary Meta Tags */}
       <title>{title}</title>
-      <meta name="title" content={title} />
-      <meta name="description" content={getMetaDescription()} />
+      <meta name="description" content={description} />
       <meta name="keywords" content={allKeywords.join(', ')} />
       
-      {/* Robots Control */}
       {noindex ? (
         <meta name="robots" content="noindex, nofollow" />
       ) : (
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
       )}
       
-      {/* Schema.org markup */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "name": "Best IPTV Service Provider",
-          "description": getMetaDescription(),
-          "url": fullCanonicalUrl,
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": `${baseUrl}/search?q={search_term_string}`,
-            "query-input": "required name=search_term_string"
-          }
-        })}
-      </script>
-
-      {/* Open Graph / Facebook */}
-      <meta property="og:type" content={type} />
-      <meta property="og:url" content={fullCanonicalUrl} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={getMetaDescription()} />
-      <meta property="og:image" content={fullImageUrl} />
-      <meta property="og:site_name" content="Best IPTV Service" />
-      
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={fullCanonicalUrl} />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={getMetaDescription()} />
-      <meta name="twitter:image" content={fullImageUrl} />
-      
-      {/* Additional Meta */}
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-      <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-      <meta name="theme-color" content="#F97316" />
-      
-      {/* Canonical */}
       <link rel="canonical" href={fullCanonicalUrl} />
       
-      {/* Language Alternates */}
-      <link rel="alternate" href={`${baseUrl}`} hrefLang="x-default" />
-      <link rel="alternate" href={`${baseUrl}`} hrefLang="en" />
-      <link rel="alternate" href={`${baseUrl}/es`} hrefLang="es" />
-      <link rel="alternate" href={`${baseUrl}/fr`} hrefLang="fr" />
-      <link rel="alternate" href={`${baseUrl}/de`} hrefLang="de" />
+      <meta property="og:type" content={type} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={fullImageUrl} />
+      <meta property="og:url" content={fullCanonicalUrl} />
+      
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={fullImageUrl} />
+      
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
       
       {children}
     </Helmet>

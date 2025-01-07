@@ -1,5 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 import type { SEOPageData } from "@/types/seo";
+import { useToast } from "@/components/ui/use-toast";
 
 export interface SEOMetrics {
   route: string;
@@ -35,8 +36,19 @@ export const generateDynamicMetaTags = (pageData: SEOPageData) => {
 
 export const trackSEOMetrics = async (pageData: SEOPageData) => {
   try {
+    const { error: existingError } = await supabase
+      .from('seo_performance_tracking')
+      .select('id')
+      .eq('page_path', window.location.pathname)
+      .maybeSingle();
+
+    if (existingError) {
+      console.error('Error checking existing metrics:', existingError);
+      return null;
+    }
+
     const { data, error } = await supabase
-      .from('seo_performance_metrics')
+      .from('seo_performance_tracking')
       .upsert([
         {
           page_path: window.location.pathname,
@@ -44,6 +56,17 @@ export const trackSEOMetrics = async (pageData: SEOPageData) => {
           meta_description: pageData.description,
           canonical_url: `https://www.iptvservice.site${window.location.pathname}`,
           meta_robots: 'index,follow',
+          structured_data: {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "IPTV Subscription Service",
+            "description": pageData.description,
+            "offers": {
+              "@type": "Offer",
+              "price": "14.99",
+              "priceCurrency": "USD"
+            }
+          },
           open_graph: {
             title: pageData.title,
             description: pageData.description,
@@ -53,7 +76,8 @@ export const trackSEOMetrics = async (pageData: SEOPageData) => {
             title: pageData.title,
             description: pageData.description,
             image: pageData.imageUrl
-          }
+          },
+          organic_traffic: 1
         }
       ], {
         onConflict: 'page_path'
@@ -61,11 +85,34 @@ export const trackSEOMetrics = async (pageData: SEOPageData) => {
 
     if (error) {
       console.error('Error tracking SEO metrics:', error);
+      return null;
     }
 
     return data;
   } catch (error) {
-    console.error('Error tracking SEO metrics:', error);
+    console.error('Error in trackSEOMetrics:', error);
     return null;
+  }
+};
+
+export const updateSEOKeywords = async (keywords: string[]) => {
+  try {
+    const { error } = await supabase
+      .from('iptv_seo_keywords')
+      .upsert(
+        keywords.map(keyword => ({
+          keyword,
+          relevance_score: 1,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        })),
+        { onConflict: 'keyword' }
+      );
+
+    if (error) {
+      console.error('Error updating SEO keywords:', error);
+    }
+  } catch (error) {
+    console.error('Error in updateSEOKeywords:', error);
   }
 };
