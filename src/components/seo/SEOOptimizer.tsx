@@ -3,7 +3,8 @@ import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import type { SEOMetrics, SEOPerformanceMetric } from '@/types/tables/seo-metrics';
+import { useToast } from '@/components/ui/use-toast';
+import type { SEOMetrics } from '@/types/tables/seo-metrics';
 
 interface SEOOptimizerProps {
   title?: string;
@@ -27,6 +28,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   noindex = false
 }) => {
   const location = useLocation();
+  const { toast } = useToast();
   const currentPath = location.pathname;
   const baseUrl = 'https://www.iptvservice.site';
 
@@ -34,25 +36,40 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const normalizedPath = currentPath.replace(/\/+$/, '');
   const canonicalPath = normalizedPath === '' ? '/' : normalizedPath;
   
-  const { data: seoMetrics } = useQuery({
+  const { data: seoMetrics, error: seoError } = useQuery({
     queryKey: ['seo-metrics', canonicalPath],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('seo_metrics')
-        .select('*')
-        .eq('route', canonicalPath)
-        .maybeSingle();
+      try {
+        const { data, error } = await supabase
+          .from('seo_metrics')
+          .select('*')
+          .eq('route', canonicalPath)
+          .maybeSingle();
 
-      if (error) {
-        console.error('Error fetching SEO metrics:', error);
-        return null;
+        if (error) {
+          throw error;
+        }
+
+        return data as SEOMetrics;
+      } catch (err) {
+        console.error('Error fetching SEO metrics:', err);
+        throw err;
       }
-
-      return data as SEOMetrics;
     },
-    staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000
+    retry: 2,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000 // 10 minutes
   });
+
+  useEffect(() => {
+    if (seoError) {
+      toast({
+        title: "SEO Data Error",
+        description: "Unable to load SEO data. Using fallback values.",
+        variant: "destructive",
+      });
+    }
+  }, [seoError, toast]);
 
   const title = propTitle || seoMetrics?.title || 'Best IPTV Service Provider';
   const description = propDescription || seoMetrics?.description || 'Premium IPTV subscription service with 40,000+ channels worldwide';
@@ -60,80 +77,34 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const imageUrl = propImageUrl || '/iptv-subscription.png';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
 
+  // Track page view and performance
   useEffect(() => {
-    let cleanup: (() => void) | undefined;
-    
     const trackPageView = async () => {
       try {
-        // First, try to get existing record
-        const { data: existingData, error: fetchError } = await supabase
-          .from('seo_performance')
-          .select('visits')
-          .eq('url', canonicalPath)
-          .maybeSingle();
-
-        if (fetchError) {
-          console.error('Error fetching existing record:', fetchError);
-          return;
-        }
-
-        const visits = (existingData?.visits || 0) + 1;
-
-        const metric: SEOPerformanceMetric = {
-          url: canonicalPath,
-          visits,
-          bounce_rate: 0,
-          avg_time_on_page: 0
-        };
-
-        // Use upsert with array of records
-        const { error: upsertError } = await supabase
-          .from('seo_performance')
-          .upsert([metric]);
-
-        if (upsertError) {
-          console.error('Error upserting metrics:', upsertError);
-          return;
-        }
-
-        const startTime = performance.now();
-        
-        cleanup = () => {
-          const timeOnPage = (performance.now() - startTime) / 1000;
-          const updateMetrics = async () => {
-            try {
-              const { error: updateError } = await supabase
-                .from('seo_performance')
-                .update({ avg_time_on_page: timeOnPage })
-                .eq('url', canonicalPath);
-
-              if (updateError) {
-                console.error('Error updating page timing:', updateError);
-              } else {
-                console.log('Page timing updated');
-              }
-            } catch (err) {
-              console.error('Error in cleanup function:', err);
+        const { error: trackingError } = await supabase
+          .from('seo_performance_tracking')
+          .upsert([
+            {
+              page_path: canonicalPath,
+              page_title: title,
+              meta_description: description,
+              canonical_url: canonicalUrl,
+              organic_traffic: 1
             }
-          };
-          void updateMetrics();
-        };
-      } catch (error) {
-        console.error('Error in trackPageView:', error);
-      }
-      return cleanup;
-    };
+          ], {
+            onConflict: 'page_path'
+          });
 
-    void trackPageView().then(cleanupFn => {
-      cleanup = cleanupFn;
-    });
-
-    return () => {
-      if (cleanup) {
-        cleanup();
+        if (trackingError) {
+          console.error('Error tracking page view:', trackingError);
+        }
+      } catch (err) {
+        console.error('Error in page view tracking:', err);
       }
     };
-  }, [canonicalPath]);
+
+    void trackPageView();
+  }, [canonicalPath, title, description, canonicalUrl]);
 
   return (
     <Helmet>
@@ -148,10 +119,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       
       {/* Canonical URL */}
       <link rel="canonical" href={canonicalUrl} />
-      
-      {/* Alternate Language URLs */}
-      <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
-      <link rel="alternate" hrefLang="en" href={canonicalUrl} />
       
       {/* Open Graph Tags */}
       <meta property="og:type" content={type} />
@@ -173,25 +140,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       <meta name="theme-color" content="#F97316" />
       
-      {/* Schema.org Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          "url": canonicalUrl,
-          "name": title,
-          "description": description,
-          "image": fullImageUrl,
-          "publisher": {
-            "@type": "Organization",
-            "name": "IPTV Service",
-            "logo": {
-              "@type": "ImageObject",
-              "url": `${baseUrl}/favicon.png`
-            }
-          }
-        })}
-      </script>
       {children}
     </Helmet>
   );
