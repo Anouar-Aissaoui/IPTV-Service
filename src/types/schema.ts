@@ -7,6 +7,21 @@ export interface BaseSchema {
   url: string;
   name?: string;
   description?: string;
+  logo?: {
+    '@type': string;
+    url: string;
+    width?: number;
+    height?: number;
+    caption?: string;
+  };
+  mainEntity?: Array<{
+    '@type': string;
+    name: string;
+    acceptedAnswer?: {
+      '@type': string;
+      text: string;
+    };
+  }>;
 }
 
 export interface WebPageSchema extends BaseSchema {
