@@ -8,7 +8,6 @@ import LiveChannels from "@/components/LiveChannels";
 import { SEOOptimizer } from "@/components/seo/SEOOptimizer";
 import { IPTVDefinition } from "@/components/seo/IPTVDefinition";
 import { IPTVBenefits } from "@/components/seo/IPTVBenefits";
-import { IPTVExplanation } from "@/components/seo/IPTVExplanation";
 import { seoKeywords } from "@/components/seo/Keywords";
 import { getStructuredData } from "@/components/seo/StructuredData";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
@@ -45,14 +44,12 @@ const Index = () => {
       <Hero />
       <BrandCarousel />
       <IPTVDefinition />
-      <IPTVExplanation />
       <Pricing />
       <Content />
       <LiveChannels />
       <LiveSports />
       <IPTVBenefits />
       <FAQ />
-      <IPTVExplanation />
 
       {/* Quick Links Section */}
       <div className="container mx-auto px-4 py-12 my-8">
