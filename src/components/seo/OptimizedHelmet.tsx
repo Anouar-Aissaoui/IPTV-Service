@@ -15,8 +15,8 @@ interface HelmetProps {
 }
 
 const OptimizedHelmet: React.FC<HelmetProps> = memo(({
-  title = "Best IPTV Subscription 2025 | Buy IPTV Services in USA, UK & Worldwide",
-  description = "Get the best IPTV subscription! Enjoy 24K+ channels, affordable plans, and reliable service in USA, UK & worldwide. Subscribe to top IPTV providers now!",
+  title = "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide",
+  description = "Premium IPTV subscription service with worldwide coverage",
   canonicalUrl,
   imageUrl = "/iptv-subscription.png",
   locale = "en",

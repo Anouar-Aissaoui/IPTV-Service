@@ -61,77 +61,47 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
 
   useEffect(() => {
-    let cleanup: (() => void) | undefined;
-    
     const trackPageView = async () => {
       try {
-        // First, try to get existing record
-        const { data: existingData, error: fetchError } = await supabase
-          .from('seo_performance')
-          .select('visits')
-          .eq('url', canonicalPath)
-          .maybeSingle();
-
-        if (fetchError) {
-          console.error('Error fetching existing record:', fetchError);
-          return;
-        }
-
-        const visits = (existingData?.visits || 0) + 1;
-
         const metric: SEOPerformanceMetric = {
           url: canonicalPath,
-          visits,
+          visits: 1,
           bounce_rate: 0,
           avg_time_on_page: 0
         };
 
-        // Use upsert with array of records
-        const { error: upsertError } = await supabase
+        await supabase
           .from('seo_performance')
-          .upsert([metric]);
-
-        if (upsertError) {
-          console.error('Error upserting metrics:', upsertError);
-          return;
-        }
+          .upsert([metric], {
+            onConflict: 'url'
+          });
 
         const startTime = performance.now();
         
-        cleanup = () => {
+        return () => {
           const timeOnPage = (performance.now() - startTime) / 1000;
           const updateMetrics = async () => {
             try {
-              const { error: updateError } = await supabase
+              await supabase
                 .from('seo_performance')
                 .update({ avg_time_on_page: timeOnPage })
                 .eq('url', canonicalPath);
-
-              if (updateError) {
-                console.error('Error updating page timing:', updateError);
-              } else {
-                console.log('Page timing updated');
-              }
+              console.log('Page timing updated');
             } catch (err) {
-              console.error('Error in cleanup function:', err);
+              console.error('Error updating page timing:', err);
             }
           };
           void updateMetrics();
         };
       } catch (error) {
         console.error('Error in trackPageView:', error);
+        return () => {};
       }
-      return cleanup;
     };
 
-    void trackPageView().then(cleanupFn => {
-      cleanup = cleanupFn;
-    });
-
+    const cleanup = trackPageView();
     return () => {
-      if (cleanup) {
-        cleanup();
-      }
+      void cleanup.then(cleanupFn => cleanupFn());
     };
   }, [canonicalPath]);
 
