@@ -3,14 +3,16 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-export default defineConfig(({ command, mode }) => ({
+// https://vitejs.dev/config/
+export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
   },
   plugins: [
     react(),
-    mode === 'development' && componentTagger(),
+    mode === 'development' &&
+    componentTagger(),
     {
       name: 'submit-sitemap',
       closeBundle: async () => {
@@ -42,24 +44,20 @@ export default defineConfig(({ command, mode }) => ({
   },
   build: {
     rollupOptions: {
-      input: {
-        client: './src/entry-client.tsx',
-        server: './src/entry-server.tsx'
-      },
       output: {
         manualChunks(id) {
+          // Bundle core React dependencies together
           if (id.includes('node_modules/react') || 
               id.includes('node_modules/react-dom')) {
             return 'vendor';
           }
+          // Bundle shadcn components together
           if (id.includes('components/ui/')) {
             return 'shadcn';
           }
         },
       },
     },
-    ssr: true,
-    ssrManifest: true,
     chunkSizeWarningLimit: 1000,
     minify: 'terser',
     terserOptions: {
