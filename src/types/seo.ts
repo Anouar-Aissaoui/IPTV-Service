@@ -25,3 +25,12 @@ export interface SEOPageData {
   pageType?: string;
   alternateUrls?: Record<string, string>;
 }
+
+export interface KeywordPerformance {
+  id?: string;
+  keyword: string;
+  page_path: string;
+  position?: number;
+  impressions?: number;
+  last_updated?: string;
+}

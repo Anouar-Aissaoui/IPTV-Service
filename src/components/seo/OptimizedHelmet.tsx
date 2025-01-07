@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { trackSEOMetrics } from '@/utils/seoUtils';
-import { generatePSEOContent } from '@/utils/pSEOUtils';
+import { generatePSEOContent, trackKeywordPerformance } from '@/utils/pSEOUtils';
 import { useQuery } from '@tanstack/react-query';
 import { seoKeywords } from './Keywords';
 

@@ -1,5 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
-import type { PSEOVariation } from "@/types/seo";
+import type { PSEOVariation, KeywordPerformance } from "@/types/seo";
 
 export const generatePSEOContent = async (
   slug: string,
@@ -48,10 +48,16 @@ export const generatePSEOContent = async (
         return null;
       }
 
-      return newVariation;
+      return {
+        ...newVariation,
+        content: newVariation.content as PSEOVariation['content']
+      };
     }
 
-    return variation;
+    return {
+      ...variation,
+      content: variation.content as PSEOVariation['content']
+    };
   } catch (error) {
     console.error('Error in generatePSEOContent:', error);
     return null;
@@ -62,17 +68,19 @@ export const trackKeywordPerformance = async (
   keyword: string,
   pagePath: string,
   position?: number
-) => {
+): Promise<void> => {
   try {
+    const keywordData: KeywordPerformance = {
+      keyword,
+      page_path: pagePath,
+      position,
+      impressions: 1,
+      last_updated: new Date().toISOString()
+    };
+
     const { error } = await supabase
       .from('keyword_performance')
-      .upsert({
-        keyword,
-        page_path: pagePath,
-        position,
-        impressions: 1,
-        last_updated: new Date().toISOString()
-      }, {
+      .upsert(keywordData, {
         onConflict: 'keyword,page_path'
       });
 
