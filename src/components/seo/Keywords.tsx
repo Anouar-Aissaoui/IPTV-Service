@@ -23,7 +23,12 @@ export const seoKeywords = [
   'IPTV channels list',
   'sports IPTV service',
   'movies IPTV service',
-  'TV shows streaming'
+  'TV shows streaming',
+  'premium IPTV channels',
+  'reliable IPTV service',
+  'high quality IPTV',
+  'IPTV streaming service',
+  'IPTV entertainment'
 ];
 
 export const getKeywordsString = () => seoKeywords.join(', ');

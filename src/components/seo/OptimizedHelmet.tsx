@@ -1,6 +1,9 @@
 import React, { memo, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { trackSEOMetrics, updateSEOKeywords } from '@/utils/seoUtils';
+import { trackSEOMetrics } from '@/utils/seoUtils';
+import { generatePSEOContent } from '@/utils/pSEOUtils';
+import { useQuery } from '@tanstack/react-query';
+import { seoKeywords } from './Keywords';
 
 interface HelmetProps {
   title?: string;
@@ -13,11 +16,12 @@ interface HelmetProps {
   children?: React.ReactNode;
   noindex?: boolean;
   pageType?: 'home' | 'product' | 'tutorial' | 'pricing' | 'channels' | 'faq';
+  slug?: string;
 }
 
 const OptimizedHelmet: React.FC<HelmetProps> = memo(({
-  title = "Best IPTV Subscription 2025 | Buy IPTV Services in USA, UK & Worldwide",
-  description = "Get the best IPTV subscription! Choose from top IPTV providers for premium IPTV services. Subscribe to our IPTV service for 24K+ channels worldwide.",
+  title: propTitle,
+  description: propDescription,
   canonicalUrl,
   imageUrl = "/iptv-subscription.png",
   locale = "en",
@@ -25,44 +29,23 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
   keywords = [],
   children,
   noindex = false,
-  pageType = 'home'
+  pageType = 'home',
+  slug = ''
 }) => {
+  const { data: pSEOData } = useQuery({
+    queryKey: ['pseo', slug, locale],
+    queryFn: () => generatePSEOContent(slug || window.location.pathname, [...seoKeywords, ...keywords], locale),
+    enabled: !!slug || !!window.location.pathname
+  });
+
   const baseUrl = 'https://www.iptvservice.site';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
   const fullCanonicalUrl = canonicalUrl ? (canonicalUrl.startsWith('http') ? canonicalUrl : `${baseUrl}${canonicalUrl}`) : baseUrl;
 
-  const defaultKeywords = [
-    'iptv subscription',
-    'best iptv',
-    'iptv subscribe',
-    'iptv providers',
-    'iptv provider',
-    'bestiptv',
-    'iptv subscriptions',
-    'iptv service',
-    'iptv sub',
-    'iptv suppliers',
-    'buy iptv',
-    'iptv services',
-    'iptv'
-  ];
+  const title = pSEOData?.title || propTitle || 'Best IPTV Subscription Service';
+  const description = pSEOData?.description || propDescription || 'Premium IPTV subscription service with 40,000+ channels worldwide';
 
-  const allKeywords = [...new Set([...defaultKeywords, ...keywords])];
-
-  useEffect(() => {
-    // Track SEO metrics
-    void trackSEOMetrics({
-      title,
-      description,
-      keywords: allKeywords,
-      imageUrl: fullImageUrl,
-      locale,
-      pageType
-    });
-
-    // Update keywords in database
-    void updateSEOKeywords(allKeywords);
-  }, [title, description, fullImageUrl, locale, pageType]);
+  const allKeywords = [...new Set([...(pSEOData?.keywords || []), ...keywords])];
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -82,6 +65,22 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
       "reviewCount": "1250"
     }
   };
+
+  useEffect(() => {
+    void trackSEOMetrics({
+      title,
+      description,
+      keywords: allKeywords,
+      imageUrl: fullImageUrl,
+      locale,
+      pageType
+    });
+
+    // Track impressions for each keyword
+    allKeywords.forEach(keyword => {
+      void trackKeywordPerformance(keyword, window.location.pathname);
+    });
+  }, [title, description, fullImageUrl, locale, pageType, allKeywords]);
 
   return (
     <Helmet>
