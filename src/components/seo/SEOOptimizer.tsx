@@ -33,6 +33,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const currentPath = location.pathname;
   const baseUrl = 'https://www.iptvservice.site';
 
+  // Generate canonical URL with proper handling
   const getCanonicalUrl = () => {
     if (propCanonicalUrl) {
       return propCanonicalUrl.startsWith('http') ? propCanonicalUrl : `${baseUrl}${propCanonicalUrl}`;
@@ -45,24 +46,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
     return `${baseUrl}${currentPath}`.replace(/\/$/, '');
   };
 
-  const getPageSpecificDescription = (path: string) => {
-    switch (path) {
-      case '/':
-        return "Experience premium IPTV with 40,000+ channels, 4K quality streaming, and comprehensive content library. Best IPTV provider for entertainment, sports, and movies.";
-      case '/pricing':
-        return "Affordable IPTV subscription plans starting from $14.99. Choose from monthly, quarterly, or yearly packages with premium features and 24/7 support.";
-      case '/channels':
-        return "Browse our extensive channel list featuring 40,000+ live channels, premium sports, movies, and international content. HD & 4K quality guaranteed.";
-      case '/tutorials':
-        return "Easy-to-follow IPTV setup guides for all devices. Step-by-step instructions for Smart TV, FireStick, Android, iOS, and more.";
-      case '/support':
-        return "24/7 IPTV customer support, technical assistance, and troubleshooting. Get instant help with your streaming service needs.";
-      default:
-        return propDescription || "Premium IPTV subscription service with 40,000+ channels worldwide. High-quality streaming, extensive content library, and reliable service.";
-    }
-  };
-
-  const description = getPageSpecificDescription(currentPath);
+  const description = propDescription || "Premium IPTV subscription service with 40,000+ channels worldwide. High-quality streaming, extensive content library, and reliable service.";
   const title = propTitle || 'Best IPTV Service Provider';
   const canonicalUrl = getCanonicalUrl();
   const imageUrl = propImageUrl || '/iptv-subscription.png';
@@ -140,25 +124,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       <meta name="theme-color" content="#F97316" />
       
       {/* Schema.org Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          url: canonicalUrl,
-          name: title,
-          description,
-          image: fullImageUrl,
-          publisher: {
-            "@type": "Organization",
-            "name": "IPTV Service",
-            "logo": {
-              "@type": "ImageObject",
-              "url": `${baseUrl}/favicon.png`
-            }
-          }
-        })}
-      </script>
-      
       <SchemaManager schemas={allSchemas} />
       {children}
     </Helmet>
