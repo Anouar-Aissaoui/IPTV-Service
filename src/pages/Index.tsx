@@ -15,8 +15,8 @@ import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { Link } from "react-router-dom";
 
 const Index = () => {
-  const pageTitle = "Best IPTV Subscription 2025 | Buy IPTV Services in USA, UK & Worldwide";
-  const pageDescription = "Get the best IPTV subscription! Enjoy 24K+ channels, affordable plans, and reliable service in USA, UK & worldwide. Subscribe to top IPTV providers now!";
+  const pageTitle = "Best IPTV Subscription 2024 | Premium IPTV Service Provider USA & Worldwide";
+  const pageDescription = "Get the best IPTV subscription with 40,000+ channels & premium content. Top-rated IPTV provider offering HD/4K quality, 24/7 support & affordable plans. Subscribe now!";
   
   return (
     <div className="min-h-screen bg-dark text-white font-grotesk">
@@ -52,8 +52,9 @@ const Index = () => {
       <LiveSports />
       <IPTVBenefits />
       <FAQ />
+      <IPTVExplanation />
 
-      {/* Quick Links Section - Now positioned after FAQ */}
+      {/* Quick Links Section */}
       <div className="container mx-auto px-4 py-12 my-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           <div className="brutal-border brutal-shadow bg-black p-6 transform hover:-rotate-1 transition-transform">
