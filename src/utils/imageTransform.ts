@@ -10,20 +10,35 @@ export const getTransformedImageUrl = (
   } = {}
 ) => {
   try {
-    // If the URL is already a Cloudflare URL or is a relative path, return as is
-    if (!originalUrl || originalUrl.startsWith('/') || originalUrl.includes('/cdn-cgi/')) {
+    // If the URL is a relative path or already transformed, return as is
+    if (!originalUrl || originalUrl.startsWith('/') || originalUrl.includes('/cdn-cgi/') || originalUrl.includes('imagedelivery.net')) {
       return originalUrl;
     }
 
-    const url = new URL(originalUrl);
-    const transformUrl = `https://imagedelivery.net/${CLOUDFLARE_ACCOUNT_HASH}${url.pathname}`;
+    // Handle image URLs from different sources
+    let imagePath = '';
+    try {
+      const url = new URL(originalUrl);
+      imagePath = url.pathname;
+    } catch {
+      // If URL parsing fails, use the original URL as the path
+      imagePath = originalUrl;
+    }
+
+    // Remove any leading slashes
+    imagePath = imagePath.replace(/^\/+/, '');
+
+    // Construct the Cloudflare Image delivery URL
+    const transformUrl = `https://imagedelivery.net/${CLOUDFLARE_ACCOUNT_HASH}/${imagePath}`;
     
+    // Add transformation parameters
     const params = new URLSearchParams();
     if (options.width) params.append('width', options.width.toString());
     if (options.height) params.append('height', options.height.toString());
     if (options.quality) params.append('quality', options.quality.toString());
     if (options.format) params.append('format', options.format);
 
+    // Return the final URL with parameters
     return `${transformUrl}?${params.toString()}`;
   } catch (error) {
     console.warn('Error transforming image URL:', error);
