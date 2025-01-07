@@ -25,45 +25,82 @@ export const getStructuredData = (pageType?: string, pageData?: PageData): BaseS
   const url = pageData?.url || baseUrl;
 
   const baseSchemas: BaseSchema[] = [
-    getOrganizationSchema(),
-    getWebsiteSchema(
-      pageData?.title || 'IPTV Service',
-      pageData?.description || 'Premium IPTV Service',
-      url
-    ),
-    getProductSchema(
-      'Premium IPTV Subscription',
-      'Access to 40,000+ live channels and VOD content',
-      url,
-      { low: '14.99', high: '99.99' }
-    ),
-    getFAQSchema(),
-    getServiceSchema()
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      '@id': `${baseUrl}/#organization`,
+      url: baseUrl,
+      ...getOrganizationSchema()
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      url: baseUrl,
+      ...getWebsiteSchema()
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      url: baseUrl,
+      ...getProductSchema(
+        'Premium IPTV Subscription',
+        'Access to 40,000+ live channels and VOD content',
+        url,
+        { low: '14.99', high: '99.99' }
+      )
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      url: `${baseUrl}/faq`,
+      ...getFAQSchema()
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      url: baseUrl,
+      ...getServiceSchema()
+    }
   ];
 
   if (pageType === 'article' && pageData) {
-    baseSchemas.push(getArticleSchema({
-      title: pageData.title,
-      description: pageData.description,
+    baseSchemas.push({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
       url: pageData.url,
-      image: pageData.imageUrl || `${baseUrl}/iptv-subscription.png`,
-      datePublished: pageData.datePublished || new Date().toISOString(),
-      dateModified: pageData.dateModified || new Date().toISOString(),
-      author: pageData.author || 'IPTV Service'
-    }));
+      ...getArticleSchema({
+        title: pageData.title,
+        description: pageData.description,
+        url: pageData.url,
+        image: pageData.imageUrl || `${baseUrl}/iptv-subscription.png`,
+        datePublished: pageData.datePublished || new Date().toISOString(),
+        dateModified: pageData.dateModified || new Date().toISOString(),
+        author: pageData.author || 'IPTV Service'
+      })
+    });
   }
 
   if (pageType === 'tutorial' && pageData) {
-    baseSchemas.push(getTutorialSchema({
-      title: pageData.title,
-      description: pageData.description,
+    baseSchemas.push({
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
       url: pageData.url,
-      steps: []
-    }));
+      ...getTutorialSchema({
+        title: pageData.title,
+        description: pageData.description,
+        url: pageData.url,
+        steps: []
+      })
+    });
   }
 
   if (pageData?.breadcrumbs) {
-    baseSchemas.push(getBreadcrumbSchema(pageData.breadcrumbs));
+    baseSchemas.push({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      url: pageData.url,
+      ...getBreadcrumbSchema(pageData.breadcrumbs)
+    });
   }
 
   return {

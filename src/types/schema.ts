@@ -22,6 +22,7 @@ export interface BaseSchema {
       text: string;
     };
   }>;
+  '@graph'?: BaseSchema[];
 }
 
 export interface WebPageSchema extends BaseSchema {
