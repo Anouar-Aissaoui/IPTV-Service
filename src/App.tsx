@@ -1,4 +1,4 @@
-import React, { StrictMode } from "react";
+import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -62,22 +62,20 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <BrowserRouter>
-            <div className="min-h-screen bg-background">
-              <div className="app-container relative">
-                <AppRoutes />
-                <Toaster />
-                <Sonner />
-                <Analytics />
-              </div>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <BrowserRouter>
+          <div className="min-h-screen bg-background">
+            <div className="app-container relative">
+              <AppRoutes />
+              <Toaster />
+              <Sonner />
+              <Analytics />
             </div>
-          </BrowserRouter>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </StrictMode>
+          </div>
+        </BrowserRouter>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 
