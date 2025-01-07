@@ -11,8 +11,8 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.iptvservice.site/</loc>
-    <lastmod>2024-03-20</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2024-03-21</lastmod>
+    <changefreq>always</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://www.iptvservice.site/iptv-subscription.png</image:loc>
@@ -25,90 +25,90 @@
   <!-- Main Pages -->
   <url>
     <loc>https://www.iptvservice.site/pricing</loc>
-    <lastmod>2024-03-20</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2024-03-21</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.9</priority>
     <mobile:mobile/>
   </url>
 
   <url>
     <loc>https://www.iptvservice.site/channels</loc>
-    <lastmod>2024-03-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2024-03-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
     <mobile:mobile/>
   </url>
 
   <url>
     <loc>https://www.iptvservice.site/faq</loc>
-    <lastmod>2024-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2024-03-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
     <mobile:mobile/>
   </url>
 
   <!-- Setup Guides -->
   <url>
     <loc>https://www.iptvservice.site/iptv-setup-tutorials</loc>
-    <lastmod>2024-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2024-03-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
     <mobile:mobile/>
   </url>
 
   <url>
     <loc>https://www.iptvservice.site/iptv-setup-tutorials/how-to-setup-iptv-on-vlc-windows</loc>
-    <lastmod>2024-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2024-03-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
     <mobile:mobile/>
   </url>
 
   <url>
     <loc>https://www.iptvservice.site/iptv-setup-tutorials/how-to-setup-iptv-on-smart-tv</loc>
-    <lastmod>2024-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2024-03-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
     <mobile:mobile/>
   </url>
 
   <url>
     <loc>https://www.iptvservice.site/iptv-setup-tutorials/how-to-setup-iptv-on-mobile-devices</loc>
-    <lastmod>2024-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2024-03-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
     <mobile:mobile/>
   </url>
 
   <url>
     <loc>https://www.iptvservice.site/iptv-setup-tutorials/how-to-setup-iptv-on-fire-tv-stick</loc>
-    <lastmod>2024-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2024-03-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
     <mobile:mobile/>
   </url>
 
   <url>
     <loc>https://www.iptvservice.site/iptv-setup-tutorials/how-to-setup-iptv-on-mag-box</loc>
-    <lastmod>2024-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2024-03-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
     <mobile:mobile/>
   </url>
 
   <url>
     <loc>https://www.iptvservice.site/iptv-setup-tutorials/how-to-setup-iptv-on-formuler-z8</loc>
-    <lastmod>2024-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2024-03-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
     <mobile:mobile/>
   </url>
 
   <url>
     <loc>https://www.iptvservice.site/iptv-setup-tutorials/how-to-setup-iptv-on-enigma2</loc>
-    <lastmod>2024-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2024-03-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
     <mobile:mobile/>
   </url>
 </urlset>
