@@ -1,3 +1,5 @@
+import type { BaseSchema } from '@/types/schema';
+
 export const getServiceSchema = () => ({
   "@type": "Service",
   "name": "IPTV Streaming Service",
@@ -22,4 +24,4 @@ export const getServiceSchema = () => ({
       }
     ]
   }
-});
+}) as BaseSchema;

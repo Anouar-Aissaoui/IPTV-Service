@@ -1,4 +1,4 @@
-export type SchemaType = 'WebPage' | 'Product' | 'FAQPage' | 'Article' | 'Organization' | 'BreadcrumbList';
+export type SchemaType = 'WebPage' | 'Product' | 'FAQPage' | 'Article' | 'Organization' | 'BreadcrumbList' | 'Service';
 
 export interface BaseSchema {
   '@context': string;
