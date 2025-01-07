@@ -24,7 +24,7 @@ const queryClient = new QueryClient({
     queries: {
       staleTime: 5 * 60 * 1000,
       retry: 1,
-      suspense: true,
+      enabled: true // Using enabled instead of suspense
     },
   },
 });
