@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import Hero from "@/components/Hero";
 import { Pricing } from "@/components/Pricing";
 import Content from "@/components/Content";
@@ -50,6 +51,11 @@ const Index = () => {
 
   return (
     <ContentWrapper as="main" className="min-h-screen bg-dark text-white font-grotesk">
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+      </Helmet>
+
       <SEOOptimizer 
         title={pageTitle}
         description={pageDescription}
