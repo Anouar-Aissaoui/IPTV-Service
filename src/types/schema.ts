@@ -5,6 +5,8 @@ export interface BaseSchema {
   '@type': SchemaType;
   '@id'?: string;
   url: string;
+  name?: string;
+  description?: string;
 }
 
 export interface WebPageSchema extends BaseSchema {
@@ -58,6 +60,7 @@ export interface ArticleSchema extends BaseSchema {
   };
   datePublished: string;
   dateModified: string;
+  image?: string;
 }
 
 export interface OrganizationSchema extends BaseSchema {

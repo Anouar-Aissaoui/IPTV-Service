@@ -1,6 +1,6 @@
-import type { BaseSchema } from '@/types/schema';
+import type { ServiceSchema } from '@/types/schema';
 
-export const getServiceSchema = (): BaseSchema => ({
+export const getServiceSchema = (): ServiceSchema => ({
   '@context': 'https://schema.org',
   '@type': 'Service',
   '@id': 'https://www.iptvservice.site/#service',

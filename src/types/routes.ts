@@ -42,6 +42,7 @@ export interface PageMetadata {
   keywords: string[];
   canonicalUrl: AppRoute;
   imageUrl?: string;
+  url: string;
 }
 
 /**
