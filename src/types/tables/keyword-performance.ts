@@ -6,6 +6,8 @@ export interface KeywordPerformanceTable {
     position: number | null;
     impressions: number | null;
     last_updated: string | null;
+    created_at: string;
+    updated_at: string;
   };
   Insert: {
     id?: string;
@@ -14,6 +16,8 @@ export interface KeywordPerformanceTable {
     position?: number | null;
     impressions?: number | null;
     last_updated?: string | null;
+    created_at?: string;
+    updated_at?: string;
   };
   Update: {
     id?: string;
@@ -22,5 +26,7 @@ export interface KeywordPerformanceTable {
     position?: number | null;
     impressions?: number | null;
     last_updated?: string | null;
+    created_at?: string;
+    updated_at?: string;
   };
 }

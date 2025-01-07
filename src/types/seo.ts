@@ -13,7 +13,7 @@ export interface PSEOVariation {
   schema_org?: Record<string, any>;
   page_type?: string;
   locale?: string;
-  alternate_urls?: Record<string, string>;
+  alternate_urls?: Record<string, string> | null;
 }
 
 export interface SEOPageData {

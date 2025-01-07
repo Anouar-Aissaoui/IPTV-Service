@@ -50,13 +50,15 @@ export const generatePSEOContent = async (
 
       return {
         ...newVariation,
-        content: newVariation.content as PSEOVariation['content']
+        content: newVariation.content as PSEOVariation['content'],
+        alternate_urls: newVariation.alternate_urls as Record<string, string> | null
       };
     }
 
     return {
       ...variation,
-      content: variation.content as PSEOVariation['content']
+      content: variation.content as PSEOVariation['content'],
+      alternate_urls: variation.alternate_urls as Record<string, string> | null
     };
   } catch (error) {
     console.error('Error in generatePSEOContent:', error);
