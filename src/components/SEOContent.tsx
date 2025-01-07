@@ -1,6 +1,52 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/components/ui/use-toast';
 
 export const SEOContent: React.FC = () => {
+  const { toast } = useToast();
+  
+  useEffect(() => {
+    const trackKeywords = async () => {
+      try {
+        const keywords = [
+          'iptv subscription',
+          'best iptv provider',
+          'premium iptv service',
+          'iptv channels'
+        ];
+        
+        // Track each keyword for the current page
+        const currentPath = window.location.pathname;
+        
+        for (const keyword of keywords) {
+          const { error } = await supabase
+            .from('keyword_performance')
+            .upsert({
+              keyword,
+              page_path: currentPath,
+              impressions: 1,
+              last_updated: new Date().toISOString()
+            }, {
+              onConflict: 'keyword,page_path'
+            });
+            
+          if (error) {
+            console.error('Error tracking keyword:', error);
+            toast({
+              title: "Error tracking SEO performance",
+              description: "Some metrics may not be recorded correctly.",
+              variant: "destructive",
+            });
+          }
+        }
+      } catch (err) {
+        console.error('Error in keyword tracking:', err);
+      }
+    };
+
+    void trackKeywords();
+  }, [toast]);
+
   return (
     <div className="prose prose-invert max-w-none">
       <section className="py-8">
