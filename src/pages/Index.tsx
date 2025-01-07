@@ -28,19 +28,10 @@ const Index = () => {
         type="website"
         keywords={[
           ...seoKeywords,
-          'iptv subscription',
-          'best iptv',
-          'iptv subscribe',
-          'iptv providers',
-          'iptv provider',
-          'bestiptv',
-          'iptv subscriptions',
-          'iptv service',
-          'iptv sub',
-          'iptv suppliers',
-          'buy iptv',
-          'iptv services',
-          'iptv'
+          '4K IPTV streaming',
+          'premium IPTV channels',
+          'IPTV subscription 2024',
+          'best IPTV provider USA'
         ]}
         noindex={false}
       >
