@@ -44,10 +44,7 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     rollupOptions: {
-      input: {
-        client: './src/entry-client.tsx',
-        server: './src/entry-server.tsx'
-      },
+      input: './src/entry-client.tsx',
       output: {
         manualChunks(id) {
           if (id.includes('node_modules/react') || 
@@ -68,7 +65,7 @@ export default defineConfig(({ mode }) => ({
         drop_debugger: true,
       },
     },
-    ssr: true,
+    ssr: './src/entry-server.tsx',
     ssrManifest: true,
   },
 }));
