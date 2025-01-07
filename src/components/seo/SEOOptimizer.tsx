@@ -5,11 +5,12 @@ import { useQuery } from '@tanstack/react-query';
 import { initializeSEOMetrics } from '@/utils/seoMetricsUtils';
 import { SchemaManager, generateWebPageSchema, generateProductSchema } from './SchemaManager';
 import type { BaseSchema } from '@/types/schema';
+import type { AppRoute } from '@/types/routes';
 
 interface SEOOptimizerProps {
   title?: string;
   description?: string;
-  canonicalUrl?: string;
+  canonicalUrl?: AppRoute;
   imageUrl?: string;
   type?: string;
   keywords?: string[];
@@ -30,7 +31,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   schemas = []
 }) => {
   const location = useLocation();
-  const currentPath = location.pathname;
+  const currentPath = location.pathname as AppRoute;
   const baseUrl = 'https://www.iptvservice.site';
 
   const getCanonicalUrl = () => {
@@ -45,7 +46,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
     return `${baseUrl}${currentPath}`.replace(/\/$/, '');
   };
 
-  const getPageSpecificDescription = (path: string) => {
+  const getPageSpecificDescription = (path: AppRoute) => {
     switch (path) {
       case '/':
         return "Experience premium IPTV with 40,000+ channels, 4K quality streaming, and comprehensive content library. Best IPTV provider for entertainment, sports, and movies.";
@@ -53,10 +54,8 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
         return "Affordable IPTV subscription plans starting from $14.99. Choose from monthly, quarterly, or yearly packages with premium features and 24/7 support.";
       case '/channels':
         return "Browse our extensive channel list featuring 40,000+ live channels, premium sports, movies, and international content. HD & 4K quality guaranteed.";
-      case '/tutorials':
+      case '/iptv-setup-tutorials':
         return "Easy-to-follow IPTV setup guides for all devices. Step-by-step instructions for Smart TV, FireStick, Android, iOS, and more.";
-      case '/support':
-        return "24/7 IPTV customer support, technical assistance, and troubleshooting. Get instant help with your streaming service needs.";
       default:
         return propDescription || "Premium IPTV subscription service with 40,000+ channels worldwide. High-quality streaming, extensive content library, and reliable service.";
     }
@@ -140,25 +139,6 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       <meta name="theme-color" content="#F97316" />
       
       {/* Schema.org Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          url: canonicalUrl,
-          name: title,
-          description,
-          image: fullImageUrl,
-          publisher: {
-            "@type": "Organization",
-            "name": "IPTV Service",
-            "logo": {
-              "@type": "ImageObject",
-              "url": `${baseUrl}/favicon.png`
-            }
-          }
-        })}
-      </script>
-      
       <SchemaManager schemas={allSchemas} />
       {children}
     </Helmet>

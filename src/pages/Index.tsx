@@ -19,6 +19,7 @@ import { Footer } from "@/components/home/Footer";
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
+import type { PageMetadata } from '@/types/routes';
 
 const Index = () => {
   const { data: iptvKeywords } = useQuery({
@@ -35,35 +36,31 @@ const Index = () => {
   });
 
   const currentYear = new Date().getFullYear();
-  const pageTitle = `Best IPTV Service Provider ${currentYear} | Premium IPTV Subscription USA & Worldwide`;
-  const pageDescription = `Experience the ultimate IPTV service with 40,000+ live channels, 54,000+ VOD content, and 4K quality streaming. Top-rated IPTV provider offering affordable packages with 24/7 support. Try the best IPTV subscription service now!`;
+  
+  const pageMetadata: PageMetadata = {
+    title: `Best IPTV Service Provider ${currentYear} | Premium IPTV Subscription USA & Worldwide`,
+    description: `Experience the ultimate IPTV service with 40,000+ live channels, 54,000+ VOD content, and 4K quality streaming. Top-rated IPTV provider offering affordable packages with 24/7 support. Try the best IPTV subscription service now!`,
+    keywords: [...(iptvKeywords || []), ...seoKeywords],
+    canonicalUrl: '/',
+    imageUrl: '/iptv-subscription.png'
+  };
   
   const pageData = {
-    title: pageTitle,
-    description: pageDescription,
+    ...pageMetadata,
     datePublished: `${currentYear}-01-01`,
     dateModified: new Date().toISOString(),
-    author: "IPTV Service",
-    image: "https://www.iptvservice.site/iptv-subscription.png",
-    keywords: iptvKeywords || []
+    author: "IPTV Service"
   };
 
   return (
     <ContentWrapper as="main" className="min-h-screen bg-dark text-white font-grotesk">
       <SEOOptimizer 
-        title={pageTitle}
-        description={pageDescription}
-        canonicalUrl="https://www.iptvservice.site"
-        imageUrl="/iptv-subscription.png"
+        title={pageMetadata.title}
+        description={pageMetadata.description}
+        canonicalUrl={pageMetadata.canonicalUrl}
+        imageUrl={pageMetadata.imageUrl}
         type="website"
-        keywords={[
-          ...(iptvKeywords || []),
-          ...seoKeywords,
-          '4K IPTV streaming',
-          'premium IPTV channels',
-          `IPTV subscription ${currentYear}`,
-          'best IPTV provider USA'
-        ]}
+        keywords={pageMetadata.keywords}
         noindex={false}
       >
         <script type="application/ld+json">
