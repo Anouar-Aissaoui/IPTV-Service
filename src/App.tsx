@@ -1,4 +1,4 @@
-import React, { StrictMode } from "react";
+import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -34,7 +34,7 @@ const AppRoutes = () => {
       <Route path="/pricing" element={<Index />} />
       <Route path="/faq" element={<Index />} />
       
-      {/* New IPTV Setup Tutorials routes with descriptive URLs */}
+      {/* IPTV Setup Tutorials routes */}
       <Route path="/iptv-setup-tutorials" element={<Tutorials />} />
       <Route path="/iptv-setup-tutorials/how-to-setup-iptv-on-smart-tv" element={<SmartTvSetup />} />
       <Route path="/iptv-setup-tutorials/how-to-setup-iptv-on-mobile-devices" element={<MobileSetup />} />
@@ -44,7 +44,7 @@ const AppRoutes = () => {
       <Route path="/iptv-setup-tutorials/how-to-setup-iptv-on-enigma2" element={<Enigma2Setup />} />
       <Route path="/iptv-setup-tutorials/how-to-setup-iptv-on-vlc-windows" element={<VlcWindowsSetup />} />
 
-      {/* Redirects from old tutorial URLs */}
+      {/* Redirects */}
       <Route path="/tutorials" element={<Navigate to="/iptv-setup-tutorials" replace />} />
       <Route path="/tutorials/smart-tv" element={<Navigate to="/iptv-setup-tutorials/how-to-setup-iptv-on-smart-tv" replace />} />
       <Route path="/tutorials/mobile" element={<Navigate to="/iptv-setup-tutorials/how-to-setup-iptv-on-mobile-devices" replace />} />
@@ -61,21 +61,19 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <BrowserRouter>
-            <div className="min-h-screen bg-background">
-              <div className="app-container relative">
-                <AppRoutes />
-                <Toaster />
-                <Sonner />
-              </div>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <BrowserRouter>
+          <div className="min-h-screen bg-background">
+            <div className="app-container relative">
+              <AppRoutes />
+              <Toaster />
+              <Sonner />
             </div>
-          </BrowserRouter>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </StrictMode>
+          </div>
+        </BrowserRouter>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 
