@@ -20,25 +20,58 @@ export interface PageData {
   canonicalUrl?: string;
 }
 
+const baseUrl = 'https://www.iptvservice.site';
+
 export const getStructuredData = (pageType?: string, pageData?: PageData): BaseSchema => {
-  const baseUrl = 'https://www.iptvservice.site';
   const url = pageData?.url || baseUrl;
+  const context = 'https://schema.org';
 
   const baseSchemas: BaseSchema[] = [
-    getOrganizationSchema(),
-    getWebsiteSchema(
-      pageData?.title || 'IPTV Service',
-      pageData?.description || 'Premium IPTV Service',
-      url
-    ),
-    getProductSchema(
-      'Premium IPTV Subscription',
-      'Access to 40,000+ live channels and VOD content',
-      url,
-      { low: '14.99', high: '99.99' }
-    ),
-    getFAQSchema(),
-    getServiceSchema()
+    {
+      '@context': context,
+      '@type': 'Organization',
+      '@id': `${baseUrl}/#organization`,
+      name: 'IPTV Service',
+      url: baseUrl,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${baseUrl}/iptv-subscription.png`,
+        width: 600,
+        height: 60,
+        caption: 'IPTV Service Logo'
+      },
+      description: 'Premium IPTV Service Provider',
+      sameAs: [
+        'https://facebook.com/iptvservice',
+        'https://twitter.com/iptvservice'
+      ],
+      contactPoint: [{
+        '@type': 'ContactPoint',
+        telephone: '+1-234-567-8900',
+        contactType: 'customer service',
+        areaServed: 'Worldwide',
+        availableLanguage: ['English'],
+        hoursAvailable: 'Mo-Su 00:00-24:00'
+      }],
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'US'
+      },
+      award: 'Best IPTV Service Provider 2024'
+    },
+    {
+      '@context': context,
+      '@type': 'FAQPage',
+      url: `${baseUrl}/faq`,
+      mainEntity: [{
+        '@type': 'Question',
+        name: 'What devices are supported?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Our IPTV service supports Smart TVs, mobile devices, tablets, and streaming devices.'
+        }
+      }]
+    }
   ];
 
   if (pageType === 'article' && pageData) {
@@ -66,8 +99,11 @@ export const getStructuredData = (pageType?: string, pageData?: PageData): BaseS
     baseSchemas.push(getBreadcrumbSchema(pageData.breadcrumbs));
   }
 
+  // Add website schema
+  baseSchemas.push(getWebsiteSchema());
+
   return {
-    '@context': 'https://schema.org',
+    '@context': context,
     '@type': 'WebPage',
     url,
     '@graph': baseSchemas
