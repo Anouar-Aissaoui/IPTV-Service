@@ -9,10 +9,12 @@ interface BlurImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   hash?: string
   width?: number
   height?: number
+  priority?: boolean
+  fetchPriority?: "high" | "low" | "auto"
 }
 
 const BlurImage = React.forwardRef<HTMLImageElement, BlurImageProps>(
-  ({ className, alt, hash, width, height, ...props }, ref) => {
+  ({ className, alt, hash, width, height, priority, fetchPriority = "auto", ...props }, ref) => {
     const [imageLoaded, setImageLoaded] = useState<boolean>(false)
 
     useEffect(() => {
@@ -45,6 +47,9 @@ const BlurImage = React.forwardRef<HTMLImageElement, BlurImageProps>(
             className
           )}
           alt={alt}
+          loading={priority ? "eager" : "lazy"}
+          decoding={priority ? "sync" : "async"}
+          fetchPriority={fetchPriority}
           {...props}
         />
       </div>
