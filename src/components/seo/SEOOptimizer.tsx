@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { initializeSEOMetrics } from '@/utils/seoMetricsUtils';
-import { SchemaManager, generateWebPageSchema, generateProductSchema } from './SchemaManager';
-import type { BaseSchema } from '@/types/schema';
+import { supabase } from '@/integrations/supabase/client';
+import type { SEOMetrics, SEOPerformanceMetric } from '@/types/tables/seo-metrics';
 
 interface SEOOptimizerProps {
   title?: string;
@@ -15,7 +14,6 @@ interface SEOOptimizerProps {
   keywords?: string[];
   children?: React.ReactNode;
   noindex?: boolean;
-  schemas?: BaseSchema[];
 }
 
 export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
@@ -26,87 +24,108 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   type = 'website',
   keywords = [],
   children,
-  noindex = false,
-  schemas = []
+  noindex = false
 }) => {
   const location = useLocation();
   const currentPath = location.pathname;
   const baseUrl = 'https://www.iptvservice.site';
 
-  // Generate canonical URL with proper handling
-  const getCanonicalUrl = () => {
-    if (propCanonicalUrl) {
-      return propCanonicalUrl.startsWith('http') ? propCanonicalUrl : `${baseUrl}${propCanonicalUrl}`;
-    }
-    // For root path, return base URL without trailing slash
-    if (currentPath === '/') {
-      return baseUrl;
-    }
-    // For other paths, combine base URL with current path and ensure no trailing slash
-    return `${baseUrl}${currentPath}`.replace(/\/$/, '');
-  };
+  // Normalize the current URL by removing trailing slashes and query parameters
+  const normalizedPath = currentPath.replace(/\/+$/, '');
+  const canonicalPath = normalizedPath === '' ? '/' : normalizedPath;
+  
+  const { data: seoMetrics } = useQuery({
+    queryKey: ['seo-metrics', canonicalPath],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('seo_metrics')
+        .select('*')
+        .eq('route', canonicalPath)
+        .maybeSingle();
 
-  const description = propDescription || "Premium IPTV subscription service with 40,000+ channels worldwide. High-quality streaming, extensive content library, and reliable service.";
-  const title = propTitle || 'Best IPTV Service Provider';
-  const canonicalUrl = getCanonicalUrl();
+      if (error) {
+        console.error('Error fetching SEO metrics:', error);
+        return null;
+      }
+
+      return data as SEOMetrics;
+    },
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000
+  });
+
+  const title = propTitle || seoMetrics?.title || 'Best IPTV Service Provider';
+  const description = propDescription || seoMetrics?.description || 'Premium IPTV subscription service with 40,000+ channels worldwide';
+  const canonicalUrl = propCanonicalUrl || seoMetrics?.canonical_url || `${baseUrl}${canonicalPath}`;
   const imageUrl = propImageUrl || '/iptv-subscription.png';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
 
-  // Generate default schemas if none provided
-  const defaultSchemas: BaseSchema[] = [
-    generateWebPageSchema(title, description, canonicalUrl),
-    generateProductSchema(
-      'Premium IPTV Subscription',
-      'Access to 40,000+ live channels and 54,000+ VOD content with HD and 4K quality streaming.',
-      canonicalUrl,
-      { low: '14.99', high: '99.99' }
-    )
-  ];
+  useEffect(() => {
+    const trackPageView = async () => {
+      try {
+        const metric: SEOPerformanceMetric = {
+          url: canonicalPath,
+          visits: 1,
+          bounce_rate: 0,
+          avg_time_on_page: 0
+        };
 
-  const allSchemas = [...defaultSchemas, ...schemas];
+        await supabase
+          .from('seo_performance')
+          .upsert([metric], {
+            onConflict: 'url'
+          });
 
-  useQuery({
-    queryKey: ['seoMetrics', currentPath],
-    queryFn: async () => {
-      await initializeSEOMetrics(
-        currentPath,
-        title,
-        description,
-        canonicalUrl,
-        {
-          keywords: keywords.join(', '),
-          'og:type': type,
-          'og:url': canonicalUrl,
-          'twitter:url': canonicalUrl
-        },
-        {
-          '@context': 'https://schema.org',
-          '@type': 'WebPage',
-          url: canonicalUrl,
-          name: title,
-          description
-        }
-      );
-    }
-  });
+        const startTime = performance.now();
+        
+        return () => {
+          const timeOnPage = (performance.now() - startTime) / 1000;
+          const updateMetrics = async () => {
+            try {
+              await supabase
+                .from('seo_performance')
+                .update({ avg_time_on_page: timeOnPage })
+                .eq('url', canonicalPath);
+              console.log('Page timing updated');
+            } catch (err) {
+              console.error('Error updating page timing:', err);
+            }
+          };
+          void updateMetrics();
+        };
+      } catch (error) {
+        console.error('Error in trackPageView:', error);
+        return () => {};
+      }
+    };
+
+    const cleanup = trackPageView();
+    return () => {
+      void cleanup.then(cleanupFn => cleanupFn());
+    };
+  }, [canonicalPath]);
 
   return (
     <Helmet>
+      {/* Primary Meta Tags */}
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
       {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
       
-      {/* Enhanced URL and Canonical Tags */}
-      <link rel="canonical" href={canonicalUrl} />
-      <meta property="og:url" content={canonicalUrl} />
-      <meta name="twitter:url" content={canonicalUrl} />
-      
-      {/* Enhanced Robots Control */}
+      {/* Robots Control */}
       <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
+      
+      {/* Canonical URL */}
+      <link rel="canonical" href={canonicalUrl} />
+      
+      {/* Alternate Language URLs */}
+      <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="en" href={canonicalUrl} />
       
       {/* Open Graph Tags */}
       <meta property="og:type" content={type} />
+      <meta property="og:url" content={canonicalUrl} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={fullImageUrl} />
@@ -114,6 +133,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
 
       {/* Twitter Card Tags */}
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content={canonicalUrl} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={fullImageUrl} />
@@ -124,7 +144,24 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
       <meta name="theme-color" content="#F97316" />
       
       {/* Schema.org Structured Data */}
-      <SchemaManager schemas={allSchemas} />
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "url": canonicalUrl,
+          "name": title,
+          "description": description,
+          "image": fullImageUrl,
+          "publisher": {
+            "@type": "Organization",
+            "name": "IPTV Service",
+            "logo": {
+              "@type": "ImageObject",
+              "url": `${baseUrl}/favicon.png`
+            }
+          }
+        })}
+      </script>
       {children}
     </Helmet>
   );

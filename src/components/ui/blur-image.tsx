@@ -1,62 +1,34 @@
-"use client"
-
-import * as React from "react"
-import { useState, useEffect } from "react"
-import { cn } from "@/lib/utils"
-import { Blurhash } from "react-blurhash"
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 interface BlurImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  hash?: string
-  width?: number
-  height?: number
-  priority?: boolean
-  fetchPriority?: "high" | "low" | "auto"
+  src: string;
+  alt: string;
+  className?: string;
+  priority?: boolean;
 }
 
-const BlurImage = React.forwardRef<HTMLImageElement, BlurImageProps>(
-  ({ className, alt, hash, width, height, priority, fetchPriority = "auto", ...props }, ref) => {
-    const [imageLoaded, setImageLoaded] = useState<boolean>(false)
-
-    useEffect(() => {
-      const img = new Image()
-      img.onload = () => {
-        setImageLoaded(true)
-      }
-      img.src = props.src || ""
-    }, [props.src])
+export const BlurImage = React.forwardRef<HTMLImageElement, BlurImageProps>(
+  ({ src, alt, className, priority, ...props }, ref) => {
+    const [isLoading, setIsLoading] = React.useState(true);
 
     return (
-      <div className="relative">
-        {!imageLoaded && hash && (
-          <div className="absolute inset-0">
-            <Blurhash
-              hash={hash}
-              width={width || 400}
-              height={height || 300}
-              resolutionX={32}
-              resolutionY={32}
-              punch={1}
-            />
-          </div>
-        )}
+      <div className={cn("overflow-hidden relative", className)}>
         <img
           ref={ref}
-          className={cn(
-            "transition-opacity duration-300",
-            imageLoaded ? "opacity-100" : "opacity-0",
-            className
-          )}
+          src={src}
           alt={alt}
           loading={priority ? "eager" : "lazy"}
-          decoding={priority ? "sync" : "async"}
-          fetchPriority={fetchPriority}
+          className={cn(
+            "duration-700 ease-in-out",
+            isLoading ? "scale-110 blur-2xl" : "scale-100 blur-0"
+          )}
+          onLoad={() => setIsLoading(false)}
           {...props}
         />
       </div>
-    )
+    );
   }
-)
+);
 
-BlurImage.displayName = "BlurImage"
-
-export { BlurImage }
+BlurImage.displayName = "BlurImage";

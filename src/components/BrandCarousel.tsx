@@ -7,7 +7,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { OptimizedImage } from "./ui/optimized-image";
+import { BlurImage } from "./ui/blur-image";
 
 const brands = [
   {
@@ -111,12 +111,14 @@ const brands = [
 const CarouselBrandItem = React.memo(({ brand }: { brand: typeof brands[number] }) => (
   <div className="p-1 md:p-2">
     <figure className="relative aspect-[3/1] w-full">
-      <OptimizedImage
+      <BlurImage
         src={brand.src}
         alt={brand.alt}
         width={brand.width}
         height={brand.height}
         className="object-contain w-full h-full opacity-50 hover:opacity-100 transition-opacity duration-300 scale-75 hover:scale-90"
+        loading="lazy"
+        decoding="async"
       />
     </figure>
   </div>

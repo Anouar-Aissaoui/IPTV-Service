@@ -2,7 +2,6 @@ export * from './buyer-info';
 export * from './cache';
 export * from './contact-messages';
 export * from './images';
-export * from './iptv-seo-keywords';
 export * from './performance-metrics';
 export * from './pseo-variations';
 export * from './seo-bulk-pages';
