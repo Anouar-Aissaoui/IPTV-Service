@@ -23,6 +23,5 @@ export interface SEOPageData {
   imageUrl?: string;
   locale?: string;
   pageType?: string;
-  type?: string;
   alternateUrls?: Record<string, string>;
 }

@@ -36,7 +36,7 @@ export const generateDynamicMetaTags = (pageData: SEOPageData) => {
 export const trackSEOMetrics = async (pageData: SEOPageData) => {
   try {
     const { data, error } = await supabase
-      .from('seo_performance_tracking')
+      .from('seo_performance_metrics')
       .upsert([
         {
           page_path: window.location.pathname,
@@ -53,9 +53,6 @@ export const trackSEOMetrics = async (pageData: SEOPageData) => {
             title: pageData.title,
             description: pageData.description,
             image: pageData.imageUrl
-          },
-          keyword_rankings: {
-            keywords: pageData.keywords
           }
         }
       ], {
