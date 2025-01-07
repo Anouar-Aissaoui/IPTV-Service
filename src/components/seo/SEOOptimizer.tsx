@@ -63,18 +63,33 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   useEffect(() => {
     const trackPageView = async () => {
       try {
-        const metric: SEOPerformanceMetric = {
-          url: canonicalPath,
-          visits: 1,
-          bounce_rate: 0,
-          avg_time_on_page: 0
-        };
-
-        await supabase
+        // First check if a record exists
+        const { data: existingData } = await supabase
           .from('seo_performance')
-          .upsert([metric], {
-            onConflict: 'url'
-          });
+          .select('*')
+          .eq('url', canonicalPath)
+          .maybeSingle();
+
+        if (existingData) {
+          // Update existing record
+          await supabase
+            .from('seo_performance')
+            .update({
+              visits: (existingData.visits || 0) + 1,
+              updated_at: new Date().toISOString()
+            })
+            .eq('url', canonicalPath);
+        } else {
+          // Insert new record
+          await supabase
+            .from('seo_performance')
+            .insert([{
+              url: canonicalPath,
+              visits: 1,
+              bounce_rate: 0,
+              avg_time_on_page: 0
+            }]);
+        }
 
         const startTime = performance.now();
         
