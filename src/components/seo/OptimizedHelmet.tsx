@@ -38,7 +38,12 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
     if (canonicalUrl) {
       return canonicalUrl.startsWith('http') ? canonicalUrl : `${baseUrl}${canonicalUrl}`;
     }
-    return currentPath === '/' ? baseUrl : `${baseUrl}${currentPath}`;
+    // For root path, return base URL without trailing slash
+    if (currentPath === '/') {
+      return baseUrl;
+    }
+    // For other paths, combine base URL with current path
+    return `${baseUrl}${currentPath}`;
   };
 
   const fullCanonicalUrl = getCanonicalUrl();

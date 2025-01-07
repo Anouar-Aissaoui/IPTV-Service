@@ -1,8 +1,6 @@
 import * as React from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { BlurImage } from "./ui/blur-image";
-import { useQuery } from "@tanstack/react-query";
-import { api } from "@/services/api";
 
 const movies = [
   {
@@ -42,29 +40,17 @@ const MovieCard = React.lazy(() => import("./MovieCard"));
 const Content: React.FC = () => {
   const { toast } = useToast();
 
-  // Track page view
   React.useEffect(() => {
-    api.trackPageView(window.location.pathname).catch(console.error);
+    performance.mark('content-component-rendered');
+    
+    return () => {
+      performance.measure('content-render-time', 'content-component-rendered');
+    };
   }, []);
 
-  // Get SEO metrics
-  const { data: seoMetrics } = useQuery({
-    queryKey: ['seoMetrics', window.location.pathname],
-    queryFn: () => api.getSEOMetrics(window.location.pathname)
-  });
-
-  React.useEffect(() => {
-    if (seoMetrics) {
-      console.log('SEO Metrics:', seoMetrics);
-    }
-  }, [seoMetrics]);
-
   const handleMovieClick = React.useCallback((movieTitle: string) => {
-    toast({
-      title: "Movie Selected",
-      description: `You clicked on ${movieTitle}`,
-    });
-  }, [toast]);
+    console.log(`Movie clicked: ${movieTitle}`);
+  }, []);
 
   return (
     <div className="bg-dark py-20 relative overflow-hidden">
