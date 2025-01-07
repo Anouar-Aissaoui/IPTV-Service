@@ -114,9 +114,8 @@ const CarouselBrandItem = React.memo(({ brand }: { brand: typeof brands[number] 
       <BlurImage
         src={brand.src}
         alt={brand.alt}
-        width={150}
-        height={46}
-        quality={85}
+        width={brand.width}
+        height={brand.height}
         className="object-contain w-full h-full opacity-50 hover:opacity-100 transition-opacity duration-300 scale-75 hover:scale-90"
         loading="lazy"
         decoding="async"

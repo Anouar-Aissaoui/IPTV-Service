@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import type { SEOMetrics } from '@/types/tables/seo-metrics';
+import type { SEOMetrics, SEOPerformanceMetric } from '@/types/tables/seo-metrics';
 
 interface SEOOptimizerProps {
   title?: string;
@@ -63,24 +63,18 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   useEffect(() => {
     const trackPageView = async () => {
       try {
-        // Get the most recent record for this URL
-        const { data: latestRecord } = await supabase
-          .from('seo_performance')
-          .select('*')
-          .eq('url', canonicalPath)
-          .order('created_at', { ascending: false })
-          .limit(1)
-          .single();
+        const metric: SEOPerformanceMetric = {
+          url: canonicalPath,
+          visits: 1,
+          bounce_rate: 0,
+          avg_time_on_page: 0
+        };
 
-        // Create a new record for this visit
         await supabase
           .from('seo_performance')
-          .insert([{
-            url: canonicalPath,
-            visits: 1,
-            bounce_rate: 0,
-            avg_time_on_page: latestRecord?.avg_time_on_page || 0
-          }]);
+          .upsert([metric], {
+            onConflict: 'url'
+          });
 
         const startTime = performance.now();
         
@@ -88,22 +82,11 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
           const timeOnPage = (performance.now() - startTime) / 1000;
           const updateMetrics = async () => {
             try {
-              // Get the record we just created
-              const { data: currentRecord } = await supabase
+              await supabase
                 .from('seo_performance')
-                .select('*')
-                .eq('url', canonicalPath)
-                .order('created_at', { ascending: false })
-                .limit(1)
-                .single();
-
-              if (currentRecord) {
-                await supabase
-                  .from('seo_performance')
-                  .update({ avg_time_on_page: timeOnPage })
-                  .eq('id', currentRecord.id);
-                console.log('Page timing updated');
-              }
+                .update({ avg_time_on_page: timeOnPage })
+                .eq('url', canonicalPath);
+              console.log('Page timing updated');
             } catch (err) {
               console.error('Error updating page timing:', err);
             }
