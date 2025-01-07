@@ -48,9 +48,6 @@
     <meta name="ICBM" content="37.09024, -95.712891" />
     <meta name="theme-color" content="#F97316" />
     
-    <!-- MetaManager Pixel -->
-    <script async src="https://pixel.metamanager.io/mm.js?id=MMP-0WDNRQJ" type="text/javascript"></script>
-    
     <!-- Resource Hints -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link rel="preconnect" href="https://cdn.gpteng.co" crossorigin />
@@ -77,12 +74,14 @@
     <!-- Plausible Analytics -->
     <script defer data-domain="iptvservice.site" src="https://plausible.io/js/script.file-downloads.hash.outbound-links.pageview-props.revenue.tagged-events.js"></script>
     <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+    
+    <!-- GPT Engineer Script -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><!--ssr-outlet--></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-load-image/5.16.0/load-image.min.js" defer></script>
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
     <script>
       if ('serviceWorker' in navigator) {
