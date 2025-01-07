@@ -7,37 +7,52 @@ export const SEOContent: React.FC = () => {
   
   useEffect(() => {
     const trackKeywords = async () => {
+      const keywords = [
+        'iptv subscription',
+        'best iptv provider',
+        'premium iptv service',
+        'iptv channels'
+      ];
+      
+      const currentPath = window.location.pathname;
+      
+      // Use a single upsert operation for all keywords
+      const keywordData = keywords.map(keyword => ({
+        keyword,
+        page_path: currentPath,
+        impressions: 1,
+        last_updated: new Date().toISOString()
+      }));
+
       try {
-        const keywords = [
-          'iptv subscription',
-          'best iptv provider',
-          'premium iptv service',
-          'iptv channels'
-        ];
-        
-        // Track each keyword for the current page
-        const currentPath = window.location.pathname;
-        
-        for (const keyword of keywords) {
-          const { error } = await supabase
-            .from('keyword_performance')
-            .upsert({
-              keyword,
-              page_path: currentPath,
-              impressions: 1,
-              last_updated: new Date().toISOString()
-            }, {
-              onConflict: 'keyword,page_path'
-            });
+        const { error } = await supabase
+          .from('keyword_performance')
+          .upsert(keywordData, {
+            onConflict: 'keyword,page_path',
+            ignoreDuplicates: true
+          });
             
-          if (error) {
-            console.error('Error tracking keyword:', error);
-            toast({
-              title: "Error tracking SEO performance",
-              description: "Some metrics may not be recorded correctly.",
-              variant: "destructive",
-            });
-          }
+        if (error) {
+          console.error('Error tracking keywords:', error);
+          toast({
+            title: "Error tracking SEO performance",
+            description: "Will retry automatically. Some metrics may be delayed.",
+            variant: "destructive",
+          });
+
+          // Retry once after a short delay
+          setTimeout(async () => {
+            const { error: retryError } = await supabase
+              .from('keyword_performance')
+              .upsert(keywordData, {
+                onConflict: 'keyword,page_path',
+                ignoreDuplicates: true
+              });
+
+            if (retryError) {
+              console.error('Error in retry attempt:', retryError);
+            }
+          }, 1000);
         }
       } catch (err) {
         console.error('Error in keyword tracking:', err);
