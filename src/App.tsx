@@ -2,7 +2,7 @@ import React, { StrictMode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from 'next-themes';
 import Index from "./pages/Index";
 import Channels from "./pages/Channels";
@@ -64,13 +64,15 @@ const App = () => {
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="min-h-screen bg-background">
-            <div className="app-container relative">
-              <AppRoutes />
-              <Toaster />
-              <Sonner />
+          <BrowserRouter>
+            <div className="min-h-screen bg-background">
+              <div className="app-container relative">
+                <AppRoutes />
+                <Toaster />
+                <Sonner />
+              </div>
             </div>
-          </div>
+          </BrowserRouter>
         </ThemeProvider>
       </QueryClientProvider>
     </StrictMode>
