@@ -1,23 +1,17 @@
 import React, { useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
+import { seoKeywords } from './seo/Keywords';
 
 export const SEOContent: React.FC = () => {
   const { toast } = useToast();
   
   useEffect(() => {
     const trackKeywords = async () => {
-      const keywords = [
-        'iptv subscription',
-        'best iptv provider',
-        'premium iptv service',
-        'iptv channels'
-      ];
-      
       const currentPath = window.location.pathname;
       
       // Use a single upsert operation for all keywords
-      const keywordData = keywords.map(keyword => ({
+      const keywordData = seoKeywords.map(keyword => ({
         keyword,
         page_path: currentPath,
         impressions: 1,

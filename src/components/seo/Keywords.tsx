@@ -16,19 +16,7 @@ export const seoKeywords = [
   'streaming TV channels',
   'live TV streaming',
   'USA IPTV service',
-  'affordable IPTV subscription',
-  '4K IPTV service',
-  'IPTV provider USA',
-  'best IPTV provider',
-  'IPTV channels list',
-  'sports IPTV service',
-  'movies IPTV service',
-  'TV shows streaming',
-  'premium IPTV channels',
-  'reliable IPTV service',
-  'high quality IPTV',
-  'IPTV streaming service',
-  'IPTV entertainment'
+  'affordable IPTV subscription'
 ];
 
 export const getKeywordsString = () => seoKeywords.join(', ');
