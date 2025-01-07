@@ -10,16 +10,7 @@ export default defineConfig(({ mode }) => ({
     middlewareMode: true,
   },
   plugins: [
-    react({
-      babel: {
-        plugins: [
-          [
-            'babel-plugin-transform-remove-console',
-            { exclude: ['error', 'warn'] }
-          ]
-        ]
-      }
-    }),
+    react(),
     mode === 'development' &&
     componentTagger(),
     {
@@ -53,6 +44,10 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     rollupOptions: {
+      input: {
+        client: './src/entry-client.tsx',
+        server: './src/entry-server.tsx'
+      },
       output: {
         manualChunks(id) {
           if (id.includes('node_modules/react') || 
