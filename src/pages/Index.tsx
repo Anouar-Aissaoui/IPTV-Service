@@ -17,22 +17,13 @@ import { ContentWrapper } from "@/components/layout/ContentWrapper";
 import { QuickLinks } from "@/components/home/QuickLinks";
 import { Footer } from "@/components/home/Footer";
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from "@/integrations/supabase/client";
-import type { Database } from "@/integrations/supabase/types";
+import { api } from "@/services/api";
 import type { PageMetadata } from '@/types/routes';
 
 const Index = () => {
   const { data: iptvKeywords } = useQuery({
     queryKey: ['iptvKeywords'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('iptv_seo_keywords')
-        .select('keyword')
-        .returns<Pick<Database['public']['Tables']['iptv_seo_keywords']['Row'], 'keyword'>[]>();
-      
-      if (error) throw error;
-      return data.map(k => k.keyword);
-    }
+    queryFn: api.getIPTVKeywords
   });
 
   const currentYear = new Date().getFullYear();
