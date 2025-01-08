@@ -77,48 +77,58 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const imageUrl = propImageUrl || '/iptv-subscription.png';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
 
-  // Track page view and performance with retry logic
+  // Track page view and performance with improved error handling
   useEffect(() => {
     const trackPageView = async () => {
       try {
-        const performanceData = {
-          page_path: canonicalPath,
-          page_title: title,
-          meta_description: description,
-          canonical_url: canonicalUrl,
-          organic_traffic: 1,
-          meta_robots: noindex ? 'noindex,nofollow' : 'index,follow',
-          structured_data: {
-            '@context': 'https://schema.org',
-            '@type': 'WebPage',
-            name: title,
-            description: description,
-            url: canonicalUrl
-          }
-        };
-
         const { error } = await supabase
           .from('seo_performance_tracking')
-          .upsert(performanceData, {
-            onConflict: 'page_path',
-            ignoreDuplicates: false
-          });
+          .insert({
+            page_path: canonicalPath,
+            page_title: title,
+            meta_description: description,
+            canonical_url: canonicalUrl,
+            organic_traffic: 1,
+            meta_robots: noindex ? 'noindex,nofollow' : 'index,follow',
+            structured_data: {
+              '@context': 'https://schema.org',
+              '@type': 'WebPage',
+              name: title,
+              description: description,
+              url: canonicalUrl
+            }
+          })
+          .select()
+          .single();
 
         if (error) {
-          console.error('Error tracking page view:', error);
-          // Retry once with a delay if there's an error
-          setTimeout(async () => {
-            const { error: retryError } = await supabase
+          // If the record exists, update it instead
+          if (error.code === '23505') { // Unique violation error code
+            const { error: updateError } = await supabase
               .from('seo_performance_tracking')
-              .upsert(performanceData, {
-                onConflict: 'page_path',
-                ignoreDuplicates: false
-              });
+              .update({
+                page_title: title,
+                meta_description: description,
+                canonical_url: canonicalUrl,
+                meta_robots: noindex ? 'noindex,nofollow' : 'index,follow',
+                structured_data: {
+                  '@context': 'https://schema.org',
+                  '@type': 'WebPage',
+                  name: title,
+                  description: description,
+                  url: canonicalUrl
+                }
+              })
+              .eq('page_path', canonicalPath)
+              .select()
+              .single();
 
-            if (retryError) {
-              console.error('Error in retry attempt:', retryError);
+            if (updateError) {
+              console.error('Error updating page view:', updateError);
             }
-          }, 1000);
+          } else {
+            console.error('Error tracking page view:', error);
+          }
         }
       } catch (err) {
         console.error('Error in page view tracking:', err);
