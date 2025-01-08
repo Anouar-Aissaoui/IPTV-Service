@@ -19,9 +19,6 @@ const MovieCard = memo(({ movie }: MovieProps) => {
         width={movie.width}
         height={movie.height}
         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-        loading="lazy"
-        decoding="async"
-        fetchPriority="low"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
         <h3 className="text-white font-bold transform -rotate-2">{movie.title}</h3>
