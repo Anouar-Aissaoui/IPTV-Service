@@ -80,14 +80,9 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   useEffect(() => {
     const trackPageView = async () => {
       try {
-        // First check if the record exists
-        const { data: existingRecord } = await supabase
-          .from('seo_performance_tracking')
-          .select('*')
-          .eq('page_path', canonicalPath)
-          .maybeSingle();
-
+        const timestamp = new Date().toISOString();
         const performanceData = {
+          page_path: canonicalPath,
           page_title: title,
           meta_description: description,
           canonical_url: canonicalUrl,
@@ -98,38 +93,24 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
             name: title,
             description: description,
             url: canonicalUrl
-          }
+          },
+          updated_at: timestamp
         };
 
-        if (existingRecord) {
-          // Update existing record
-          const { error: updateError } = await supabase
-            .from('seo_performance_tracking')
-            .update({
-              ...performanceData,
-              organic_traffic: (existingRecord.organic_traffic || 0) + 1,
-              updated_at: new Date().toISOString()
-            })
-            .eq('page_path', canonicalPath);
+        const { error: upsertError } = await supabase
+          .from('seo_performance_tracking')
+          .upsert(performanceData, {
+            onConflict: 'page_path',
+            ignoreDuplicates: false
+          });
 
-          if (updateError) {
-            console.error('Error updating performance tracking:', updateError);
-          }
-        } else {
-          // Insert new record
-          const { error: insertError } = await supabase
-            .from('seo_performance_tracking')
-            .insert({
-              page_path: canonicalPath,
-              ...performanceData,
-              organic_traffic: 1,
-              created_at: new Date().toISOString(),
-              updated_at: new Date().toISOString()
-            });
-
-          if (insertError) {
-            console.error('Error inserting performance tracking:', insertError);
-          }
+        if (upsertError) {
+          console.error('Error tracking page view:', upsertError);
+          toast({
+            title: "Analytics Error",
+            description: "Unable to track page view. This won't affect your experience.",
+            variant: "destructive",
+          });
         }
       } catch (err) {
         console.error('Error in page view tracking:', err);
@@ -137,7 +118,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
     };
 
     void trackPageView();
-  }, [canonicalPath, title, description, canonicalUrl, noindex]);
+  }, [canonicalPath, title, description, canonicalUrl, noindex, toast]);
 
   return (
     <Helmet>
