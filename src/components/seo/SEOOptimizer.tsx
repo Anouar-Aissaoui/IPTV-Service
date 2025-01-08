@@ -81,54 +81,63 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   useEffect(() => {
     const trackPageView = async () => {
       try {
-        const { error } = await supabase
+        // First, check if the record exists
+        const { data: existingRecord, error: fetchError } = await supabase
           .from('seo_performance_tracking')
-          .insert({
-            page_path: canonicalPath,
-            page_title: title,
-            meta_description: description,
-            canonical_url: canonicalUrl,
-            organic_traffic: 1,
-            meta_robots: noindex ? 'noindex,nofollow' : 'index,follow',
-            structured_data: {
-              '@context': 'https://schema.org',
-              '@type': 'WebPage',
-              name: title,
-              description: description,
-              url: canonicalUrl
-            }
-          })
-          .select()
-          .single();
+          .select('*')
+          .eq('page_path', canonicalPath)
+          .maybeSingle();
+
+        if (fetchError) {
+          console.error('Error checking existing record:', fetchError);
+          return;
+        }
+
+        const performanceData = {
+          page_title: title,
+          meta_description: description,
+          canonical_url: canonicalUrl,
+          meta_robots: noindex ? 'noindex,nofollow' : 'index,follow',
+          structured_data: {
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            name: title,
+            description: description,
+            url: canonicalUrl
+          }
+        };
+
+        let error;
+
+        if (existingRecord) {
+          // Update existing record
+          const { error: updateError } = await supabase
+            .from('seo_performance_tracking')
+            .update({
+              ...performanceData,
+              organic_traffic: (existingRecord.organic_traffic || 0) + 1
+            })
+            .eq('page_path', canonicalPath);
+          error = updateError;
+        } else {
+          // Insert new record
+          const { error: insertError } = await supabase
+            .from('seo_performance_tracking')
+            .insert({
+              page_path: canonicalPath,
+              ...performanceData,
+              organic_traffic: 1
+            });
+          error = insertError;
+        }
 
         if (error) {
-          // If the record exists, update it instead
-          if (error.code === '23505') { // Unique violation error code
-            const { error: updateError } = await supabase
-              .from('seo_performance_tracking')
-              .update({
-                page_title: title,
-                meta_description: description,
-                canonical_url: canonicalUrl,
-                meta_robots: noindex ? 'noindex,nofollow' : 'index,follow',
-                structured_data: {
-                  '@context': 'https://schema.org',
-                  '@type': 'WebPage',
-                  name: title,
-                  description: description,
-                  url: canonicalUrl
-                }
-              })
-              .eq('page_path', canonicalPath)
-              .select()
-              .single();
-
-            if (updateError) {
-              console.error('Error updating page view:', updateError);
-            }
-          } else {
-            console.error('Error tracking page view:', error);
-          }
+          console.error('Error tracking page view:', error);
+          toast({
+            title: "Analytics Error",
+            description: "Unable to track page view. This won't affect your experience.",
+            variant: "destructive",
+          });
         }
       } catch (err) {
         console.error('Error in page view tracking:', err);
@@ -136,7 +145,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
     };
 
     void trackPageView();
-  }, [canonicalPath, title, description, canonicalUrl, noindex]);
+  }, [canonicalPath, title, description, canonicalUrl, noindex, toast]);
 
   return (
     <Helmet>
