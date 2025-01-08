@@ -33,6 +33,7 @@ const Index = () => {
           'best IPTV provider USA'
         ]}
         noindex={false}
+        isStatic={true} // Mark homepage as static
       >
         <script type="application/ld+json">
           {JSON.stringify(getStructuredData())}
