@@ -10,7 +10,6 @@ export const SEOContent: React.FC = () => {
     const trackKeywords = async () => {
       const currentPath = window.location.pathname;
       
-      // Use a single upsert operation for all keywords
       const keywordData = seoKeywords.map(keyword => ({
         keyword,
         page_path: currentPath,
@@ -34,7 +33,6 @@ export const SEOContent: React.FC = () => {
             variant: "destructive",
           });
 
-          // Retry once after a short delay
           setTimeout(async () => {
             const { error: retryError } = await supabase
               .from('keyword_performance')
