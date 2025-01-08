@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { BlurImage } from "./ui/blur-image";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const movies = [
   {
@@ -40,16 +41,102 @@ const MovieCard = React.lazy(() => import("./MovieCard"));
 const Content: React.FC = () => {
   const { toast } = useToast();
 
+  // Track page performance
+  const { data: performanceData, error: performanceError } = useQuery({
+    queryKey: ['seo-performance', window.location.pathname],
+    queryFn: async () => {
+      try {
+        const { data, error } = await supabase
+          .from('seo_performance')
+          .upsert([
+            {
+              url: window.location.pathname,
+              visits: 1,
+              avg_time_on_page: 0,
+              bounce_rate: 0
+            }
+          ], {
+            onConflict: 'url'
+          })
+          .select('*')
+          .maybeSingle();
+
+        if (error) {
+          console.error('Error tracking performance:', error);
+          return null;
+        }
+
+        return data;
+      } catch (err) {
+        console.error('Error in performance tracking:', err);
+        return null;
+      }
+    },
+    retry: 1
+  });
+
   React.useEffect(() => {
+    if (performanceError) {
+      toast({
+        title: "Performance Tracking Error",
+        description: "Unable to track page performance. This won't affect your experience.",
+        variant: "destructive",
+      });
+    }
+
+    // Measure performance
+    const startTime = performance.now();
     performance.mark('content-component-rendered');
     
     return () => {
+      const endTime = performance.now();
+      const timeOnPage = (endTime - startTime) / 1000;
+
+      // Update performance metrics on unmount
+      const updateMetrics = async () => {
+        try {
+          const { error } = await supabase
+            .from('seo_performance')
+            .update({ 
+              avg_time_on_page: timeOnPage 
+            })
+            .eq('url', window.location.pathname);
+
+          if (error) {
+            console.error('Error updating performance metrics:', error);
+          }
+        } catch (err) {
+          console.error('Error in cleanup:', err);
+        }
+      };
+
+      void updateMetrics();
       performance.measure('content-render-time', 'content-component-rendered');
     };
-  }, []);
+  }, [performanceError, toast]);
 
   const handleMovieClick = React.useCallback((movieTitle: string) => {
     console.log(`Movie clicked: ${movieTitle}`);
+    
+    // Track interaction
+    const trackInteraction = async () => {
+      try {
+        const { error } = await supabase
+          .from('seo_performance')
+          .update({ 
+            bounce_rate: 0 // User interacted, not a bounce
+          })
+          .eq('url', window.location.pathname);
+
+        if (error) {
+          console.error('Error updating bounce rate:', error);
+        }
+      } catch (err) {
+        console.error('Error tracking interaction:', err);
+      }
+    };
+
+    void trackInteraction();
   }, []);
 
   return (

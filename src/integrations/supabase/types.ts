@@ -72,6 +72,39 @@ export type Database = {
         }
         Relationships: []
       }
+      keyword_performance: {
+        Row: {
+          created_at: string | null
+          id: string
+          impressions: number | null
+          keyword: string
+          last_updated: string | null
+          page_path: string
+          position: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          impressions?: number | null
+          keyword: string
+          last_updated?: string | null
+          page_path: string
+          position?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          impressions?: number | null
+          keyword?: string
+          last_updated?: string | null
+          page_path?: string
+          position?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       pseo_variations: {
         Row: {
           alternate_urls: Json | null
@@ -264,6 +297,72 @@ export type Database = {
           meta_description?: string
           meta_robots?: string | null
           open_graph?: Json | null
+          page_path?: string
+          page_speed_score?: number | null
+          page_title?: string
+          structured_data?: Json | null
+          twitter_card?: Json | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      seo_performance_tracking: {
+        Row: {
+          avg_time_on_page: number | null
+          backlinks_count: number | null
+          bounce_rate: number | null
+          canonical_url: string | null
+          core_web_vitals: Json | null
+          created_at: string | null
+          id: string
+          keyword_rankings: Json | null
+          last_crawled: string | null
+          meta_description: string
+          meta_robots: string | null
+          open_graph: Json | null
+          organic_traffic: number | null
+          page_path: string
+          page_speed_score: number | null
+          page_title: string
+          structured_data: Json | null
+          twitter_card: Json | null
+          updated_at: string | null
+        }
+        Insert: {
+          avg_time_on_page?: number | null
+          backlinks_count?: number | null
+          bounce_rate?: number | null
+          canonical_url?: string | null
+          core_web_vitals?: Json | null
+          created_at?: string | null
+          id?: string
+          keyword_rankings?: Json | null
+          last_crawled?: string | null
+          meta_description: string
+          meta_robots?: string | null
+          open_graph?: Json | null
+          organic_traffic?: number | null
+          page_path: string
+          page_speed_score?: number | null
+          page_title: string
+          structured_data?: Json | null
+          twitter_card?: Json | null
+          updated_at?: string | null
+        }
+        Update: {
+          avg_time_on_page?: number | null
+          backlinks_count?: number | null
+          bounce_rate?: number | null
+          canonical_url?: string | null
+          core_web_vitals?: Json | null
+          created_at?: string | null
+          id?: string
+          keyword_rankings?: Json | null
+          last_crawled?: string | null
+          meta_description?: string
+          meta_robots?: string | null
+          open_graph?: Json | null
+          organic_traffic?: number | null
           page_path?: string
           page_speed_score?: number | null
           page_title?: string
