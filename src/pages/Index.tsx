@@ -8,8 +8,6 @@ import LiveChannels from "@/components/LiveChannels";
 import { SEOOptimizer } from "@/components/seo/SEOOptimizer";
 import { IPTVDefinition } from "@/components/seo/IPTVDefinition";
 import { IPTVBenefits } from "@/components/seo/IPTVBenefits";
-import { seoKeywords } from "@/components/seo/Keywords";
-import { getStructuredData } from "@/components/seo/StructuredData";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { Link } from "react-router-dom";
 
@@ -26,14 +24,22 @@ const Index = () => {
         imageUrl="/iptv-subscription.png"
         type="website"
         keywords={[
-          ...seoKeywords,
-          '4K IPTV streaming',
-          'premium IPTV channels',
-          'IPTV subscription 2024',
-          'best IPTV provider USA'
+          'iptv subscription',
+          'best iptv',
+          'iptv subscribe',
+          'iptv providers',
+          'iptv provider',
+          'bestiptv',
+          'iptv subscriptions',
+          'iptv service',
+          'iptv sub',
+          'iptv suppliers',
+          'buy iptv',
+          'iptv services',
+          'iptv'
         ]}
         noindex={false}
-        isStatic={true} // Mark homepage as static
+        isStatic={true}
       >
         <script type="application/ld+json">
           {JSON.stringify(getStructuredData())}
