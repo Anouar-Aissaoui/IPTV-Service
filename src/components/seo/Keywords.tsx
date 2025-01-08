@@ -13,5 +13,3 @@ export const seoKeywords = [
   'iptv services',
   'iptv'
 ];
-
-export const getKeywordsString = () => seoKeywords.join(', ');
