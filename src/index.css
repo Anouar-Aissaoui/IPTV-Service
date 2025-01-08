@@ -1,4 +1,3 @@
-/* Critical CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -26,7 +25,9 @@
     --ring: 24 95% 53%;
     --radius: 0.75rem;
   }
+}
 
+@layer base {
   * {
     @apply border-border font-grotesk;
     -webkit-tap-highlight-color: transparent;
@@ -37,6 +38,7 @@
     touch-action: manipulation;
   }
 
+  /* Improve text readability on mobile */
   h1 {
     @apply text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight;
     line-height: 1.2;
@@ -56,14 +58,72 @@
     @apply text-base md:text-lg;
     line-height: 1.6;
   }
-}
 
-/* Mobile Optimization Styles */
-@layer utilities {
-  .touch-manipulation {
-    touch-action: manipulation;
+  /* Optimize button and link touch targets */
+  button, 
+  a,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"] {
+    @apply min-h-[44px] min-w-[44px] cursor-pointer;
+    padding: max(0.5rem, env(safe-area-inset-top)) max(0.5rem, env(safe-area-inset-right)) max(0.5rem, env(safe-area-inset-bottom)) max(0.5rem, env(safe-area-inset-left));
   }
 
+  /* Improve form elements on mobile */
+  input,
+  select,
+  textarea {
+    @apply text-base p-3;
+    font-size: 16px !important; /* Prevent zoom on focus in iOS */
+  }
+}
+
+/* Responsive Container */
+.container {
+  @apply px-4 mx-auto max-w-7xl;
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+/* Mobile-first spacing utilities */
+.brutal-shadow {
+  @apply shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)];
+}
+
+.brutal-border {
+  @apply border-2 md:border-4 border-black;
+}
+
+/* Touch-friendly hover states */
+@media (hover: hover) {
+  .brutal-hover {
+    @apply transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+  .brutal-hover {
+    @apply transition-none transform-none active:translate-y-0.5;
+  }
+  
+  .group:active .group-hover\:opacity-100 {
+    @apply opacity-100;
+  }
+  
+  .group:active .group-hover\:scale-110 {
+    @apply scale-105;
+  }
+}
+
+/* Prevent text size adjustments */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Safe area insets support */
+@supports(padding: max(0px)) {
   .safe-area-inset {
     padding-left: max(1rem, env(safe-area-inset-left));
     padding-right: max(1rem, env(safe-area-inset-right));
@@ -71,61 +131,18 @@
   }
 }
 
-/* Non-critical styles loaded asynchronously */
-@media print {
-  .brutal-shadow {
-    @apply shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)];
-  }
+/* Mobile Menu Animation */
+.slide-in-from-top {
+  animation: slideDown 0.3s ease-out;
+}
 
-  .brutal-border {
-    @apply border-2 md:border-4 border-black;
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
   }
-
-  @media (hover: hover) {
-    .brutal-hover {
-      @apply transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1;
-    }
-  }
-
-  @media (hover: none) {
-    .brutal-hover {
-      @apply transition-none transform-none active:translate-y-0.5;
-    }
-    
-    .group:active .group-hover\:opacity-100 {
-      @apply opacity-100;
-    }
-    
-    .group:active .group-hover\:scale-110 {
-      @apply scale-105;
-    }
-  }
-
-  html {
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-  }
-
-  @supports(padding: max(0px)) {
-    .safe-area-inset {
-      padding-left: max(1rem, env(safe-area-inset-left));
-      padding-right: max(1rem, env(safe-area-inset-right));
-      padding-bottom: max(1rem, env(safe-area-inset-bottom));
-    }
-  }
-
-  .slide-in-from-top {
-    animation: slideDown 0.3s ease-out;
-  }
-
-  @keyframes slideDown {
-    from {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
