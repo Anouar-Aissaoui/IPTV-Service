@@ -60,11 +60,12 @@ export const SEOContent: React.FC = () => {
     <div className="prose prose-invert max-w-none">
       <section className="py-8">
         <h1 className="text-4xl font-bold mb-6">
-          Premium IPTV Subscription Service - Best IPTV Provider Worldwide
+          Best IPTV Subscription 2025 | Buy IPTV Services in USA, UK & Worldwide
         </h1>
         <p className="mb-4 text-lg">
-          Experience the ultimate <strong>IPTV subscription</strong> solution with our premium service. Access over 40,000 live channels
-          and 54,000+ VOD content in stunning HD and 4K quality. As a leading <strong>IPTV provider</strong>, we deliver comprehensive coverage of sports,
+          Get the best IPTV subscription! Enjoy 24K+ channels, affordable plans, and reliable service in USA, UK & worldwide. 
+          Subscribe to top IPTV providers now with our premium service. Access over 40,000 live channels and 54,000+ VOD content 
+          in stunning HD and 4K quality. As a leading IPTV provider, we deliver comprehensive coverage of sports,
           movies, TV shows, news, and international programming from around the globe.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
