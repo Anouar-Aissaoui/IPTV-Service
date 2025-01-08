@@ -11,25 +11,11 @@ import { IPTVBenefits } from "@/components/seo/IPTVBenefits";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { getStructuredData } from "@/components/seo/StructuredData";
 import { Link } from "react-router-dom";
+import { seoKeywords } from "@/components/seo/Keywords";
 
 const Index = () => {
-  const pageTitle = "Best IPTV Subscription 2024 | Premium IPTV Service Provider USA & Worldwide";
-  const pageDescription = "Get the best IPTV subscription with 40,000+ channels & premium content. Top-rated IPTV provider offering HD/4K quality, 24/7 support & affordable plans. Subscribe now!";
-  const keywords = [
-    'iptv subscription',
-    'best iptv',
-    'iptv subscribe',
-    'iptv providers',
-    'iptv provider',
-    'bestiptv',
-    'iptv subscriptions',
-    'iptv service',
-    'iptv sub',
-    'iptv suppliers',
-    'buy iptv',
-    'iptv services',
-    'iptv'
-  ];
+  const pageTitle = "Best IPTV Subscription 2025 | Buy IPTV Services in USA, UK & Worldwide";
+  const pageDescription = "Get the best IPTV subscription! Enjoy 24K+ channels, affordable plans, and reliable service in USA, UK & worldwide. Subscribe to top IPTV providers now!";
   
   return (
     <div className="min-h-screen bg-dark text-white font-grotesk">
@@ -39,7 +25,7 @@ const Index = () => {
         canonicalUrl="https://www.iptvservice.site"
         imageUrl="/iptv-subscription.png"
         type="website"
-        keywords={keywords}
+        keywords={seoKeywords}
         noindex={false}
         isStatic={true}
       >
