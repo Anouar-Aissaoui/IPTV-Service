@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -35,40 +35,26 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const normalizedPath = currentPath.replace(/\/+$/, '');
   const canonicalPath = normalizedPath === '' ? '/' : normalizedPath;
   
-  const { data: seoMetrics, error: seoError } = useQuery({
+  const { data: seoMetrics } = useQuery({
     queryKey: ['seo-metrics', canonicalPath],
     queryFn: async () => {
-      try {
-        const { data, error } = await supabase
-          .from('seo_metrics')
-          .select('*')
-          .eq('route', canonicalPath)
-          .maybeSingle();
+      const { data, error } = await supabase
+        .from('seo_metrics')
+        .select('*')
+        .eq('route', canonicalPath)
+        .maybeSingle();
 
-        if (error) {
-          throw error;
-        }
-
-        return data;
-      } catch (err) {
-        console.error('Error fetching SEO metrics:', err);
-        throw err;
+      if (error) {
+        console.error('Error fetching SEO metrics:', error);
+        return null;
       }
+
+      return data;
     },
     retry: 2,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000 // 10 minutes
   });
-
-  useEffect(() => {
-    if (seoError) {
-      toast({
-        title: "SEO Data Error",
-        description: "Unable to load SEO data. Using fallback values.",
-        variant: "destructive",
-      });
-    }
-  }, [seoError, toast]);
 
   const title = propTitle || seoMetrics?.title || 'Best IPTV Service Provider';
   const description = propDescription || seoMetrics?.description || 'Premium IPTV subscription service with 40,000+ channels worldwide';
@@ -76,7 +62,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const imageUrl = propImageUrl || '/iptv-subscription.png';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
 
-  // Track page view and performance with improved error handling
+  // Track page view and performance
   useEffect(() => {
     const trackPageView = async () => {
       try {

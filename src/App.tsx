@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from 'next-themes';
 import { Analytics } from '@vercel/analytics/react';
+import { HelmetProvider } from 'react-helmet-async';
 import Index from "./pages/Index";
 import Channels from "./pages/Channels";
 import Tutorials from "./pages/Tutorials";
@@ -20,8 +21,8 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 0, // Set to 0 to disable caching
-      gcTime: 0,    // Changed from cacheTime to gcTime
+      staleTime: 0,
+      gcTime: 0,
       retry: 1,
     },
   },
@@ -90,20 +91,22 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <BrowserRouter>
-          <div className="min-h-screen bg-background">
-            <div className="app-container relative">
-              <AppRoutes />
-              <Toaster />
-              <Sonner />
-              <Analytics />
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <BrowserRouter>
+            <div className="min-h-screen bg-background">
+              <div className="app-container relative">
+                <AppRoutes />
+                <Toaster />
+                <Sonner />
+                <Analytics />
+              </div>
             </div>
-          </div>
-        </BrowserRouter>
-      </ThemeProvider>
-    </QueryClientProvider>
+          </BrowserRouter>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 };
 
