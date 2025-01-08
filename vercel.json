@@ -65,6 +65,21 @@
       "source": "/tutorials/vlc-windows",
       "destination": "/iptv-setup-tutorials/how-to-setup-iptv-on-vlc-windows",
       "permanent": true
+    },
+    {
+      "source": "/premium-iptv-service",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/pricing",
+      "destination": "/#pricing",
+      "permanent": true
+    },
+    {
+      "source": "/faq",
+      "destination": "/#faq",
+      "permanent": true
     }
   ],
   "headers": [
@@ -94,6 +109,14 @@
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "Link",
+          "value": "</style.css>; rel=preload; as=style"
         }
       ]
     },
@@ -112,24 +135,6 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/_next/image(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, s-maxage=1, stale-while-revalidate=59"
         }
       ]
     }

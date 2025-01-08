@@ -59,6 +59,20 @@ const faqs = [
 ];
 
 export const FAQ = () => {
+  // Generate FAQ Schema
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
     <div id="faq-section" className="bg-dark py-20">
       <div className="container mx-auto px-4 max-w-4xl">
@@ -102,6 +116,9 @@ export const FAQ = () => {
             ))}
           </Accordion>
         </div>
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
+        </script>
       </div>
     </div>
   );

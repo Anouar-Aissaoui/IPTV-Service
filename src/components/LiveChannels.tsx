@@ -8,7 +8,8 @@ const channels = [
     link: "https://wa.me/message/R5IYJF3GG635D1",
     description: "Watch live college sports and events on ESPNU",
     width: 300,
-    height: 450
+    height: 450,
+    altText: "ESPNU Live Sports Channel - College Sports and Events Coverage"
   },
   {
     title: "ESPN",
@@ -16,7 +17,8 @@ const channels = [
     link: "https://wa.me/message/R5IYJF3GG635D1",
     description: "The worldwide leader in sports broadcasting",
     width: 300,
-    height: 450
+    height: 450,
+    altText: "ESPN Main Channel - Worldwide Leader in Sports Broadcasting"
   },
   {
     title: "NBA TV",
@@ -24,7 +26,8 @@ const channels = [
     link: "https://wa.me/message/R5IYJF3GG635D1",
     description: "24/7 basketball coverage and live NBA games",
     width: 300,
-    height: 450
+    height: 450,
+    altText: "NBA TV Channel - 24/7 Basketball Coverage and Live Games"
   },
   {
     title: "NFL Network",
@@ -32,7 +35,8 @@ const channels = [
     link: "https://wa.me/message/R5IYJF3GG635D1",
     description: "Complete NFL coverage and exclusive content",
     width: 300,
-    height: 450
+    height: 450,
+    altText: "NFL Network - Complete Football Coverage and Exclusive Content"
   },
   {
     title: "HBO 2 East",
@@ -40,7 +44,8 @@ const channels = [
     link: "https://wa.me/message/R5IYJF3GG635D1",
     description: "Premium entertainment and exclusive HBO content",
     width: 300,
-    height: 450
+    height: 450,
+    altText: "HBO 2 East - Premium Entertainment and Exclusive Content"
   },
   {
     title: "HBO East",
@@ -48,7 +53,8 @@ const channels = [
     link: "https://wa.me/message/R5IYJF3GG635D1",
     description: "Original HBO series, movies, and specials",
     width: 300,
-    height: 450
+    height: 450,
+    altText: "HBO East - Original Series, Movies, and Special Programming"
   },
   {
     title: "Fox Sports 1",
@@ -56,7 +62,8 @@ const channels = [
     link: "https://wa.me/message/R5IYJF3GG635D1",
     description: "Live sports coverage and analysis on FS1",
     width: 300,
-    height: 450
+    height: 450,
+    altText: "Fox Sports 1 - Live Sports Coverage and Analysis"
   },
   {
     title: "National Geographic",
@@ -64,7 +71,8 @@ const channels = [
     link: "https://wa.me/message/R5IYJF3GG635D1",
     description: "World-class documentaries and educational content",
     width: 300,
-    height: 450
+    height: 450,
+    altText: "National Geographic Channel - World-Class Documentaries and Educational Content"
   },
 ];
 
@@ -96,12 +104,13 @@ const LiveChannels = () => {
                   />
                   <img
                     src={channel.image.replace('.webp', '.jpg')}
-                    alt={`${channel.title} - ${channel.description}`}
+                    alt={channel.altText}
                     className="absolute h-full w-full object-cover"
                     width={channel.width}
                     height={channel.height}
                     loading="lazy"
                     decoding="async"
+                    fetchPriority="low"
                   />
                 </picture>
                 

@@ -1,3 +1,4 @@
+/* Critical CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -25,112 +26,106 @@
     --ring: 24 95% 53%;
     --radius: 0.75rem;
   }
-}
 
-@layer base {
   * {
     @apply border-border font-grotesk;
+    -webkit-tap-highlight-color: transparent;
   }
+  
   body {
     @apply bg-background text-foreground overflow-x-hidden min-h-screen;
+    touch-action: manipulation;
   }
+
   h1 {
     @apply text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight;
+    line-height: 1.2;
   }
+
   h2 {
     @apply text-xl md:text-3xl lg:text-4xl font-extrabold tracking-tight;
+    line-height: 1.3;
   }
+
   h3 {
     @apply text-lg md:text-2xl lg:text-3xl font-bold tracking-tight;
+    line-height: 1.4;
   }
+
   p {
-    @apply text-sm md:text-base lg:text-lg;
-  }
-  button {
-    @apply text-sm md:text-base font-bold tracking-wide;
+    @apply text-base md:text-lg;
+    line-height: 1.6;
   }
 }
 
-.bg-gradient-radial {
-  background-image: radial-gradient(circle at center, var(--tw-gradient-stops));
-}
-
-/* Neo Brutalism Specific Styles */
-.brutal-shadow {
-  @apply shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)];
-}
-
-.brutal-border {
-  @apply border-2 md:border-4 border-black;
-}
-
-.brutal-hover {
-  @apply transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1;
-}
-
-.brutal-text {
-  @apply font-black tracking-tight;
-}
-
-.brutal-rotate {
-  @apply transform -rotate-2;
-}
-
-.brutal-rotate-reverse {
-  @apply transform rotate-2;
-}
-
-/* Responsive Container */
-.container {
-  @apply px-4 mx-auto max-w-7xl;
-}
-
-/* Mobile Menu Animation */
-.slide-in-from-top {
-  animation: slideDown 0.3s ease-out;
-}
-
-@keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-    opacity: 0;
+/* Mobile Optimization Styles */
+@layer utilities {
+  .touch-manipulation {
+    touch-action: manipulation;
   }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+
+  .safe-area-inset {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
 }
 
-/* Touch Device Optimizations */
-@media (hover: none) {
-  .brutal-hover {
-    @apply transition-none transform-none;
+/* Non-critical styles loaded asynchronously */
+@media print {
+  .brutal-shadow {
+    @apply shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] lg:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)];
   }
-  
-  .group:active .group-hover\:opacity-100 {
-    @apply opacity-100;
+
+  .brutal-border {
+    @apply border-2 md:border-4 border-black;
   }
-  
-  .group:active .group-hover\:scale-110 {
-    @apply scale-110;
+
+  @media (hover: hover) {
+    .brutal-hover {
+      @apply transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1;
+    }
   }
-}
 
-/* Prevent text size adjustments on orientation changes */
-html {
-  -webkit-text-size-adjust: 100%;
-}
+  @media (hover: none) {
+    .brutal-hover {
+      @apply transition-none transform-none active:translate-y-0.5;
+    }
+    
+    .group:active .group-hover\:opacity-100 {
+      @apply opacity-100;
+    }
+    
+    .group:active .group-hover\:scale-110 {
+      @apply scale-105;
+    }
+  }
 
-/* Improve tap targets on mobile */
-button, 
-a {
-  @apply min-h-[44px] min-w-[44px];
-}
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
 
-/* Improve form elements on mobile */
-input,
-select,
-textarea {
-  @apply text-base;
-  font-size: 16px !important;
+  @supports(padding: max(0px)) {
+    .safe-area-inset {
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+  }
+
+  .slide-in-from-top {
+    animation: slideDown 0.3s ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 }

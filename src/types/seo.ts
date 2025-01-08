@@ -13,7 +13,7 @@ export interface PSEOVariation {
   schema_org?: Record<string, any>;
   page_type?: string;
   locale?: string;
-  alternate_urls?: Record<string, string> | null;
+  alternate_urls?: Record<string, string>;
 }
 
 export interface SEOPageData {
@@ -24,13 +24,4 @@ export interface SEOPageData {
   locale?: string;
   pageType?: string;
   alternateUrls?: Record<string, string>;
-}
-
-export interface KeywordPerformance {
-  id?: string;
-  keyword: string;
-  page_path: string;
-  position?: number;
-  impressions?: number;
-  last_updated?: string;
 }

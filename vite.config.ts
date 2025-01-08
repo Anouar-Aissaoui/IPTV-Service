@@ -40,25 +40,23 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
   },
   build: {
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
-              return 'vendor';
-            }
-            if (id.includes('@/components/ui')) {
-              return 'ui';
-            }
-            if (id.includes('@/components/seo')) {
-              return 'seo';
-            }
-            if (id.includes('@/utils')) {
-              return 'utils';
-            }
+        manualChunks(id) {
+          // Bundle core React dependencies together
+          if (id.includes('node_modules/react') || 
+              id.includes('node_modules/react-dom')) {
+            return 'vendor';
+          }
+          // Bundle shadcn components together
+          if (id.includes('components/ui/')) {
+            return 'shadcn';
+          }
+          // Bundle all images together
+          if (/\.(png|jpe?g|gif|svg|webp)$/.test(id)) {
+            return 'images';
           }
         },
       },
@@ -67,16 +65,17 @@ export default defineConfig(({ mode }) => ({
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: mode === 'production',
-        drop_debugger: mode === 'production',
-        pure_funcs: mode === 'production' ? ['console.log'] : [],
+        drop_console: true,
+        drop_debugger: true,
       },
     },
+    cssCodeSplit: true,
+    cssMinify: true,
+    assetsInlineLimit: 4096, // Inline assets < 4kb
+    sourcemap: false,
     reportCompressedSize: false,
-    sourcemap: mode === 'development'
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
-    exclude: []
+    include: ['react', 'react-dom'],
   },
 }));

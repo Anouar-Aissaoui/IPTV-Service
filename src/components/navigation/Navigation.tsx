@@ -65,7 +65,7 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-dark/95 backdrop-blur-sm border-b-4 border-[#F97316]">
+    <nav className="sticky top-0 z-50 w-full bg-dark/95 backdrop-blur-sm border-b-4 border-[#F97316] safe-area-inset">
       <div className="container mx-auto px-4 py-4 md:py-6">
         <div className="flex items-center justify-between">
           <div className="text-xl sm:text-2xl font-black text-white transform -rotate-2 hover:rotate-0 transition-all duration-300">
@@ -75,18 +75,18 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
                 e.preventDefault();
                 handleHomeClick();
               }}
-              className="hover:text-[#F97316] transition-all duration-300 ease-in-out flex items-center gap-2 brutal-border brutal-shadow px-3 py-1 sm:px-4 sm:py-2 bg-black hover:-translate-y-1 hover:translate-x-1"
+              className="hover:text-[#F97316] transition-all duration-300 ease-in-out flex items-center gap-2 brutal-border brutal-shadow px-4 py-2 sm:px-6 sm:py-3 bg-black hover:-translate-y-1 hover:translate-x-1 min-h-[44px] sm:min-h-[48px]"
             >
               IPTV Service
             </a>
           </div>
           
           <button 
-            className="md:hidden text-[#F97316] hover:text-white transition-colors p-2 hover:bg-[#F97316] brutal-border brutal-shadow"
+            className="md:hidden text-[#F97316] hover:text-white transition-colors p-3 sm:p-4 hover:bg-[#F97316] brutal-border brutal-shadow min-h-[44px] min-w-[44px] touch-manipulation"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
+            <Menu className="h-6 w-6 sm:h-7 sm:w-7" />
           </button>
 
           <NavItems 

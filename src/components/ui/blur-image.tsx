@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { cn } from "@/lib/utils";
 
 interface BlurImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -6,20 +6,30 @@ interface BlurImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   alt: string;
   className?: string;
   priority?: boolean;
+  fetchPriority?: "high" | "low" | "auto";
 }
 
 export const BlurImage = React.forwardRef<HTMLImageElement, BlurImageProps>(
-  ({ src, alt, className, priority, ...props }, ref) => {
+  ({ src, alt, className, priority, fetchPriority = "auto", ...props }, ref) => {
+    const [isLoading, setIsLoading] = React.useState(true);
+
     return (
-      <img
-        ref={ref}
-        src={src}
-        alt={alt}
-        className={cn("transition-all duration-300", className)}
-        loading={priority ? "eager" : "lazy"}
-        decoding="async"
-        {...props}
-      />
+      <div className={cn("overflow-hidden relative", className)}>
+        <img
+          ref={ref}
+          src={src}
+          alt={alt}
+          loading={priority ? "eager" : "lazy"}
+          decoding={priority ? "sync" : "async"}
+          fetchPriority={fetchPriority}
+          className={cn(
+            "duration-700 ease-in-out",
+            isLoading ? "scale-110 blur-2xl" : "scale-100 blur-0"
+          )}
+          onLoad={() => setIsLoading(false)}
+          {...props}
+        />
+      </div>
     );
   }
 );
