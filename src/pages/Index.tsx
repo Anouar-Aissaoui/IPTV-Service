@@ -9,6 +9,7 @@ import { SEOOptimizer } from "@/components/seo/SEOOptimizer";
 import { IPTVDefinition } from "@/components/seo/IPTVDefinition";
 import { IPTVBenefits } from "@/components/seo/IPTVBenefits";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { getStructuredData } from "@/components/seo/StructuredData";
 import { Link } from "react-router-dom";
 
 const Index = () => {
