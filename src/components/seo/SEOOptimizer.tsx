@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
-import type { SEOMetrics } from '@/types/tables/seo-metrics';
 
 interface SEOOptimizerProps {
   title?: string;
@@ -50,7 +49,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
           throw error;
         }
 
-        return data as SEOMetrics;
+        return data;
       } catch (err) {
         console.error('Error fetching SEO metrics:', err);
         throw err;
@@ -81,17 +80,12 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   useEffect(() => {
     const trackPageView = async () => {
       try {
-        // First, check if the record exists
-        const { data: existingRecord, error: fetchError } = await supabase
+        // First check if the record exists
+        const { data: existingRecord } = await supabase
           .from('seo_performance_tracking')
           .select('*')
           .eq('page_path', canonicalPath)
           .maybeSingle();
-
-        if (fetchError) {
-          console.error('Error checking existing record:', fetchError);
-          return;
-        }
 
         const performanceData = {
           page_title: title,
@@ -107,18 +101,20 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
           }
         };
 
-        let error;
-
         if (existingRecord) {
           // Update existing record
           const { error: updateError } = await supabase
             .from('seo_performance_tracking')
             .update({
               ...performanceData,
-              organic_traffic: (existingRecord.organic_traffic || 0) + 1
+              organic_traffic: (existingRecord.organic_traffic || 0) + 1,
+              updated_at: new Date().toISOString()
             })
             .eq('page_path', canonicalPath);
-          error = updateError;
+
+          if (updateError) {
+            console.error('Error updating performance tracking:', updateError);
+          }
         } else {
           // Insert new record
           const { error: insertError } = await supabase
@@ -126,18 +122,14 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
             .insert({
               page_path: canonicalPath,
               ...performanceData,
-              organic_traffic: 1
+              organic_traffic: 1,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString()
             });
-          error = insertError;
-        }
 
-        if (error) {
-          console.error('Error tracking page view:', error);
-          toast({
-            title: "Analytics Error",
-            description: "Unable to track page view. This won't affect your experience.",
-            variant: "destructive",
-          });
+          if (insertError) {
+            console.error('Error inserting performance tracking:', insertError);
+          }
         }
       } catch (err) {
         console.error('Error in page view tracking:', err);
@@ -145,7 +137,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
     };
 
     void trackPageView();
-  }, [canonicalPath, title, description, canonicalUrl, noindex, toast]);
+  }, [canonicalPath, title, description, canonicalUrl, noindex]);
 
   return (
     <Helmet>
