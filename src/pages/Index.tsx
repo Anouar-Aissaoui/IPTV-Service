@@ -8,43 +8,86 @@ import LiveChannels from "@/components/LiveChannels";
 import { SEOOptimizer } from "@/components/seo/SEOOptimizer";
 import { IPTVDefinition } from "@/components/seo/IPTVDefinition";
 import { IPTVBenefits } from "@/components/seo/IPTVBenefits";
-import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
-import { getStructuredData } from "@/components/seo/StructuredData";
-import { Link } from "react-router-dom";
+import { IPTVExplanation } from "@/components/seo/IPTVExplanation";
 import { seoKeywords } from "@/components/seo/Keywords";
+import { getStructuredData } from "@/components/seo/StructuredData";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { Link } from "react-router-dom";
+import { ContentWrapper } from "@/components/layout/ContentWrapper";
 
 const Index = () => {
-  const pageTitle = "Best IPTV Subscription 2025 | Buy IPTV Services in USA, UK & Worldwide";
-  const pageDescription = "Get the best IPTV subscription! Enjoy 24K+ channels, affordable plans, and reliable service in USA, UK & worldwide. Subscribe to top IPTV providers now!";
+  const pageTitle = "Best IPTV Service Provider 2024 | Premium IPTV Subscription USA";
+  const pageDescription = "Experience premium IPTV service with 40,000+ live channels, 54,000+ VOD content, and 4K quality streaming. Best IPTV provider offering affordable packages with 24/7 support. Try now!";
   
+  const pageData = {
+    title: pageTitle,
+    description: pageDescription,
+    datePublished: "2024-01-01",
+    dateModified: new Date().toISOString(),
+    author: "IPTV Service",
+    image: "https://www.iptvservice.site/iptv-subscription.png"
+  };
+
   return (
-    <div className="min-h-screen bg-dark text-white font-grotesk">
+    <ContentWrapper as="main" className="min-h-screen bg-dark text-white font-grotesk">
       <SEOOptimizer 
         title={pageTitle}
         description={pageDescription}
         canonicalUrl="https://www.iptvservice.site"
         imageUrl="/iptv-subscription.png"
         type="website"
-        keywords={seoKeywords}
+        keywords={[
+          ...seoKeywords,
+          '4K IPTV streaming',
+          'premium IPTV channels',
+          'IPTV subscription 2024',
+          'best IPTV provider USA'
+        ]}
         noindex={false}
-        isStatic={true}
       >
         <script type="application/ld+json">
-          {JSON.stringify(getStructuredData())}
+          {JSON.stringify(getStructuredData('article', pageData))}
         </script>
       </SEOOptimizer>
 
       <Breadcrumbs />
       
-      <Hero />
-      <BrandCarousel />
-      <IPTVDefinition />
-      <Pricing />
-      <Content />
-      <LiveChannels />
-      <LiveSports />
-      <IPTVBenefits />
-      <FAQ />
+      <ContentWrapper as="section" ariaLabel="Hero Section">
+        <Hero />
+      </ContentWrapper>
+
+      <ContentWrapper as="section" ariaLabel="Brand Showcase">
+        <BrandCarousel />
+      </ContentWrapper>
+
+      <ContentWrapper as="article" ariaLabel="IPTV Information">
+        <IPTVDefinition />
+        <IPTVExplanation />
+      </ContentWrapper>
+
+      <ContentWrapper as="section" ariaLabel="Pricing Plans">
+        <Pricing />
+      </ContentWrapper>
+
+      <ContentWrapper as="section" ariaLabel="Content Showcase">
+        <Content />
+      </ContentWrapper>
+
+      <ContentWrapper as="section" ariaLabel="Live Channels">
+        <LiveChannels />
+      </ContentWrapper>
+
+      <ContentWrapper as="section" ariaLabel="Live Sports">
+        <LiveSports />
+      </ContentWrapper>
+
+      <ContentWrapper as="section" ariaLabel="IPTV Benefits">
+        <IPTVBenefits />
+      </ContentWrapper>
+
+      <ContentWrapper as="section" ariaLabel="Frequently Asked Questions">
+        <FAQ />
+      </ContentWrapper>
 
       {/* Quick Links Section */}
       <div className="container mx-auto px-4 py-12 my-8">
@@ -140,7 +183,7 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
+    </ContentWrapper>
   );
 };
 

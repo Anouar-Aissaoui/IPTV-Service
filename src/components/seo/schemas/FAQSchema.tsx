@@ -24,6 +24,22 @@ export const getFAQSchema = () => ({
         "@type": "Answer",
         "text": "Our comprehensive content library includes 40,000+ live channels, 54,000+ VOD content including latest movies and TV shows, premium sports channels, news networks, and international channels from various countries. All content is available in HD and 4K quality where applicable."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I set up the IPTV service on my device?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Setup is easy! We provide detailed step-by-step guides for all supported devices. After subscription, you'll receive instant access to our setup tutorials. Our 24/7 support team is always available to help with installation and configuration."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What payment methods do you accept?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We accept all major credit cards, PayPal, and cryptocurrency payments. Our subscription plans are flexible with monthly, quarterly, and annual options. All transactions are secure and protected."
+      }
     }
   ]
 });

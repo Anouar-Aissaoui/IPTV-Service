@@ -1,30 +1,26 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 
 const GOOGLE_URL = "https://www.google.com/ping?sitemap="
+const YANDEX_URL = "https://www.yandex.com/webmaster/site/indexNow?url="
 const BING_URL = "https://www.bing.com/ping?sitemap="
 
 const submitSitemap = async (sitemapUrl: string) => {
   try {
     // Submit to Google
-    const googleResponse = await fetch(`${GOOGLE_URL}${sitemapUrl}`, {
-      method: 'GET',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; IPTVServiceBot/1.0; +https://www.iptvservice.site)'
-      }
-    })
+    const googleResponse = await fetch(`${GOOGLE_URL}${sitemapUrl}`)
     console.log('Google submission status:', googleResponse.status)
 
+    // Submit to Yandex
+    const yandexResponse = await fetch(`${YANDEX_URL}${sitemapUrl}`)
+    console.log('Yandex submission status:', yandexResponse.status)
+
     // Submit to Bing
-    const bingResponse = await fetch(`${BING_URL}${sitemapUrl}`, {
-      method: 'GET',
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; IPTVServiceBot/1.0; +https://www.iptvservice.site)'
-      }
-    })
+    const bingResponse = await fetch(`${BING_URL}${sitemapUrl}`)
     console.log('Bing submission status:', bingResponse.status)
 
     return {
       google: googleResponse.status,
+      yandex: yandexResponse.status,
       bing: bingResponse.status
     }
   } catch (error) {
@@ -48,14 +44,11 @@ serve(async (req) => {
 
     return new Response(
       JSON.stringify({
-        message: 'Sitemap submitted successfully to Google and Bing',
+        message: 'Sitemap submitted successfully',
         result
       }),
       { 
-        headers: { 
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*"
-        },
+        headers: { "Content-Type": "application/json" },
         status: 200 
       }
     )

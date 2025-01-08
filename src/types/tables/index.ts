@@ -1,4 +1,5 @@
 export * from './buyer-info';
+export * from './cache';
 export * from './contact-messages';
 export * from './images';
 export * from './performance-metrics';
