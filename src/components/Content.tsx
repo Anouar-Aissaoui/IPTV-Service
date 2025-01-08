@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
 const movies = [
@@ -40,8 +40,29 @@ const MovieCard = React.lazy(() => import("./MovieCard"));
 
 const Content: React.FC = () => {
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
-  // Track page performance
+  // Prefetch performance data
+  React.useEffect(() => {
+    const prefetchData = async () => {
+      await queryClient.prefetchQuery({
+        queryKey: ['seo-performance', window.location.pathname],
+        queryFn: async () => {
+          const { data } = await supabase
+            .from('seo_performance')
+            .select('*')
+            .eq('url', window.location.pathname)
+            .maybeSingle();
+          return data;
+        },
+        staleTime: 1000 * 60 * 5, // Consider data fresh for 5 minutes
+        cacheTime: 1000 * 60 * 30, // Keep in cache for 30 minutes
+      });
+    };
+    void prefetchData();
+  }, [queryClient]);
+
+  // Track page performance with optimized caching
   const { data: performanceData, error: performanceError } = useQuery({
     queryKey: ['seo-performance', window.location.pathname],
     queryFn: async () => {
@@ -72,7 +93,10 @@ const Content: React.FC = () => {
         return null;
       }
     },
-    retry: 1
+    retry: 1,
+    staleTime: 1000 * 60 * 5, // Data remains fresh for 5 minutes
+    cacheTime: 1000 * 60 * 30, // Keep in cache for 30 minutes
+    refetchOnWindowFocus: false, // Disable automatic refetching on window focus
   });
 
   React.useEffect(() => {
@@ -92,9 +116,15 @@ const Content: React.FC = () => {
       const endTime = performance.now();
       const timeOnPage = (endTime - startTime) / 1000;
 
-      // Update performance metrics on unmount
+      // Optimistic update for performance metrics
       const updateMetrics = async () => {
         try {
+          // Update cache optimistically
+          queryClient.setQueryData(['seo-performance', window.location.pathname], (old: any) => ({
+            ...old,
+            avg_time_on_page: timeOnPage
+          }));
+
           const { error } = await supabase
             .from('seo_performance')
             .update({ 
@@ -104,6 +134,10 @@ const Content: React.FC = () => {
 
           if (error) {
             console.error('Error updating performance metrics:', error);
+            // Revert optimistic update on error
+            void queryClient.invalidateQueries({
+              queryKey: ['seo-performance', window.location.pathname]
+            });
           }
         } catch (err) {
           console.error('Error in cleanup:', err);
@@ -113,14 +147,20 @@ const Content: React.FC = () => {
       void updateMetrics();
       performance.measure('content-render-time', 'content-component-rendered');
     };
-  }, [performanceError, toast]);
+  }, [performanceError, toast, queryClient]);
 
   const handleMovieClick = React.useCallback((movieTitle: string) => {
     console.log(`Movie clicked: ${movieTitle}`);
     
-    // Track interaction
+    // Optimistic update for bounce rate
     const trackInteraction = async () => {
       try {
+        // Update cache optimistically
+        queryClient.setQueryData(['seo-performance', window.location.pathname], (old: any) => ({
+          ...old,
+          bounce_rate: 0
+        }));
+
         const { error } = await supabase
           .from('seo_performance')
           .update({ 
@@ -130,6 +170,10 @@ const Content: React.FC = () => {
 
         if (error) {
           console.error('Error updating bounce rate:', error);
+          // Revert optimistic update on error
+          void queryClient.invalidateQueries({
+            queryKey: ['seo-performance', window.location.pathname]
+          });
         }
       } catch (err) {
         console.error('Error tracking interaction:', err);
@@ -137,7 +181,7 @@ const Content: React.FC = () => {
     };
 
     void trackInteraction();
-  }, []);
+  }, [queryClient]);
 
   return (
     <div className="bg-dark py-20 relative overflow-hidden">
