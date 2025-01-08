@@ -77,26 +77,48 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   const imageUrl = propImageUrl || '/iptv-subscription.png';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
 
-  // Track page view and performance
+  // Track page view and performance with retry logic
   useEffect(() => {
     const trackPageView = async () => {
       try {
-        const { error: trackingError } = await supabase
+        const performanceData = {
+          page_path: canonicalPath,
+          page_title: title,
+          meta_description: description,
+          canonical_url: canonicalUrl,
+          organic_traffic: 1,
+          meta_robots: noindex ? 'noindex,nofollow' : 'index,follow',
+          structured_data: {
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            name: title,
+            description: description,
+            url: canonicalUrl
+          }
+        };
+
+        const { error } = await supabase
           .from('seo_performance_tracking')
-          .upsert([
-            {
-              page_path: canonicalPath,
-              page_title: title,
-              meta_description: description,
-              canonical_url: canonicalUrl,
-              organic_traffic: 1
-            }
-          ], {
-            onConflict: 'page_path'
+          .upsert(performanceData, {
+            onConflict: 'page_path',
+            ignoreDuplicates: false
           });
 
-        if (trackingError) {
-          console.error('Error tracking page view:', trackingError);
+        if (error) {
+          console.error('Error tracking page view:', error);
+          // Retry once with a delay if there's an error
+          setTimeout(async () => {
+            const { error: retryError } = await supabase
+              .from('seo_performance_tracking')
+              .upsert(performanceData, {
+                onConflict: 'page_path',
+                ignoreDuplicates: false
+              });
+
+            if (retryError) {
+              console.error('Error in retry attempt:', retryError);
+            }
+          }, 1000);
         }
       } catch (err) {
         console.error('Error in page view tracking:', err);
@@ -104,7 +126,7 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
     };
 
     void trackPageView();
-  }, [canonicalPath, title, description, canonicalUrl]);
+  }, [canonicalPath, title, description, canonicalUrl, noindex]);
 
   return (
     <Helmet>
