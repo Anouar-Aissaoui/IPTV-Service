@@ -15,6 +15,21 @@ import { Link } from "react-router-dom";
 const Index = () => {
   const pageTitle = "Best IPTV Subscription 2024 | Premium IPTV Service Provider USA & Worldwide";
   const pageDescription = "Get the best IPTV subscription with 40,000+ channels & premium content. Top-rated IPTV provider offering HD/4K quality, 24/7 support & affordable plans. Subscribe now!";
+  const keywords = [
+    'iptv subscription',
+    'best iptv',
+    'iptv subscribe',
+    'iptv providers',
+    'iptv provider',
+    'bestiptv',
+    'iptv subscriptions',
+    'iptv service',
+    'iptv sub',
+    'iptv suppliers',
+    'buy iptv',
+    'iptv services',
+    'iptv'
+  ];
   
   return (
     <div className="min-h-screen bg-dark text-white font-grotesk">
@@ -24,21 +39,7 @@ const Index = () => {
         canonicalUrl="https://www.iptvservice.site"
         imageUrl="/iptv-subscription.png"
         type="website"
-        keywords={[
-          'iptv subscription',
-          'best iptv',
-          'iptv subscribe',
-          'iptv providers',
-          'iptv provider',
-          'bestiptv',
-          'iptv subscriptions',
-          'iptv service',
-          'iptv sub',
-          'iptv suppliers',
-          'buy iptv',
-          'iptv services',
-          'iptv'
-        ]}
+        keywords={keywords}
         noindex={false}
         isStatic={true}
       >

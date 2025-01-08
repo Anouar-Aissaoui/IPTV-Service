@@ -11,12 +11,7 @@ export const seoKeywords = [
   'iptv suppliers',
   'buy iptv',
   'iptv services',
-  'iptv',
-  'HD IPTV service',
-  'streaming TV channels',
-  'live TV streaming',
-  'USA IPTV service',
-  'affordable IPTV subscription'
+  'iptv'
 ];
 
 export const getKeywordsString = () => seoKeywords.join(', ');
