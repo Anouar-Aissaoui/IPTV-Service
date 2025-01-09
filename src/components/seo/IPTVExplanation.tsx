@@ -4,27 +4,29 @@ export const IPTVExplanation = () => {
   return (
     <section className="py-8 px-4 bg-dark">
       <div className="container mx-auto">
-        <h2 className="text-2xl font-bold mb-4 text-white">Premium IPTV Service</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">Why Choose Our IPTV Service?</h2>
         <div className="space-y-4">
           <p className="text-gray-300">
-            Looking to buy IPTV? Experience the future of television with our premium IPTV service. We offer an extensive 
-            collection of channels from around the world, including live sports, entertainment, news, and educational content. 
-            Our HD IPTV service provides crystal-clear streaming quality, ensuring you never miss a moment of your favorite shows.
+            As a premier IPTV provider, we offer comprehensive IPTV services that cater to all your entertainment needs. 
+            Our IPTV subscriptions include access to over 40,000 channels worldwide, featuring live sports, premium movies, 
+            and exclusive content. When you subscribe to IPTV with us, you're choosing one of the best IPTV providers in 
+            the industry.
           </p>
           <p className="text-gray-300">
-            As the best IPTV service provider in the USA, we offer:
+            Key benefits of our IPTV subscription include:
           </p>
           <ul className="list-disc list-inside text-gray-300 space-y-2 ml-4">
-            <li>Live TV channels from USA, UK, Canada, and worldwide</li>
-            <li>Premium sports packages including NFL, NBA, MLB, and international leagues</li>
-            <li>Extensive video-on-demand library with latest movies and TV shows</li>
-            <li>24/7 technical support and regular content updates</li>
-            <li>Affordable IPTV subscription plans for every budget</li>
-            <li>High-quality streaming TV channels in HD and 4K resolution</li>
+            <li>Premium IPTV channels with 4K and HD quality streaming</li>
+            <li>Extensive sports packages including PPV events</li>
+            <li>Massive VOD library with latest movies and TV shows</li>
+            <li>24/7 technical support for all IPTV subscribers</li>
+            <li>Compatible with all major streaming devices</li>
+            <li>Affordable IPTV subscription plans</li>
           </ul>
           <p className="text-gray-300 mt-4">
-            Choose our reliable IPTV service for the ultimate streaming experience. With our affordable IPTV subscription, 
-            you'll get access to premium content, live TV streaming, and an extensive collection of on-demand entertainment.
+            Looking to buy IPTV? Our service stands out among IPTV suppliers with reliable streaming, 
+            high-quality content, and competitive pricing. Experience why thousands choose us as their trusted 
+            IPTV service provider.
           </p>
         </div>
       </div>
