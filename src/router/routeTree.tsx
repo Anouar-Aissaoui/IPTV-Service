@@ -15,79 +15,79 @@ import Channels from '../pages/Channels'
 
 export const rootRoute = new RootRoute()
 
-export const indexRoute = new Route({
+const indexRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/',
   component: Index,
 })
 
-export const pricingRoute = new Route({
+const pricingRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/pricing',
   component: Pricing,
 })
 
-export const channelsRoute = new Route({
+const channelsRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/channels',
   component: Channels,
 })
 
-export const faqRoute = new Route({
+const faqRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/faq',
   component: FAQ,
 })
 
-export const tutorialsRoute = new Route({
+const tutorialsRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/iptv-setup-tutorials',
   component: Tutorials,
 })
 
-export const smartTvSetupRoute = new Route({
+const smartTvSetupRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/iptv-setup-tutorials/how-to-setup-iptv-on-smart-tv',
   component: SmartTvSetup,
 })
 
-export const mobileSetupRoute = new Route({
+const mobileSetupRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/iptv-setup-tutorials/how-to-setup-iptv-on-mobile-devices',
   component: MobileSetup,
 })
 
-export const magSetupRoute = new Route({
+const magSetupRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/iptv-setup-tutorials/how-to-setup-iptv-on-mag-box',
   component: MagSetup,
 })
 
-export const formulerSetupRoute = new Route({
+const formulerSetupRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/iptv-setup-tutorials/how-to-setup-iptv-on-formuler-z8',
   component: FormulerSetup,
 })
 
-export const fireTvSetupRoute = new Route({
+const fireTvSetupRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/iptv-setup-tutorials/how-to-setup-iptv-on-fire-tv-stick',
   component: FireTvSetup,
 })
 
-export const enigma2SetupRoute = new Route({
+const enigma2SetupRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/iptv-setup-tutorials/how-to-setup-iptv-on-enigma2',
   component: Enigma2Setup,
 })
 
-export const vlcWindowsSetupRoute = new Route({
+const vlcWindowsSetupRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/iptv-setup-tutorials/how-to-setup-iptv-on-vlc-windows',
   component: VlcWindowsSetup,
 })
 
-export const notFoundRoute = new Route({
+const notFoundRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '*',
   component: NotFound,
