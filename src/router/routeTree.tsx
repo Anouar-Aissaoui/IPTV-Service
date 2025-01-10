@@ -9,6 +9,9 @@ import FireTvSetup from '../pages/FireTvSetup'
 import Enigma2Setup from '../pages/Enigma2Setup'
 import VlcWindowsSetup from '../pages/VlcWindowsSetup'
 import NotFound from '../pages/NotFound'
+import { FAQ } from '../components/FAQ'
+import { Pricing } from '../components/Pricing'
+import Channels from '../pages/Channels'
 
 export const rootRoute = new RootRoute()
 
@@ -16,6 +19,24 @@ export const indexRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/',
   component: Index,
+})
+
+export const pricingRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: '/pricing',
+  component: Pricing,
+})
+
+export const channelsRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: '/channels',
+  component: Channels,
+})
+
+export const faqRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: '/faq',
+  component: FAQ,
 })
 
 export const tutorialsRoute = new Route({
@@ -74,6 +95,9 @@ export const notFoundRoute = new Route({
 
 export const routeTree = rootRoute.addChildren([
   indexRoute,
+  pricingRoute,
+  channelsRoute,
+  faqRoute,
   tutorialsRoute,
   smartTvSetupRoute,
   mobileSetupRoute,
