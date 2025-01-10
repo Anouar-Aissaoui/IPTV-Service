@@ -1,7 +1,7 @@
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import { NavItems } from "./NavItems";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useRouter } from "@tanstack/react-router";
 
 interface NavigationProps {
   onScrollToSection: (sectionId: string) => void;
@@ -10,11 +10,11 @@ interface NavigationProps {
 export const Navigation = ({ onScrollToSection }: NavigationProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
 
   const handleHomeClick = () => {
-    if (location.pathname !== '/') {
-      navigate('/');
+    if (router.state.location.pathname !== '/') {
+      navigate({ to: '/' });
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -29,8 +29,8 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
       name: "Pricing", 
       path: "/pricing",
       action: () => {
-        if (location.pathname !== '/pricing') {
-          navigate('/pricing');
+        if (router.state.location.pathname !== '/pricing') {
+          navigate({ to: '/pricing' });
         }
         onScrollToSection('pricing-section');
       }
@@ -39,8 +39,8 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
       name: "Channel List", 
       path: "/channels",
       action: () => {
-        if (location.pathname !== '/channels') {
-          navigate('/channels');
+        if (router.state.location.pathname !== '/channels') {
+          navigate({ to: '/channels' });
         }
         onScrollToSection('channel-list');
       }
@@ -49,15 +49,15 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
       name: "Tutorials",
       path: "/iptv-setup-tutorials",
       action: () => {
-        navigate('/iptv-setup-tutorials');
+        navigate({ to: '/iptv-setup-tutorials' });
       }
     },
     { 
       name: "FAQ", 
       path: "/faq",
       action: () => {
-        if (location.pathname !== '/faq') {
-          navigate('/faq');
+        if (router.state.location.pathname !== '/faq') {
+          navigate({ to: '/faq' });
         }
         onScrollToSection('faq-section');
       }

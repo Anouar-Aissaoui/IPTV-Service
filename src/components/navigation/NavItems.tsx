@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useRouter } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
 
 interface NavItem {
@@ -14,8 +14,8 @@ interface NavItemsProps {
 
 export const NavItems = ({ items, isMobile, onItemClick }: NavItemsProps) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const currentLanguage = location.pathname.split('/')[1] || 'en';
+  const router = useRouter();
+  const currentLanguage = router.state.location.pathname.split('/')[1] || 'en';
 
   const handleItemClick = (action: () => void) => {
     action();
