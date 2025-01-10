@@ -1,35 +1,18 @@
-import React, { StrictMode } from "react";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ThemeProvider } from 'next-themes';
-import { AppRouter } from "./router/router";
+import { RouterProvider } from '@tanstack/react-router'
+import { router } from './router/router'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Toaster } from '@/components/ui/toaster'
+import './App.css'
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000,
-      retry: 1,
-    },
-  },
-});
+const queryClient = new QueryClient()
 
-const App = () => {
+function App() {
   return (
-    <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="min-h-screen bg-background">
-            <div className="app-container relative">
-              <AppRouter />
-              <Toaster />
-              <Sonner />
-            </div>
-          </div>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </StrictMode>
-  );
-};
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <Toaster />
+    </QueryClientProvider>
+  )
+}
 
-export default App;
+export default App
