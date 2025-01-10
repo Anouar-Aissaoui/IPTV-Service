@@ -6,10 +6,8 @@ import { ThemeProvider } from 'next-themes';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { routeConfig } from './router/routes';
 
-// Create a new router instance
 const router = createRouter(routeConfig);
 
-// Declare the router type to enable type safety
 declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router;
