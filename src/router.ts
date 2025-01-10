@@ -1,4 +1,5 @@
-import { createRouter, createRouteConfig } from '@tanstack/react-router';
+import React from 'react';
+import { createRouter, createRouteConfig, Outlet } from '@tanstack/react-router';
 import Index from './pages/Index';
 import Channels from './pages/Channels';
 import Tutorials from './pages/Tutorials';
@@ -12,7 +13,7 @@ import VlcWindowsSetup from './pages/VlcWindowsSetup';
 import NotFound from './pages/NotFound';
 
 const rootRoute = createRouteConfig({
-  component: () => <div id="root"><Outlet /></div>,
+  component: () => React.createElement('div', { id: 'root' }, React.createElement(Outlet, null)),
 });
 
 const indexRoute = rootRoute.createRoute({
