@@ -6,14 +6,6 @@ import { ThemeProvider } from 'next-themes';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { routeConfig } from './router/routes';
 
-const router = createRouter(routeConfig);
-
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router;
-  }
-}
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -23,18 +15,29 @@ const queryClient = new QueryClient({
   },
 });
 
+// Create the router instance
+const router = createRouter({
+  routeTree: routeConfig,
+  context: {
+    queryClient,
+  },
+});
+
+// Register router type
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router;
+  }
+}
+
 const App = () => {
   return (
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <RouterProvider router={router} />
-          <div className="min-h-screen bg-background">
-            <div className="app-container relative">
-              <Toaster />
-              <Sonner />
-            </div>
-          </div>
+          <Toaster />
+          <Sonner />
         </ThemeProvider>
       </QueryClientProvider>
     </StrictMode>

@@ -1,4 +1,4 @@
-import { createRoute, createRouter } from '@tanstack/react-router';
+import { createRoute } from '@tanstack/react-router';
 import Index from '@/pages/Index';
 import Channels from '@/pages/Channels';
 import Tutorials from '@/pages/Tutorials';
@@ -15,6 +15,7 @@ import NotFound from '@/pages/NotFound';
 const rootRoute = createRoute({
   id: 'root',
   component: Index,
+  path: '/',
 });
 
 // Create child routes
@@ -117,21 +118,19 @@ const notFoundRoute = createRoute({
 });
 
 // Create and export the router configuration
-export const routeConfig = {
-  routeTree: rootRoute.addChildren([
-    indexRoute,
-    premiumServiceRoute,
-    channelsRoute,
-    pricingRoute,
-    faqRoute,
-    tutorialsRoute,
-    smartTvSetupRoute,
-    mobileSetupRoute,
-    magSetupRoute,
-    formulerSetupRoute,
-    fireTvSetupRoute,
-    enigma2SetupRoute,
-    vlcWindowsSetupRoute,
-    notFoundRoute,
-  ]),
-};
+export const routeConfig = rootRoute.addChildren([
+  indexRoute,
+  premiumServiceRoute,
+  channelsRoute,
+  pricingRoute,
+  faqRoute,
+  tutorialsRoute,
+  smartTvSetupRoute,
+  mobileSetupRoute,
+  magSetupRoute,
+  formulerSetupRoute,
+  fireTvSetupRoute,
+  enigma2SetupRoute,
+  vlcWindowsSetupRoute,
+  notFoundRoute,
+]);
