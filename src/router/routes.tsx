@@ -1,4 +1,4 @@
-import { createFileRoute, createRouter } from '@tanstack/react-router';
+import { createRoute, createRouter } from '@tanstack/react-router';
 import Index from '@/pages/Index';
 import Channels from '@/pages/Channels';
 import Tutorials from '@/pages/Tutorials';
@@ -11,70 +11,112 @@ import Enigma2Setup from '@/pages/Enigma2Setup';
 import VlcWindowsSetup from '@/pages/VlcWindowsSetup';
 import NotFound from '@/pages/NotFound';
 
-// Define route tree
-const routeTree = {
+// Create the root route
+const rootRoute = createRoute({
   component: Index,
-  children: [
-    {
-      path: '/',
-      component: Index,
-    },
-    {
-      path: '/premium-iptv-service',
-      component: Index,
-    },
-    {
-      path: '/channels',
-      component: Channels,
-    },
-    {
-      path: '/pricing',
-      component: Index,
-    },
-    {
-      path: '/faq',
-      component: Index,
-    },
-    {
-      path: '/iptv-setup-tutorials',
-      component: Tutorials,
-    },
-    {
-      path: '/iptv-setup-tutorials/how-to-setup-iptv-on-smart-tv',
-      component: SmartTvSetup,
-    },
-    {
-      path: '/iptv-setup-tutorials/how-to-setup-iptv-on-mobile-devices',
-      component: MobileSetup,
-    },
-    {
-      path: '/iptv-setup-tutorials/how-to-setup-iptv-on-mag-box',
-      component: MagSetup,
-    },
-    {
-      path: '/iptv-setup-tutorials/how-to-setup-iptv-on-formuler-z8',
-      component: FormulerSetup,
-    },
-    {
-      path: '/iptv-setup-tutorials/how-to-setup-iptv-on-fire-tv-stick',
-      component: FireTvSetup,
-    },
-    {
-      path: '/iptv-setup-tutorials/how-to-setup-iptv-on-enigma2',
-      component: Enigma2Setup,
-    },
-    {
-      path: '/iptv-setup-tutorials/how-to-setup-iptv-on-vlc-windows',
-      component: VlcWindowsSetup,
-    },
-    {
-      path: '*',
-      component: NotFound,
-    },
-  ],
-};
+});
+
+// Create child routes
+const indexRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/',
+  component: Index,
+});
+
+const premiumServiceRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/premium-iptv-service',
+  component: Index,
+});
+
+const channelsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/channels',
+  component: Channels,
+});
+
+const pricingRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/pricing',
+  component: Index,
+});
+
+const faqRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/faq',
+  component: Index,
+});
+
+const tutorialsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/iptv-setup-tutorials',
+  component: Tutorials,
+});
+
+const smartTvSetupRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/iptv-setup-tutorials/how-to-setup-iptv-on-smart-tv',
+  component: SmartTvSetup,
+});
+
+const mobileSetupRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/iptv-setup-tutorials/how-to-setup-iptv-on-mobile-devices',
+  component: MobileSetup,
+});
+
+const magSetupRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/iptv-setup-tutorials/how-to-setup-iptv-on-mag-box',
+  component: MagSetup,
+});
+
+const formulerSetupRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/iptv-setup-tutorials/how-to-setup-iptv-on-formuler-z8',
+  component: FormulerSetup,
+});
+
+const fireTvSetupRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/iptv-setup-tutorials/how-to-setup-iptv-on-fire-tv-stick',
+  component: FireTvSetup,
+});
+
+const enigma2SetupRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/iptv-setup-tutorials/how-to-setup-iptv-on-enigma2',
+  component: Enigma2Setup,
+});
+
+const vlcWindowsSetupRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/iptv-setup-tutorials/how-to-setup-iptv-on-vlc-windows',
+  component: VlcWindowsSetup,
+});
+
+const notFoundRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '*',
+  component: NotFound,
+});
 
 // Create and export the router configuration
 export const routeConfig = {
-  routeTree,
+  routeTree: rootRoute.addChildren([
+    indexRoute,
+    premiumServiceRoute,
+    channelsRoute,
+    pricingRoute,
+    faqRoute,
+    tutorialsRoute,
+    smartTvSetupRoute,
+    mobileSetupRoute,
+    magSetupRoute,
+    formulerSetupRoute,
+    fireTvSetupRoute,
+    enigma2SetupRoute,
+    vlcWindowsSetupRoute,
+    notFoundRoute,
+  ]),
 };

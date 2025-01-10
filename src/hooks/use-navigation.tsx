@@ -1,8 +1,7 @@
-import { useNavigate, useSearch, Link } from '@tanstack/react-router';
+import { useNavigate, Link } from '@tanstack/react-router';
 
 export const useNavigation = () => {
   const navigate = useNavigate();
-  const search = useSearch({ from: '/' });
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -13,7 +12,6 @@ export const useNavigation = () => {
 
   return {
     navigate,
-    search,
     scrollToSection,
     Link,
   };
