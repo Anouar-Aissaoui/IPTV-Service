@@ -1,5 +1,5 @@
 import React from 'react';
-import { createRouter, Route, RootRoute, Outlet } from '@tanstack/react-router';
+import { createRouter, Route, RootRoute } from '@tanstack/react-router';
 import Index from './pages/Index';
 import Channels from './pages/Channels';
 import Tutorials from './pages/Tutorials';
