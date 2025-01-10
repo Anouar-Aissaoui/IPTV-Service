@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from 'next-themes';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { routeConfig } from './router/routes';
-import { RouterDevtools } from '@tanstack/router-devtools';
 
 // Create a new router instance
 const router = createRouter(routeConfig);
@@ -38,7 +37,6 @@ const App = () => {
               <Sonner />
             </div>
           </div>
-          {process.env.NODE_ENV === 'development' && <RouterDevtools router={router} />}
         </ThemeProvider>
       </QueryClientProvider>
     </StrictMode>
