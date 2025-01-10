@@ -1,7 +1,7 @@
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import { NavItems } from "./NavItems";
-import { useNavigation } from "@/hooks/use-navigation";
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface NavigationProps {
   onScrollToSection: (sectionId: string) => void;
@@ -9,40 +9,56 @@ interface NavigationProps {
 
 export const Navigation = ({ onScrollToSection }: NavigationProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { navigate, Link } = useNavigation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleHomeClick = () => {
-    navigate({ to: '/' });
+    if (location.pathname !== '/') {
+      navigate('/');
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const navItems = [
     { 
       name: "Home", 
+      path: "/",
       action: handleHomeClick
     },
     { 
       name: "Pricing", 
+      path: "/pricing",
       action: () => {
-        navigate({ to: '/pricing' });
+        if (location.pathname !== '/pricing') {
+          navigate('/pricing');
+        }
         onScrollToSection('pricing-section');
       }
     },
     { 
       name: "Channel List", 
+      path: "/channels",
       action: () => {
-        navigate({ to: '/channels' });
+        if (location.pathname !== '/channels') {
+          navigate('/channels');
+        }
         onScrollToSection('channel-list');
       }
     },
     {
       name: "Tutorials",
-      action: () => navigate({ to: '/iptv-setup-tutorials' })
+      path: "/iptv-setup-tutorials",
+      action: () => {
+        navigate('/iptv-setup-tutorials');
+      }
     },
     { 
       name: "FAQ", 
+      path: "/faq",
       action: () => {
-        navigate({ to: '/faq' });
+        if (location.pathname !== '/faq') {
+          navigate('/faq');
+        }
         onScrollToSection('faq-section');
       }
     }
@@ -53,8 +69,8 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
       <div className="container mx-auto px-4 py-4 md:py-6">
         <div className="flex items-center justify-between">
           <div className="text-xl sm:text-2xl font-black text-white transform -rotate-2 hover:rotate-0 transition-all duration-300">
-            <Link 
-              to="/"
+            <a 
+              href="/"
               onClick={(e) => {
                 e.preventDefault();
                 handleHomeClick();
@@ -62,7 +78,7 @@ export const Navigation = ({ onScrollToSection }: NavigationProps) => {
               className="hover:text-[#F97316] transition-all duration-300 ease-in-out flex items-center gap-2 brutal-border brutal-shadow px-3 py-1 sm:px-4 sm:py-2 bg-black hover:-translate-y-1 hover:translate-x-1"
             >
               IPTV Service
-            </Link>
+            </a>
           </div>
           
           <button 
