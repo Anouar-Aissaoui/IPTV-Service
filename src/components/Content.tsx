@@ -2,10 +2,8 @@ import { Suspense, lazy, useTransition, useMemo, useCallback, useRef, Fragment }
 import { useToast } from "@/components/ui/use-toast";
 import { debounce } from "@/utils/debounce";
 import { throttle } from "@/utils/throttle";
-
-// Lazy load components
-const MovieCard = lazy(() => import("./MovieCard"));
-const LoadingCard = lazy(() => import("./LoadingCard"));
+import MovieSection from "./movies/MovieSection";
+import MovieGrid from "./movies/MovieGrid";
 
 const movies = [
   {
@@ -103,33 +101,13 @@ const Content = () => {
   }, []);
 
   return (
-    <div className="bg-dark py-20 relative overflow-hidden">
-      <div className="container mx-auto px-4 relative">
-        <div className="mb-12 transform -rotate-2">
-          <h2 className="text-3xl md:text-4xl font-black text-center brutal-text inline-block bg-[#F97316] text-dark px-6 py-3 border-4 border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            Movies & <span className="text-white bg-dark px-2">TV Shows</span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {memoizedMovies.map((movie) => (
-            <Fragment key={movie.title}>
-              <Suspense fallback={<LoadingCard />}>
-                <div 
-                  onClick={() => handleMovieClick(movie.title)}
-                  className="transform transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1"
-                >
-                  <MovieCard 
-                    movie={movie} 
-                    onLoad={() => processImage(movie.image)}
-                  />
-                </div>
-              </Suspense>
-            </Fragment>
-          ))}
-        </div>
-      </div>
-    </div>
+    <MovieSection>
+      <MovieGrid 
+        movies={memoizedMovies}
+        onMovieClick={handleMovieClick}
+        onImageLoad={processImage}
+      />
+    </MovieSection>
   );
 };
 
