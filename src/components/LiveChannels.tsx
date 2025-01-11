@@ -1,8 +1,5 @@
 import React from "react";
 import { Play } from "lucide-react";
-import { FixedSizeGrid } from 'react-window';
-import { useWindowSize } from "@/hooks/use-mobile";
-import { ErrorBoundary } from "./ErrorBoundary";
 
 const channels = [
   {
@@ -71,44 +68,7 @@ const channels = [
   },
 ];
 
-const ChannelCard = React.lazy(() => import("./MovieCard"));
-
-const LoadingCard = () => (
-  <div className="aspect-[2/3] bg-gray-800 animate-pulse border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]">
-    <div className="h-full w-full flex items-center justify-center">
-      <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin" />
-    </div>
-  </div>
-);
-
-const Cell = ({ columnIndex, rowIndex, style, data }: any) => {
-  const index = rowIndex * data.columnCount + columnIndex;
-  if (index >= channels.length) return null;
-  
-  return (
-    <div style={style}>
-      <ErrorBoundary fallback={<div className="text-red-500">Error loading channel</div>}>
-        <React.Suspense fallback={<LoadingCard />}>
-          <div className="transform transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1">
-            <ChannelCard movie={channels[index]} />
-          </div>
-        </React.Suspense>
-      </ErrorBoundary>
-    </div>
-  );
-};
-
 const LiveChannels = () => {
-  const { width } = useWindowSize();
-
-  const columnCount = width < 640 ? 2 : 
-                     width < 768 ? 3 : 
-                     width < 1024 ? 4 : 
-                     width < 1280 ? 5 : 6;
-  
-  const rowCount = Math.ceil(channels.length / columnCount);
-  const itemSize = Math.min(300, (width - 32) / columnCount);
-
   return (
     <section className="bg-dark py-12 md:py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 relative brutal-container">
@@ -118,19 +78,48 @@ const LiveChannels = () => {
           </h2>
         </div>
         
-        <ErrorBoundary fallback={<div className="text-red-500">Error loading grid</div>}>
-          <FixedSizeGrid
-            columnCount={columnCount}
-            columnWidth={itemSize}
-            height={Math.min(600, rowCount * itemSize)}
-            rowCount={rowCount}
-            rowHeight={itemSize}
-            width={width - 32}
-            itemData={{ columnCount }}
-          >
-            {Cell}
-          </FixedSizeGrid>
-        </ErrorBoundary>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-3 md:gap-6">
+          {channels.map((channel) => (
+            <a
+              key={channel.title}
+              href={channel.link}
+              className="relative block group transform transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1"
+              data-abc="true"
+              aria-label={`Watch ${channel.title} - ${channel.description}`}
+            >
+              <div className="aspect-square relative rounded-none transition overflow-hidden cursor-pointer border-2 md:border-4 border-white shadow-[4px_4px_0px_0px_rgba(249,115,22,1)] md:shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]">
+                <picture>
+                  <source
+                    srcSet={channel.image}
+                    type="image/webp"
+                    className="absolute h-full w-full object-cover"
+                  />
+                  <img
+                    src={channel.image.replace('.webp', '.jpg')}
+                    alt={`${channel.title} - ${channel.description}`}
+                    className="absolute h-full w-full object-cover"
+                    width={channel.width}
+                    height={channel.height}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+                
+                <div className="hidden group-hover:flex absolute left-1/2 top-1/2 -translate-x-1/2 z-20 -translate-y-1/2 h-12 w-12 md:h-16 md:w-16 items-center justify-center cursor-pointer bg-[#F97316] border-2 md:border-4 border-white">
+                  <Play className="h-4 w-4 md:h-6 md:w-6 translate-x-0.5 text-dark" aria-hidden="true" />
+                </div>
+                
+                <div className="absolute inset-0 bg-gradient-to-b from-dark/20 to-dark/80 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+              
+              <div className="pt-2 md:pt-3 transition text-center">
+                <h3 className="text-sm md:text-brutal-base font-black tracking-tight text-white bg-dark inline-block px-2 transform rotate-1">
+                  {channel.title}
+                </h3>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );
