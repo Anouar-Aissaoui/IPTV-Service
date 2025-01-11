@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Fragment } from 'react';
 import MovieCard from './MovieCard';
-import { LoadingCard } from '../LoadingCard';
+import LoadingCard from '../LoadingCard';
 
 interface Movie {
   title: string;
