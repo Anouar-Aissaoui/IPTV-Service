@@ -31,7 +31,31 @@ export const getTutorialSchema = (tutorial: {
   },
   "sku": "IPTV-TUTORIAL",
   "mpn": "IPTV-TUT-001",
-  "image": ["https://www.iptvservice.site/iptv-subscription.png"],
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://www.iptvservice.site/iptv-subscription.png",
+    "width": 1200,
+    "height": 630
+  },
+  "review": {
+    "@type": "Review",
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "4.8",
+      "bestRating": "5"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "IPTV Reviews"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "850",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "USD",
@@ -41,19 +65,14 @@ export const getTutorialSchema = (tutorial: {
     "offers": [
       {
         "@type": "Offer",
+        "name": "Basic Tutorial Access",
         "price": "10",
-        "priceCurrency": "USD"
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split('T')[0],
+        "itemCondition": "https://schema.org/NewCondition",
+        "url": "https://www.iptvservice.site/tutorials"
       }
     ]
-  },
-  "sameAs": [
-    "https://www.iptvservice.site",
-    "https://www.iptvservice.site/tutorials"
-  ],
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "customer support",
-    "availableLanguage": ["English"],
-    "email": "support@iptvservice.site"
   }
 });

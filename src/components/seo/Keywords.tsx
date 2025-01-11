@@ -1,18 +1,9 @@
 export const seoKeywords = [
-  'iptv subscription',
-  'best iptv',
-  'iptv subscribe',
-  'iptv providers',
-  'iptv provider',
-  'bestiptv',
-  'iptv subscriptions',
-  'iptv service',
-  'iptv sub',
-  'iptv suppliers',
-  'buy iptv',
-  'iptv services',
-  'iptv',
-  'premium iptv service',
+  'buy IPTV',
+  'IPTV service',
+  'best IPTV service',
+  'IPTV subscription',
+  'premium IPTV',
   'HD IPTV service',
   'streaming TV channels',
   'live TV streaming',
@@ -23,7 +14,16 @@ export const seoKeywords = [
   'best IPTV provider',
   'IPTV channels list',
   'sports IPTV service',
-  'movies IPTV service'
+  'movies IPTV service',
+  'TV shows streaming',
+  'international IPTV channels',
+  'reliable IPTV service',
+  'quality IPTV provider',
+  'IPTV subscription plans',
+  'streaming service provider',
+  'live sports streaming',
+  'VOD content library',
+  'HD streaming service'
 ];
 
 export const getKeywordsString = () => seoKeywords.join(', ');

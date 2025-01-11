@@ -3,7 +3,6 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
@@ -55,6 +54,10 @@ export default defineConfig(({ mode }) => ({
           if (id.includes('components/ui/')) {
             return 'shadcn';
           }
+          // Bundle all images together
+          if (/\.(png|jpe?g|gif|svg|webp)$/.test(id)) {
+            return 'images';
+          }
         },
       },
     },
@@ -68,5 +71,11 @@ export default defineConfig(({ mode }) => ({
     },
     cssCodeSplit: true,
     cssMinify: true,
+    assetsInlineLimit: 4096, // Inline assets < 4kb
+    sourcemap: false,
+    reportCompressedSize: false,
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom'],
   },
 }));
