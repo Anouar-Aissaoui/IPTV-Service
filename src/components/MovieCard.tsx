@@ -23,6 +23,7 @@ const MovieCard = memo(({ movie, onLoad }: MovieProps) => {
         onLoad={onLoad}
         loading="lazy"
         decoding="async"
+        priority={false}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
         <h3 className="text-white font-bold transform -rotate-2">{movie.title}</h3>
