@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { BlurImage } from "./ui/blur-image";
+import { FixedSizeGrid } from 'react-window';
+import { useWindowSize } from "@/hooks/use-mobile";
 
 const movies = [
   {
@@ -37,8 +38,31 @@ const movies = [
 
 const MovieCard = React.lazy(() => import("./MovieCard"));
 
+const Cell = ({ columnIndex, rowIndex, style, data }: any) => {
+  const index = rowIndex * data.columnCount + columnIndex;
+  if (index >= movies.length) return null;
+  
+  return (
+    <div style={style}>
+      <React.Suspense
+        fallback={
+          <div className="aspect-[2/3] bg-gray-800 animate-pulse border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]"></div>
+        }
+      >
+        <div 
+          onClick={() => data.onMovieClick(movies[index].title)}
+          className="transform transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1"
+        >
+          <MovieCard movie={movies[index]} />
+        </div>
+      </React.Suspense>
+    </div>
+  );
+};
+
 const Content: React.FC = () => {
   const { toast } = useToast();
+  const { width } = useWindowSize();
 
   React.useEffect(() => {
     performance.mark('content-component-rendered');
@@ -52,6 +76,14 @@ const Content: React.FC = () => {
     console.log(`Movie clicked: ${movieTitle}`);
   }, []);
 
+  const columnCount = width < 640 ? 2 : 
+                     width < 768 ? 3 : 
+                     width < 1024 ? 4 : 
+                     width < 1280 ? 5 : 5;
+  
+  const rowCount = Math.ceil(movies.length / columnCount);
+  const itemSize = Math.min(300, (width - 32) / columnCount);
+
   return (
     <div className="bg-dark py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 relative">
@@ -61,23 +93,17 @@ const Content: React.FC = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {movies.map((movie) => (
-            <React.Suspense
-              key={movie.title}
-              fallback={
-                <div className="aspect-[2/3] bg-gray-800 animate-pulse border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]"></div>
-              }
-            >
-              <div 
-                onClick={() => handleMovieClick(movie.title)}
-                className="transform transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1"
-              >
-                <MovieCard movie={movie} />
-              </div>
-            </React.Suspense>
-          ))}
-        </div>
+        <FixedSizeGrid
+          columnCount={columnCount}
+          columnWidth={itemSize}
+          height={Math.min(600, rowCount * itemSize)}
+          rowCount={rowCount}
+          rowHeight={itemSize}
+          width={width - 32}
+          itemData={{ columnCount, onMovieClick: handleMovieClick }}
+        >
+          {Cell}
+        </FixedSizeGrid>
       </div>
     </div>
   );
