@@ -9,7 +9,10 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   plugins: [
-    react(),
+    react({
+      // Enable Fast Refresh for better development experience
+      fastRefresh: true,
+    }),
     mode === 'development' &&
     componentTagger(),
     {
@@ -59,6 +62,11 @@ export default defineConfig(({ mode }) => ({
             '@radix-ui/react-dialog',
             '@radix-ui/react-dropdown-menu',
             '@radix-ui/react-toast'
+          ],
+          components: [
+            './src/components/Hero.tsx',
+            './src/components/Content.tsx',
+            './src/components/MovieCard.tsx'
           ]
         },
       },
@@ -69,16 +77,27 @@ export default defineConfig(({ mode }) => ({
       compress: {
         drop_console: true,
         drop_debugger: true,
-        pure_funcs: ['console.log']
+        pure_funcs: ['console.log'],
+        passes: 2
       },
+      mangle: {
+        safari10: true
+      }
     },
     cssCodeSplit: true,
     cssMinify: true,
     reportCompressedSize: false,
-    sourcemap: false
+    sourcemap: false,
+    target: 'esnext',
+    modulePreload: {
+      polyfill: true
+    }
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],
-    exclude: ['@vercel/speed-insights']
+    exclude: ['@vercel/speed-insights'],
+    esbuildOptions: {
+      target: 'esnext'
+    }
   }
 }));
