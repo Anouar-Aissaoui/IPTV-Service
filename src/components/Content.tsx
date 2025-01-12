@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { BlurImage } from "./ui/blur-image";
+import { MoviesContent } from "@/types/page-content";
+import MovieCard from "./MovieCard";
 
 const movies = [
   {
@@ -35,9 +36,7 @@ const movies = [
   },
 ];
 
-const MovieCard = React.lazy(() => import("./MovieCard"));
-
-const Content: React.FC = () => {
+const Content: React.FC<{ content?: MoviesContent }> = ({ content }) => {
   const { toast } = useToast();
 
   React.useEffect(() => {

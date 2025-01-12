@@ -42,9 +42,23 @@ const Index = () => {
         return null;
       }
 
-      return data as PageContent;
+      // Parse the JSON fields to ensure they match our types
+      if (data) {
+        return {
+          ...data,
+          hero_content: data.hero_content as PageContent['hero_content'],
+          features_content: data.features_content as PageContent['features_content'],
+          pricing_content: data.pricing_content as PageContent['pricing_content'],
+          channels_content: data.channels_content as PageContent['channels_content'],
+          sports_content: data.sports_content as PageContent['sports_content'],
+          movies_content: data.movies_content as PageContent['movies_content'],
+          faq_content: data.faq_content as PageContent['faq_content'],
+        } as PageContent;
+      }
+
+      return null;
     },
-    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+    staleTime: 5 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
   });
 

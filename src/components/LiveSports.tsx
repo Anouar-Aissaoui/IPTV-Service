@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { BlurImage } from "./ui/blur-image";
+import { SportsContent } from "@/types/page-content";
 
 interface SportProps {
   sport: {
@@ -64,7 +65,7 @@ const SportCard = memo(({ sport }: SportProps) => {
 
 SportCard.displayName = 'SportCard';
 
-export const LiveSports = () => {
+export const LiveSports: React.FC<{ content?: SportsContent }> = ({ content }) => {
   return (
     <div className="bg-dark py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 relative">
