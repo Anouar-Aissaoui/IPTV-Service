@@ -88,12 +88,24 @@ const Content: React.FC = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div 
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
+          style={{ 
+            containIntrinsicSize: '342px 513px',
+            contain: 'layout paint'
+          }}
+        >
           {movies.map((movie, index) => (
             <React.Suspense
               key={movie.title}
               fallback={
-                <div className="aspect-[2/3] bg-gray-800 animate-pulse border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]"></div>
+                <div 
+                  className="aspect-[2/3] bg-gray-800 animate-pulse border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]"
+                  style={{
+                    aspectRatio: `${movie.width}/${movie.height}`,
+                    width: '100%'
+                  }}
+                ></div>
               }
             >
               <div 
@@ -101,6 +113,7 @@ const Content: React.FC = () => {
                 className="transform transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1"
                 role="button"
                 tabIndex={0}
+                style={{ contain: 'layout paint' }}
               >
                 <MovieCard 
                   movie={movie} 

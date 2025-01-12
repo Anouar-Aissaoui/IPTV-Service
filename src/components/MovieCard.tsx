@@ -21,7 +21,14 @@ const MovieCard = memo(({ movie, priority = false }: MovieProps) => {
   }, [movie.title]);
 
   return (
-    <div className="relative group overflow-hidden border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)] transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200">
+    <div 
+      className="relative group overflow-hidden border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)] transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200"
+      style={{
+        aspectRatio: `${movie.width}/${movie.height}`,
+        width: '100%',
+        contain: 'layout paint'
+      }}
+    >
       <OptimizedImage
         src={movie.image}
         alt={`Movie poster for ${movie.title}`}
