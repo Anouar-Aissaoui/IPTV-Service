@@ -9,6 +9,48 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      articles: {
+        Row: {
+          content: Json
+          created_at: string | null
+          description: string
+          id: string
+          keywords: string[] | null
+          meta_tags: Json | null
+          published_at: string | null
+          slug: string
+          structured_data: Json | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          content: Json
+          created_at?: string | null
+          description: string
+          id?: string
+          keywords?: string[] | null
+          meta_tags?: Json | null
+          published_at?: string | null
+          slug: string
+          structured_data?: Json | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          content?: Json
+          created_at?: string | null
+          description?: string
+          id?: string
+          keywords?: string[] | null
+          meta_tags?: Json | null
+          published_at?: string | null
+          slug?: string
+          structured_data?: Json | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       error_404_logs: {
         Row: {
           hits: number | null
