@@ -42,10 +42,8 @@ const Index = () => {
         return null;
       }
 
-      // Parse and type cast the JSON fields
       if (data) {
         return {
-          ...data,
           hero_content: data.hero_content as PageContent['hero_content'],
           features_content: data.features_content as PageContent['features_content'],
           pricing_content: data.pricing_content as PageContent['pricing_content'],
