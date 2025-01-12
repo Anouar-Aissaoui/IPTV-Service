@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from 'next-themes';
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Index from "./pages/Index";
 import Channels from "./pages/Channels";
 import Tutorials from "./pages/Tutorials";
@@ -75,6 +76,7 @@ const App = () => {
                 <AppRoutes />
                 <Toaster />
                 <Sonner />
+                <SpeedInsights />
               </div>
             </div>
           </BrowserRouter>
