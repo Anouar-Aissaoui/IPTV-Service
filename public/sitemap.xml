@@ -55,15 +55,6 @@
     <mobile:mobile/>
   </url>
 
-  <!-- Articles -->
-  <url>
-    <loc>https://www.iptvservice.site/article/best-iptv-service-providers-2025</loc>
-    <lastmod>2024-03-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <mobile:mobile/>
-  </url>
-
   <!-- Setup Guides -->
   <url>
     <loc>https://www.iptvservice.site/iptv-setup-tutorials</loc>
