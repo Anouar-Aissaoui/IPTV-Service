@@ -210,6 +210,48 @@ export type Database = {
         }
         Relationships: []
       }
+      page_content: {
+        Row: {
+          channels_content: Json
+          created_at: string | null
+          faq_content: Json
+          features_content: Json
+          hero_content: Json
+          id: string
+          movies_content: Json
+          page_path: string
+          pricing_content: Json
+          sports_content: Json
+          updated_at: string | null
+        }
+        Insert: {
+          channels_content?: Json
+          created_at?: string | null
+          faq_content?: Json
+          features_content?: Json
+          hero_content?: Json
+          id?: string
+          movies_content?: Json
+          page_path: string
+          pricing_content?: Json
+          sports_content?: Json
+          updated_at?: string | null
+        }
+        Update: {
+          channels_content?: Json
+          created_at?: string | null
+          faq_content?: Json
+          features_content?: Json
+          hero_content?: Json
+          id?: string
+          movies_content?: Json
+          page_path?: string
+          pricing_content?: Json
+          sports_content?: Json
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       pseo_variations: {
         Row: {
           alternate_urls: Json | null

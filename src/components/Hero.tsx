@@ -4,7 +4,21 @@ import { Button } from "@/components/ui/button";
 import { BlurImage } from "./ui/blur-image";
 import { Navigation } from "./navigation/Navigation";
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  content?: {
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    stats?: {
+      customers?: string;
+      channels?: string;
+      sports?: string;
+      vod?: string;
+    };
+  };
+}
+
+const Hero: React.FC<HeroProps> = ({ content }) => {
   const { t } = useTranslation();
   
   const handleWhatsAppClick = () => {
@@ -26,11 +40,11 @@ const Hero: React.FC = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8 lg:gap-12">
           <div className="w-full lg:w-1/2 space-y-4 md:space-y-6 text-center lg:text-left">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight tracking-tight transform -rotate-1">
-              {t('hero.title')}
+              {content?.title || t('hero.title')}
             </h1>
             
             <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-gray-300 transform rotate-1 max-w-xl mx-auto lg:mx-0">
-              {t('hero.subtitle')} {t('hero.description')}
+              {content?.description || `${t('hero.subtitle')} ${t('hero.description')}`}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -69,22 +83,12 @@ const Hero: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-8 md:mt-12">
-          <div className="bg-dark border-4 border-[#F97316] p-3 sm:p-4 md:p-6 transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200 shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white transform -rotate-2">+7K</h2>
-            <p className="text-[#F97316] text-xs sm:text-sm font-semibold transform rotate-1">{t('stats.customers')}</p>
-          </div>
-          <div className="bg-dark border-4 border-[#F97316] p-3 sm:p-4 md:p-6 transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200 shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white transform rotate-2">+40K</h2>
-            <p className="text-[#F97316] text-xs sm:text-sm font-semibold transform -rotate-1">{t('stats.channels')}</p>
-          </div>
-          <div className="bg-dark border-4 border-[#F97316] p-3 sm:p-4 md:p-6 transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200 shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white transform -rotate-2">+1,500</h2>
-            <p className="text-[#F97316] text-xs sm:text-sm font-semibold transform rotate-1">{t('stats.sports')}</p>
-          </div>
-          <div className="bg-dark border-4 border-[#F97316] p-3 sm:p-4 md:p-6 transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200 shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white transform rotate-2">+54K</h2>
-            <p className="text-[#F97316] text-xs sm:text-sm font-semibold transform -rotate-1">{t('stats.vod')}</p>
-          </div>
+          {Object.entries(content?.stats || {}).map(([key, value]) => (
+            <div key={key} className="bg-dark border-4 border-[#F97316] p-3 sm:p-4 md:p-6 transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200 shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white transform -rotate-2">{value}</h2>
+              <p className="text-[#F97316] text-xs sm:text-sm font-semibold transform rotate-1">{t(`stats.${key}`)}</p>
+            </div>
+          ))}
         </div>
       </div>
 

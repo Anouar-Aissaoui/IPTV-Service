@@ -1,3 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import Hero from "@/components/Hero";
 import { Pricing } from "@/components/Pricing";
 import Content from "@/components/Content";
@@ -14,8 +16,37 @@ import { getStructuredData } from "@/components/seo/StructuredData";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { Link } from "react-router-dom";
 import { ContentWrapper } from "@/components/layout/ContentWrapper";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useToast } from "@/components/ui/use-toast";
 
 const Index = () => {
+  const { toast } = useToast();
+  
+  const { data: pageContent, isLoading, error } = useQuery({
+    queryKey: ['page-content', '/'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('page_content')
+        .select('*')
+        .eq('page_path', '/')
+        .maybeSingle();
+
+      if (error) {
+        console.error('Error fetching page content:', error);
+        toast({
+          title: "Error loading content",
+          description: "Please refresh the page to try again",
+          variant: "destructive"
+        });
+        return null;
+      }
+
+      return data;
+    },
+    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+    gcTime: 10 * 60 * 1000,
+  });
+
   const pageTitle = "Best IPTV Service Provider 2024 | Premium IPTV Subscription USA";
   const pageDescription = "Experience premium IPTV service with 40,000+ live channels, 54,000+ VOD content, and 4K quality streaming. Best IPTV provider offering affordable packages with 24/7 support. Try now!";
   
@@ -27,6 +58,18 @@ const Index = () => {
     author: "IPTV Service",
     image: "https://www.iptvservice.site/iptv-subscription.png"
   };
+
+  if (isLoading) {
+    return (
+      <ContentWrapper as="main" className="min-h-screen bg-dark text-white font-grotesk">
+        <div className="space-y-8">
+          <Skeleton className="h-[600px] w-full" />
+          <Skeleton className="h-[400px] w-full" />
+          <Skeleton className="h-[400px] w-full" />
+        </div>
+      </ContentWrapper>
+    );
+  }
 
   return (
     <ContentWrapper as="main" className="min-h-screen bg-dark text-white font-grotesk">
@@ -53,7 +96,7 @@ const Index = () => {
       <Breadcrumbs />
       
       <ContentWrapper as="section" ariaLabel="Hero Section">
-        <Hero />
+        <Hero content={pageContent?.hero_content} />
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="Brand Showcase">
@@ -66,19 +109,19 @@ const Index = () => {
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="Pricing Plans">
-        <Pricing />
+        <Pricing content={pageContent?.pricing_content} />
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="Content Showcase">
-        <Content />
+        <Content content={pageContent?.movies_content} />
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="Live Channels">
-        <LiveChannels />
+        <LiveChannels content={pageContent?.channels_content} />
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="Live Sports">
-        <LiveSports />
+        <LiveSports content={pageContent?.sports_content} />
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="IPTV Benefits">
@@ -86,7 +129,7 @@ const Index = () => {
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="Frequently Asked Questions">
-        <FAQ />
+        <FAQ content={pageContent?.faq_content} />
       </ContentWrapper>
 
       {/* Quick Links Section */}

@@ -1,83 +1,41 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import path from "path";
-import { componentTagger } from "lovable-tagger";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import path from 'path';
 
-export default defineConfig(({ mode }) => ({
-  server: {
-    host: "::",
-    port: 8080,
-  },
-  plugins: [
-    react(),
-    mode === 'development' &&
-    componentTagger(),
-    {
-      name: 'submit-sitemap',
-      closeBundle: async () => {
-        if (mode === 'production') {
-          try {
-            const response = await fetch('https://nzemomqyeyamurngohfl.supabase.co/functions/v1/submit-sitemap', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                sitemapUrl: 'https://www.iptvservice.site/sitemap.xml'
-              })
-            });
-            
-            const result = await response.json();
-            console.log('Sitemap submission result:', result);
-          } catch (error) {
-            console.error('Failed to submit sitemap:', error);
-          }
-        }
-      }
-    }
-  ].filter(Boolean),
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      '@': path.resolve(__dirname, './src'),
     },
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: [
-            'react',
-            'react-dom',
-            'react-router-dom',
-            '@tanstack/react-query',
-            'next-themes',
-            'lucide-react'
-          ],
-          ui: [
-            '@radix-ui/react-accordion',
-            '@radix-ui/react-dialog',
-            '@radix-ui/react-dropdown-menu',
-            '@radix-ui/react-toast'
-          ]
-        },
-      },
-    },
-    chunkSizeWarningLimit: 1000,
+    target: 'esnext',
     minify: 'terser',
     terserOptions: {
       compress: {
         drop_console: true,
         drop_debugger: true,
-        pure_funcs: ['console.log', 'console.debug', 'console.info'],
       },
     },
-    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'ui-vendor': ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-toast'],
+          'query-vendor': ['@tanstack/react-query'],
+          'i18n-vendor': ['i18next', 'react-i18next'],
+        },
+      },
+    },
     cssMinify: true,
-    reportCompressedSize: false,
-    sourcemap: false
+    sourcemap: false,
+    chunkSizeWarningLimit: 1000,
   },
-  optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
-    exclude: ['@vercel/speed-insights']
-  }
-}));
+  server: {
+    port: 3000,
+    strictPort: true,
+    host: true,
+  },
+});
