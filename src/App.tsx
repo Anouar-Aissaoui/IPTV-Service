@@ -17,6 +17,7 @@ import Enigma2Setup from "./pages/Enigma2Setup";
 import VlcWindowsSetup from "./pages/VlcWindowsSetup";
 import FreeTrial from "./pages/FreeTrial";
 import Contact from "./pages/Contact";
+import Legal from "./pages/Legal";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -39,10 +40,16 @@ const AppRoutes = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/iptv-free-trial-24-hours" element={<FreeTrial />} />
       
+      {/* Legal Routes */}
+      <Route path="/legal/:type" element={<Legal />} />
+      <Route path="/privacy-policy" element={<Navigate to="/legal/privacy-policy" replace />} />
+      <Route path="/terms-of-service" element={<Navigate to="/legal/terms-of-service" replace />} />
+      <Route path="/refund-policy" element={<Navigate to="/legal/refund-policy" replace />} />
+      
       {/* Redirect from old URL to new URL */}
       <Route path="/free-trial" element={<Navigate to="/iptv-free-trial-24-hours" replace />} />
       
-      {/* New IPTV Setup Tutorials routes with descriptive URLs */}
+      {/* IPTV Setup Tutorials routes */}
       <Route path="/iptv-setup-tutorials" element={<Tutorials />} />
       <Route path="/iptv-setup-tutorials/how-to-setup-iptv-on-smart-tv" element={<SmartTvSetup />} />
       <Route path="/iptv-setup-tutorials/how-to-setup-iptv-on-mobile-devices" element={<MobileSetup />} />
