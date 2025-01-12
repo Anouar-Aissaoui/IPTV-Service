@@ -23,7 +23,21 @@ export const seoKeywords = [
   'best IPTV provider',
   'IPTV channels list',
   'sports IPTV service',
-  'movies IPTV service'
+  'movies IPTV service',
+  'iptv free trial',
+  'iptv free trial reddit 2025',
+  'iptv free trials',
+  'free iptv trial',
+  'free trial iptv',
+  'iptv free trial 2025',
+  'iptv with free trial',
+  'free iptv trials',
+  'free trial iptv service',
+  'instant free iptv trial',
+  'iptv service with free trial',
+  'iptv service free trial',
+  'best iptv free trials',
+  'free trial of iptv'
 ];
 
 export const getKeywordsString = () => seoKeywords.join(', ');
