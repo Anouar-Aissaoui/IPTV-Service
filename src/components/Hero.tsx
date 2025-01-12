@@ -53,10 +53,7 @@ const Hero: React.FC = () => {
           </div>
           
           <div className="w-full lg:w-1/2 max-w-[480px] mx-auto">
-            <div 
-              className="relative transform hover:scale-105 transition-duration-300 rotate-2"
-              style={{ aspectRatio: '480/320' }}
-            >
+            <div className="relative transform hover:scale-105 transition-duration-300 rotate-2">
               <div className="absolute -inset-1 bg-[#F97316]/30 rounded-none blur"></div>
               <BlurImage
                 src="/iptv-subscription.png"
