@@ -7,6 +7,7 @@ const urlsToCache = [
   '/src/index.css',
   '/devices.png',
   '/iptv-subscription.png',
+  '/favicon.png',
   // Cache other images
   '/lovable-uploads/00c90df3-a23d-47e3-b967-8806209cd5b1.png',
   '/lovable-uploads/62b3cd9e-1589-432c-b117-d855ac8f0b81.png',
@@ -15,6 +16,7 @@ const urlsToCache = [
   '/lovable-uploads/eb41a9e5-0a89-4fbb-9995-ac1735cd4aaf.png'
 ];
 
+// Install event - cache core assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -23,8 +25,28 @@ self.addEventListener('install', (event) => {
         return cache.addAll(urlsToCache);
       })
   );
+  // Activate worker immediately
+  self.skipWaiting();
 });
 
+// Activate event - clean up old caches
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+  // Claim clients immediately
+  self.clients.claim();
+});
+
+// Fetch event - serve from cache, fallback to network
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request)
@@ -46,27 +68,15 @@ self.addEventListener('fetch', (event) => {
 
             caches.open(CACHE_NAME)
               .then((cache) => {
-                cache.put(event.request, responseToCache);
+                // Don't cache if method isn't GET
+                if (event.request.method === 'GET') {
+                  cache.put(event.request, responseToCache);
+                }
               });
 
             return response;
           }
         );
       })
-  );
-});
-
-self.addEventListener('activate', (event) => {
-  const cacheWhitelist = [CACHE_NAME];
-  event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
   );
 });

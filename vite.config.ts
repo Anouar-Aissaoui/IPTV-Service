@@ -3,7 +3,6 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
@@ -45,16 +44,21 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          // Bundle core React dependencies together
-          if (id.includes('node_modules/react') || 
-              id.includes('node_modules/react-dom')) {
-            return 'vendor';
-          }
-          // Bundle shadcn components together
-          if (id.includes('components/ui/')) {
-            return 'shadcn';
-          }
+        manualChunks: {
+          vendor: [
+            'react',
+            'react-dom',
+            'react-router-dom',
+            '@tanstack/react-query',
+            'next-themes',
+            'lucide-react'
+          ],
+          ui: [
+            '@radix-ui/react-accordion',
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-dropdown-menu',
+            '@radix-ui/react-toast'
+          ]
         },
       },
     },
@@ -64,9 +68,16 @@ export default defineConfig(({ mode }) => ({
       compress: {
         drop_console: true,
         drop_debugger: true,
+        pure_funcs: ['console.log', 'console.debug', 'console.info'],
       },
     },
     cssCodeSplit: true,
     cssMinify: true,
+    reportCompressedSize: false,
+    sourcemap: false
   },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
+    exclude: ['@vercel/speed-insights']
+  }
 }));
