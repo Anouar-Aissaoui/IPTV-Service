@@ -62,18 +62,25 @@ const Content: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {movies.map((movie) => (
+          {movies.map((movie, index) => (
             <React.Suspense
               key={movie.title}
               fallback={
-                <div className="aspect-[2/3] bg-gray-800 animate-pulse border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]"></div>
+                <div 
+                  className="aspect-[2/3] bg-gray-800 animate-pulse border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]"
+                  style={{ aspectRatio: '2/3' }}
+                ></div>
               }
             >
               <div 
                 onClick={() => handleMovieClick(movie.title)}
                 className="transform transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1"
+                style={{ aspectRatio: '2/3' }}
               >
-                <MovieCard movie={movie} />
+                <MovieCard 
+                  movie={movie} 
+                  priority={index < 5} 
+                />
               </div>
             </React.Suspense>
           ))}

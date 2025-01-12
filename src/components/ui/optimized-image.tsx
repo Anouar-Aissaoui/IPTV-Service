@@ -22,10 +22,12 @@ export const OptimizedImage = ({
   const webpSrc = src.endsWith('.webp') ? src : `${src.split('.').slice(0, -1).join('.')}.webp`;
   
   return (
-    <picture>
+    <picture className="block w-full">
       <source
         srcSet={webpSrc}
         type="image/webp"
+        width={width}
+        height={height}
       />
       <BlurImage
         src={src}

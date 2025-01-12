@@ -8,17 +8,22 @@ interface MovieProps {
     width: number;
     height: number;
   };
+  priority?: boolean;
 }
 
-const MovieCard = memo(({ movie }: MovieProps) => {
+const MovieCard = memo(({ movie, priority = false }: MovieProps) => {
   return (
-    <div className="relative group overflow-hidden border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)] transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200">
+    <div 
+      className="relative group overflow-hidden border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)] transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200"
+      style={{ aspectRatio: '2/3' }}
+    >
       <OptimizedImage
         src={movie.image}
         alt={`Movie poster for ${movie.title}`}
         width={movie.width}
         height={movie.height}
-        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 transform-gpu will-change-transform"
+        priority={priority}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
         <h3 className="text-white font-bold transform -rotate-2">{movie.title}</h3>
