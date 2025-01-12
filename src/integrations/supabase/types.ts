@@ -51,6 +51,39 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_messages: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          message: string
+          name: string
+          status: string | null
+          subject: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          message: string
+          name: string
+          status?: string | null
+          subject: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          status?: string | null
+          subject?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       error_404_logs: {
         Row: {
           hits: number | null
@@ -143,6 +176,36 @@ export type Database = {
           last_updated?: string | null
           page_path?: string
           position?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      legal_content: {
+        Row: {
+          content: Json
+          created_at: string | null
+          id: string
+          last_updated: string | null
+          title: string
+          type: string
+          updated_at: string | null
+        }
+        Insert: {
+          content?: Json
+          created_at?: string | null
+          id?: string
+          last_updated?: string | null
+          title: string
+          type: string
+          updated_at?: string | null
+        }
+        Update: {
+          content?: Json
+          created_at?: string | null
+          id?: string
+          last_updated?: string | null
+          title?: string
+          type?: string
           updated_at?: string | null
         }
         Relationships: []

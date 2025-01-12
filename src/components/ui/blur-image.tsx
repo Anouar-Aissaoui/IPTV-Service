@@ -24,7 +24,8 @@ export const BlurImage = React.forwardRef<HTMLImageElement, BlurImageProps>(
           fetchPriority={fetchPriority}
           className={cn(
             "duration-700 ease-in-out",
-            isLoading ? "scale-110 blur-2xl" : "scale-100 blur-0"
+            isLoading ? "scale-110 blur-2xl grayscale" : "scale-100 blur-0 grayscale-0",
+            className
           )}
           onLoad={() => setIsLoading(false)}
           {...props}

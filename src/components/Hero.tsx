@@ -62,6 +62,7 @@ const Hero: React.FC = () => {
                 width={480}
                 height={320}
                 priority={true}
+                fetchPriority="high"
               />
             </div>
           </div>
