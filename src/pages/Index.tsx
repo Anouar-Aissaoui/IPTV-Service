@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import { ContentWrapper } from "@/components/layout/ContentWrapper";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
+import { PageContent } from "@/types/page-content";
 
 const Index = () => {
   const { toast } = useToast();
@@ -41,7 +42,7 @@ const Index = () => {
         return null;
       }
 
-      return data;
+      return data as PageContent;
     },
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     gcTime: 10 * 60 * 1000,

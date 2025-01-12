@@ -3,19 +3,10 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { BlurImage } from "./ui/blur-image";
 import { Navigation } from "./navigation/Navigation";
+import { HeroContent } from "@/types/page-content";
 
 interface HeroProps {
-  content?: {
-    title?: string;
-    subtitle?: string;
-    description?: string;
-    stats?: {
-      customers?: string;
-      channels?: string;
-      sports?: string;
-      vod?: string;
-    };
-  };
+  content?: HeroContent;
 }
 
 const Hero: React.FC<HeroProps> = ({ content }) => {
@@ -83,7 +74,7 @@ const Hero: React.FC<HeroProps> = ({ content }) => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-8 md:mt-12">
-          {Object.entries(content?.stats || {}).map(([key, value]) => (
+          {content?.stats && Object.entries(content.stats).map(([key, value]) => (
             <div key={key} className="bg-dark border-4 border-[#F97316] p-3 sm:p-4 md:p-6 transform hover:-translate-y-1 hover:translate-x-1 transition-transform duration-200 shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]">
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white transform -rotate-2">{value}</h2>
               <p className="text-[#F97316] text-xs sm:text-sm font-semibold transform rotate-1">{t(`stats.${key}`)}</p>
