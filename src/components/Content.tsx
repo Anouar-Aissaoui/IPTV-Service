@@ -35,13 +35,7 @@ const movies = [
   },
 ];
 
-const MovieCard = React.lazy(() => 
-  new Promise<{ default: React.ComponentType<any> }>(resolve => {
-    requestIdleCallback(() => {
-      import("./MovieCard").then(module => resolve(module));
-    });
-  })
-);
+const MovieCard = React.lazy(() => import("./MovieCard"));
 
 const Content: React.FC = () => {
   const { toast } = useToast();
