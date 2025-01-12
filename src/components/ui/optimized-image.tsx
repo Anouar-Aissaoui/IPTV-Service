@@ -1,16 +1,16 @@
 import React from 'react';
-import { BlurImage } from "./blur-image";
+import Image from 'next/image';
 
-interface OptimizedImageProps {
+export interface OptimizedImageProps {
   src: string;
   alt: string;
-  width?: number;
-  height?: number;
+  width: number;
+  height: number;
   className?: string;
   priority?: boolean;
 }
 
-export const OptimizedImage = ({
+export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   src,
   alt,
   width,
@@ -22,11 +22,9 @@ export const OptimizedImage = ({
   
   return (
     <picture>
-      <source
-        srcSet={webpSrc}
-        type="image/webp"
-      />
-      <BlurImage
+      <source srcSet={webpSrc} type="image/webp" />
+      <source srcSet={src} type="image/jpeg" />
+      <img
         src={src}
         alt={alt}
         width={width}
