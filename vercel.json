@@ -27,6 +27,11 @@
       "permanent": true
     },
     {
+      "source": "/free-trial",
+      "destination": "/iptv-free-trial-24-hours",
+      "permanent": true
+    },
+    {
       "source": "/tutorials",
       "destination": "/iptv-setup-tutorials",
       "permanent": true

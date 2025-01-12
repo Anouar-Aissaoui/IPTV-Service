@@ -34,7 +34,10 @@ const AppRoutes = () => {
       <Route path="/channels" element={<Channels />} />
       <Route path="/pricing" element={<Index />} />
       <Route path="/faq" element={<Index />} />
-      <Route path="/free-trial" element={<FreeTrial />} />
+      <Route path="/iptv-free-trial-24-hours" element={<FreeTrial />} />
+      
+      {/* Redirect from old URL to new URL */}
+      <Route path="/free-trial" element={<Navigate to="/iptv-free-trial-24-hours" replace />} />
       
       {/* New IPTV Setup Tutorials routes with descriptive URLs */}
       <Route path="/iptv-setup-tutorials" element={<Tutorials />} />
