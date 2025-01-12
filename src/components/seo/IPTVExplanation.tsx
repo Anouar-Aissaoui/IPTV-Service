@@ -1,56 +1,65 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 export const IPTVExplanation = () => {
   return (
-    <section className="py-8 px-4 bg-dark">
+    <section className="py-12 px-4 bg-dark relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.15)_0%,transparent_70%)]" />
+      
       <div className="container mx-auto">
-        <h1 className="text-3xl font-bold mb-6 text-white">Premium IPTV Service</h1>
-        
-        <div className="space-y-8">
-          <div>
-            <h2 className="text-2xl font-bold mb-4 text-white">Experience Next-Generation TV</h2>
-            <p className="text-gray-300">
-              Looking to buy IPTV? Experience the future of television with our premium IPTV service. We offer an extensive 
-              collection of channels from around the world, including <Link to="/sports" className="text-[#F97316] hover:underline">live sports</Link>, 
-              <Link to="/entertainment" className="text-[#F97316] hover:underline"> entertainment</Link>, 
-              <Link to="/news" className="text-[#F97316] hover:underline"> news</Link>, and educational content.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-bold mb-4 text-white">Why Choose Our Service?</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h3 className="text-xl font-semibold mb-3 text-white">Unmatched Content Library</h3>
-                <ul className="list-disc list-inside text-gray-300 space-y-2">
-                  <li>40,000+ live channels worldwide</li>
-                  <li>54,000+ movies and TV shows on demand</li>
-                  <li>Premium sports packages including PPV events</li>
-                  <li>International channels in multiple languages</li>
+        <div className="max-w-4xl mx-auto transform rotate-1">
+          <div className="bg-[#F97316] brutal-border p-8 brutal-shadow">
+            <h2 className="text-2xl md:text-3xl font-black mb-6 text-dark transform -rotate-1">
+              Why Choose Our IPTV Service?
+            </h2>
+            
+            <div className="space-y-6 text-dark">
+              <p className="font-bold leading-relaxed transform rotate-1">
+                As a <span className="bg-dark text-white px-2">premier IPTV provider</span>, 
+                we offer comprehensive IPTV services that cater to all your entertainment needs. 
+                Our <span className="bg-dark text-white px-2">IPTV subscriptions</span> include access to over 
+                <span className="bg-dark text-white px-2">40,000 channels worldwide</span>, featuring live sports, 
+                premium movies, and exclusive content.
+              </p>
+              
+              <div className="bg-white/90 p-6 brutal-border brutal-shadow transform -rotate-1">
+                <p className="font-black text-xl mb-4 text-dark">
+                  Key benefits of our IPTV subscription:
+                </p>
+                <ul className="list-none space-y-3 text-dark font-bold">
+                  <li className="flex items-center space-x-2 transform hover:translate-x-2 transition-transform">
+                    <span className="bg-dark text-white px-2">→</span>
+                    <span>Premium IPTV channels with 4K and HD quality streaming</span>
+                  </li>
+                  <li className="flex items-center space-x-2 transform hover:translate-x-2 transition-transform">
+                    <span className="bg-dark text-white px-2">→</span>
+                    <span>Extensive sports packages including PPV events</span>
+                  </li>
+                  <li className="flex items-center space-x-2 transform hover:translate-x-2 transition-transform">
+                    <span className="bg-dark text-white px-2">→</span>
+                    <span>Massive VOD library with latest movies and TV shows</span>
+                  </li>
+                  <li className="flex items-center space-x-2 transform hover:translate-x-2 transition-transform">
+                    <span className="bg-dark text-white px-2">→</span>
+                    <span>24/7 technical support for all IPTV subscribers</span>
+                  </li>
+                  <li className="flex items-center space-x-2 transform hover:translate-x-2 transition-transform">
+                    <span className="bg-dark text-white px-2">→</span>
+                    <span>Compatible with all major streaming devices</span>
+                  </li>
+                  <li className="flex items-center space-x-2 transform hover:translate-x-2 transition-transform">
+                    <span className="bg-dark text-white px-2">→</span>
+                    <span>Affordable IPTV subscription plans</span>
+                  </li>
                 </ul>
               </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-3 text-white">Technical Excellence</h3>
-                <ul className="list-disc list-inside text-gray-300 space-y-2">
-                  <li>HD and 4K quality streaming</li>
-                  <li>99.9% uptime guarantee</li>
-                  <li>Anti-buffering technology</li>
-                  <li>Multi-device compatibility</li>
-                </ul>
-              </div>
+              
+              <p className="font-bold leading-relaxed transform -rotate-1">
+                Looking to <span className="bg-dark text-white px-2">buy IPTV</span>? 
+                Our service stands out among <span className="bg-dark text-white px-2">IPTV suppliers</span> with 
+                reliable streaming, high-quality content, and competitive pricing. Experience why thousands choose 
+                us as their trusted <span className="bg-dark text-white px-2">IPTV service provider</span>.
+              </p>
             </div>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-bold mb-4 text-white">Getting Started</h2>
-            <p className="text-gray-300 mb-4">
-              Ready to transform your entertainment experience? Check our 
-              <Link to="/pricing" className="text-[#F97316] hover:underline"> subscription plans</Link> or learn more about our 
-              <Link to="/features" className="text-[#F97316] hover:underline"> features</Link>. Need help? Visit our 
-              <Link to="/tutorials" className="text-[#F97316] hover:underline"> setup guides</Link> or 
-              <Link to="/support" className="text-[#F97316] hover:underline"> contact our support team</Link>.
-            </p>
           </div>
         </div>
       </div>

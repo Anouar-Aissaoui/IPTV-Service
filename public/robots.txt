@@ -1,14 +1,6 @@
 # Global rules
 User-agent: *
 Allow: /
-Allow: /support
-Allow: /pricing
-Allow: /channels
-Allow: /faq
-Allow: /iptv-setup-tutorials
-Allow: /sitemap.xml
-
-# Block sensitive areas
 Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
@@ -51,7 +43,7 @@ User-agent: CCBot
 Disallow: /
 
 # Optimize crawling rate
-Crawl-delay: 2
+Crawl-delay: 1
 
 # Clean parameters
 Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content&fbclid&gclid&_ga&_gl / 
@@ -70,10 +62,6 @@ Allow: /
 Crawl-delay: 1
 
 User-agent: Yandex
-Allow: /
-Crawl-delay: 2
-
-User-agent: DuckDuckBot
 Allow: /
 Crawl-delay: 2
 
