@@ -11,7 +11,7 @@ interface HelmetProps {
   keywords?: string[];
   children?: React.ReactNode;
   noindex?: boolean;
-  pageType?: 'home' | 'product' | 'tutorial' | 'pricing' | 'channels' | 'faq';
+  pageType?: 'home' | 'product' | 'tutorial' | 'pricing' | 'channels' | 'faq' | 'article';
   alternateUrls?: Record<string, string>;
 }
 
