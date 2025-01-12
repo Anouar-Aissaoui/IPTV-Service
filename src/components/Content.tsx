@@ -41,10 +41,12 @@ const Content: React.FC = () => {
   const { toast } = useToast();
 
   React.useEffect(() => {
-    performance.mark('content-component-rendered');
+    // Mark when content section starts rendering
+    performance.mark('content-start');
     
     return () => {
-      performance.measure('content-render-time', 'content-component-rendered');
+      // Measure content render time
+      performance.measure('content-render-time', 'content-start');
     };
   }, []);
 
@@ -62,7 +64,7 @@ const Content: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {movies.map((movie) => (
+          {movies.map((movie, index) => (
             <React.Suspense
               key={movie.title}
               fallback={
@@ -73,7 +75,10 @@ const Content: React.FC = () => {
                 onClick={() => handleMovieClick(movie.title)}
                 className="transform transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1"
               >
-                <MovieCard movie={movie} />
+                <MovieCard 
+                  movie={movie} 
+                  priority={index < 2} // Prioritize loading first two images
+                />
               </div>
             </React.Suspense>
           ))}
