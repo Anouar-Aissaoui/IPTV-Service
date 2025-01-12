@@ -42,7 +42,7 @@ const Index = () => {
         return null;
       }
 
-      // Parse the JSON fields to ensure they match our types
+      // Parse and type cast the JSON fields
       if (data) {
         return {
           ...data,
@@ -53,7 +53,7 @@ const Index = () => {
           sports_content: data.sports_content as PageContent['sports_content'],
           movies_content: data.movies_content as PageContent['movies_content'],
           faq_content: data.faq_content as PageContent['faq_content'],
-        } as PageContent;
+        } satisfies PageContent;
       }
 
       return null;
