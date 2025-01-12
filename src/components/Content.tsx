@@ -36,10 +36,9 @@ const movies = [
 ];
 
 const MovieCard = React.lazy(() => 
-  import("./MovieCard").then(module => {
-    // Add a small delay to prevent blocking the main thread
-    return new Promise(resolve => {
-      requestIdleCallback(() => resolve(module));
+  new Promise<{ default: React.ComponentType<any> }>(resolve => {
+    requestIdleCallback(() => {
+      import("./MovieCard").then(module => resolve(module));
     });
   })
 );
@@ -49,7 +48,6 @@ const Content: React.FC = () => {
   const contentRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    // Mark when content section starts rendering
     performance.mark('content-start');
     
     const observer = new IntersectionObserver(
@@ -76,7 +74,6 @@ const Content: React.FC = () => {
   }, []);
 
   const handleMovieClick = React.useCallback((movieTitle: string) => {
-    // Use requestAnimationFrame for smooth animations
     requestAnimationFrame(() => {
       console.log(`Movie clicked: ${movieTitle}`);
     });
@@ -107,7 +104,7 @@ const Content: React.FC = () => {
               >
                 <MovieCard 
                   movie={movie} 
-                  priority={index < 2} // Prioritize loading first two images
+                  priority={index < 2}
                 />
               </div>
             </React.Suspense>

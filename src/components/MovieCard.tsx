@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import { OptimizedImage } from "./ui/optimized-image";
 
 interface MovieProps {
@@ -12,8 +12,7 @@ interface MovieProps {
 }
 
 const MovieCard = memo(({ movie, priority = false }: MovieProps) => {
-  // Memoize the image loading state callback
-  const handleImageLoad = useCallback(() => {
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       window.requestIdleCallback(() => {
         performance.mark(`movie-card-${movie.title}-loaded`);
@@ -30,7 +29,6 @@ const MovieCard = memo(({ movie, priority = false }: MovieProps) => {
         height={movie.height}
         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
         priority={priority}
-        onLoad={handleImageLoad}
         loading={priority ? "eager" : "lazy"}
         decoding={priority ? "sync" : "async"}
         fetchPriority={priority ? "high" : "auto"}
@@ -41,7 +39,6 @@ const MovieCard = memo(({ movie, priority = false }: MovieProps) => {
     </div>
   );
 }, (prevProps, nextProps) => {
-  // Custom comparison function for memo
   return (
     prevProps.movie.title === nextProps.movie.title &&
     prevProps.movie.image === nextProps.movie.image &&
