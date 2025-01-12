@@ -35,27 +35,55 @@ const movies = [
   },
 ];
 
-const MovieCard = React.lazy(() => import("./MovieCard"));
+const MovieCard = React.lazy(() => 
+  import("./MovieCard").then(module => {
+    // Add a small delay to prevent blocking the main thread
+    return new Promise(resolve => {
+      requestIdleCallback(() => resolve(module));
+    });
+  })
+);
 
 const Content: React.FC = () => {
   const { toast } = useToast();
+  const contentRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     // Mark when content section starts rendering
     performance.mark('content-start');
     
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            performance.mark('content-visible');
+            performance.measure('content-time-to-visible', 'content-start', 'content-visible');
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (contentRef.current) {
+      observer.observe(contentRef.current);
+    }
+    
     return () => {
-      // Measure content render time
+      observer.disconnect();
       performance.measure('content-render-time', 'content-start');
     };
   }, []);
 
   const handleMovieClick = React.useCallback((movieTitle: string) => {
-    console.log(`Movie clicked: ${movieTitle}`);
+    // Use requestAnimationFrame for smooth animations
+    requestAnimationFrame(() => {
+      console.log(`Movie clicked: ${movieTitle}`);
+    });
   }, []);
 
   return (
-    <div className="bg-dark py-20 relative overflow-hidden">
+    <div className="bg-dark py-20 relative overflow-hidden" ref={contentRef}>
       <div className="container mx-auto px-4 relative">
         <div className="mb-12 transform -rotate-2">
           <h2 className="text-3xl md:text-4xl font-black text-center brutal-text inline-block bg-[#F97316] text-dark px-6 py-3 border-4 border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
@@ -74,6 +102,8 @@ const Content: React.FC = () => {
               <div 
                 onClick={() => handleMovieClick(movie.title)}
                 className="transform transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1"
+                role="button"
+                tabIndex={0}
               >
                 <MovieCard 
                   movie={movie} 
@@ -88,4 +118,4 @@ const Content: React.FC = () => {
   );
 };
 
-export default Content;
+export default React.memo(Content);

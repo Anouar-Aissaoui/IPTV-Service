@@ -68,33 +68,52 @@ export default defineConfig(({ mode }) => ({
         },
       },
     },
-    chunkSizeWarningLimit: 1000,
+    modulePreload: {
+      polyfill: true,
+      resolveDependencies: (filename, deps) => {
+        // Optimize dependency resolution
+        return deps.filter(dep => !dep.includes('node_modules'));
+      }
+    },
+    target: 'esnext',
     minify: 'terser',
     terserOptions: {
       compress: {
         drop_console: true,
         drop_debugger: true,
         pure_funcs: ['console.log'],
-        passes: 2
+        passes: 2,
+        ecma: 2020,
+        module: true,
+        toplevel: true,
+        unsafe_arrows: true,
+        unsafe_methods: true
       },
       mangle: {
-        safari10: true
+        safari10: true,
+        toplevel: true,
+        module: true
+      },
+      format: {
+        comments: false,
+        ecma: 2020
       }
     },
     cssCodeSplit: true,
     cssMinify: true,
     reportCompressedSize: false,
     sourcemap: false,
-    target: 'esnext',
-    modulePreload: {
-      polyfill: true
-    }
+    chunkSizeWarningLimit: 1000
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],
     exclude: ['@vercel/speed-insights'],
     esbuildOptions: {
-      target: 'esnext'
+      target: 'esnext',
+      splitting: true,
+      minify: true,
+      treeShaking: true,
+      format: 'esm'
     }
   }
 }));
