@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { OptimizedImage } from "./ui/optimized-image";
 
 interface MovieProps {
@@ -29,9 +29,6 @@ const MovieCard = memo(({ movie, priority = false }: MovieProps) => {
         height={movie.height}
         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
         priority={priority}
-        loading={priority ? "eager" : "lazy"}
-        decoding={priority ? "sync" : "async"}
-        fetchPriority={priority ? "high" : "auto"}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
         <h3 className="text-white font-bold transform -rotate-2">{movie.title}</h3>
