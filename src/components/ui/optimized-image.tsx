@@ -1,15 +1,16 @@
 import React from 'react';
+import { BlurImage } from "./blur-image";
 
-export interface OptimizedImageProps {
+interface OptimizedImageProps {
   src: string;
   alt: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   className?: string;
   priority?: boolean;
 }
 
-export const OptimizedImage: React.FC<OptimizedImageProps> = ({
+export const OptimizedImage = ({
   src,
   alt,
   width,
@@ -17,15 +18,25 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   className,
   priority = false,
 }: OptimizedImageProps) => {
+  // Generate WebP source if the original is not already WebP
+  const webpSrc = src.endsWith('.webp') ? src : `${src.split('.').slice(0, -1).join('.')}.webp`;
+  
   return (
-    <img
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      className={className}
-      loading={priority ? "eager" : "lazy"}
-      decoding="async"
-    />
+    <picture>
+      <source
+        srcSet={webpSrc}
+        type="image/webp"
+      />
+      <BlurImage
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className={className}
+        loading={priority ? "eager" : "lazy"}
+        decoding={priority ? "sync" : "async"}
+        fetchPriority={priority ? "high" : "auto"}
+      />
+    </picture>
   );
 };

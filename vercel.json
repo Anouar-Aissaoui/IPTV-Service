@@ -121,7 +121,7 @@
         },
         {
           "key": "Link",
-          "value": "</style.css>; rel=preload; as=style, </devices.png>; rel=preload; as=image, </iptv-subscription.png>; rel=preload; as=image"
+          "value": "</style.css>; rel=preload; as=style"
         }
       ]
     },

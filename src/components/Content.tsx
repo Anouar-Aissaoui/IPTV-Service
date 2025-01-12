@@ -1,22 +1,38 @@
-import React, { Suspense } from 'react';
-import { useToast } from '@/hooks/use-toast';
+import * as React from "react";
+import { useToast } from "@/components/ui/use-toast";
+import { BlurImage } from "./ui/blur-image";
 
 const movies = [
   {
-    title: "Live Sports",
-    description: "Watch your favorite sports live in HD quality",
-    image: "/lovable-uploads/74cadd1d-7f11-4677-9cfc-3342545d312f.png"
+    title: "Madame Web",
+    image: "https://image.tmdb.org/t/p/w342/sjMN7DRi4sGiledsmllEw5HJjPy.jpg",
+    width: 342,
+    height: 513,
   },
   {
-    title: "Movies & TV Shows",
-    description: "Enjoy the latest movies and TV shows",
-    image: "/lovable-uploads/7b0e5f14-995d-47d0-8c7a-108c30d9fd42.png"
+    title: "Dune: Part Two",
+    image: "https://image.tmdb.org/t/p/w342/cdqLnri3NEGcmfnqwk2TSIYtddg.jpg",
+    width: 342,
+    height: 513,
   },
   {
-    title: "News Channels",
-    description: "Stay updated with worldwide news coverage",
-    image: "/lovable-uploads/df29e2ce-114a-4085-ae32-d6da18f0b141.png"
-  }
+    title: "Argylle",
+    image: "https://image.tmdb.org/t/p/w342/aosm8NMQ3UyoBVpSxyimorCQykC.jpg",
+    width: 342,
+    height: 513,
+  },
+  {
+    title: "Migration",
+    image: "https://image.tmdb.org/t/p/w342/4YZpsylmjHbqeWzjKpUEF8gcLNW.jpg",
+    width: 342,
+    height: 513,
+  },
+  {
+    title: "Anyone But You",
+    image: "https://image.tmdb.org/t/p/w342/lurEK87kukWNaHd0zYnsi3yzJrs.jpg",
+    width: 342,
+    height: 513,
+  },
 ];
 
 const MovieCard = React.lazy(() => import("./MovieCard"));
@@ -24,33 +40,46 @@ const MovieCard = React.lazy(() => import("./MovieCard"));
 const Content: React.FC = () => {
   const { toast } = useToast();
 
+  React.useEffect(() => {
+    performance.mark('content-component-rendered');
+    
+    return () => {
+      performance.measure('content-render-time', 'content-component-rendered');
+    };
+  }, []);
+
+  const handleMovieClick = React.useCallback((movieTitle: string) => {
+    console.log(`Movie clicked: ${movieTitle}`);
+  }, []);
+
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32">
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <div className="space-y-2">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-              Explore Our Content
-            </h2>
-            <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              Discover a vast library of content including live sports, movies, TV shows, and news channels.
-            </p>
-          </div>
+    <div className="bg-dark py-20 relative overflow-hidden">
+      <div className="container mx-auto px-4 relative">
+        <div className="mb-12 transform -rotate-2">
+          <h2 className="text-3xl md:text-4xl font-black text-center brutal-text inline-block bg-[#F97316] text-dark px-6 py-3 border-4 border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            Movies & <span className="text-white bg-dark px-2">TV Shows</span>
+          </h2>
         </div>
-        <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-12">
-          {movies.map((movie, index) => (
-            <Suspense 
-              key={index}
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          {movies.map((movie) => (
+            <React.Suspense
+              key={movie.title}
               fallback={
-                <div className="h-[360px] w-full animate-pulse rounded-lg bg-muted" />
+                <div className="aspect-[2/3] bg-gray-800 animate-pulse border-4 border-white shadow-[8px_8px_0px_0px_rgba(249,115,22,1)]"></div>
               }
             >
-              <MovieCard {...movie} />
-            </Suspense>
+              <div 
+                onClick={() => handleMovieClick(movie.title)}
+                className="transform transition-transform duration-200 hover:-translate-y-1 hover:translate-x-1"
+              >
+                <MovieCard movie={movie} />
+              </div>
+            </React.Suspense>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

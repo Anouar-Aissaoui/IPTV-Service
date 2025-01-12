@@ -18,11 +18,6 @@ const Hero: React.FC = () => {
     }
   };
 
-  React.useEffect(() => {
-    // Mark when hero section is rendered
-    performance.mark('hero-rendered');
-  }, []);
-
   return (
     <div className="relative bg-dark">
       <Navigation onScrollToSection={scrollToSection} />
