@@ -1,4 +1,6 @@
 const CACHE_NAME = 'iptv-cache-v1';
+const RUNTIME_CACHE = 'runtime-cache';
+
 const urlsToCache = [
   '/',
   '/index.html',
@@ -7,7 +9,6 @@ const urlsToCache = [
   '/src/index.css',
   '/devices.png',
   '/iptv-subscription.png',
-  // Cache other images
   '/lovable-uploads/00c90df3-a23d-47e3-b967-8806209cd5b1.png',
   '/lovable-uploads/62b3cd9e-1589-432c-b117-d855ac8f0b81.png',
   '/lovable-uploads/68c06c7a-d842-491a-a970-14726b960bc0.png',
@@ -15,6 +16,7 @@ const urlsToCache = [
   '/lovable-uploads/eb41a9e5-0a89-4fbb-9995-ac1735cd4aaf.png'
 ];
 
+// Install event - cache core assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -25,39 +27,9 @@ self.addEventListener('install', (event) => {
   );
 });
 
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        // Cache hit - return response
-        if (response) {
-          return response;
-        }
-
-        return fetch(event.request).then(
-          (response) => {
-            // Check if we received a valid response
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-
-            // Clone the response
-            const responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then((cache) => {
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          }
-        );
-      })
-  );
-});
-
+// Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
-  const cacheWhitelist = [CACHE_NAME];
+  const cacheWhitelist = [CACHE_NAME, RUNTIME_CACHE];
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
@@ -69,4 +41,55 @@ self.addEventListener('activate', (event) => {
       );
     })
   );
+});
+
+// Fetch event - network first, then cache
+self.addEventListener('fetch', (event) => {
+  // Skip cross-origin requests
+  if (!event.request.url.startsWith(self.location.origin)) {
+    return;
+  }
+
+  event.respondWith(
+    caches.match(event.request)
+      .then((response) => {
+        if (response) {
+          return response;
+        }
+
+        return fetch(event.request)
+          .then((response) => {
+            // Check if we received a valid response
+            if (!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+
+            // Clone the response
+            const responseToCache = response.clone();
+
+            caches.open(RUNTIME_CACHE)
+              .then((cache) => {
+                cache.put(event.request, responseToCache);
+              });
+
+            return response;
+          })
+          .catch(() => {
+            // If the network fails, try to return a cached response
+            return caches.match(event.request);
+          });
+      })
+  );
+});
+
+// Handle offline fallback
+self.addEventListener('fetch', (event) => {
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .catch(() => {
+          return caches.match('/index.html');
+        })
+    );
+  }
 });
