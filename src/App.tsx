@@ -16,6 +16,7 @@ import FireTvSetup from "./pages/FireTvSetup";
 import Enigma2Setup from "./pages/Enigma2Setup";
 import VlcWindowsSetup from "./pages/VlcWindowsSetup";
 import FreeTrial from "./pages/FreeTrial";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
@@ -35,6 +36,7 @@ const AppRoutes = () => {
       <Route path="/channels" element={<Channels />} />
       <Route path="/pricing" element={<Index />} />
       <Route path="/faq" element={<Index />} />
+      <Route path="/contact" element={<Contact />} />
       <Route path="/iptv-free-trial-24-hours" element={<FreeTrial />} />
       
       {/* Redirect from old URL to new URL */}
