@@ -1,61 +1,89 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 
-const GOOGLE_URL = "https://www.google.com/ping?sitemap="
-const YANDEX_URL = "https://www.yandex.com/webmaster/site/indexNow?url="
-const BING_URL = "https://www.bing.com/ping?sitemap="
+const SEARCH_ENGINES = {
+  google: "https://www.google.com/ping?sitemap=",
+  bing: "https://www.bing.com/ping?sitemap=",
+  yandex: "https://www.yandex.com/webmaster/site/indexNow?url=",
+  index_now: "https://api.indexnow.org/indexnow"
+};
+
+interface SubmissionResult {
+  engine: string;
+  status: number;
+  success: boolean;
+  message?: string;
+}
+
+const submitToSearchEngine = async (engine: string, url: string, sitemapUrl: string): Promise<SubmissionResult> => {
+  try {
+    const response = await fetch(`${url}${sitemapUrl}`);
+    return {
+      engine,
+      status: response.status,
+      success: response.ok,
+      message: response.ok ? 'Submitted successfully' : 'Submission failed'
+    };
+  } catch (error) {
+    console.error(`Error submitting to ${engine}:`, error);
+    return {
+      engine,
+      status: 500,
+      success: false,
+      message: error.message
+    };
+  }
+};
 
 const submitSitemap = async (sitemapUrl: string) => {
-  try {
-    // Submit to Google
-    const googleResponse = await fetch(`${GOOGLE_URL}${sitemapUrl}`)
-    console.log('Google submission status:', googleResponse.status)
+  const results: SubmissionResult[] = [];
 
-    // Submit to Yandex
-    const yandexResponse = await fetch(`${YANDEX_URL}${sitemapUrl}`)
-    console.log('Yandex submission status:', yandexResponse.status)
-
-    // Submit to Bing
-    const bingResponse = await fetch(`${BING_URL}${sitemapUrl}`)
-    console.log('Bing submission status:', bingResponse.status)
-
-    return {
-      google: googleResponse.status,
-      yandex: yandexResponse.status,
-      bing: bingResponse.status
-    }
-  } catch (error) {
-    console.error('Error submitting sitemap:', error)
-    throw error
+  // Submit to each search engine
+  for (const [engine, url] of Object.entries(SEARCH_ENGINES)) {
+    const result = await submitToSearchEngine(engine, url, sitemapUrl);
+    results.push(result);
+    
+    // Log the result
+    console.log(`${engine} submission:`, result);
   }
-}
+
+  return results;
+};
 
 serve(async (req) => {
   try {
-    const { sitemapUrl } = await req.json()
+    const { sitemapUrl } = await req.json();
     
     if (!sitemapUrl) {
       return new Response(
         JSON.stringify({ error: 'Sitemap URL is required' }),
-        { status: 400 }
-      )
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
     }
 
-    const result = await submitSitemap(sitemapUrl)
+    const results = await submitSitemap(sitemapUrl);
+    const allSuccessful = results.every(r => r.success);
 
     return new Response(
       JSON.stringify({
-        message: 'Sitemap submitted successfully',
-        result
+        message: allSuccessful ? 'Sitemap submitted successfully to all search engines' : 'Some submissions failed',
+        results
       }),
       { 
         headers: { "Content-Type": "application/json" },
-        status: 200 
+        status: allSuccessful ? 200 : 207 // 207 Multi-Status for partial success
       }
-    )
+    );
   } catch (error) {
+    console.error('Error in submit-sitemap function:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
-      { status: 500 }
-    )
+      JSON.stringify({ 
+        error: 'Internal server error',
+        message: error.message 
+      }),
+      { 
+        headers: { "Content-Type": "application/json" },
+        status: 500 
+      }
+    );
   }
-})
+});
