@@ -29,15 +29,17 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
+interface ArticleSection {
+  type: string;
+  content: string;
+  title?: string;
+  items?: string[];
+  tableData?: Record<string, string | number>[];
+  chartData?: Record<string, string | number>[];
+}
+
 interface ArticleContent {
-  sections: {
-    type: string;
-    content: string;
-    title?: string;
-    items?: string[];
-    tableData?: Record<string, string | number>[];
-    chartData?: Record<string, string | number>[];
-  }[];
+  sections: ArticleSection[];
 }
 
 const Article = () => {
@@ -65,8 +67,14 @@ const Article = () => {
     return <div className="container mx-auto p-4">Article not found</div>;
   }
 
-  // Type assertion to ensure content matches ArticleContent structure
+  // Type assertion with validation
   const content = article.content as unknown as ArticleContent;
+  
+  // Validate content structure
+  if (!content || !Array.isArray(content.sections)) {
+    console.error('Invalid article content structure:', content);
+    return <div className="container mx-auto p-4">Error: Invalid article format</div>;
+  }
 
   return (
     <>
