@@ -4,10 +4,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { NavItems } from "./NavItems";
 
 interface NavigationProps {
-  onScrollToSection?: (sectionId: string) => void;
+  onScrollToSection: (sectionId: string) => void;
 }
 
-const Navigation = ({ onScrollToSection }: NavigationProps) => {
+export const Navigation = ({ onScrollToSection }: NavigationProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -106,5 +106,3 @@ const Navigation = ({ onScrollToSection }: NavigationProps) => {
     </nav>
   );
 };
-
-export default Navigation;
