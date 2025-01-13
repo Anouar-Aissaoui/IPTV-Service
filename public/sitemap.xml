@@ -11,7 +11,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.iptvservice.site/</loc>
-    <lastmod>2024-03-26</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -25,7 +25,7 @@
   <!-- Blog Posts -->
   <url>
     <loc>https://www.iptvservice.site/blog/best-iptv-service-providers-subscriptions</loc>
-    <lastmod>2024-03-26</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <mobile:mobile/>
@@ -34,7 +34,7 @@
   <!-- Main Pages -->
   <url>
     <loc>https://www.iptvservice.site/pricing</loc>
-    <lastmod>2024-03-26</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <mobile:mobile/>
@@ -42,7 +42,7 @@
 
   <url>
     <loc>https://www.iptvservice.site/iptv-free-trial-24-hours</loc>
-    <lastmod>2024-03-26</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <mobile:mobile/>
@@ -50,7 +50,7 @@
 
   <url>
     <loc>https://www.iptvservice.site/channels</loc>
-    <lastmod>2024-03-26</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <mobile:mobile/>
@@ -58,7 +58,7 @@
 
   <url>
     <loc>https://www.iptvservice.site/faq</loc>
-    <lastmod>2024-03-26</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <mobile:mobile/>
@@ -67,7 +67,7 @@
   <!-- Setup Guides -->
   <url>
     <loc>https://www.iptvservice.site/iptv-setup-tutorials</loc>
-    <lastmod>2024-03-26</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <mobile:mobile/>
