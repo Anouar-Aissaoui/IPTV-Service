@@ -6,7 +6,7 @@ import { getKeywordsString } from '@/components/seo/Keywords';
 import { ContentWrapper } from '@/components/layout/ContentWrapper';
 import { supabase } from '@/integrations/supabase/client';
 import { getStructuredData } from '@/components/seo/StructuredData';
-import Navigation from '@/components/navigation/Navigation';
+import { Navigation } from '@/components/navigation/Navigation';
 
 const BlogPost = () => {
   const { data: article } = useQuery({
@@ -19,13 +19,52 @@ const BlogPost = () => {
         .maybeSingle();
 
       if (error) throw error;
-      return data;
+      return {
+        ...data,
+        slug: 'best-iptv-service-providers-subscriptions',
+        title: 'Best IPTV Service Providers Subscriptions: Complete Guide 2025',
+        description: 'Discover the top IPTV service providers offering premium subscriptions in 2025. Compare features, pricing, and reliability to find the perfect IPTV subscription for your streaming needs.',
+        content: data?.content || {},
+        keywords: [
+          'iptv subscription',
+          'best iptv',
+          'iptv subscribe',
+          'iptv providers',
+          'iptv provider',
+          'bestiptv',
+          'iptv subscriptions',
+          'iptv service',
+          'iptv sub',
+          'iptv suppliers',
+          'buy iptv',
+          'iptv services',
+          'iptv'
+        ],
+        meta_tags: {
+          'og:type': 'article',
+          'article:published_time': data?.published_at || new Date().toISOString(),
+          'article:modified_time': data?.updated_at || new Date().toISOString(),
+          'article:author': 'IPTV Service',
+          'article:section': 'IPTV Guides',
+          'article:tag': 'IPTV Subscription, Best IPTV Service, IPTV Provider'
+        },
+        author: 'IPTV Service',
+        category: 'IPTV Guides',
+        tags: ['IPTV', 'Streaming', 'Entertainment', 'TV Channels'],
+        primary_keyword: 'best iptv service providers',
+        secondary_keywords: [
+          'premium iptv subscription',
+          'reliable iptv service',
+          'top iptv providers 2025'
+        ],
+        reading_time_minutes: 15
+      };
     },
-    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
-    gcTime: 10 * 60 * 1000,   // Garbage collect after 10 minutes
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
   });
 
-  // Track page view for SEO metrics using useMutation
+  // Track page view for SEO metrics
   const { mutate: trackPageView } = useMutation({
     mutationKey: ['seo-performance', 'track-view'],
     mutationFn: async () => {
@@ -38,7 +77,19 @@ const BlogPost = () => {
             meta_description: article?.description,
             canonical_url: 'https://www.iptvservice.site/blog/best-iptv-service-providers-subscriptions',
             organic_traffic: 1,
-            last_crawled: new Date().toISOString()
+            last_crawled: new Date().toISOString(),
+            keyword_rankings: {
+              'best iptv service': 1,
+              'iptv subscription': 2,
+              'iptv providers': 3
+            },
+            structured_data: getStructuredData('article', {
+              title: article?.title,
+              description: article?.description,
+              author: article?.author,
+              datePublished: article?.published_at,
+              dateModified: article?.updated_at
+            })
           }
         ], {
           onConflict: 'page_path'
@@ -63,7 +114,19 @@ const BlogPost = () => {
       image: 'https://www.iptvservice.site/iptv-subscription.jpg',
       datePublished: article.published_at,
       dateModified: article.updated_at,
-      author: article.author
+      author: article.author,
+      publisher: {
+        '@type': 'Organization',
+        name: 'IPTV Service',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://www.iptvservice.site/iptv-subscription.png'
+        }
+      },
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': 'https://www.iptvservice.site/blog/best-iptv-service-providers-subscriptions'
+      }
     });
   }, [article]);
 
@@ -83,9 +146,9 @@ const BlogPost = () => {
   return (
     <>
       <SEOOptimizer
-        title={article?.title || "Best IPTV Service Providers Guide 2024 | Premium Subscriptions"}
-        description={article?.description || "Comprehensive guide to the best IPTV service providers in 2024. Compare features, pricing, and channel offerings. Find the perfect IPTV subscription for your needs."}
-        keywords={getKeywordsString().split(', ')}
+        title={article?.title || "Best IPTV Service Providers Guide 2025 | Premium Subscriptions"}
+        description={article?.description || "Comprehensive guide to the best IPTV service providers in 2025. Compare features, pricing, and channel offerings. Find the perfect IPTV subscription for your needs."}
+        keywords={article?.keywords || getKeywordsString().split(', ')}
         type="article"
         canonicalUrl="https://www.iptvservice.site/blog/best-iptv-service-providers-subscriptions"
         imageUrl="/iptv-subscription.jpg"
