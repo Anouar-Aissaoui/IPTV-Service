@@ -7,6 +7,11 @@ const SEARCH_ENGINES = {
   index_now: "https://api.indexnow.org/indexnow"
 };
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+}
+
 interface SubmissionResult {
   engine: string;
   status: number;
@@ -15,8 +20,18 @@ interface SubmissionResult {
 }
 
 const submitToSearchEngine = async (engine: string, url: string, sitemapUrl: string): Promise<SubmissionResult> => {
+  console.log(`Submitting sitemap to ${engine}: ${url}${sitemapUrl}`);
+  
   try {
-    const response = await fetch(`${url}${sitemapUrl}`);
+    const response = await fetch(`${url}${sitemapUrl}`, {
+      method: 'GET',
+      headers: {
+        'User-Agent': 'IPTVService-Bot/1.0',
+      },
+    });
+    
+    console.log(`${engine} response status:`, response.status);
+    
     return {
       engine,
       status: response.status,
@@ -35,31 +50,36 @@ const submitToSearchEngine = async (engine: string, url: string, sitemapUrl: str
 };
 
 const submitSitemap = async (sitemapUrl: string) => {
+  console.log('Starting sitemap submission process');
   const results: SubmissionResult[] = [];
 
   // Submit to each search engine
   for (const [engine, url] of Object.entries(SEARCH_ENGINES)) {
     const result = await submitToSearchEngine(engine, url, sitemapUrl);
     results.push(result);
-    
-    // Log the result
-    console.log(`${engine} submission:`, result);
+    console.log(`${engine} submission result:`, result);
   }
 
   return results;
 };
 
 serve(async (req) => {
+  // Handle CORS preflight requests
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { headers: corsHeaders });
+  }
+
   try {
     const { sitemapUrl } = await req.json();
     
     if (!sitemapUrl) {
       return new Response(
         JSON.stringify({ error: 'Sitemap URL is required' }),
-        { status: 400, headers: { "Content-Type": "application/json" } }
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
+    console.log('Received sitemap submission request for:', sitemapUrl);
     const results = await submitSitemap(sitemapUrl);
     const allSuccessful = results.every(r => r.success);
 
@@ -69,7 +89,7 @@ serve(async (req) => {
         results
       }),
       { 
-        headers: { "Content-Type": "application/json" },
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: allSuccessful ? 200 : 207 // 207 Multi-Status for partial success
       }
     );
@@ -81,7 +101,7 @@ serve(async (req) => {
         message: error.message 
       }),
       { 
-        headers: { "Content-Type": "application/json" },
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500 
       }
     );
