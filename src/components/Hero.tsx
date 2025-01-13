@@ -56,7 +56,7 @@ const Hero: React.FC = () => {
             <div className="relative transform hover:scale-105 transition-duration-300 rotate-2">
               <div className="absolute -inset-1 bg-[#F97316]/30 rounded-none blur"></div>
               <OptimizedImage
-                src="/iptv-subscription.png"
+                src="/iptv-subscription.jpg"
                 alt="Premium IPTV Service - High quality streaming with 40,000+ channels and VOD content"
                 className="relative border-4 border-white shadow-[12px_12px_0px_0px_rgba(249,115,22,1)] w-full h-auto object-cover"
                 width={480}
