@@ -20,9 +20,9 @@ import {
 } from 'recharts';
 
 const providerStats = [
-  { name: 'Provider A', channels: 40000, vod: 54000, rating: 4.8 },
-  { name: 'Provider B', channels: 35000, vod: 48000, rating: 4.6 },
-  { name: 'Provider C', channels: 38000, vod: 50000, rating: 4.7 },
+  { name: 'IPTV Service', channels: 40000, vod: 54000, rating: 4.8 },
+  { name: 'GetMaxTv', channels: 35000, vod: 48000, rating: 4.6 },
+  { name: 'XtremeHD IPTV UK', channels: 38000, vod: 50000, rating: 4.7 },
 ];
 
 export const ArticleContent: React.FC = () => {
