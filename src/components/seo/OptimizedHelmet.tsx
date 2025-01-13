@@ -16,8 +16,8 @@ interface HelmetProps {
 }
 
 const OptimizedHelmet: React.FC<HelmetProps> = memo(({
-  title = "Best IPTV Service Provider 2024 | Premium IPTV Subscription USA & UK",
-  description = "Experience premium IPTV service with 40,000+ live channels, 54,000+ VOD content, and 4K quality streaming. Best IPTV provider offering affordable packages with 24/7 support. Try now!",
+  title = "Best IPTV Service Providers Subscriptions: Complete Guide 2025",
+  description = "Discover the top IPTV service providers offering premium subscriptions in 2025. Compare features, pricing, and reliability to find the perfect IPTV subscription for your streaming needs.",
   canonicalUrl,
   imageUrl = "/iptv-subscription.png",
   locale = "en",

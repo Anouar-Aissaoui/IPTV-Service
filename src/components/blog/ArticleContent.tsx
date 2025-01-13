@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from "@/components/ui/card";
-import { 
+import {
   Table,
   TableBody,
   TableCell,
@@ -28,7 +28,7 @@ const providerStats = [
 export const ArticleContent: React.FC = () => {
   return (
     <article className="prose prose-lg prose-invert max-w-none">
-      <h1 className="text-4xl font-bold mb-8">Best IPTV Service Providers Subscriptions</h1>
+      <h1 className="text-4xl font-bold mb-8">Best IPTV Service Providers Subscriptions: Complete Guide 2025</h1>
       
       <div className="mb-8">
         <p className="text-xl leading-relaxed">
