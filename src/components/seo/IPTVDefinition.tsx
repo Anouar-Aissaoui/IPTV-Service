@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const IPTVDefinition = () => {
   return (
@@ -14,7 +15,7 @@ export const IPTVDefinition = () => {
             
             <div className="space-y-6">
               <p className="text-dark font-bold leading-relaxed transform -rotate-1">
-                Looking for the <span className="bg-dark text-white px-2">best IPTV subscription</span> service? 
+                Looking for the <Link to="/blog/best-iptv-service-providers-subscriptions" className="bg-dark text-white px-2 hover:bg-black transition-colors">best IPTV subscription</Link> service? 
                 Our premium IPTV provider offers an unmatched streaming experience with over 
                 <span className="bg-dark text-white px-2">40,000 live channels</span> and an extensive VOD library. 
                 As a leading <span className="bg-dark text-white px-2">IPTV service provider</span>, 
