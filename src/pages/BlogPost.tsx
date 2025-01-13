@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { ArticleContent } from '@/components/blog/ArticleContent';
 import SEOOptimizer from '@/components/seo/SEOOptimizer';
 import { getKeywordsString } from '@/components/seo/Keywords';
@@ -24,10 +24,10 @@ const BlogPost = () => {
     gcTime: 10 * 60 * 1000,   // Garbage collect after 10 minutes
   });
 
-  // Track page view for SEO metrics
-  const { mutate: trackPageView } = useQuery({
-    queryKey: ['seo-performance', 'track-view'],
-    queryFn: async () => {
+  // Track page view for SEO metrics using useMutation
+  const { mutate: trackPageView } = useMutation({
+    mutationKey: ['seo-performance', 'track-view'],
+    mutationFn: async () => {
       const { data, error } = await supabase
         .from('seo_performance_tracking')
         .upsert([
@@ -45,8 +45,7 @@ const BlogPost = () => {
 
       if (error) throw error;
       return data;
-    },
-    enabled: !!article
+    }
   });
 
   React.useEffect(() => {
