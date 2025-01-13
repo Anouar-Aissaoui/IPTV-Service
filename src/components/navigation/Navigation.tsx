@@ -2,24 +2,22 @@ import * as React from "react";
 import { Menu } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { NavItems } from "./NavItems";
-
-interface NavigationProps {
-  onScrollToSection: (sectionId: string) => void;
-}
+import { MobileNavMenu } from "./MobileNavMenu";
+import type { NavigationProps, NavItem } from "./types";
 
 const Navigation = ({ onScrollToSection }: NavigationProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleHomeClick = () => {
+  const handleHomeClick = React.useCallback(() => {
     if (location.pathname !== '/') {
       navigate('/');
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, [location.pathname, navigate]);
 
-  const navItems = [
+  const navItems = React.useMemo<NavItem[]>(() => [
     { 
       name: "Home", 
       path: "/",
@@ -62,7 +60,12 @@ const Navigation = ({ onScrollToSection }: NavigationProps) => {
         onScrollToSection('faq-section');
       }
     }
-  ];
+  ], [location.pathname, navigate, onScrollToSection, handleHomeClick]);
+
+  const handleMobileItemClick = React.useCallback((action: () => void) => {
+    action();
+    setIsMobileMenuOpen(false);
+  }, []);
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-dark/95 backdrop-blur-sm border-b-4 border-[#F97316]">
@@ -95,10 +98,9 @@ const Navigation = ({ onScrollToSection }: NavigationProps) => {
           />
 
           {isMobileMenuOpen && (
-            <NavItems 
-              items={navItems} 
-              isMobile={true} 
-              onItemClick={() => setIsMobileMenuOpen(false)}
+            <MobileNavMenu 
+              items={navItems}
+              onItemClick={handleMobileItemClick}
             />
           )}
         </div>
@@ -107,4 +109,4 @@ const Navigation = ({ onScrollToSection }: NavigationProps) => {
   );
 };
 
-export default Navigation;
+export default React.memo(Navigation);
