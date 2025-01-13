@@ -7,16 +7,16 @@ import Navigation from "./navigation/Navigation";
 const Hero: React.FC = () => {
   const { t } = useTranslation();
   
-  const handleWhatsAppClick = () => {
+  const handleWhatsAppClick = React.useCallback(() => {
     window.open('https://wa.me/message/R5IYJF3GG635D1', '_blank');
-  };
+  }, []);
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = React.useCallback((sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  }, []);
 
   return (
     <div className="relative bg-dark">
@@ -25,11 +25,15 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-4 py-6 md:py-12 lg:py-16">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8 lg:gap-12">
           <div className="w-full lg:w-1/2 space-y-4 md:space-y-6 text-center lg:text-left">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight tracking-tight transform -rotate-1">
+            <h1 
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight tracking-tight transform -rotate-1"
+            >
               {t('hero.title')}
             </h1>
             
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-gray-300 transform rotate-1 max-w-xl mx-auto lg:mx-0">
+            <p 
+              className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-gray-300 transform rotate-1 max-w-xl mx-auto lg:mx-0"
+            >
               {t('hero.subtitle')} {t('hero.description')}
             </p>
 
@@ -62,6 +66,9 @@ const Hero: React.FC = () => {
                 width={480}
                 height={320}
                 priority={true}
+                loading="eager"
+                fetchPriority="high"
+                decoding="sync"
               />
             </div>
           </div>
@@ -94,4 +101,4 @@ const Hero: React.FC = () => {
   );
 };
 
-export default Hero;
+export default React.memo(Hero);
