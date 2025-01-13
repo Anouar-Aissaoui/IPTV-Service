@@ -1,8 +1,13 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import viteImagemin from 'vite-plugin-imagemin';
+import path from 'path';
 
 export default defineConfig({
+  server: {
+    host: "::",
+    port: 8080,
+  },
   plugins: [
     react(),
     viteImagemin({
@@ -36,4 +41,34 @@ export default defineConfig({
       },
     }),
   ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/react') || 
+              id.includes('node_modules/react-dom')) {
+            return 'vendor';
+          }
+          if (id.includes('components/ui/')) {
+            return 'shadcn';
+          }
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    cssCodeSplit: true,
+    cssMinify: true,
+  },
 });
