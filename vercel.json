@@ -7,28 +7,6 @@
   ],
   "redirects": [
     {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "iptvservice.site"
-        }
-      ],
-      "destination": "https://www.iptvservice.site",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "iptvservice.site"
-        }
-      ],
-      "destination": "https://www.iptvservice.site/:path*",
-      "permanent": true
-    },
-    {
       "source": "/home",
       "destination": "/",
       "permanent": true

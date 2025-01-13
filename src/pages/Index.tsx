@@ -1,5 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import Hero from "@/components/Hero";
 import { Pricing } from "@/components/Pricing";
 import Content from "@/components/Content";
@@ -16,50 +14,8 @@ import { getStructuredData } from "@/components/seo/StructuredData";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { Link } from "react-router-dom";
 import { ContentWrapper } from "@/components/layout/ContentWrapper";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useToast } from "@/components/ui/use-toast";
-import { PageContent } from "@/types/page-content";
 
 const Index = () => {
-  const { toast } = useToast();
-  
-  const { data: pageContent, isLoading, error } = useQuery({
-    queryKey: ['page-content', '/'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('page_content')
-        .select('*')
-        .eq('page_path', '/')
-        .maybeSingle();
-
-      if (error) {
-        console.error('Error fetching page content:', error);
-        toast({
-          title: "Error loading content",
-          description: "Please refresh the page to try again",
-          variant: "destructive"
-        });
-        return null;
-      }
-
-      if (data) {
-        return {
-          hero_content: data.hero_content as PageContent['hero_content'],
-          features_content: data.features_content as PageContent['features_content'],
-          pricing_content: data.pricing_content as PageContent['pricing_content'],
-          channels_content: data.channels_content as PageContent['channels_content'],
-          sports_content: data.sports_content as PageContent['sports_content'],
-          movies_content: data.movies_content as PageContent['movies_content'],
-          faq_content: data.faq_content as PageContent['faq_content'],
-        } satisfies PageContent;
-      }
-
-      return null;
-    },
-    staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000,
-  });
-
   const pageTitle = "Best IPTV Service Provider 2024 | Premium IPTV Subscription USA";
   const pageDescription = "Experience premium IPTV service with 40,000+ live channels, 54,000+ VOD content, and 4K quality streaming. Best IPTV provider offering affordable packages with 24/7 support. Try now!";
   
@@ -71,18 +27,6 @@ const Index = () => {
     author: "IPTV Service",
     image: "https://www.iptvservice.site/iptv-subscription.png"
   };
-
-  if (isLoading) {
-    return (
-      <ContentWrapper as="main" className="min-h-screen bg-dark text-white font-grotesk">
-        <div className="space-y-8">
-          <Skeleton className="h-[600px] w-full" />
-          <Skeleton className="h-[400px] w-full" />
-          <Skeleton className="h-[400px] w-full" />
-        </div>
-      </ContentWrapper>
-    );
-  }
 
   return (
     <ContentWrapper as="main" className="min-h-screen bg-dark text-white font-grotesk">
@@ -109,7 +53,7 @@ const Index = () => {
       <Breadcrumbs />
       
       <ContentWrapper as="section" ariaLabel="Hero Section">
-        <Hero content={pageContent?.hero_content} />
+        <Hero />
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="Brand Showcase">
@@ -122,19 +66,19 @@ const Index = () => {
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="Pricing Plans">
-        <Pricing content={pageContent?.pricing_content} />
+        <Pricing />
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="Content Showcase">
-        <Content content={pageContent?.movies_content} />
+        <Content />
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="Live Channels">
-        <LiveChannels content={pageContent?.channels_content} />
+        <LiveChannels />
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="Live Sports">
-        <LiveSports content={pageContent?.sports_content} />
+        <LiveSports />
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="IPTV Benefits">
@@ -142,7 +86,7 @@ const Index = () => {
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="Frequently Asked Questions">
-        <FAQ content={pageContent?.faq_content} />
+        <FAQ />
       </ContentWrapper>
 
       {/* Quick Links Section */}

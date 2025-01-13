@@ -2,83 +2,78 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { Helmet } from "react-helmet";
-import { PricingContent } from "@/types/page-content";
 
-interface PricingProps {
-  content?: PricingContent;
-}
+const keywords = [
+  'buy IPTV',
+  'IPTV service',
+  'best IPTV service',
+  'IPTV subscription',
+  'premium IPTV',
+  'HD IPTV service',
+  'streaming TV channels',
+  'live TV streaming',
+  'USA IPTV service',
+  'affordable IPTV subscription'
+];
 
-export const Pricing: React.FC<PricingProps> = ({ content }) => {
+const plans = [
+  {
+    name: "1 Month",
+    price: "14.99",
+    features: [
+      "7000+ Live Channels",
+      "40000+ VOD Movies",
+      "1500+ TV Shows",
+      "HD & SD Quality",
+      "24/7 Support",
+    ],
+  },
+  {
+    name: "3 Months",
+    price: "24.99",
+    features: [
+      "7000+ Live Channels",
+      "40000+ VOD Movies",
+      "1500+ TV Shows",
+      "HD & SD Quality",
+      "24/7 Support",
+      "3 Connections",
+    ],
+  },
+  {
+    name: "6 Months",
+    price: "39.99",
+    features: [
+      "7000+ Live Channels",
+      "40000+ VOD Movies",
+      "1500+ TV Shows",
+      "HD & SD Quality",
+      "24/7 Support",
+      "3 Connections",
+      "PPV Events",
+    ],
+    popular: true,
+  },
+  {
+    name: "12 Months",
+    price: "59.99",
+    features: [
+      "7000+ Live Channels",
+      "40000+ VOD Movies",
+      "1500+ TV Shows",
+      "HD & SD Quality",
+      "24/7 Support",
+      "4 Connections",
+      "PPV Events",
+      "Premium Support",
+    ],
+  },
+];
+
+export const Pricing: React.FC = () => {
   const handleGetStarted = () => {
     window.open('https://wa.me/message/R5IYJF3GG635D1', '_blank');
   };
-
-  const keywords = [
-    'buy IPTV',
-    'IPTV service',
-    'best IPTV service',
-    'IPTV subscription',
-    'premium IPTV',
-    'HD IPTV service',
-    'streaming TV channels',
-    'live TV streaming',
-    'USA IPTV service',
-    'affordable IPTV subscription'
-  ];
-
-  const plans = [
-    {
-      name: "1 Month",
-      price: "14.99",
-      features: [
-        "7000+ Live Channels",
-        "40000+ VOD Movies",
-        "1500+ TV Shows",
-        "HD & SD Quality",
-        "24/7 Support",
-      ],
-    },
-    {
-      name: "3 Months",
-      price: "24.99",
-      features: [
-        "7000+ Live Channels",
-        "40000+ VOD Movies",
-        "1500+ TV Shows",
-        "HD & SD Quality",
-        "24/7 Support",
-        "3 Connections",
-      ],
-    },
-    {
-      name: "6 Months",
-      price: "39.99",
-      features: [
-        "7000+ Live Channels",
-        "40000+ VOD Movies",
-        "1500+ TV Shows",
-        "HD & SD Quality",
-        "24/7 Support",
-        "3 Connections",
-        "PPV Events",
-      ],
-      popular: true,
-    },
-    {
-      name: "12 Months",
-      price: "59.99",
-      features: [
-        "7000+ Live Channels",
-        "40000+ VOD Movies",
-        "1500+ TV Shows",
-        "HD & SD Quality",
-        "24/7 Support",
-        "4 Connections",
-        "PPV Events",
-        "Premium Support",
-      ],
-    },
-  ];
 
   return (
     <>

@@ -1,10 +1,5 @@
 import React from "react";
 import { Play } from "lucide-react";
-import { ChannelsContent } from "@/types/page-content";
-
-interface LiveChannelsProps {
-  content?: ChannelsContent;
-}
 
 const channels = [
   {
@@ -73,7 +68,7 @@ const channels = [
   },
 ];
 
-const LiveChannels: React.FC<LiveChannelsProps> = ({ content }) => {
+const LiveChannels = () => {
   return (
     <section className="bg-dark py-12 md:py-20 relative overflow-hidden">
       <div className="container mx-auto px-4 relative brutal-container">
