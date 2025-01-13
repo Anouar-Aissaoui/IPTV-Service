@@ -109,4 +109,4 @@ const Navigation = ({ onScrollToSection }: NavigationProps) => {
   );
 };
 
-export default React.memo(Navigation);
+export default Navigation;
