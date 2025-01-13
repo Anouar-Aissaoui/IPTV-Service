@@ -6,7 +6,7 @@ import { getKeywordsString } from '@/components/seo/Keywords';
 import { ContentWrapper } from '@/components/layout/ContentWrapper';
 import { supabase } from '@/integrations/supabase/client';
 import { getStructuredData } from '@/components/seo/StructuredData';
-import { Navigation } from '@/components/navigation/Navigation';
+import Navigation from '@/components/navigation/Navigation';
 
 const BlogPost = () => {
   const { data: article } = useQuery({
@@ -76,13 +76,6 @@ const BlogPost = () => {
             page_title: article?.title || 'Best IPTV Service Providers Guide',
             meta_description: article?.description,
             canonical_url: 'https://www.iptvservice.site/blog/best-iptv-service-providers-subscriptions',
-            organic_traffic: 1,
-            last_crawled: new Date().toISOString(),
-            keyword_rankings: {
-              'best iptv service': 1,
-              'iptv subscription': 2,
-              'iptv providers': 3
-            },
             structured_data: getStructuredData('article', {
               title: article?.title,
               description: article?.description,
