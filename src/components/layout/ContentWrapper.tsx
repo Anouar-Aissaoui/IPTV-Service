@@ -24,3 +24,6 @@ export const ContentWrapper: React.FC<ContentWrapperProps> = ({
     </Component>
   );
 };
+
+// Also export as default for backward compatibility if needed
+export default ContentWrapper;

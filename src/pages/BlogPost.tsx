@@ -4,7 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { ArticleContent } from '@/components/blog/ArticleContent';
 import SEOOptimizer from '@/components/seo/SEOOptimizer';
 import { getKeywordsString } from '@/components/seo/Keywords';
-import ContentWrapper from '@/components/layout/ContentWrapper';
+import { ContentWrapper } from '@/components/layout/ContentWrapper';
 
 const BlogPost = () => {
   const { data: article } = useQuery({
