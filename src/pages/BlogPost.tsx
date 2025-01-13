@@ -6,6 +6,7 @@ import { getKeywordsString } from '@/components/seo/Keywords';
 import { ContentWrapper } from '@/components/layout/ContentWrapper';
 import { supabase } from '@/integrations/supabase/client';
 import { getStructuredData } from '@/components/seo/StructuredData';
+import Navigation from '@/components/navigation/Navigation';
 
 const BlogPost = () => {
   const { data: article } = useQuery({
@@ -72,6 +73,13 @@ const BlogPost = () => {
     { name: 'IPTV Service Providers Guide', item: '/blog/best-iptv-service-providers-subscriptions' }
   ];
 
+  const handleScrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
       <SEOOptimizer
@@ -84,6 +92,7 @@ const BlogPost = () => {
         structuredData={structuredData}
         breadcrumbs={breadcrumbs}
       />
+      <Navigation onScrollToSection={handleScrollToSection} />
       <ContentWrapper>
         <div className="max-w-4xl mx-auto py-12">
           <ArticleContent />
