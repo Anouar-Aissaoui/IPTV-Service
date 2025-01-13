@@ -45,17 +45,36 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          // Bundle core React dependencies together
-          if (id.includes('node_modules/react') || 
-              id.includes('node_modules/react-dom')) {
-            return 'vendor';
-          }
-          // Bundle shadcn components together
-          if (id.includes('components/ui/')) {
-            return 'shadcn';
-          }
+        manualChunks: {
+          'vendor': [
+            'react',
+            'react-dom',
+            'react-router-dom',
+            '@tanstack/react-query',
+            'next-themes'
+          ],
+          'ui': [
+            '@/components/ui',
+          ],
+          'features': [
+            '@/components/Hero',
+            '@/components/Pricing',
+            '@/components/Content',
+            '@/components/LiveSports',
+            '@/components/FAQ',
+            '@/components/BrandCarousel',
+            '@/components/LiveChannels'
+          ],
+          'tutorials': [
+            '@/components/tutorials'
+          ],
+          'seo': [
+            '@/components/seo'
+          ]
         },
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
       },
     },
     chunkSizeWarningLimit: 1000,
@@ -64,9 +83,11 @@ export default defineConfig(({ mode }) => ({
       compress: {
         drop_console: true,
         drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.trace'],
       },
     },
     cssCodeSplit: true,
     cssMinify: true,
+    sourcemap: false,
   },
 }));
