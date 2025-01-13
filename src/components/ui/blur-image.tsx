@@ -12,21 +12,29 @@ interface BlurImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 export const BlurImage = React.forwardRef<HTMLImageElement, BlurImageProps>(
   ({ src, alt, className, priority, fetchPriority = "auto", ...props }, ref) => {
     const [isLoading, setIsLoading] = React.useState(true);
+    const imageRef = React.useRef<HTMLImageElement>(null);
+
+    React.useEffect(() => {
+      if (imageRef.current?.complete) {
+        setIsLoading(false);
+      }
+    }, []);
 
     return (
       <div className={cn("overflow-hidden relative", className)}>
         <img
-          ref={ref}
+          ref={ref || imageRef}
           src={src}
           alt={alt}
           loading={priority ? "eager" : "lazy"}
           decoding={priority ? "sync" : "async"}
           fetchPriority={fetchPriority}
+          onLoad={() => setIsLoading(false)}
           className={cn(
             "duration-700 ease-in-out",
-            isLoading ? "scale-110 blur-2xl" : "scale-100 blur-0"
+            isLoading ? "scale-110 blur-2xl" : "scale-100 blur-0",
+            className
           )}
-          onLoad={() => setIsLoading(false)}
           {...props}
         />
       </div>
