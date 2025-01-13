@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import { BlurImage } from "./ui/blur-image";
+import { OptimizedImage } from "./ui/optimized-image";
 import { Navigation } from "./navigation/Navigation";
 
 const Hero: React.FC = () => {
@@ -55,7 +55,7 @@ const Hero: React.FC = () => {
           <div className="w-full lg:w-1/2 max-w-[480px] mx-auto">
             <div className="relative transform hover:scale-105 transition-duration-300 rotate-2">
               <div className="absolute -inset-1 bg-[#F97316]/30 rounded-none blur"></div>
-              <BlurImage
+              <OptimizedImage
                 src="/iptv-subscription.png"
                 alt="Premium IPTV Service - High quality streaming with 40,000+ channels and VOD content"
                 className="relative border-4 border-white shadow-[12px_12px_0px_0px_rgba(249,115,22,1)] w-full h-auto object-cover"
