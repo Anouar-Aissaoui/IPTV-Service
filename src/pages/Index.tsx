@@ -18,8 +18,8 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
-  const pageTitle = "Best IPTV Service Provider 2024 | Premium IPTV Subscription USA";
-  const pageDescription = "Experience premium IPTV service with 40,000+ live channels, 54,000+ VOD content, and 4K quality streaming. Best IPTV provider offering affordable packages with 24/7 support. Try now!";
+  const pageTitle = "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide";
+  const pageDescription = "Looking to Buy IPTV? Choose the best IPTV provider offering affordable IPTV services in USA, UK & Worldwide with 24K+ channels. IPTV Subscribe now!";
   
   // Track SEO performance
   const { data: seoMetrics } = useQuery({
