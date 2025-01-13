@@ -19,7 +19,7 @@ export const OptimizedImage = ({
   priority = false,
 }: OptimizedImageProps) => {
   // Generate WebP source if the original is not already WebP
-  const webpSrc = src.endsWith('.webp') ? src : `${src.split('.').slice(0, -1).join('.')}.webp`;
+  const webpSrc = src.replace(/\.(png|jpg|jpeg)$/, '.webp');
   
   return (
     <picture>
@@ -35,7 +35,7 @@ export const OptimizedImage = ({
         className={className}
         loading={priority ? "eager" : "lazy"}
         decoding={priority ? "sync" : "async"}
-        fetchPriority={priority ? "high" : "auto"}
+        fetchpriority={priority ? "high" : "auto"}
       />
     </picture>
   );
