@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { ContentWrapper } from '@/components/layout/ContentWrapper';
-import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import OptimizedHelmet from '@/components/seo/OptimizedHelmet';
 import { ArticleContent } from '@/components/articles/ArticleContent';
 import { ArticleHeader } from '@/components/articles/ArticleHeader';
@@ -20,7 +19,7 @@ const Article = () => {
         .from('articles')
         .select('*')
         .eq('slug', slug)
-        .maybeSingle();
+        .single();
 
       if (error) throw error;
       return data;
@@ -30,10 +29,14 @@ const Article = () => {
   if (isLoading) {
     return (
       <ContentWrapper>
-        <div className="space-y-4">
-          <Skeleton className="h-8 w-3/4" />
-          <Skeleton className="h-4 w-1/2" />
-          <Skeleton className="h-64" />
+        <div className="container mx-auto px-4 py-12">
+          <Skeleton className="h-12 w-3/4 mb-4" />
+          <Skeleton className="h-6 w-1/2 mb-8" />
+          <div className="space-y-4">
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-3/4" />
+          </div>
         </div>
       </ContentWrapper>
     );
@@ -42,9 +45,8 @@ const Article = () => {
   if (!article) {
     return (
       <ContentWrapper>
-        <div className="text-center py-12">
+        <div className="container mx-auto px-4 py-12">
           <h1 className="text-2xl font-bold">Article not found</h1>
-          <p className="text-gray-500">The article you're looking for doesn't exist.</p>
         </div>
       </ContentWrapper>
     );
@@ -60,10 +62,11 @@ const Article = () => {
         imageUrl="/iptv-subscription.jpg"
       />
       <ContentWrapper>
-        <Breadcrumbs />
-        <ArticleHeader article={article} />
-        <ArticleContent content={article.content} />
-        <RelatedArticles articleIds={article.related_articles} currentArticleId={article.id} />
+        <div className="container mx-auto px-4 py-12">
+          <ArticleHeader article={article} />
+          <ArticleContent content={article.content} />
+          <RelatedArticles currentArticleId={article.id} relatedIds={article.related_articles} />
+        </div>
       </ContentWrapper>
     </>
   );
