@@ -1,12 +1,13 @@
 import type { Config } from "tailwindcss";
+import typography from "@tailwindcss/typography";
 
-export default {
+const config = {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
   prefix: "",
   theme: {
@@ -21,51 +22,41 @@ export default {
       fontFamily: {
         grotesk: ['Space Grotesk', 'sans-serif'],
       },
-      fontSize: {
-        'brutal-sm': ['0.875rem', { lineHeight: '1.25rem', letterSpacing: '0.05em', fontWeight: '700' }],
-        'brutal-base': ['1rem', { lineHeight: '1.5rem', letterSpacing: '0.05em', fontWeight: '700' }],
-        'brutal-lg': ['1.125rem', { lineHeight: '1.75rem', letterSpacing: '0.05em', fontWeight: '700' }],
-        'brutal-xl': ['1.25rem', { lineHeight: '1.75rem', letterSpacing: '0.05em', fontWeight: '800' }],
-        'brutal-2xl': ['1.5rem', { lineHeight: '2rem', letterSpacing: '0.05em', fontWeight: '800' }],
-        'brutal-3xl': ['1.875rem', { lineHeight: '2.25rem', letterSpacing: '0.05em', fontWeight: '900' }],
-        'brutal-4xl': ['2.25rem', { lineHeight: '2.5rem', letterSpacing: '0.05em', fontWeight: '900' }],
-      },
-      borderWidth: {
-        '3': '3px',
-      },
       colors: {
-        primary: "#F97316",
-        neon: "#F97316",
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         dark: "#000000",
-        "dark-gray": "#000000",
-        border: "#F97316",
-        input: "#000000",
-        ring: "#F97316",
-        background: "#000000",
-        foreground: "#FFFFFF",
+        neon: "#F97316",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
         secondary: {
-          DEFAULT: "#000000",
-          foreground: "#FFFFFF",
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {
-          DEFAULT: "#000000",
-          foreground: "#FFFFFF",
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: "#000000",
-          foreground: "#FFFFFF",
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
-          DEFAULT: "#000000",
-          foreground: "#FFFFFF",
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
-          DEFAULT: "#000000",
-          foreground: "#FFFFFF",
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "#000000",
-          foreground: "#FFFFFF",
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
         },
       },
       borderRadius: {
@@ -73,46 +64,18 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-5px)" },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        float: "float 3s ease-in-out infinite",
-      },
     },
   },
   plugins: [
-    require("tailwindcss-animate"),
-    require("daisyui")
+    typography,
+    require("tailwindcss-animate")
   ],
-  daisyui: {
-    themes: [
-      {
-        mytheme: {
-          "primary": "#F97316",
-          "secondary": "#000000",
-          "accent": "#F97316",
-          "neutral": "#000000",
-          "base-100": "#000000",
-          "info": "#0ea5e9",
-          "success": "#22c55e",
-          "warning": "#f59e0b",
-          "error": "#ef4444",
-        },
-      },
-    ],
+  future: {
+    hoverOnlyWhenSupported: true,
   },
+  experimental: {
+    optimizeUniversalDefaults: true
+  }
 } satisfies Config;
+
+export default config;
