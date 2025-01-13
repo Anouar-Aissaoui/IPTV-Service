@@ -11,67 +11,43 @@ export type Database = {
     Tables: {
       articles: {
         Row: {
-          author: string | null
-          category: string | null
           content: Json
           created_at: string | null
           description: string
           id: string
-          is_featured: boolean | null
           keywords: string[] | null
           meta_tags: Json | null
           published_at: string | null
-          reading_time: number | null
-          related_articles: string[] | null
           slug: string
-          status: string | null
           structured_data: Json | null
-          tags: string[] | null
           title: string
           updated_at: string | null
-          views_count: number | null
         }
         Insert: {
-          author?: string | null
-          category?: string | null
           content: Json
           created_at?: string | null
           description: string
           id?: string
-          is_featured?: boolean | null
           keywords?: string[] | null
           meta_tags?: Json | null
           published_at?: string | null
-          reading_time?: number | null
-          related_articles?: string[] | null
           slug: string
-          status?: string | null
           structured_data?: Json | null
-          tags?: string[] | null
           title: string
           updated_at?: string | null
-          views_count?: number | null
         }
         Update: {
-          author?: string | null
-          category?: string | null
           content?: Json
           created_at?: string | null
           description?: string
           id?: string
-          is_featured?: boolean | null
           keywords?: string[] | null
           meta_tags?: Json | null
           published_at?: string | null
-          reading_time?: number | null
-          related_articles?: string[] | null
           slug?: string
-          status?: string | null
           structured_data?: Json | null
-          tags?: string[] | null
           title?: string
           updated_at?: string | null
-          views_count?: number | null
         }
         Relationships: []
       }
