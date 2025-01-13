@@ -1,20 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navigation } from '@/components/layout/Navigation';
-import { Index } from '@/pages/Index';
-import { Pricing } from '@/pages/Pricing';
-import { Channels } from '@/pages/Channels';
-import { FreeTrial } from '@/pages/FreeTrial';
-import { Tutorials } from '@/pages/Tutorials';
-import { VlcWindowsSetup } from '@/pages/tutorials/VlcWindowsSetup';
-import { SmartTvSetup } from '@/pages/tutorials/SmartTvSetup';
-import { MobileSetup } from '@/pages/tutorials/MobileSetup';
-import { FireTvSetup } from '@/pages/tutorials/FireTvSetup';
-import { MagSetup } from '@/pages/tutorials/MagSetup';
-import { FormulerSetup } from '@/pages/tutorials/FormulerSetup';
-import { Enigma2Setup } from '@/pages/tutorials/Enigma2Setup';
-import { Article } from '@/pages/Article';
-import { NotFound } from '@/pages/NotFound';
+import Index from '@/pages/Index';
+import Pricing from '@/pages/Pricing';
+import Channels from '@/pages/Channels';
+import FreeTrial from '@/pages/FreeTrial';
+import Tutorials from '@/pages/Tutorials';
+import VlcWindowsSetup from '@/pages/tutorials/VlcWindowsSetup';
+import SmartTvSetup from '@/pages/tutorials/SmartTvSetup';
+import MobileSetup from '@/pages/tutorials/MobileSetup';
+import FireTvSetup from '@/pages/tutorials/FireTvSetup';
+import MagSetup from '@/pages/tutorials/MagSetup';
+import FormulerSetup from '@/pages/tutorials/FormulerSetup';
+import Enigma2Setup from '@/pages/tutorials/Enigma2Setup';
+import Article from '@/pages/Article';
+import NotFound from '@/pages/NotFound';
 
 function App() {
   return (

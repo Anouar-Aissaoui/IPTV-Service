@@ -10,7 +10,7 @@ import { ArticleHeader } from '@/components/articles/ArticleHeader';
 import { RelatedArticles } from '@/components/articles/RelatedArticles';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export const Article = () => {
+const Article = () => {
   const { slug } = useParams();
 
   const { data: article, isLoading } = useQuery({
@@ -56,7 +56,7 @@ export const Article = () => {
         title={article.title}
         description={article.description}
         keywords={article.keywords}
-        pageType="article"
+        type="website"
         imageUrl="/iptv-subscription.jpg"
       />
       <ContentWrapper>
