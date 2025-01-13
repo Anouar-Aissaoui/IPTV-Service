@@ -19,7 +19,7 @@ export const OptimizedImage = ({
   priority = false,
 }: OptimizedImageProps) => {
   // Generate WebP source if the original is not already WebP
-  const webpSrc = src.replace(/\.(png|jpg|jpeg)$/, '.webp');
+  const webpSrc = src.endsWith('.webp') ? src : `${src.split('.').slice(0, -1).join('.')}.webp`;
   
   return (
     <picture>
