@@ -1,199 +1,113 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
-import { SEOOptimizer } from '@/components/seo/SEOOptimizer';
-import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
-import { 
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle 
-} from '@/components/ui/card';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer
-} from 'recharts';
+import React, { useState } from 'react';
+import { supabase } from '../integrations/supabase/client';
+import { generateUniqueSlug } from '../utils/seoUtils';
 
-interface ArticleSection {
-  type: string;
-  content: string;
-  title?: string;
-  items?: string[];
-  tableData?: Record<string, string | number>[];
-  chartData?: Record<string, string | number>[];
-}
+export default function Article() {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [content, setContent] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
-interface ArticleContent {
-  sections: ArticleSection[];
-}
-
-const Article = () => {
-  const { slug } = useParams<{ slug: string }>();
-
-  const { data: article, isLoading } = useQuery({
-    queryKey: ['article', slug],
-    queryFn: async () => {
-      const { data, error } = await supabase
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    try {
+      const baseSlug = title.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+        
+      const uniqueSlug = await generateUniqueSlug(baseSlug);
+      
+      const { error } = await supabase
         .from('articles')
-        .select('*')
-        .eq('slug', slug)
-        .maybeSingle();
+        .insert({
+          title,
+          slug: uniqueSlug,
+          description,
+          content,
+          status: 'draft',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        });
 
       if (error) throw error;
-      return data;
+      
+      setSuccess(true);
+      setError(null);
+      setTitle('');
+      setDescription('');
+      setContent('');
+    } catch (error) {
+      console.error('Error creating article:', error);
+      setError('Failed to create article. Please try again.');
+      setSuccess(false);
     }
-  });
-
-  if (isLoading) {
-    return <div className="container mx-auto p-4">Loading...</div>;
-  }
-
-  if (!article) {
-    return <div className="container mx-auto p-4">Article not found</div>;
-  }
-
-  // Type assertion with validation
-  const content = article.content as unknown as ArticleContent;
-  
-  // Validate content structure
-  if (!content || !Array.isArray(content.sections)) {
-    console.error('Invalid article content structure:', content);
-    return <div className="container mx-auto p-4">Error: Invalid article format</div>;
-  }
+  };
 
   return (
-    <>
-      <SEOOptimizer
-        title={article.title}
-        description={article.description}
-        keywords={article.keywords}
-        type="article"
-      />
+    <div className="max-w-2xl mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Create New Article</h1>
       
-      <div className="container mx-auto p-4">
-        <Breadcrumbs />
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          {error}
+        </div>
+      )}
+      
+      {success && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+          Article created successfully!
+        </div>
+      )}
+      
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Title
+          </label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+            required
+          />
+        </div>
         
-        <article className="prose prose-invert max-w-none">
-          <h1 className="text-4xl font-bold mb-6">{article.title}</h1>
-          
-          {content.sections.map((section, index) => {
-            switch (section.type) {
-              case 'introduction':
-                return (
-                  <div key={index} className="mb-8">
-                    <p className="text-lg leading-relaxed">{section.content}</p>
-                  </div>
-                );
-              
-              case 'content':
-                return (
-                  <div key={index} className="mb-8">
-                    {section.title && (
-                      <h2 className="text-2xl font-semibold mb-4">{section.title}</h2>
-                    )}
-                    <p className="mb-4">{section.content}</p>
-                    {section.items && (
-                      <ul className="list-disc pl-6 space-y-2">
-                        {section.items.map((item, itemIndex) => (
-                          <li key={itemIndex}>{item}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                );
-              
-              case 'table':
-                return (
-                  <Card key={index} className="mb-8">
-                    <CardHeader>
-                      <CardTitle>{section.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      {section.tableData && (
-                        <Table>
-                          <TableHeader>
-                            <TableRow>
-                              {Object.keys(section.tableData[0]).map((header) => (
-                                <TableHead key={header}>{header}</TableHead>
-                              ))}
-                            </TableRow>
-                          </TableHeader>
-                          <TableBody>
-                            {section.tableData.map((row, rowIndex) => (
-                              <TableRow key={rowIndex}>
-                                {Object.values(row).map((cell, cellIndex) => (
-                                  <TableCell key={cellIndex}>{cell}</TableCell>
-                                ))}
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
-                      )}
-                    </CardContent>
-                  </Card>
-                );
-              
-              case 'chart':
-                return (
-                  <Card key={index} className="mb-8">
-                    <CardHeader>
-                      <CardTitle>{section.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      {section.chartData && (
-                        <div className="h-[400px] w-full">
-                          <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={section.chartData}>
-                              <CartesianGrid strokeDasharray="3 3" />
-                              <XAxis dataKey="category" />
-                              <YAxis />
-                              <Tooltip />
-                              <Bar dataKey="value" fill="#8884d8" />
-                            </BarChart>
-                          </ResponsiveContainer>
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                );
-              
-              case 'conclusion':
-                return (
-                  <div key={index} className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">Conclusion</h2>
-                    <p className="text-lg">{section.content}</p>
-                  </div>
-                );
-              
-              default:
-                return null;
-            }
-          })}
-          
-          <div className="mt-8 text-sm text-gray-400">
-            <p>Last updated: {new Date(article.updated_at).toLocaleDateString()}</p>
-            <p>Author: {article.author}</p>
-            <p>Category: {article.category}</p>
-          </div>
-        </article>
-      </div>
-    </>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Description
+          </label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+            rows={3}
+            required
+          />
+        </div>
+        
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Content
+          </label>
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+            rows={10}
+            required
+          />
+        </div>
+        
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Create Article
+        </button>
+      </form>
+    </div>
   );
-};
-
-export default Article;
+}
