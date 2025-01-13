@@ -14,18 +14,91 @@ import { getStructuredData } from "@/components/seo/StructuredData";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { Link } from "react-router-dom";
 import { ContentWrapper } from "@/components/layout/ContentWrapper";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
   const pageTitle = "Best IPTV Service Provider 2024 | Premium IPTV Subscription USA";
   const pageDescription = "Experience premium IPTV service with 40,000+ live channels, 54,000+ VOD content, and 4K quality streaming. Best IPTV provider offering affordable packages with 24/7 support. Try now!";
   
+  // Track SEO performance
+  const { data: seoMetrics } = useQuery({
+    queryKey: ['seoMetrics', 'index'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('seo_performance_tracking')
+        .upsert({
+          page_path: '/',
+          page_title: pageTitle,
+          meta_description: pageDescription,
+          canonical_url: 'https://www.iptvservice.site',
+          structured_data: getStructuredData('website', {
+            title: pageTitle,
+            description: pageDescription,
+            datePublished: "2024-01-01",
+            dateModified: new Date().toISOString(),
+            author: "IPTV Service",
+            image: "https://www.iptvservice.site/iptv-subscription.png"
+          }),
+          meta_robots: 'index,follow',
+          open_graph: {
+            title: pageTitle,
+            description: pageDescription,
+            type: 'website',
+            url: 'https://www.iptvservice.site',
+            image: 'https://www.iptvservice.site/iptv-subscription.png'
+          },
+          twitter_card: {
+            title: pageTitle,
+            description: pageDescription,
+            image: 'https://www.iptvservice.site/iptv-subscription.png'
+          },
+          keyword_rankings: {
+            'iptv subscription': 1,
+            'best iptv': 2,
+            'iptv providers': 3,
+            'buy iptv': 4
+          }
+        }, {
+          onConflict: 'page_path'
+        })
+        .select();
+
+      if (error) throw error;
+      return data;
+    }
+  });
+
   const pageData = {
     title: pageTitle,
     description: pageDescription,
     datePublished: "2024-01-01",
     dateModified: new Date().toISOString(),
     author: "IPTV Service",
-    image: "https://www.iptvservice.site/iptv-subscription.png"
+    image: "https://www.iptvservice.site/iptv-subscription.png",
+    category: "IPTV Services",
+    tags: [
+      "iptv subscription",
+      "best iptv",
+      "iptv subscribe",
+      "iptv providers",
+      "iptv provider",
+      "bestiptv",
+      "iptv subscriptions",
+      "iptv service",
+      "iptv sub",
+      "iptv suppliers",
+      "buy iptv",
+      "iptv services",
+      "iptv"
+    ],
+    primaryKeyword: "iptv subscription",
+    secondaryKeywords: [
+      "best iptv service",
+      "premium iptv provider",
+      "buy iptv subscription"
+    ],
+    readingTimeMinutes: 5
   };
 
   return (
@@ -38,20 +111,31 @@ const Index = () => {
         type="website"
         keywords={[
           ...seoKeywords,
-          '4K IPTV streaming',
-          'premium IPTV channels',
-          'IPTV subscription 2024',
-          'best IPTV provider USA'
+          ...pageData.tags,
+          ...pageData.secondaryKeywords
         ]}
         noindex={false}
+        structuredData={getStructuredData('website', pageData)}
       >
         <script type="application/ld+json">
-          {JSON.stringify(getStructuredData('article', pageData))}
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": pageTitle,
+            "description": pageDescription,
+            "url": "https://www.iptvservice.site",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://www.iptvservice.site/search?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          })}
         </script>
       </SEOOptimizer>
 
       <Breadcrumbs />
       
+      {/* Keep existing component structure */}
       <ContentWrapper as="section" ariaLabel="Hero Section">
         <Hero />
       </ContentWrapper>
