@@ -65,7 +65,8 @@ const Article = () => {
     return <div className="container mx-auto p-4">Article not found</div>;
   }
 
-  const content = article.content as ArticleContent;
+  // Type assertion to ensure content matches ArticleContent structure
+  const content = article.content as unknown as ArticleContent;
 
   return (
     <>
