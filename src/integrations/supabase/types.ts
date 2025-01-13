@@ -16,16 +16,24 @@ export type Database = {
           content: Json
           created_at: string | null
           description: string
+          external_links: Json | null
           id: string
+          internal_links: Json | null
           is_featured: boolean | null
           keywords: string[] | null
+          last_updated: string | null
           meta_tags: Json | null
+          primary_keyword: string | null
           published_at: string | null
           reading_time: number | null
+          reading_time_minutes: number | null
           related_articles: string[] | null
+          secondary_keywords: string[] | null
+          seo_score: number | null
           slug: string
           status: string | null
           structured_data: Json | null
+          table_of_contents: Json | null
           tags: string[] | null
           title: string
           updated_at: string | null
@@ -37,16 +45,24 @@ export type Database = {
           content: Json
           created_at?: string | null
           description: string
+          external_links?: Json | null
           id?: string
+          internal_links?: Json | null
           is_featured?: boolean | null
           keywords?: string[] | null
+          last_updated?: string | null
           meta_tags?: Json | null
+          primary_keyword?: string | null
           published_at?: string | null
           reading_time?: number | null
+          reading_time_minutes?: number | null
           related_articles?: string[] | null
+          secondary_keywords?: string[] | null
+          seo_score?: number | null
           slug: string
           status?: string | null
           structured_data?: Json | null
+          table_of_contents?: Json | null
           tags?: string[] | null
           title: string
           updated_at?: string | null
@@ -58,16 +74,24 @@ export type Database = {
           content?: Json
           created_at?: string | null
           description?: string
+          external_links?: Json | null
           id?: string
+          internal_links?: Json | null
           is_featured?: boolean | null
           keywords?: string[] | null
+          last_updated?: string | null
           meta_tags?: Json | null
+          primary_keyword?: string | null
           published_at?: string | null
           reading_time?: number | null
+          reading_time_minutes?: number | null
           related_articles?: string[] | null
+          secondary_keywords?: string[] | null
+          seo_score?: number | null
           slug?: string
           status?: string | null
           structured_data?: Json | null
+          table_of_contents?: Json | null
           tags?: string[] | null
           title?: string
           updated_at?: string | null

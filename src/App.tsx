@@ -17,6 +17,7 @@ import Enigma2Setup from "./pages/Enigma2Setup";
 import VlcWindowsSetup from "./pages/VlcWindowsSetup";
 import FreeTrial from "./pages/FreeTrial";
 import NotFound from "./pages/NotFound";
+import BlogPost from "./pages/BlogPost";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,6 +37,7 @@ const AppRoutes = () => {
       <Route path="/pricing" element={<Index />} />
       <Route path="/faq" element={<Index />} />
       <Route path="/iptv-free-trial-24-hours" element={<FreeTrial />} />
+      <Route path="/blog/best-iptv-service-providers-subscriptions" element={<BlogPost />} />
       
       {/* Redirect from old URL to new URL */}
       <Route path="/free-trial" element={<Navigate to="/iptv-free-trial-24-hours" replace />} />
