@@ -1,14 +1,14 @@
+import * as React from "react";
 import { Menu } from "lucide-react";
-import { useState } from "react";
-import { NavItems } from "./NavItems";
 import { useNavigate, useLocation } from "react-router-dom";
+import { NavItems } from "./NavItems";
 
 interface NavigationProps {
   onScrollToSection: (sectionId: string) => void;
 }
 
 export const Navigation = ({ onScrollToSection }: NavigationProps) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
