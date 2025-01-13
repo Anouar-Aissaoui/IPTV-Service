@@ -66,9 +66,6 @@ const Hero: React.FC = () => {
                 width={480}
                 height={320}
                 priority={true}
-                loading="eager"
-                fetchPriority="high"
-                decoding="sync"
               />
             </div>
           </div>
