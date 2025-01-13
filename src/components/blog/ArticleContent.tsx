@@ -32,10 +32,7 @@ export const ArticleContent: React.FC = () => {
       
       <div className="mb-8">
         <p className="text-xl leading-relaxed">
-          Looking for the best <strong>IPTV subscription</strong>? Our comprehensive guide covers everything you need to know about 
-          <strong>IPTV providers</strong> and how to <strong>buy IPTV</strong> services. Whether you're searching for 
-          <strong>IPTV subscriptions</strong> or want to <strong>subscribe to IPTV</strong>, we've got you covered with the 
-          most reliable <strong>IPTV suppliers</strong> and <strong>IPTV services</strong> available.
+          Looking for the best <strong>IPTV subscription</strong>? Our comprehensive guide covers everything you need to know about <strong>IPTV providers</strong> and how to <strong>buy IPTV</strong> services. Whether you're searching for <strong>IPTV subscriptions</strong> or want to <strong>subscribe to IPTV</strong>, we've got you covered with the most reliable <strong>IPTV suppliers</strong> and <strong>IPTV services</strong> available.
         </p>
       </div>
 
