@@ -2,7 +2,7 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { OptimizedImage } from "./ui/optimized-image";
-import { Navigation } from "./navigation/Navigation";
+import Navigation from "./navigation/Navigation";
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();

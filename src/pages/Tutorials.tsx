@@ -4,7 +4,7 @@ import OptimizedHelmet from '@/components/seo/OptimizedHelmet';
 import TutorialHero from '@/components/tutorials/TutorialHero';
 import TutorialCard from '@/components/tutorials/TutorialCard';
 import TutorialFeatures from '@/components/tutorials/TutorialFeatures';
-import { Navigation } from '@/components/navigation/Navigation';
+import Navigation from '@/components/navigation/Navigation';
 
 const tutorials = [
   {

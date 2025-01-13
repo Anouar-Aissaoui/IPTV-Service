@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigation } from "@/components/navigation/Navigation";
+import Navigation from "@/components/navigation/Navigation";
 import OptimizedHelmet from "@/components/seo/OptimizedHelmet";
 import LiveChannels from "@/components/LiveChannels";
 

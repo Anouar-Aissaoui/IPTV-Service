@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import OptimizedHelmet from "@/components/seo/OptimizedHelmet";
 import { ContentWrapper } from "@/components/layout/ContentWrapper";
-import { Navigation } from "@/components/navigation/Navigation";
+import Navigation from "@/components/navigation/Navigation";
 import { SEOContent } from "@/components/SEOContent";
 import { trackSEOMetrics } from "@/utils/seoUtils";
 import { useQuery } from "@tanstack/react-query";
