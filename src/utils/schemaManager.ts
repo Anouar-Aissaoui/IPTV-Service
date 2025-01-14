@@ -1,6 +1,6 @@
-import type { BreadcrumbList, FAQPage, WebPage, WithContext } from "schema-dts";
+import type { BreadcrumbList, FAQPage, WebPage, WithContext, Thing } from "schema-dts";
 
-export const generateDynamicSchema = (pageData: {
+interface SchemaData {
   type: string;
   title: string;
   description: string;
@@ -10,29 +10,35 @@ export const generateDynamicSchema = (pageData: {
   dateModified?: string;
   breadcrumbs?: Array<{name: string, item: string}>;
   faq?: Array<{question: string, answer: string}>;
-}): Array<WithContext<WebPage | BreadcrumbList | FAQPage>> => {
-  const schemas: Array<WithContext<WebPage | BreadcrumbList | FAQPage>> = [];
+}
+
+export const generateDynamicSchema = (pageData: SchemaData): WithContext<Thing> => {
+  const schemas: Array<Thing> = [];
 
   // Base WebPage schema
-  const baseSchema: WithContext<WebPage> = {
-    "@context": "https://schema.org",
-    "@type": pageData.type,
-    "@id": `https://www.iptvservice.site${pageData.url}#${pageData.type.toLowerCase()}`,
+  const baseSchema: WebPage = {
+    "@type": "WebPage",
+    "@id": `https://www.iptvservice.site${pageData.url}#webpage`,
     "url": `https://www.iptvservice.site${pageData.url}`,
     "name": pageData.title,
     "description": pageData.description,
     "publisher": {
+      "@type": "Organization",
       "@id": "https://www.iptvservice.site/#organization"
     },
     "inLanguage": "en-US",
-    "potentialAction": {
+    "potentialAction": [{
       "@type": "SearchAction",
-      "target": "https://www.iptvservice.site/search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    },
-    "breadcrumb": {
-      "@id": "https://www.iptvservice.site/#breadcrumb"
-    }
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://www.iptvservice.site/search?q={search_term_string}"
+      },
+      "query-input": {
+        "@type": "PropertyValueSpecification",
+        "valueRequired": true,
+        "valueName": "search_term_string"
+      }
+    }]
   };
 
   if (pageData.datePublished) {
@@ -49,8 +55,7 @@ export const generateDynamicSchema = (pageData: {
 
   // Generate breadcrumbs schema if available
   if (pageData.breadcrumbs) {
-    const breadcrumbsSchema: WithContext<BreadcrumbList> = {
-      "@context": "https://schema.org",
+    const breadcrumbsSchema: BreadcrumbList = {
       "@type": "BreadcrumbList",
       "itemListElement": pageData.breadcrumbs.map((crumb, index) => ({
         "@type": "ListItem",
@@ -64,8 +69,7 @@ export const generateDynamicSchema = (pageData: {
 
   // Generate FAQ schema if available
   if (pageData.faq) {
-    const faqSchema: WithContext<FAQPage> = {
-      "@context": "https://schema.org",
+    const faqSchema: FAQPage = {
       "@type": "FAQPage",
       "mainEntity": pageData.faq.map(item => ({
         "@type": "Question",
@@ -79,5 +83,8 @@ export const generateDynamicSchema = (pageData: {
     schemas.push(faqSchema);
   }
 
-  return schemas;
+  return {
+    "@context": "https://schema.org",
+    "@graph": schemas
+  };
 };

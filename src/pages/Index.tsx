@@ -32,14 +32,14 @@ const Index = () => {
           page_title: pageTitle,
           meta_description: pageDescription,
           canonical_url: 'https://www.iptvservice.site',
-          structured_data: getStructuredData('website', {
+          structured_data: JSON.parse(JSON.stringify(getStructuredData('website', {
             title: pageTitle,
             description: pageDescription,
             datePublished: "2024-01-01",
             dateModified: new Date().toISOString(),
             author: "IPTV Service",
             image: "https://www.iptvservice.site/iptv-subscription.png"
-          }),
+          }))),
           meta_robots: 'index,follow',
           open_graph: {
             title: pageTitle,
@@ -135,7 +135,6 @@ const Index = () => {
 
       <Breadcrumbs />
       
-      {/* Keep existing component structure */}
       <ContentWrapper as="section" ariaLabel="Hero Section">
         <Hero />
       </ContentWrapper>
@@ -173,7 +172,6 @@ const Index = () => {
         <FAQ />
       </ContentWrapper>
 
-      {/* Quick Links Section */}
       <div className="container mx-auto px-4 py-12 my-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           <div className="brutal-border brutal-shadow bg-black p-6 transform hover:-rotate-1 transition-transform">
@@ -213,7 +211,6 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Footer Section */}
       <footer className="bg-black border-t border-neon mt-16">
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">

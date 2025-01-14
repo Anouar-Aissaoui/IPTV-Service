@@ -79,13 +79,13 @@ const BlogPost = () => {
         title: article?.title || 'Best IPTV Service Providers Guide',
         description: article?.description,
         meta_tags: article?.meta_tags || {},
-        structured_data: getStructuredData('article', {
+        structured_data: JSON.parse(JSON.stringify(getStructuredData('article', {
           title: article?.title,
           description: article?.description,
           author: article?.author,
           datePublished: article?.published_at,
           dateModified: article?.updated_at
-        })
+        })))
       };
 
       if (existingRecord) {

@@ -9,7 +9,7 @@ import { getBreadcrumbSchema } from './schemas/BreadcrumbSchema';
 import { generateDynamicSchema } from '@/utils/schemaManager';
 import type { WithContext, Thing } from 'schema-dts';
 
-export const getStructuredData = (pageType?: string, pageData?: any): WithContext<Thing> => {
+export const getStructuredData = (pageType?: string, pageData?: any): Record<string, any> => {
   const baseSchemas = [
     getOrganizationSchema(),
     getWebsiteSchema(),
@@ -29,7 +29,7 @@ export const getStructuredData = (pageType?: string, pageData?: any): WithContex
       breadcrumbs: pageData.breadcrumbs,
       faq: pageData.faq
     });
-    baseSchemas.push(...dynamicSchemas);
+    baseSchemas.push(dynamicSchemas);
   }
 
   if (pageType === 'article' && pageData) {
@@ -40,8 +40,9 @@ export const getStructuredData = (pageType?: string, pageData?: any): WithContex
     baseSchemas.push(getTutorialSchema(pageData));
   }
 
-  return {
+  // Convert to plain object for JSON compatibility
+  return JSON.parse(JSON.stringify({
     "@context": "https://schema.org",
     "@graph": baseSchemas
-  };
+  }));
 };
