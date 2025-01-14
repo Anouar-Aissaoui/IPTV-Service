@@ -25,3 +25,13 @@ export interface SEOPageData {
   pageType?: string;
   alternateUrls?: Record<string, string>;
 }
+
+export interface SEOMetrics {
+  route: string;
+  title: string;
+  description: string;
+  canonical_url: string;
+  meta_tags: Record<string, string>;
+  structured_data: Record<string, any>;
+  social_tags?: Record<string, any>;
+}
