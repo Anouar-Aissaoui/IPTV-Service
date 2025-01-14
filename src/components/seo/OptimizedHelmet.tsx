@@ -1,9 +1,8 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { Helmet } from 'react-helmet';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { trackSEOMetrics } from '@/utils/seoUtils';
-import { useLocation } from 'react-router-dom';
 
 interface HelmetProps {
   title?: string;
@@ -20,8 +19,8 @@ interface HelmetProps {
 }
 
 const OptimizedHelmet: React.FC<HelmetProps> = memo(({
-  title = "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide",
-  description = "Looking to Buy IPTV? Choose the best IPTV provider offering affordable IPTV services in USA, UK & Worldwide with 24K+ channels. IPTV Subscribe now!",
+  title = "Best IPTV Service Providers Subscriptions: Complete Guide 2025",
+  description = "Discover the top IPTV service providers offering premium subscriptions in 2025. Compare features, pricing, and reliability to find the perfect IPTV subscription for your streaming needs.",
   canonicalUrl,
   imageUrl = "/iptv-subscription.png",
   locale = "en",
@@ -32,16 +31,12 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
   pageType = 'home',
   alternateUrls = {}
 }) => {
-  const location = useLocation();
   const baseUrl = 'https://www.iptvservice.site';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
-  const currentPath = location.pathname;
-  const fullCanonicalUrl = canonicalUrl 
-    ? (canonicalUrl.startsWith('http') ? canonicalUrl : `${baseUrl}${canonicalUrl}`)
-    : `${baseUrl}${currentPath}`;
+  const fullCanonicalUrl = canonicalUrl ? (canonicalUrl.startsWith('http') ? canonicalUrl : `${baseUrl}${canonicalUrl}`) : baseUrl;
 
   // Track SEO metrics
-  useEffect(() => {
+  React.useEffect(() => {
     void trackSEOMetrics({
       title,
       description,
@@ -49,19 +44,33 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
       imageUrl: fullImageUrl,
       locale,
       pageType,
-      alternateUrls,
-      canonicalUrl: fullCanonicalUrl
+      alternateUrls
     });
-  }, [title, description, keywords, fullImageUrl, locale, pageType, alternateUrls, fullCanonicalUrl]);
+  }, [title, description, keywords, fullImageUrl, locale, pageType, alternateUrls]);
+
+  // Get dynamic content based on page type
+  const { data: pageContent } = useQuery({
+    queryKey: ['page-content', pageType],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('page_content')
+        .select('*')
+        .eq('page_path', window.location.pathname)
+        .maybeSingle();
+
+      if (error) throw error;
+      return data;
+    }
+  });
 
   // Get SEO metrics for additional metadata
   const { data: seoMetrics } = useQuery({
-    queryKey: ['seo-metrics', currentPath],
+    queryKey: ['seo-metrics', window.location.pathname],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('seo_metrics')
         .select('*')
-        .eq('route', currentPath)
+        .eq('route', window.location.pathname)
         .maybeSingle();
 
       if (error) throw error;
@@ -70,9 +79,11 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
   });
 
   const getMetaDescription = () => {
+    // First try to get description from SEO metrics
     if (seoMetrics?.description) {
       return seoMetrics.description;
     }
+    // Fallback to provided description
     return description;
   };
 
@@ -123,7 +134,7 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
       
       {/* Alternate Language URLs */}
       {Object.entries(alternateUrls).map(([lang, url]) => (
-        <link key={`alternate-${lang}`} rel="alternate" href={url.startsWith('http') ? url : `${baseUrl}${url}`} hrefLang={lang} />
+        <link key={`alternate-${lang}`} rel="alternate" href={url} hrefLang={lang} />
       ))}
       <link rel="alternate" href={baseUrl} hrefLang="x-default" />
       

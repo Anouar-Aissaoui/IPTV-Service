@@ -14,7 +14,6 @@ export interface PSEOVariation {
   page_type?: string;
   locale?: string;
   alternate_urls?: Record<string, string>;
-  canonicalUrl?: string;
 }
 
 export interface SEOPageData {
@@ -25,7 +24,6 @@ export interface SEOPageData {
   locale?: string;
   pageType?: string;
   alternateUrls?: Record<string, string>;
-  canonicalUrl?: string;
 }
 
 export interface SEOMetrics {
