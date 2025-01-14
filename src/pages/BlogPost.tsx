@@ -64,32 +64,31 @@ const BlogPost = () => {
     gcTime: 10 * 60 * 1000,
   });
 
-  // Track page view for SEO metrics
   const { mutate: trackPageView } = useMutation({
     mutationKey: ['seo-performance', 'track-view'],
     mutationFn: async () => {
-      // First check if the record exists
       const { data: existingRecord } = await supabase
         .from('seo_metrics')
         .select()
         .eq('route', '/blog/best-iptv-service-providers-subscriptions')
         .maybeSingle();
 
+      const structuredData = getStructuredData('article', {
+        title: article?.title,
+        description: article?.description,
+        author: article?.author,
+        datePublished: article?.published_at,
+        dateModified: article?.updated_at
+      });
+
       const seoData = {
         title: article?.title || 'Best IPTV Service Providers Guide',
         description: article?.description,
         meta_tags: article?.meta_tags || {},
-        structured_data: JSON.parse(JSON.stringify(getStructuredData('article', {
-          title: article?.title,
-          description: article?.description,
-          author: article?.author,
-          datePublished: article?.published_at,
-          dateModified: article?.updated_at
-        })))
+        structured_data: JSON.parse(JSON.stringify(structuredData))
       };
 
       if (existingRecord) {
-        // Update existing record
         const { data, error } = await supabase
           .from('seo_metrics')
           .update(seoData)
@@ -100,7 +99,6 @@ const BlogPost = () => {
         if (error) throw error;
         return data;
       } else {
-        // Insert new record
         const { data, error } = await supabase
           .from('seo_metrics')
           .insert({

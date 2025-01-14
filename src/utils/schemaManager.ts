@@ -1,4 +1,4 @@
-import type { BreadcrumbList, FAQPage, WebPage, WithContext, Thing } from "schema-dts";
+import type { WithContext, Thing, WebPage, BreadcrumbList, SearchAction, FAQPage } from 'schema-dts';
 
 interface SchemaData {
   type: string;
@@ -12,7 +12,7 @@ interface SchemaData {
   faq?: Array<{question: string, answer: string}>;
 }
 
-export const generateDynamicSchema = (pageData: SchemaData): WithContext<Thing> => {
+export const generateDynamicSchema = (pageData: SchemaData): Record<string, any> => {
   const schemas: Array<Thing> = [];
 
   // Base WebPage schema
@@ -29,15 +29,8 @@ export const generateDynamicSchema = (pageData: SchemaData): WithContext<Thing> 
     "inLanguage": "en-US",
     "potentialAction": [{
       "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://www.iptvservice.site/search?q={search_term_string}"
-      },
-      "query-input": {
-        "@type": "PropertyValueSpecification",
-        "valueRequired": true,
-        "valueName": "search_term_string"
-      }
+      "target": `https://www.iptvservice.site/search?q={search_term_string}`,
+      "query": "required name=search_term_string"
     }]
   };
 
@@ -83,6 +76,7 @@ export const generateDynamicSchema = (pageData: SchemaData): WithContext<Thing> 
     schemas.push(faqSchema);
   }
 
+  // Convert to plain object for JSON compatibility
   return {
     "@context": "https://schema.org",
     "@graph": schemas

@@ -7,7 +7,6 @@ import { getArticleSchema } from './schemas/ArticleSchema';
 import { getTutorialSchema } from './schemas/TutorialSchema';
 import { getBreadcrumbSchema } from './schemas/BreadcrumbSchema';
 import { generateDynamicSchema } from '@/utils/schemaManager';
-import type { WithContext, Thing } from 'schema-dts';
 
 export const getStructuredData = (pageType?: string, pageData?: any): Record<string, any> => {
   const baseSchemas = [
