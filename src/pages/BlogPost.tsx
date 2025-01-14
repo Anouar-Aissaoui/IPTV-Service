@@ -69,26 +69,50 @@ const BlogPost = () => {
     mutationKey: ['seo-performance', 'track-view'],
     mutationFn: async () => {
       const { data, error } = await supabase
-        .from('seo_performance_tracking')
-        .upsert([
-          {
-            page_path: '/blog/best-iptv-service-providers-subscriptions',
-            page_title: article?.title || 'Best IPTV Service Providers Guide',
-            meta_description: article?.description,
-            canonical_url: 'https://www.iptvservice.site/blog/best-iptv-service-providers-subscriptions',
-            structured_data: getStructuredData('article', {
-              title: article?.title,
-              description: article?.description,
-              author: article?.author,
-              datePublished: article?.published_at,
-              dateModified: article?.updated_at
-            })
-          }
-        ], {
-          onConflict: 'page_path'
-        });
+        .from('seo_metrics')
+        .insert({
+          route: '/blog/best-iptv-service-providers-subscriptions',
+          title: article?.title || 'Best IPTV Service Providers Guide',
+          description: article?.description,
+          canonical_url: 'https://www.iptvservice.site/blog/best-iptv-service-providers-subscriptions',
+          meta_tags: article?.meta_tags || {},
+          structured_data: getStructuredData('article', {
+            title: article?.title,
+            description: article?.description,
+            author: article?.author,
+            datePublished: article?.published_at,
+            dateModified: article?.updated_at
+          })
+        })
+        .select()
+        .single();
 
-      if (error) throw error;
+      if (error) {
+        // If the record already exists, try to update it
+        if (error.code === '23505') { // Unique violation error code
+          const { data: updatedData, error: updateError } = await supabase
+            .from('seo_metrics')
+            .update({
+              title: article?.title || 'Best IPTV Service Providers Guide',
+              description: article?.description,
+              meta_tags: article?.meta_tags || {},
+              structured_data: getStructuredData('article', {
+                title: article?.title,
+                description: article?.description,
+                author: article?.author,
+                datePublished: article?.published_at,
+                dateModified: article?.updated_at
+              })
+            })
+            .eq('route', '/blog/best-iptv-service-providers-subscriptions')
+            .select()
+            .single();
+
+          if (updateError) throw updateError;
+          return updatedData;
+        }
+        throw error;
+      }
       return data;
     }
   });
