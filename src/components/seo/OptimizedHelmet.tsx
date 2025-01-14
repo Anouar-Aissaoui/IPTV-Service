@@ -33,7 +33,7 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
 }) => {
   const baseUrl = 'https://www.iptvservice.site';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
-  const fullCanonicalUrl = canonicalUrl ? (canonicalUrl.startsWith('http') ? canonicalUrl : `${baseUrl}${canonicalUrl}`) : baseUrl;
+  const fullCanonicalUrl = canonicalUrl ? (canonicalUrl.startsWith('http') ? canonicalUrl : `${baseUrl}${canonicalUrl}`) : `${baseUrl}${window.location.pathname}`;
 
   // Track SEO metrics
   React.useEffect(() => {
