@@ -48,7 +48,7 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
     });
   }, [title, description, keywords, fullImageUrl, locale, pageType, alternateUrls]);
 
-  // Get dynamic meta description based on page type
+  // Get dynamic content based on page type
   const { data: pageContent } = useQuery({
     queryKey: ['page-content', pageType],
     queryFn: async () => {
@@ -63,10 +63,27 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
     }
   });
 
-  const getMetaDescription = () => {
-    if (pageContent?.meta_description) {
-      return pageContent.meta_description;
+  // Get SEO metrics for additional metadata
+  const { data: seoMetrics } = useQuery({
+    queryKey: ['seo-metrics', window.location.pathname],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('seo_metrics')
+        .select('*')
+        .eq('route', window.location.pathname)
+        .maybeSingle();
+
+      if (error) throw error;
+      return data;
     }
+  });
+
+  const getMetaDescription = () => {
+    // First try to get description from SEO metrics
+    if (seoMetrics?.description) {
+      return seoMetrics.description;
+    }
+    // Fallback to provided description
     return description;
   };
 
