@@ -16,59 +16,15 @@ import { Link } from "react-router-dom";
 import { ContentWrapper } from "@/components/layout/ContentWrapper";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { analyzeSEO } from "@/utils/yoastSEO";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const Index = () => {
   const pageTitle = "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide";
   const pageDescription = "Looking to Buy IPTV? Choose the best IPTV provider offering affordable IPTV services in USA, UK & Worldwide with 24K+ channels. IPTV Subscribe now!";
+  const [seoScore, setSeoScore] = useState(0);
   
-  // Track SEO performance
-  const { data: seoMetrics } = useQuery({
-    queryKey: ['seoMetrics', 'index'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('seo_performance_tracking')
-        .upsert({
-          page_path: '/',
-          page_title: pageTitle,
-          meta_description: pageDescription,
-          canonical_url: 'https://www.iptvservice.site',
-          structured_data: getStructuredData('website', {
-            title: pageTitle,
-            description: pageDescription,
-            datePublished: "2024-01-01",
-            dateModified: new Date().toISOString(),
-            author: "IPTV Service",
-            image: "https://www.iptvservice.site/iptv-subscription.png"
-          }),
-          meta_robots: 'index,follow',
-          open_graph: {
-            title: pageTitle,
-            description: pageDescription,
-            type: 'website',
-            url: 'https://www.iptvservice.site',
-            image: 'https://www.iptvservice.site/iptv-subscription.png'
-          },
-          twitter_card: {
-            title: pageTitle,
-            description: pageDescription,
-            image: 'https://www.iptvservice.site/iptv-subscription.png'
-          },
-          keyword_rankings: {
-            'iptv subscription': 1,
-            'best iptv': 2,
-            'iptv providers': 3,
-            'buy iptv': 4
-          }
-        }, {
-          onConflict: 'page_path'
-        })
-        .select();
-
-      if (error) throw error;
-      return data;
-    }
-  });
-
   const pageData = {
     title: pageTitle,
     description: pageDescription,
@@ -101,6 +57,91 @@ const Index = () => {
     readingTimeMinutes: 5
   };
 
+  // Track SEO performance
+  const { data: seoMetrics } = useQuery({
+    queryKey: ['seoMetrics', 'index'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('seo_performance_tracking')
+        .upsert({
+          page_path: '/',
+          page_title: pageTitle,
+          meta_description: pageDescription,
+          canonical_url: 'https://www.iptvservice.site',
+          structured_data: getStructuredData('website', pageData),
+          meta_robots: 'index,follow',
+          open_graph: {
+            title: pageTitle,
+            description: pageDescription,
+            type: 'website',
+            url: 'https://www.iptvservice.site',
+            image: 'https://www.iptvservice.site/iptv-subscription.png'
+          },
+          twitter_card: {
+            title: pageTitle,
+            description: pageDescription,
+            image: 'https://www.iptvservice.site/iptv-subscription.png'
+          },
+          keyword_rankings: {
+            'iptv subscription': 1,
+            'best iptv': 2,
+            'iptv providers': 3,
+            'buy iptv': 4
+          }
+        }, {
+          onConflict: 'page_path'
+        })
+        .select();
+
+      if (error) throw error;
+      return data;
+    }
+  });
+
+  // Analyze SEO using Yoast
+  useEffect(() => {
+    const analyzeContent = async () => {
+      try {
+        const mainContent = document.querySelector('main')?.textContent || '';
+        const analysis = await analyzeSEO({
+          text: mainContent,
+          title: pageTitle,
+          description: pageDescription,
+          keyword: pageData.primaryKeyword,
+          url: 'https://www.iptvservice.site'
+        });
+        
+        const score = Math.round((analysis.readability.score + analysis.seo.score) / 2);
+        setSeoScore(score);
+
+        // Update SEO score in database
+        const { error } = await supabase
+          .from('seo_performance_tracking')
+          .update({ seo_score: score })
+          .eq('page_path', '/');
+
+        if (error) {
+          console.error('Error updating SEO score:', error);
+          toast.error('Failed to update SEO score');
+        }
+
+        // Show SEO score notification
+        if (score >= 80) {
+          toast.success(`Page SEO Score: ${score}/100`);
+        } else if (score >= 60) {
+          toast.info(`Page SEO Score: ${score}/100`);
+        } else {
+          toast.warning(`Page SEO Score: ${score}/100`);
+        }
+      } catch (error) {
+        console.error('Error analyzing SEO:', error);
+        toast.error('Failed to analyze SEO');
+      }
+    };
+
+    analyzeContent();
+  }, [pageTitle, pageDescription]);
+
   return (
     <ContentWrapper as="main" className="min-h-screen bg-dark text-white font-grotesk">
       <SEOOptimizer 
@@ -116,22 +157,8 @@ const Index = () => {
         ]}
         noindex={false}
         structuredData={getStructuredData('website', pageData)}
-      >
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": pageTitle,
-            "description": pageDescription,
-            "url": "https://www.iptvservice.site",
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": "https://www.iptvservice.site/search?q={search_term_string}",
-              "query-input": "required name=search_term_string"
-            }
-          })}
-        </script>
-      </SEOOptimizer>
+        content={document.querySelector('main')?.textContent || ''}
+      />
 
       <Breadcrumbs />
       
