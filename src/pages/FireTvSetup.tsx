@@ -142,7 +142,7 @@ const FireTvSetup = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Device Settings</h3>
-                    <p>Enable "Apps from Unknown Sources" in Settings > My Fire TV > Developer Options.</p>
+                    <p>Enable "Apps from Unknown Sources" in Settings {'>'} My Fire TV {'>'} Developer Options.</p>
                   </div>
                 </div>
               </Card>
