@@ -59,7 +59,7 @@ const faqs = [
 ];
 
 export const FAQ = () => {
-  // Generate FAQ Schema
+  // Generate FAQ Schema - single source of truth
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -85,6 +85,8 @@ export const FAQ = () => {
             channel listings, streaming quality, and technical support options.
           </p>
         </div>
+        
+        {/* Single FAQPage schema implementation */}
         <div itemScope itemType="https://schema.org/FAQPage">
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
@@ -92,30 +94,25 @@ export const FAQ = () => {
                 key={index}
                 value={`item-${index}`}
                 className="bg-dark border border-neon/20 rounded-lg px-6 hover:border-neon/40 transition-colors duration-300"
-                itemScope
-                itemProp="mainEntity"
-                itemType="https://schema.org/Question"
               >
                 <AccordionTrigger 
                   className="text-left text-white hover:text-neon"
-                  itemProp="name"
                 >
-                  {faq.question}
+                  <span itemProp="name">{faq.question}</span>
                 </AccordionTrigger>
-                <AccordionContent 
-                  className="text-gray-400"
-                  itemScope
-                  itemType="https://schema.org/Answer"
-                  itemProp="acceptedAnswer"
-                >
-                  <div itemProp="text" className="leading-relaxed">
-                    {faq.answer}
+                <AccordionContent className="text-gray-400">
+                  <div itemProp="acceptedAnswer" itemScope itemType="https://schema.org/Answer">
+                    <div itemProp="text" className="leading-relaxed">
+                      {faq.answer}
+                    </div>
                   </div>
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
         </div>
+
+        {/* Inject the structured data */}
         <script type="application/ld+json">
           {JSON.stringify(faqSchema)}
         </script>
