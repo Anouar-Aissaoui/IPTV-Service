@@ -19,6 +19,7 @@ import FreeTrial from "./pages/FreeTrial";
 import NotFound from "./pages/NotFound";
 import BlogPost from "./pages/BlogPost";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,6 +39,7 @@ const AppRoutes = () => {
       <Route path="/pricing" element={<Index />} />
       <Route path="/faq" element={<Index />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/terms-of-service" element={<TermsOfService />} />
       <Route path="/iptv-free-trial-24-hours" element={<FreeTrial />} />
       <Route path="/blog/best-iptv-service-providers-subscriptions" element={<BlogPost />} />
       
