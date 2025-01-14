@@ -48,21 +48,6 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
     });
   }, [title, description, keywords, fullImageUrl, locale, pageType, alternateUrls]);
 
-  // Get dynamic content based on page type
-  const { data: pageContent } = useQuery({
-    queryKey: ['page-content', pageType],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('page_content')
-        .select('*')
-        .eq('page_path', window.location.pathname)
-        .maybeSingle();
-
-      if (error) throw error;
-      return data;
-    }
-  });
-
   // Get SEO metrics for additional metadata
   const { data: seoMetrics } = useQuery({
     queryKey: ['seo-metrics', window.location.pathname],
