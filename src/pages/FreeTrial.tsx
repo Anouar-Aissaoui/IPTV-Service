@@ -109,7 +109,7 @@ const FreeTrial = () => {
           {/* Hero Section */}
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-black mb-6 transform -rotate-2">
-              Get Your <span className="text-neon">Free IPTV Trial 2024</span>
+              Get Your <span className="text-neon">Free IPTV Trial 2025</span>
             </h1>
             <p className="text-xl text-gray-300 mb-8 transform rotate-1">
               Experience premium IPTV streaming with our 24-hour free trial - Instant Activation, No Credit Card Required
@@ -222,9 +222,9 @@ const FreeTrial = () => {
 
           {/* SEO Content Section */}
           <article className="prose prose-invert max-w-none mb-16">
-            <h2 className="text-2xl font-bold mb-4">Free IPTV Trial 2024 - Test Our Premium Service</h2>
+            <h2 className="text-2xl font-bold mb-4">Free IPTV Trial 2025 - Test Our Premium Service</h2>
             <p>
-              Looking for the best IPTV service with a free trial in 2024? Our 24-hour IPTV trial gives you complete 
+              Looking for the best IPTV service with a free trial in 2025? Our 24-hour IPTV trial gives you complete 
               access to premium features, including live sports, movies, and international channels. Experience why 
               we're rated as one of the most reliable <a href="/premium-iptv-service" className="text-neon hover:underline">IPTV providers</a> with instant activation and no credit card required.
             </p>
