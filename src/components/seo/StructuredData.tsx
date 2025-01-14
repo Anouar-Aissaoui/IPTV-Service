@@ -6,15 +6,30 @@ import { getServiceSchema } from './schemas/ServiceSchema';
 import { getArticleSchema } from './schemas/ArticleSchema';
 import { getTutorialSchema } from './schemas/TutorialSchema';
 import { getBreadcrumbSchema } from './schemas/BreadcrumbSchema';
+import { generateDynamicSchema } from '@/utils/schemaManager';
 
 export const getStructuredData = (pageType?: string, pageData?: any) => {
   const baseSchemas = [
     getOrganizationSchema(),
     getWebsiteSchema(),
     getProductSchema(),
-    getFAQSchema(),
     getServiceSchema()
   ];
+
+  if (pageData) {
+    const dynamicSchemas = generateDynamicSchema({
+      type: pageType || 'WebPage',
+      title: pageData.title,
+      description: pageData.description,
+      url: pageData.url || '/',
+      imageUrl: pageData.image,
+      datePublished: pageData.datePublished,
+      dateModified: pageData.dateModified,
+      breadcrumbs: pageData.breadcrumbs,
+      faq: pageData.faq
+    });
+    baseSchemas.push(...dynamicSchemas);
+  }
 
   if (pageType === 'article' && pageData) {
     baseSchemas.push(getArticleSchema(pageData));
@@ -22,11 +37,6 @@ export const getStructuredData = (pageType?: string, pageData?: any) => {
 
   if (pageType === 'tutorial' && pageData) {
     baseSchemas.push(getTutorialSchema(pageData));
-  }
-
-  // Add breadcrumbs schema if we have breadcrumb data
-  if (pageData?.breadcrumbs) {
-    baseSchemas.push(getBreadcrumbSchema(pageData.breadcrumbs));
   }
 
   return {
