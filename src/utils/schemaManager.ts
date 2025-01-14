@@ -1,4 +1,4 @@
-import type { BreadcrumbList } from "schema-dts";
+import type { BreadcrumbList, FAQPage, Question, Answer, WithContext } from "schema-dts";
 
 export const generateDynamicSchema = (pageData: {
   type: string;
@@ -29,7 +29,7 @@ export const generateDynamicSchema = (pageData: {
 
   // Generate breadcrumbs schema if available
   if (pageData.breadcrumbs) {
-    const breadcrumbsSchema: BreadcrumbList = {
+    const breadcrumbsSchema: WithContext<BreadcrumbList> = {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": pageData.breadcrumbs.map((crumb, index) => ({
@@ -44,7 +44,7 @@ export const generateDynamicSchema = (pageData: {
 
   // Generate FAQ schema if available
   if (pageData.faq) {
-    const faqSchema = {
+    const faqSchema: WithContext<FAQPage> = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": pageData.faq.map(item => ({
