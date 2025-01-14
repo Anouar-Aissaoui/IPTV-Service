@@ -16,6 +16,7 @@ interface SEOOptimizerProps {
   noindex?: boolean;
   structuredData?: Record<string, any>;
   breadcrumbs?: Array<{name: string, item: string}>;
+  content?: string; // Added this prop
 }
 
 export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
@@ -28,7 +29,8 @@ export const SEOOptimizer: React.FC<SEOOptimizerProps> = ({
   children,
   noindex = false,
   structuredData,
-  breadcrumbs
+  breadcrumbs,
+  content
 }) => {
   const location = useLocation();
   const currentPath = location.pathname;

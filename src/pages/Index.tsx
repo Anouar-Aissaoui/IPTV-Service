@@ -1,3 +1,14 @@
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
+import { analyzeSEO } from '@/utils/yoastSEO';
+import { getStructuredData } from '@/components/seo/StructuredData';
+import { seoKeywords } from '@/components/seo/Keywords';
+import { SEOOptimizer } from '@/components/seo/SEOOptimizer';
+import { ContentWrapper } from '@/components/layout/ContentWrapper';
+import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import Hero from "@/components/Hero";
 import { Pricing } from "@/components/Pricing";
 import Content from "@/components/Content";
@@ -5,20 +16,9 @@ import { LiveSports } from "@/components/LiveSports";
 import { FAQ } from "@/components/FAQ";
 import { BrandCarousel } from "@/components/BrandCarousel";
 import LiveChannels from "@/components/LiveChannels";
-import { SEOOptimizer } from "@/components/seo/SEOOptimizer";
 import { IPTVDefinition } from "@/components/seo/IPTVDefinition";
 import { IPTVBenefits } from "@/components/seo/IPTVBenefits";
 import { IPTVExplanation } from "@/components/seo/IPTVExplanation";
-import { seoKeywords } from "@/components/seo/Keywords";
-import { getStructuredData } from "@/components/seo/StructuredData";
-import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
-import { Link } from "react-router-dom";
-import { ContentWrapper } from "@/components/layout/ContentWrapper";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
-import { analyzeSEO } from "@/utils/yoastSEO";
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
 
 const Index = () => {
   const pageTitle = "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide";
@@ -87,7 +87,8 @@ const Index = () => {
             'best iptv': 2,
             'iptv providers': 3,
             'buy iptv': 4
-          }
+          },
+          page_speed_score: seoScore // Store the SEO score here instead
         }, {
           onConflict: 'page_path'
         })
@@ -113,17 +114,6 @@ const Index = () => {
         
         const score = Math.round((analysis.readability.score + analysis.seo.score) / 2);
         setSeoScore(score);
-
-        // Update SEO score in database
-        const { error } = await supabase
-          .from('seo_performance_tracking')
-          .update({ seo_score: score })
-          .eq('page_path', '/');
-
-        if (error) {
-          console.error('Error updating SEO score:', error);
-          toast.error('Failed to update SEO score');
-        }
 
         // Show SEO score notification
         if (score >= 80) {
@@ -157,12 +147,10 @@ const Index = () => {
         ]}
         noindex={false}
         structuredData={getStructuredData('website', pageData)}
-        content={document.querySelector('main')?.textContent || ''}
       />
 
       <Breadcrumbs />
       
-      {/* Keep existing component structure */}
       <ContentWrapper as="section" ariaLabel="Hero Section">
         <Hero />
       </ContentWrapper>
