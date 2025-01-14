@@ -73,59 +73,40 @@
     <mobile:mobile/>
   </url>
 
+  <!-- Tutorial Pages with Enhanced Meta -->
   <url>
     <loc>https://www.iptvservice.site/iptv-setup-tutorials/how-to-setup-iptv-on-vlc-windows</loc>
-    <lastmod>2024-03-26</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <mobile:mobile/>
+    <image:image>
+      <image:loc>https://www.iptvservice.site/tutorials/vlc-setup.jpg</image:loc>
+      <image:title>VLC IPTV Setup Guide</image:title>
+    </image:image>
   </url>
 
   <url>
     <loc>https://www.iptvservice.site/iptv-setup-tutorials/how-to-setup-iptv-on-smart-tv</loc>
-    <lastmod>2024-03-26</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://www.iptvservice.site/iptv-setup-tutorials/how-to-setup-iptv-on-mobile-devices</loc>
-    <lastmod>2024-03-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://www.iptvservice.site/tutorials/smart-tv-setup.jpg</image:loc>
+      <image:title>Smart TV IPTV Setup Guide</image:title>
+    </image:image>
   </url>
 
   <url>
     <loc>https://www.iptvservice.site/iptv-setup-tutorials/how-to-setup-iptv-on-fire-tv-stick</loc>
-    <lastmod>2024-03-26</lastmod>
+    <lastmod>2024-03-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://www.iptvservice.site/iptv-setup-tutorials/how-to-setup-iptv-on-mag-box</loc>
-    <lastmod>2024-03-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://www.iptvservice.site/iptv-setup-tutorials/how-to-setup-iptv-on-formuler-z8</loc>
-    <lastmod>2024-03-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://www.iptvservice.site/iptv-setup-tutorials/how-to-setup-iptv-on-enigma2</loc>
-    <lastmod>2024-03-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <mobile:mobile/>
+    <image:image>
+      <image:loc>https://www.iptvservice.site/tutorials/firetv-setup.jpg</image:loc>
+      <image:title>Fire TV Stick IPTV Setup Guide</image:title>
+    </image:image>
   </url>
 </urlset>

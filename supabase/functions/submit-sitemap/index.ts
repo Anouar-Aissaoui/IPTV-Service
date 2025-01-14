@@ -17,6 +17,7 @@ interface SubmissionResult {
   status: number;
   success: boolean;
   message?: string;
+  timestamp: string;
 }
 
 const submitToSearchEngine = async (engine: string, url: string, sitemapUrl: string): Promise<SubmissionResult> => {
@@ -27,6 +28,7 @@ const submitToSearchEngine = async (engine: string, url: string, sitemapUrl: str
       method: 'GET',
       headers: {
         'User-Agent': 'IPTVService-Bot/1.0',
+        'Content-Type': 'application/xml',
       },
     });
     
@@ -36,7 +38,8 @@ const submitToSearchEngine = async (engine: string, url: string, sitemapUrl: str
       engine,
       status: response.status,
       success: response.ok,
-      message: response.ok ? 'Submitted successfully' : 'Submission failed'
+      message: response.ok ? 'Submitted successfully' : 'Submission failed',
+      timestamp: new Date().toISOString()
     };
   } catch (error) {
     console.error(`Error submitting to ${engine}:`, error);
@@ -44,7 +47,8 @@ const submitToSearchEngine = async (engine: string, url: string, sitemapUrl: str
       engine,
       status: 500,
       success: false,
-      message: error.message
+      message: error.message,
+      timestamp: new Date().toISOString()
     };
   }
 };
@@ -58,6 +62,11 @@ const submitSitemap = async (sitemapUrl: string) => {
     const result = await submitToSearchEngine(engine, url, sitemapUrl);
     results.push(result);
     console.log(`${engine} submission result:`, result);
+    
+    // Add delay between submissions
+    if (engine !== 'index_now') {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+    }
   }
 
   return results;
@@ -86,7 +95,8 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({
         message: allSuccessful ? 'Sitemap submitted successfully to all search engines' : 'Some submissions failed',
-        results
+        results,
+        timestamp: new Date().toISOString()
       }),
       { 
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -98,7 +108,8 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ 
         error: 'Internal server error',
-        message: error.message 
+        message: error.message,
+        timestamp: new Date().toISOString()
       }),
       { 
         headers: { ...corsHeaders, "Content-Type": "application/json" },
