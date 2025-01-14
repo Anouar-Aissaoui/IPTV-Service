@@ -88,7 +88,7 @@ const Index = () => {
             'iptv providers': 3,
             'buy iptv': 4
           },
-          page_speed_score: seoScore // Store the SEO score here instead
+          page_speed_score: seoScore
         }, {
           onConflict: 'page_path'
         })
