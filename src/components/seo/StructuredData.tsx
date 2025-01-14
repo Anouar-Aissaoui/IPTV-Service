@@ -9,11 +9,12 @@ import { getBreadcrumbSchema } from './schemas/BreadcrumbSchema';
 import { generateDynamicSchema } from '@/utils/schemaManager';
 
 export const getStructuredData = (pageType?: string, pageData?: any): Record<string, any> => {
+  // Convert all schema objects to plain JSON objects for database compatibility
   const baseSchemas = [
-    getOrganizationSchema(),
-    getWebsiteSchema(),
-    getProductSchema(),
-    getServiceSchema()
+    JSON.parse(JSON.stringify(getOrganizationSchema())),
+    JSON.parse(JSON.stringify(getWebsiteSchema())),
+    JSON.parse(JSON.stringify(getProductSchema())),
+    JSON.parse(JSON.stringify(getServiceSchema()))
   ];
 
   if (pageData) {
@@ -28,20 +29,20 @@ export const getStructuredData = (pageType?: string, pageData?: any): Record<str
       breadcrumbs: pageData.breadcrumbs,
       faq: pageData.faq
     });
-    baseSchemas.push(dynamicSchemas);
+    baseSchemas.push(JSON.parse(JSON.stringify(dynamicSchemas)));
   }
 
   if (pageType === 'article' && pageData) {
-    baseSchemas.push(getArticleSchema(pageData));
+    baseSchemas.push(JSON.parse(JSON.stringify(getArticleSchema(pageData))));
   }
 
   if (pageType === 'tutorial' && pageData) {
-    baseSchemas.push(getTutorialSchema(pageData));
+    baseSchemas.push(JSON.parse(JSON.stringify(getTutorialSchema(pageData))));
   }
 
   // Convert to plain object for JSON compatibility
-  return JSON.parse(JSON.stringify({
+  return {
     "@context": "https://schema.org",
     "@graph": baseSchemas
-  }));
+  };
 };

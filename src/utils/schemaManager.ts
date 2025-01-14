@@ -13,10 +13,10 @@ interface SchemaData {
 }
 
 export const generateDynamicSchema = (pageData: SchemaData): Record<string, any> => {
-  const schemas: Array<Thing> = [];
+  const schemas: Array<Record<string, any>> = [];
 
   // Base WebPage schema
-  const baseSchema: WebPage = {
+  const baseSchema = {
     "@type": "WebPage",
     "@id": `https://www.iptvservice.site${pageData.url}#webpage`,
     "url": `https://www.iptvservice.site${pageData.url}`,
@@ -30,7 +30,7 @@ export const generateDynamicSchema = (pageData: SchemaData): Record<string, any>
     "potentialAction": [{
       "@type": "SearchAction",
       "target": `https://www.iptvservice.site/search?q={search_term_string}`,
-      "query": "required name=search_term_string"
+      "query-input": "required name=search_term_string"
     }]
   };
 
@@ -48,7 +48,7 @@ export const generateDynamicSchema = (pageData: SchemaData): Record<string, any>
 
   // Generate breadcrumbs schema if available
   if (pageData.breadcrumbs) {
-    const breadcrumbsSchema: BreadcrumbList = {
+    const breadcrumbsSchema = {
       "@type": "BreadcrumbList",
       "itemListElement": pageData.breadcrumbs.map((crumb, index) => ({
         "@type": "ListItem",
@@ -62,7 +62,7 @@ export const generateDynamicSchema = (pageData: SchemaData): Record<string, any>
 
   // Generate FAQ schema if available
   if (pageData.faq) {
-    const faqSchema: FAQPage = {
+    const faqSchema = {
       "@type": "FAQPage",
       "mainEntity": pageData.faq.map(item => ({
         "@type": "Question",
@@ -76,9 +76,5 @@ export const generateDynamicSchema = (pageData: SchemaData): Record<string, any>
     schemas.push(faqSchema);
   }
 
-  // Convert to plain object for JSON compatibility
-  return {
-    "@context": "https://schema.org",
-    "@graph": schemas
-  };
+  return schemas[0]; // Return the first schema as the main one
 };
