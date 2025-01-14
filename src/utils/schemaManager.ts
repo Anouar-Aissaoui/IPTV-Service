@@ -1,4 +1,4 @@
-import type { BreadcrumbList, FAQPage, Question, Answer, WithContext } from "schema-dts";
+import type { BreadcrumbList, FAQPage, WebPage, WithContext } from "schema-dts";
 
 export const generateDynamicSchema = (pageData: {
   type: string;
@@ -10,8 +10,11 @@ export const generateDynamicSchema = (pageData: {
   dateModified?: string;
   breadcrumbs?: Array<{name: string, item: string}>;
   faq?: Array<{question: string, answer: string}>;
-}) => {
-  const baseSchema = {
+}): Array<WithContext<WebPage | BreadcrumbList | FAQPage>> => {
+  const schemas: Array<WithContext<WebPage | BreadcrumbList | FAQPage>> = [];
+
+  // Base WebPage schema
+  const baseSchema: WithContext<WebPage> = {
     "@context": "https://schema.org",
     "@type": pageData.type,
     "@id": `https://www.iptvservice.site${pageData.url}#${pageData.type.toLowerCase()}`,
@@ -22,10 +25,27 @@ export const generateDynamicSchema = (pageData: {
       "@id": "https://www.iptvservice.site/#organization"
     },
     "inLanguage": "en-US",
-    "datePublished": pageData.datePublished || new Date().toISOString(),
-    "dateModified": pageData.dateModified || new Date().toISOString(),
-    "image": pageData.imageUrl || "https://www.iptvservice.site/iptv-subscription.png"
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.iptvservice.site/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
+    "breadcrumb": {
+      "@id": "https://www.iptvservice.site/#breadcrumb"
+    }
   };
+
+  if (pageData.datePublished) {
+    baseSchema.datePublished = pageData.datePublished;
+  }
+  if (pageData.dateModified) {
+    baseSchema.dateModified = pageData.dateModified;
+  }
+  if (pageData.imageUrl) {
+    baseSchema.image = pageData.imageUrl;
+  }
+
+  schemas.push(baseSchema);
 
   // Generate breadcrumbs schema if available
   if (pageData.breadcrumbs) {
@@ -39,7 +59,7 @@ export const generateDynamicSchema = (pageData: {
         "item": `https://www.iptvservice.site${crumb.item}`
       }))
     };
-    return [baseSchema, breadcrumbsSchema];
+    schemas.push(breadcrumbsSchema);
   }
 
   // Generate FAQ schema if available
@@ -56,8 +76,8 @@ export const generateDynamicSchema = (pageData: {
         }
       }))
     };
-    return [baseSchema, faqSchema];
+    schemas.push(faqSchema);
   }
 
-  return [baseSchema];
+  return schemas;
 };
