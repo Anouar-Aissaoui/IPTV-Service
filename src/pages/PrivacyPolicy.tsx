@@ -1,6 +1,6 @@
 import React from 'react';
 import { DynamicMetaTags } from '@/components/seo/DynamicMetaTags';
-import { Navigation } from '@/components/navigation/Navigation';
+import Navigation from '@/components/navigation/Navigation';
 import { ContentWrapper } from '@/components/layout/ContentWrapper';
 
 const PrivacyPolicy = () => {
@@ -11,7 +11,7 @@ const PrivacyPolicy = () => {
         defaultTitle="Privacy Policy - IPTV Service"
         defaultDescription="Our privacy policy outlines how we collect, use, and protect your personal information when you use our IPTV service."
       />
-      <Navigation />
+      <Navigation onScrollToSection={() => {}} />
       <ContentWrapper as="main" className="container mx-auto px-4 py-8 prose prose-invert max-w-none">
         <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
         
