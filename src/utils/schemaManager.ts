@@ -32,8 +32,9 @@ export const generateDynamicSchema = (pageData: SchemaData): Record<string, any>
       "target": `https://www.iptvservice.site/search?q={search_term_string}`,
       "query-input": "required name=search_term_string"
     }]
-  };
+  } as Record<string, any>;
 
+  // Add optional properties if they exist
   if (pageData.datePublished) {
     baseSchema.datePublished = pageData.datePublished;
   }
