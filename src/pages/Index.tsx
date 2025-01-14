@@ -6,6 +6,8 @@ import { FAQ } from "@/components/FAQ";
 import { BrandCarousel } from "@/components/BrandCarousel";
 import LiveChannels from "@/components/LiveChannels";
 import { SEOOptimizer } from "@/components/seo/SEOOptimizer";
+import { Categories } from "@/components/seo/Categories";
+import { Tags } from "@/components/seo/Tags";
 import { IPTVDefinition } from "@/components/seo/IPTVDefinition";
 import { IPTVBenefits } from "@/components/seo/IPTVBenefits";
 import { IPTVExplanation } from "@/components/seo/IPTVExplanation";
@@ -69,38 +71,6 @@ const Index = () => {
     }
   });
 
-  const pageData = {
-    title: pageTitle,
-    description: pageDescription,
-    datePublished: "2024-01-01",
-    dateModified: new Date().toISOString(),
-    author: "IPTV Service",
-    image: "https://www.iptvservice.site/iptv-subscription.png",
-    category: "IPTV Services",
-    tags: [
-      "iptv subscription",
-      "best iptv",
-      "iptv subscribe",
-      "iptv providers",
-      "iptv provider",
-      "bestiptv",
-      "iptv subscriptions",
-      "iptv service",
-      "iptv sub",
-      "iptv suppliers",
-      "buy iptv",
-      "iptv services",
-      "iptv"
-    ],
-    primaryKeyword: "iptv subscription",
-    secondaryKeywords: [
-      "best iptv service",
-      "premium iptv provider",
-      "buy iptv subscription"
-    ],
-    readingTimeMinutes: 5
-  };
-
   return (
     <ContentWrapper as="main" className="min-h-screen bg-dark text-white font-grotesk">
       <SEOOptimizer 
@@ -109,33 +79,20 @@ const Index = () => {
         canonicalUrl="https://www.iptvservice.site"
         imageUrl="/iptv-subscription.png"
         type="website"
-        keywords={[
-          ...seoKeywords,
-          ...pageData.tags,
-          ...pageData.secondaryKeywords
-        ]}
+        keywords={seoKeywords}
         noindex={false}
-        structuredData={getStructuredData('website', pageData)}
-      >
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": pageTitle,
-            "description": pageDescription,
-            "url": "https://www.iptvservice.site",
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": "https://www.iptvservice.site/search?q={search_term_string}",
-              "query-input": "required name=search_term_string"
-            }
-          })}
-        </script>
-      </SEOOptimizer>
+        structuredData={getStructuredData('website', {
+          title: pageTitle,
+          description: pageDescription,
+          datePublished: "2024-01-01",
+          dateModified: new Date().toISOString(),
+          author: "IPTV Service",
+          image: "https://www.iptvservice.site/iptv-subscription.png"
+        })}
+      />
 
       <Breadcrumbs />
       
-      {/* Keep existing component structure */}
       <ContentWrapper as="section" ariaLabel="Hero Section">
         <Hero />
       </ContentWrapper>
@@ -147,6 +104,15 @@ const Index = () => {
       <ContentWrapper as="article" ariaLabel="IPTV Information">
         <IPTVDefinition />
         <IPTVExplanation />
+      </ContentWrapper>
+
+      <ContentWrapper as="section" ariaLabel="Categories and Tags">
+        <div className="container mx-auto px-4 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Categories />
+            <Tags />
+          </div>
+        </div>
       </ContentWrapper>
 
       <ContentWrapper as="section" ariaLabel="Pricing Plans">

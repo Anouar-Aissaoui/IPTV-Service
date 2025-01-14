@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -19,8 +19,8 @@ interface HelmetProps {
 }
 
 const OptimizedHelmet: React.FC<HelmetProps> = memo(({
-  title = "Best IPTV Service Providers Subscriptions: Complete Guide 2025",
-  description = "Discover the top IPTV service providers offering premium subscriptions in 2025. Compare features, pricing, and reliability to find the perfect IPTV subscription for your streaming needs.",
+  title = "Best IPTV Service Provider | Buy IPTV In USA, UK & Worldwide",
+  description = "Looking to Buy IPTV? Choose the best IPTV provider offering affordable IPTV services in USA, UK & Worldwide with 24K+ channels. IPTV Subscribe now!",
   canonicalUrl,
   imageUrl = "/iptv-subscription.png",
   locale = "en",
@@ -36,7 +36,7 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
   const fullCanonicalUrl = canonicalUrl ? (canonicalUrl.startsWith('http') ? canonicalUrl : `${baseUrl}${canonicalUrl}`) : baseUrl;
 
   // Track SEO metrics
-  React.useEffect(() => {
+  useEffect(() => {
     void trackSEOMetrics({
       title,
       description,
@@ -47,21 +47,6 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
       alternateUrls
     });
   }, [title, description, keywords, fullImageUrl, locale, pageType, alternateUrls]);
-
-  // Get dynamic content based on page type
-  const { data: pageContent } = useQuery({
-    queryKey: ['page-content', pageType],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('page_content')
-        .select('*')
-        .eq('page_path', window.location.pathname)
-        .maybeSingle();
-
-      if (error) throw error;
-      return data;
-    }
-  });
 
   // Get SEO metrics for additional metadata
   const { data: seoMetrics } = useQuery({

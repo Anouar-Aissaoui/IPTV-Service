@@ -3,7 +3,6 @@ import type { SEOPageData } from "@/types/seo";
 
 export const trackSEOMetrics = async (pageData: SEOPageData) => {
   try {
-    // First check if record exists
     const { data: existingRecord } = await supabase
       .from('seo_metrics')
       .select()
@@ -36,7 +35,19 @@ export const trackSEOMetrics = async (pageData: SEOPageData) => {
         url: `https://www.iptvservice.site${window.location.pathname}`,
         image: pageData.imageUrl || 'https://www.iptvservice.site/iptv-subscription.png',
         inLanguage: pageData.locale || 'en',
-        dateModified: new Date().toISOString()
+        dateModified: new Date().toISOString(),
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `https://www.iptvservice.site${window.location.pathname}`
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'IPTV Service',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://www.iptvservice.site/iptv-subscription.png'
+          }
+        }
       }
     };
 
