@@ -52,7 +52,7 @@ const VlcWindowsSetup = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900">
       <OptimizedHelmet 
-        title="How to Setup IPTV on VLC Media Player - Complete Windows Guide 2024"
+        title="How to Setup IPTV on VLC Media Player - Complete Windows Guide 2025"
         description="Learn how to install and configure IPTV on VLC Media Player for Windows with our detailed setup guide. Step-by-step instructions for the best streaming experience."
         keywords={[
           "VLC IPTV setup",

@@ -68,7 +68,7 @@ const SmartTvSetup = () => {
       <div className="container mx-auto px-4 py-12">
         <article className="max-w-4xl mx-auto prose prose-invert prose-lg">
           <h1 className="text-4xl font-bold mb-8 text-white">
-            Complete Guide: How to Setup IPTV on Smart TV (2024)
+            Complete Guide: How to Setup IPTV on Smart TV (2025)
           </h1>
 
           <div className="mb-8">

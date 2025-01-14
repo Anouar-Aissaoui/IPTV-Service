@@ -68,7 +68,7 @@ const MobileSetup = () => {
       <article className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto prose prose-invert prose-lg">
           <h1 className="text-4xl md:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-primary to-white">
-            Complete Guide: How to Setup IPTV on Mobile Devices (2024)
+            Complete Guide: How to Setup IPTV on Mobile Devices (2025)
           </h1>
 
           <div className="mb-8 text-xl leading-relaxed text-gray-300">
