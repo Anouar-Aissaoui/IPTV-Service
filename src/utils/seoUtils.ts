@@ -13,13 +13,13 @@ export const trackSEOMetrics = async (pageData: SEOPageData) => {
       route: window.location.pathname,
       title: pageData.title,
       description: pageData.description,
-      canonical_url: `https://www.iptvservice.site${window.location.pathname}`,
+      canonical_url: pageData.canonicalUrl || `https://www.iptvservice.site${window.location.pathname}`,
       meta_tags: {
         keywords: pageData.keywords.join(', '),
         'og:type': pageData.pageType || 'website',
         'og:title': pageData.title,
         'og:description': pageData.description,
-        'og:url': `https://www.iptvservice.site${window.location.pathname}`,
+        'og:url': pageData.canonicalUrl || `https://www.iptvservice.site${window.location.pathname}`,
         'og:image': pageData.imageUrl || 'https://www.iptvservice.site/iptv-subscription.png',
         'twitter:card': 'summary_large_image',
         'twitter:title': pageData.title,
@@ -32,13 +32,13 @@ export const trackSEOMetrics = async (pageData: SEOPageData) => {
         '@type': pageData.pageType || 'WebPage',
         name: pageData.title,
         description: pageData.description,
-        url: `https://www.iptvservice.site${window.location.pathname}`,
+        url: pageData.canonicalUrl || `https://www.iptvservice.site${window.location.pathname}`,
         image: pageData.imageUrl || 'https://www.iptvservice.site/iptv-subscription.png',
         inLanguage: pageData.locale || 'en',
         dateModified: new Date().toISOString(),
         mainEntityOfPage: {
           '@type': 'WebPage',
-          '@id': `https://www.iptvservice.site${window.location.pathname}`
+          '@id': pageData.canonicalUrl || `https://www.iptvservice.site${window.location.pathname}`
         },
         publisher: {
           '@type': 'Organization',
@@ -76,6 +76,7 @@ export const trackSEOMetrics = async (pageData: SEOPageData) => {
 export const generateDynamicMetaTags = (pageData: SEOPageData) => {
   const baseUrl = 'https://www.iptvservice.site';
   const currentUrl = window.location.pathname;
+  const canonicalUrl = pageData.canonicalUrl || `${baseUrl}${currentUrl}`;
   
   return {
     title: pageData.title,
@@ -85,12 +86,13 @@ export const generateDynamicMetaTags = (pageData: SEOPageData) => {
       'og:type': pageData.pageType || 'website',
       'og:title': pageData.title,
       'og:description': pageData.description,
-      'og:url': `${baseUrl}${currentUrl}`,
+      'og:url': canonicalUrl,
       'og:image': pageData.imageUrl || `${baseUrl}/iptv-subscription.png`,
       'twitter:title': pageData.title,
       'twitter:description': pageData.description,
       'twitter:image': pageData.imageUrl || `${baseUrl}/iptv-subscription.png`,
       'content-language': pageData.locale || 'en'
-    }
+    },
+    canonicalUrl
   };
 };

@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { trackSEOMetrics } from '@/utils/seoUtils';
+import { useLocation } from 'react-router-dom';
 
 interface HelmetProps {
   title?: string;
@@ -31,9 +32,13 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
   pageType = 'home',
   alternateUrls = {}
 }) => {
+  const location = useLocation();
   const baseUrl = 'https://www.iptvservice.site';
   const fullImageUrl = imageUrl.startsWith('http') ? imageUrl : `${baseUrl}${imageUrl}`;
-  const fullCanonicalUrl = canonicalUrl ? (canonicalUrl.startsWith('http') ? canonicalUrl : `${baseUrl}${canonicalUrl}`) : baseUrl;
+  const currentPath = location.pathname;
+  const fullCanonicalUrl = canonicalUrl 
+    ? (canonicalUrl.startsWith('http') ? canonicalUrl : `${baseUrl}${canonicalUrl}`)
+    : `${baseUrl}${currentPath}`;
 
   // Track SEO metrics
   useEffect(() => {
@@ -44,18 +49,19 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
       imageUrl: fullImageUrl,
       locale,
       pageType,
-      alternateUrls
+      alternateUrls,
+      canonicalUrl: fullCanonicalUrl
     });
-  }, [title, description, keywords, fullImageUrl, locale, pageType, alternateUrls]);
+  }, [title, description, keywords, fullImageUrl, locale, pageType, alternateUrls, fullCanonicalUrl]);
 
   // Get SEO metrics for additional metadata
   const { data: seoMetrics } = useQuery({
-    queryKey: ['seo-metrics', window.location.pathname],
+    queryKey: ['seo-metrics', currentPath],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('seo_metrics')
         .select('*')
-        .eq('route', window.location.pathname)
+        .eq('route', currentPath)
         .maybeSingle();
 
       if (error) throw error;
@@ -64,11 +70,9 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
   });
 
   const getMetaDescription = () => {
-    // First try to get description from SEO metrics
     if (seoMetrics?.description) {
       return seoMetrics.description;
     }
-    // Fallback to provided description
     return description;
   };
 
@@ -119,7 +123,7 @@ const OptimizedHelmet: React.FC<HelmetProps> = memo(({
       
       {/* Alternate Language URLs */}
       {Object.entries(alternateUrls).map(([lang, url]) => (
-        <link key={`alternate-${lang}`} rel="alternate" href={url} hrefLang={lang} />
+        <link key={`alternate-${lang}`} rel="alternate" href={url.startsWith('http') ? url : `${baseUrl}${url}`} hrefLang={lang} />
       ))}
       <link rel="alternate" href={baseUrl} hrefLang="x-default" />
       
