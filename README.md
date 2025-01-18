@@ -1,4 +1,4 @@
-# IPTV Service - React Landing Page IPTV Optimized for SEO
+# IPTV Service - React Landing Page IPTV 
 
 <h1 align="center">
   <br>
